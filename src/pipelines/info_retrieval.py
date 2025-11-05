@@ -19,6 +19,8 @@ from typing import Optional
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from src.utils.path_sanitizer import info_markdown_path
+
 # 환경변수 로드
 load_dotenv()
 
@@ -161,25 +163,6 @@ def _get_mock_data(keyword: str) -> str:
 """
 
 
-def _sanitize_filename(keyword: str) -> str:
-    """
-    파일명으로 사용하기 위해 키워드를 정제한다.
-
-    Args:
-        keyword: 원본 키워드
-
-    Returns:
-        str: 정제된 파일명 (공백은 유지, 특수문자는 제거)
-    """
-    # 파일 시스템에서 사용 불가능한 문자 제거
-    invalid_chars = '<>:"/\\|?*'
-    sanitized = keyword
-    for char in invalid_chars:
-        sanitized = sanitized.replace(char, '')
-
-    return sanitized.strip()
-
-
 def run(
     keyword: str,
     *,
@@ -233,9 +216,8 @@ def run(
     else:
         content = _search_with_llm(keyword, model=model)
 
-    # 파일명 생성 및 저장
-    filename = _sanitize_filename(keyword) + ".md"
-    output_path = output_dir / filename
+    # 파일 경로 생성 (공통 헬퍼 사용)
+    output_path = info_markdown_path(keyword, output_dir)
 
     try:
         output_path.write_text(content, encoding="utf-8")
