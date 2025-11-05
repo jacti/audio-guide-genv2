@@ -21,6 +21,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 from src.utils.path_sanitizer import script_markdown_path, audio_output_path
+from src.utils.metadata import create_metadata
 
 # 환경변수 로드
 load_dotenv()
@@ -32,6 +33,10 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
+
+# 기본 설정
+DEFAULT_OUTPUT_DIR = Path("outputs/audio")
+DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/audio")
 
 
 def _read_script(script_path: Path) -> str:
@@ -208,11 +213,11 @@ def run(
     """
     logger.info(f"=== 오디오 생성 파이프라인 시작: '{keyword}' ===")
 
-    # 기본 경로 설정
+    # 기본 경로 설정: dry_run 모드일 때 입력/출력 모두 mock 디렉토리 사용
     if script_dir is None:
-        script_dir = Path("outputs/script")
+        script_dir = Path("outputs/mock/script") if dry_run else Path("outputs/script")
     if output_dir is None:
-        output_dir = Path("outputs/audio")
+        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
 
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -228,6 +233,19 @@ def run(
     if dry_run:
         logger.info("🧪 DRY RUN 모드: 실제 API 호출 없이 더미 파일 생성")
         _create_dummy_audio(output_path)
+
+        # 메타데이터 생성 (dry_run)
+        try:
+            create_metadata(
+                keyword=keyword,
+                pipeline="audio_gen",
+                output_file_path=output_path,
+                mode="dry_run",
+                model=None,
+                voice=voice
+            )
+        except Exception as e:
+            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
     else:
         # 실제 TTS 생성
         audio_data = _generate_audio_openai(
@@ -244,6 +262,19 @@ def run(
             f.write(audio_data)
 
         logger.info(f"✅ MP3 파일 저장 완료: {output_path.absolute()}")
+
+        # 메타데이터 생성 (production)
+        try:
+            create_metadata(
+                keyword=keyword,
+                pipeline="audio_gen",
+                output_file_path=output_path,
+                mode="production",
+                model=model,
+                voice=voice
+            )
+        except Exception as e:
+            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
     logger.info(
         f"=== 오디오 생성 파이프라인 완료 ===\n"

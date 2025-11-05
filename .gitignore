@@ -260,3 +260,17 @@ Icon[]
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Pipeline 산출물 (생성된 결과물은 git 관리 안함)
+# 실행 시마다 생성되는 파일들이므로 버전 관리에서 제외
+outputs/info/*.md
+outputs/script/*.md
+outputs/audio/*.mp3
+outputs/mock/
+
+# 메타데이터 파일도 제외
+*.metadata.json
+
+# 단, .gitkeep 파일은 디렉토리 구조 유지를 위해 포함
+!outputs/**/.gitkeep
+!outputs/examples/

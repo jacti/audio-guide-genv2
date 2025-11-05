@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.utils.prompt_loader import load_prompt, list_prompts
 from src.utils.path_sanitizer import info_markdown_path, script_markdown_path
+from src.utils.metadata import create_metadata
 
 # 로깅 설정
 logging.basicConfig(
@@ -30,6 +31,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# 기본 설정
+DEFAULT_OUTPUT_DIR = Path("outputs/script")
+DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/script")
 
 
 def _generate_dry_run_script(keyword: str, prompt_version: str) -> str:
@@ -114,7 +119,7 @@ def run(
     if info_dir is None:
         info_dir = Path("outputs/info")
     if output_dir is None:
-        output_dir = Path("outputs/script")
+        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
 
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -147,6 +152,19 @@ def run(
             f.write(script_content)
 
         logger.info(f"✅ 테스트 스크립트 생성 완료: {output_file}")
+
+        # 메타데이터 생성
+        try:
+            create_metadata(
+                keyword=keyword,
+                pipeline="script_gen",
+                output_file_path=output_file,
+                mode="dry_run",
+                model=None
+            )
+        except Exception as e:
+            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
+
         return output_file
 
     # 정보 파일 존재 확인
@@ -212,6 +230,18 @@ def run(
         error_msg = f"스크립트 파일 저장 중 오류 발생: {str(e)}"
         logger.error(error_msg)
         raise Exception(error_msg) from e
+
+    # 메타데이터 생성
+    try:
+        create_metadata(
+            keyword=keyword,
+            pipeline="script_gen",
+            output_file_path=output_file,
+            mode="production",
+            model=model
+        )
+    except Exception as e:
+        logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
     return output_file
 

@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 from src.utils.path_sanitizer import info_markdown_path
+from src.utils.metadata import create_metadata
 
 # 환경변수 로드
 load_dotenv()
@@ -33,6 +34,7 @@ logging.basicConfig(
 
 # 기본 설정
 DEFAULT_OUTPUT_DIR = Path("outputs/info")
+DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/info")
 DEFAULT_MODEL = "gpt-4o-mini"
 
 
@@ -199,11 +201,12 @@ def run(
         raise ValueError("키워드는 비어있을 수 없습니다.")
 
     keyword = keyword.strip()
+    mode = "dry_run" if dry_run else "production"
     logger.info(f"{'[DRY RUN] ' if dry_run else ''}정보 검색 파이프라인 시작: {keyword}")
 
-    # 출력 디렉토리 설정
+    # 출력 디렉토리 설정: dry_run 모드일 경우 outputs/mock/info/ 사용
     if output_dir is None:
-        output_dir = DEFAULT_OUTPUT_DIR
+        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -225,6 +228,18 @@ def run(
     except Exception as e:
         logger.error(f"파일 저장 실패: {e}")
         raise
+
+    # 메타데이터 생성
+    try:
+        create_metadata(
+            keyword=keyword,
+            pipeline="info_retrieval",
+            output_file_path=output_path,
+            mode=mode,
+            model=model if not dry_run else None
+        )
+    except Exception as e:
+        logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
     return output_path.absolute()
 
