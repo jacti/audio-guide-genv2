@@ -1,6 +1,7 @@
 # requirements.txt
 openai>=0.27.0        # LLM 및 TTS API 호출
 python-dotenv>=1.0.0  # 환경변수 관리
+pyyaml>=6.0.0         # 프롬프트 템플릿 로딩 (YAML 파일 파싱)
 langchain-openai>=0.1.0  # 프롬프트/체인 구조 확장용 (선택적이지만 권장)
 exa-py>=1.0.0        # 웹 검색 SDK (현재는 주석 처리)
 # requests>=2.30.0     # 추가 웹 요청이 필요할 경우 (선택적)
