@@ -22,6 +22,7 @@ from dotenv import load_dotenv
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from src.utils.prompt_loader import load_prompt, list_prompts
+from src.utils.path_sanitizer import info_markdown_path, script_markdown_path
 
 # 로깅 설정
 logging.basicConfig(
@@ -118,10 +119,9 @@ def run(
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 파일명 생성 (공백을 언더스코어로 변환)
-    slug = keyword.replace(" ", "_")
-    info_file = info_dir / f"{slug}.md"
-    output_file = output_dir / f"{slug}_script.md"
+    # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
+    info_file = info_markdown_path(keyword, info_dir)
+    output_file = script_markdown_path(keyword, output_dir)
 
     logger.info(f"스크립트 생성 파이프라인 시작: {keyword}")
     logger.info(f"프롬프트 버전: {prompt_version}")
