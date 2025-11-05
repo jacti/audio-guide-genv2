@@ -4,7 +4,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_PATH="${SCRIPT_DIR}/.env"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+ENV_PATH="${REPO_ROOT}/.env"
 
 if [[ ! -f "${ENV_PATH}" ]]; then
   echo "❌ .env 파일이 ${ENV_PATH} 위치에 없습니다." >&2
@@ -15,7 +16,7 @@ WORKTREE_PATHS=()
 while IFS= read -r worktree_path; do
   WORKTREE_PATHS+=("${worktree_path}")
 done < <(
-  git -C "${SCRIPT_DIR}" worktree list --porcelain |
+  git -C "${REPO_ROOT}" worktree list --porcelain |
     awk '/^worktree / { path=$2 } /^$/ { if (path ~ /workflow-/) print path; path="" } END { if (path ~ /workflow-/) print path }'
 )
 
