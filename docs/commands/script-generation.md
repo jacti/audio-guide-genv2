@@ -1,39 +1,41 @@
 # 스크립트 생성 파이프라인 후속 명령
 
 ## 📌 배경
-- 커밋 `c992fff9ad9e2d29aa6e0aa397bd37fb7921db9a`에서 `path_sanitizer` 헬퍼를 도입하면서 산출물 파일명이 공백을 유지하는 형태로 정규화되었습니다.
-- 오디오 생성 파이프라인도 동일 헬퍼(`script_markdown_path`, `audio_output_path`)를 사용하도록 업데이트되었으므로, 임시 호환성(legacy 언더스코어 파일) 로직을 정리할 수 있습니다.
+- `path_sanitizer` 전환과 legacy 산출물 정리는 완료되었습니다.
+- 실제 실행(`dry_run=False`) 시 OpenAI API 연결 실패가 발생하면 즉시 예외로 종료되고, 후속 파이프라인이 중단됩니다.
+- dry_run 템플릿은 정상 작동하지만, 정보 파이프라인의 최신 Markdown 내용을 활용한 스크립트 품질 검증이 아직 부족합니다.
 
 ## ✅ 수행할 작업
-1. **임시 호환성 로직 제거**
-   - `src/pipelines/script_gen.py`에 legacy 파일명을 병행 저장하던 코드가 남아 있다면 삭제하고, `script_markdown_path` 기준 단일 파일만 생성하도록 유지하세요.
-   - 기존 테스트 산출물 중 언더스코어 버전(`*_script.md`)이 남아 있으면 정리하거나 `.gitignore`를 통해 혼선을 방지합니다.
-2. **경로 헬퍼 활용 점검**
-   - `info_markdown_path`와 `script_markdown_path` 사용 위치를 재검토하여, 하드코딩된 경로 조합이 남아 있지 않은지 확인하세요.
-   - 필요 시 주석/로그에 “공백 유지” 규칙을 명확히 기재합니다.
-3. **교차 테스트**
-   - 정보 → 스크립트 → 오디오 파이프라인을 연속 실행하여 파일이 순차적으로 연결되는지 확인합니다.
-   - dry-run과 실제 모드 각각에서 동일 키워드(`청자 상감운학문 매병`, `백자 청화 "산수문" 항아리`)로 테스트하고, 파일 경로를 출력 로그에서 검증하세요.
-4. **출력 디렉토리 정리**
-   - `outputs/script/` 내에 과거 규칙으로 생성된 파일이 있다면 보관 경로를 바꾸거나 삭제하여 새 규칙만 남도록 정리하고, dev-log에 조치 내용을 기록하세요.
-5. **커뮤니케이션**
-   - 작업 완료 후 dev-log에 테스트 결과와 남은 리스크를 요약하고, 다른 파이프라인 담당자와 공유할 필요 사항이 있는지 확인합니다.
+1. **API 연결 실패 대응**
+   - `openai.APIConnectionError`, `TimeoutError` 등 네트워크 예외를 잡아 사용자에게 친절한 안내 메시지를 제공하고, 선택적으로 `_generate_dry_run_script` 결과를 반환하도록 fall-back 옵션(`--fallback-dry-run` 등) 도입을 검토하세요.
+   - 재시도 로직이 이미 존재하므로, 최종 실패 시에도 로그와 예외 메시지에 "네트워크 환경"/"API 상태" 점검 항목을 명확히 안내합니다.
+2. **콘텐츠 품질 검증**
+   - LLM 응답을 저장하기 전에 Markdown 섹션(`#`, `##`)이 필수 구조를 만족하는지 검증하고, 비어 있거나 누락된 섹션이 있으면 예외 또는 경고를 발생시키세요.
+   - 입력 정보(`info_markdown_path`)에서 핵심 키워드가 스크립트 본문에 포함됐는지 간단한 검사(예: 키워드 존재 여부, 요약 길이)를 추가하여 정보-스크립트 간 일관성을 확인합니다.
+3. **통합 테스트 자동화**
+   - `tests/` 또는 `scripts/` 디렉토리에 info→script→audio 드라이런 시나리오를 실행하는 테스트 스크립트를 추가하고, 주요 로그/산출물 경로를 검증하세요.
+   - dry_run과 실모드(네트워크/키 존재 시) 모두를 다룰 수 있도록 테스트 파라미터를 분리하고, CI에서 dry_run 시나리오는 항상 통과하도록 구성합니다.
+4. **문서 및 커뮤니케이션**
+   - 위 개선 사항을 적용한 뒤 결과와 잔여 리스크를 `dev-log/[script-agent]YYYY-MM-DD_HH-MM-SS.md` 형식으로 기록하고, 다른 파이프라인 담당자에게 공유하세요.
 
 ## 🔎 검증 체크리스트
-- `outputs/info/`, `outputs/script/`, `outputs/audio/`가 모두 동일 키워드로 공백을 유지한 파일명을 사용하고 있는지.
-- 로그에 출력되는 경로가 `path_sanitizer` 규칙과 일치하는지.
-- dry-run/실모드 모두에서 예외가 발생하지 않고, 오디오 단계까지 실행되는지.
+- 네트워크 장애 시에도 사용자에게 의미 있는 가이드가 제공되고, 옵션에 따라 템플릿 기반 스크립트를 돌려주는지 확인.
+- 생성된 Markdown에 모든 필수 섹션(개요/역사/특징/추가 정보/참고 자료)이 포함되어 있는지 자동 검증.
+- 동일 키워드로 info→script→audio 파이프라인을 dry_run 실행했을 때 파일 경로와 로그가 일관성 있게 남는지 확인.
+- 실제 API 실행 환경에서 스크립트가 정상 생성되면 해당 결과를 `outputs/script/`에 저장하고, 이전 dry_run 산출물과 혼동되지 않도록 로그를 남길 것.
 
 ## 🧪 권장 실행 명령
 ```bash
 source .venv/bin/activate
-python src/pipelines/info_retrieval.py --keyword "청자 상감운학문 매병" --dry-run
-python src/pipelines/script_gen.py --keyword "청자 상감운학문 매병" --dry-run
-python src/pipelines/audio_gen.py --keyword "청자 상감운학문 매병" --dry-run
+# 네트워크 장애 시 fallback 결과 확인
+device_offline=1 python src/pipelines/script_gen.py --keyword "청자 상감운학문 매병" --fallback-dry-run
 
-python src/pipelines/info_retrieval.py --keyword "백자 청화 \"산수문\" 항아리" --dry-run
-python src/pipelines/script_gen.py --keyword "백자 청화 \"산수문\" 항아리" --dry-run
-python src/pipelines/audio_gen.py --keyword "백자 청화 \"산수문\" 항아리" --dry-run
+# 통합 드라이런 시나리오
+python scripts/run_pipeline_dry_run.py --keyword "청자 상감운학문 매병"
+python scripts/run_pipeline_dry_run.py --keyword "백자 청화 \"산수문\" 항아리"
+
+# 실제 API 테스트 (환경 가능 시)
+python src/pipelines/script_gen.py --keyword "청자 상감운학문 매병" --model gpt-4o-mini --temperature 0.7
 ```
 
-작업 완료 후 변경 사항과 테스트 결과를 main 리뷰어에게 공유해주세요.
+작업 완료 후 변경 사항과 테스트 결과를 메인 리뷰어에게 보고하세요.
