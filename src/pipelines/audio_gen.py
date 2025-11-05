@@ -20,6 +20,8 @@ import argparse
 from openai import OpenAI
 from dotenv import load_dotenv
 
+from src.utils.path_sanitizer import script_markdown_path, audio_output_path
+
 # 환경변수 로드
 load_dotenv()
 
@@ -30,19 +32,6 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
-
-
-def _normalize_filename(keyword: str) -> str:
-    """
-    파일명으로 사용할 수 있도록 키워드를 정규화합니다.
-
-    Args:
-        keyword: 원본 키워드 문자열
-
-    Returns:
-        str: 공백을 언더스코어로 치환한 문자열
-    """
-    return keyword.replace(" ", "_")
 
 
 def _read_script(script_path: Path) -> str:
@@ -209,10 +198,10 @@ def run(
         Exception: API 호출 실패 시
 
     Examples:
-        >>> # 기본 사용법
+        >>> # 기본 사용법 (공백이 유지됨)
         >>> output_path = run("청자 상감운학문 매병")
         >>> print(output_path)
-        /path/to/outputs/audio/청자_상감운학문_매병.mp3
+        /path/to/outputs/audio/청자 상감운학문 매병.mp3
 
         >>> # dry_run 모드
         >>> output_path = run("테스트", dry_run=True)
@@ -229,13 +218,9 @@ def run(
     output_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"출력 디렉토리: {output_dir.absolute()}")
 
-    # 파일명 정규화
-    slug = _normalize_filename(keyword)
-    script_filename = f"{slug}_script.md"
-    output_filename = f"{slug}.mp3"
-
-    script_path = script_dir / script_filename
-    output_path = output_dir / output_filename
+    # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
+    script_path = script_markdown_path(keyword, script_dir)
+    output_path = audio_output_path(keyword, output_dir)
 
     # 스크립트 파일 읽기
     script_text = _read_script(script_path)
