@@ -1,0 +1,31 @@
+pipeline: audio-generation
+review_window: main@bf9958c
+summary:
+  status: needs_fix
+  notes:
+    - OpenAI TTS 호출부가 streaming+backoff 구조로 개편되었으나 예외 범위 축소와 파라미터 미반영 문제로 신뢰성 저하가 있습니다.
+    - CLI/문서에 명시된 `initial_wait` 조정 기능이 실제 로직에 연결되어 있지 않습니다.
+issues:
+  - id: AUDIO-RETRY-COVERAGE
+    severity: high
+    location: src/pipelines/audio_gen.py:151
+    description: "`backoff` 재시도 대상이 `RateLimitError`와 `APIError`로 제한되어 `APITimeoutError`/`APIConnectionError` 등 네트워크 장애 시 즉시 실패합니다. 기존 버전은 모든 예외를 재시도했습니다."
+    evidence:
+      note: "SDK 문서 기준 TTS 호출 중 발생 가능한 `APITimeoutError`, `APIConnectionError`, `ServiceUnavailableError` 등이 재시도되지 않습니다."
+    action_items:
+      - "재시도 대상 예외를 `RateLimitError`, `APIError`, `APITimeoutError`, `APIConnectionError`, `ServiceUnavailableError` 등으로 확장하거나 `OpenAIError` 상위 클래스를 포함하세요."
+      - "확장 후 실제 호출(dry_run=False)에서 일시적인 네트워크 오류를 시뮬레이션하거나 로그로 재시도 동작을 검증하세요."
+  - id: AUDIO-INITIAL-WAIT
+    severity: medium
+    location: src/pipelines/audio_gen.py:151
+    description: "CLI로 전달되는 `--initial-wait` 값이 `backoff.expo`에 전달되지 않아 항상 기본값으로 동작합니다."
+    evidence:
+      reproduction:
+        command: "python src/pipelines/audio_gen.py --keyword '테스트' --dry-run --initial-wait 10"
+        result: "로그/재시도 대기 시간이 1초로 유지되어 옵션이 무시됨"
+    action_items:
+      - "`backoff.expo` 호출 시 `base` 또는 `factor`에 `initial_wait`를 연결해 CLI 옵션과 문서가 일치하도록 수정하세요."
+      - "수정 후 CLI 도움말과 `audio_pipeline.md`가 동일한 파라미터 의미를 설명하는지 확인하세요."
+follow_up:
+  - "예외 범위와 초기 대기 시간 수정 후, production 모드로 테스트를 재실행하고 메타데이터/로그를 dev-log에 공유하세요."
+  - "문서(`audio_pipeline.md`)의 백오프 설명을 코드 변경사항과 동기화하세요."
