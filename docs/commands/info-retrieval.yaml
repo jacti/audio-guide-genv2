@@ -1,0 +1,32 @@
+pipeline: info-retrieval
+review_window: main@d85a20ff
+summary:
+  status: blocked
+  notes:
+    - 표준 실행 방법을 `python -m src.pipelines.info_retrieval`로 통일해야 합니다.
+    - OpenAI SDK 의존성을 `openai>=1.0.0`으로 상향 후 최신 API에 맞춰 코드 재검증이 필요합니다.
+issues:
+  - id: INFO-CLI-IMPORT
+    severity: high
+    location: src/pipelines/info_retrieval.py:22
+    description: "직접 실행 시 `ModuleNotFoundError: No module named 'src'` 발생"
+    evidence:
+      reproduction:
+        command: "python3 src/pipelines/info_retrieval.py --keyword '테스트' --dry-run"
+        result: "ModuleNotFoundError"
+    action_items:
+      - "문서 및 CLI 예시를 `python -m src.pipelines.info_retrieval --keyword ...` 방식으로 수정"
+      - "필요 시 `__main__` 모듈에서 argparse 예시를 업데이트하여 혼선을 줄이기"
+  - id: INFO-OPENAI-VERSION
+    severity: high
+    location: requirements.txt:2
+    description: "`from openai import OpenAI` 사용과 requirements (`openai>=0.27.0`) 간 버전 미스매치"
+    evidence:
+      note: "0.27 계열에는 OpenAI 클래스가 없어 ImportError 발생"
+    action_items:
+      - "requirements.txt를 `openai>=1.0.0`으로 상향"
+      - "업데이트 후 context7 MCP를 활용하여 실제 API 호출(dry_run=False) 테스트를 수행하고, 발생하는 오류/경고를 최신 SDK에 맞게 수정"
+follow_up:
+  - "표준 실행법으로 dry_run 및 production 모드 재검증 → outputs/info/<keyword>.md, metadata 확인"
+  - "스크립트/오디오 파이프라인과의 연동 테스트 시 PYTHONPATH 주입 없이 동작하는지 확인"
+  - "테스트 결과와 수정 내용을 dev-log에 기록 후 메인 리뷰어에게 보고"

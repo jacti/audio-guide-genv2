@@ -1,0 +1,32 @@
+pipeline: script-generation
+review_window: main@d85a20ff
+summary:
+  status: needs_fix
+  notes:
+    - 정보 파이프라인과 동일하게 `python -m src.pipelines.script_gen` 형태의 실행 경로를 표준으로 맞춰야 합니다.
+    - OpenAI SDK 의존성을 `openai>=1.0.0`으로 올리고 실제 호출(dry_run=False)을 context7 MCP로 검증해야 합니다.
+issues:
+  - id: SCRIPT-OPENAI-VERSION
+    severity: high
+    location: src/pipelines/script_gen.py:173
+    description: "`from openai import OpenAI` 사용과 requirements (`openai>=0.27.0`) 간 버전 불일치"
+    evidence:
+      note: "0.27 계열 설치 시 ImportError 발생"
+    action_items:
+      - "requirements.txt를 `openai>=1.0.0`으로 상향"
+      - "의존성 업데이트 후 context7 MCP를 활용해 실제 API 호출을 재실행하고, SDK 1.x 문법에 맞도록 코드 수정"
+  - id: SCRIPT-UPSTREAM-CLI
+    severity: medium
+    location: docs/plan.md
+    description: "정보 파이프라인이 `python -m` 방식으로 정리되기 전까지 info→script 체인이 막힘"
+    evidence:
+      reproduction:
+        command: "python3 src/pipelines.info_retrieval.py --keyword '테스트' --dry-run"
+        result: "ModuleNotFoundError"
+    action_items:
+      - "정보 파이프라인에서 결정된 `python -m` 진입점을 참고하여 동일한 실행 플로우를 문서/테스트에 반영"
+      - "info 파이프라인 수정 후 dry_run/production 연동 테스트를 바로 수행"
+follow_up:
+  - "OpenAI 버전 상향과 코드 조정 후, `python -m src.pipelines.script_gen --keyword ...` 명령으로 dry_run 및 실제 생성 테스트"
+  - "프롬프트 v1/v2 산출물 품질을 자동 검증하는 체크리스트 초안 작성"
+  - "수정/테스트 결과를 dev-log에 기록하고 메인 리뷰어에게 공유"
