@@ -251,8 +251,8 @@ def main():
     argparse를 사용해 명령줄에서 키워드를 입력받아 파이프라인을 실행한다.
 
     Example:
-        $ python src/pipelines/info_retrieval.py --keyword "청자 상감운학문 매병"
-        $ python src/pipelines/info_retrieval.py --keyword "석굴암" --dry-run
+        $ python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
+        $ python -m src.pipelines.info_retrieval --keyword "석굴암" --dry-run
     """
     import argparse
 
@@ -261,9 +261,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
-  python src/pipelines/info_retrieval.py --keyword "청자 상감운학문 매병"
-  python src/pipelines/info_retrieval.py --keyword "석굴암" --dry-run
-  python src/pipelines/info_retrieval.py --keyword "훈민정음" --model gpt-4o
+  python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
+  python -m src.pipelines.info_retrieval --keyword "석굴암" --dry-run
+  python -m src.pipelines.info_retrieval --keyword "훈민정음" --model gpt-4o
         """
     )
 
