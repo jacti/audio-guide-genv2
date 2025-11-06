@@ -17,7 +17,8 @@ from pathlib import Path
 from typing import Optional
 import argparse
 
-from openai import OpenAI
+import backoff
+from openai import OpenAI, RateLimitError, APIError
 from dotenv import load_dotenv
 
 from src.utils.path_sanitizer import script_markdown_path, audio_output_path
@@ -65,28 +66,36 @@ def _read_script(script_path: Path) -> str:
 
 def _generate_audio_openai(
     text: str,
+    output_path: Path,
     model: str = "gpt-4o-mini-tts",
     voice: str = "alloy",
     speed: float = 1.0,
-    max_retries: int = 3,
-    retry_delay: float = 2.0
-) -> bytes:
+    max_retries: int = 8,
+    initial_wait: float = 1.0,
+    max_wait: float = 60.0
+) -> None:
     """
-    OpenAI TTS API를 호출하여 음성 데이터를 생성합니다.
+    OpenAI TTS API를 호출하여 음성 파일을 생성합니다.
+
+    지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 대응.
+    생성된 오디오는 output_path에 직접 저장됩니다.
 
     Args:
         text: 변환할 텍스트
+        output_path: 출력 파일 경로 (MP3)
         model: 사용할 TTS 모델명 (기본값: "gpt-4o-mini-tts")
         voice: 음성 종류 (alloy, echo, fable, onyx, nova, shimmer 중 선택)
         speed: 말하기 속도 (0.25 ~ 4.0, 기본값: 1.0)
-        max_retries: 최대 재시도 횟수
-        retry_delay: 재시도 대기 시간 (초)
+        max_retries: 최대 재시도 횟수 (기본값: 8)
+        initial_wait: 초기 대기 시간 초 (기본값: 1.0)
+        max_wait: 최대 대기 시간 초 (기본값: 60.0)
 
     Returns:
-        bytes: 생성된 오디오 바이너리 데이터
+        None (파일에 직접 저장)
 
     Raises:
         ValueError: API 키가 설정되지 않았거나 파라미터가 유효하지 않을 경우
+        RateLimitError: Rate Limit 초과 시 (재시도 후에도 실패)
         Exception: API 호출 실패 시
     """
     api_key = os.getenv("OPENAI_API_KEY")
@@ -104,39 +113,106 @@ def _generate_audio_openai(
     if not (0.25 <= speed <= 4.0):
         raise ValueError(f"speed는 0.25 ~ 4.0 사이여야 합니다. 입력값: {speed}")
 
+    # 요청 정보 로깅
+    text_length = len(text)
+    estimated_tokens = text_length // 4  # 대략적인 토큰 수 추정
+    logger.info(
+        f"📝 TTS 요청 준비:\n"
+        f"  - 텍스트 길이: {text_length} 글자\n"
+        f"  - 예상 토큰 수: ~{estimated_tokens} tokens\n"
+        f"  - 모델: {model}\n"
+        f"  - 음성: {voice}\n"
+        f"  - 속도: {speed}x"
+    )
+
     client = OpenAI(api_key=api_key)
 
-    # 재시도 로직
-    for attempt in range(1, max_retries + 1):
-        try:
-            logger.info(
-                f"OpenAI TTS API 호출 중 (시도 {attempt}/{max_retries}): "
-                f"model={model}, voice={voice}, speed={speed}"
-            )
+    # 백오프 핸들러: 재시도 시 로깅
+    def on_backoff(details):
+        wait_time = details['wait']
+        tries = details['tries']
+        logger.warning(
+            f"⏳ 지수 백오프 적용: {wait_time:.2f}초 대기 중 "
+            f"(재시도 {tries}/{max_retries})"
+        )
 
-            response = client.audio.speech.create(
+    # 포기 시 핸들러: 최종 실패 로깅
+    def on_giveup(details):
+        logger.error(
+            f"❌ 최대 재시도 횟수 초과 ({max_retries}회): API 호출 포기"
+        )
+
+    # 지수 백오프를 적용한 내부 API 호출 함수
+    @backoff.on_exception(
+        backoff.expo,
+        (RateLimitError, APIError),
+        max_tries=max_retries,
+        max_value=max_wait,
+        on_backoff=on_backoff,
+        on_giveup=on_giveup,
+        jitter=backoff.full_jitter  # 지터 추가로 동시 요청 분산
+    )
+    def _call_api_with_backoff():
+        """지수 백오프가 적용된 실제 API 호출 함수"""
+        try:
+            logger.info(f"🎤 OpenAI TTS API 호출 시작...")
+
+            # OpenAI TTS API 호출 (최신 문법: with_streaming_response 사용)
+            with client.audio.speech.with_streaming_response.create(
                 model=model,
                 voice=voice,
                 input=text,
                 speed=speed
-            )
+            ) as response:
+                # 파일에 직접 스트리밍
+                response.stream_to_file(str(output_path))
 
-            # 응답 데이터 읽기
-            audio_data = response.content
+            logger.info(f"✅ 음성 생성 완료: {output_path}")
 
-            logger.info(f"음성 생성 완료 ({len(audio_data)} bytes)")
-            return audio_data
+        except RateLimitError as e:
+            # Rate Limit 에러 상세 분석
+            error_msg = str(e)
 
-        except Exception as e:
-            logger.warning(f"API 호출 실패 (시도 {attempt}/{max_retries}): {e}")
-
-            if attempt < max_retries:
-                logger.info(f"{retry_delay}초 후 재시도합니다...")
-                time.sleep(retry_delay)
+            if "insufficient_quota" in error_msg.lower():
+                logger.error(
+                    f"💳 할당량 초과 (Insufficient Quota):\n"
+                    f"  - OpenAI API 크레딧이 소진되었거나 요금제 한도 초과\n"
+                    f"  - 조치 방법:\n"
+                    f"    1. https://platform.openai.com/account/billing 에서 크레딧 충전\n"
+                    f"    2. 더 높은 요금제로 업그레이드\n"
+                    f"    3. 사용량 모니터링: https://platform.openai.com/usage"
+                )
             else:
-                raise Exception(
-                    f"OpenAI TTS API 호출 실패 (최대 재시도 횟수 초과): {e}"
-                ) from e
+                logger.error(
+                    f"⚠️ Rate Limit 초과:\n"
+                    f"  - 분당 요청 수(RPM) 또는 분당 토큰 수(TPM) 제한 초과\n"
+                    f"  - 재시도 중... (자동으로 대기 시간 증가)"
+                )
+
+            # 재시도를 위해 예외를 다시 발생
+            raise
+
+        except APIError as e:
+            logger.error(f"🔴 OpenAI API 에러: {e}")
+            raise
+
+    # 실제 API 호출 실행
+    try:
+        _call_api_with_backoff()
+    except RateLimitError as e:
+        # 최종 실패 시 사용자에게 명확한 안내
+        if "insufficient_quota" in str(e).lower():
+            raise Exception(
+                f"💳 OpenAI API 할당량 초과로 TTS 생성 실패\n"
+                f"크레딧을 충전하거나 요금제를 업그레이드하세요.\n"
+                f"상세 정보: {e}"
+            ) from e
+        else:
+            raise Exception(
+                f"⚠️ Rate Limit 초과로 TTS 생성 실패 ({max_retries}회 재시도)\n"
+                f"호출 빈도를 낮추거나 더 높은 요금제를 사용하세요.\n"
+                f"상세 정보: {e}"
+            ) from e
 
 
 def _create_dummy_audio(output_path: Path) -> None:
@@ -169,14 +245,16 @@ def run(
     voice: str = "alloy",
     model: str = "gpt-4o-mini-tts",
     speed: float = 1.0,
-    max_retries: int = 3,
-    retry_delay: float = 2.0,
+    max_retries: int = 8,
+    initial_wait: float = 1.0,
+    max_wait: float = 60.0,
     dry_run: bool = False
 ) -> Path:
     """
     오디오 생성 파이프라인 메인 진입점.
 
     스크립트 파일을 읽어 OpenAI TTS API를 통해 MP3 파일로 변환합니다.
+    지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 자동 대응.
 
     Args:
         keyword: 유물 키워드 (파일명 결정에 사용)
@@ -185,8 +263,9 @@ def run(
         voice: TTS 음성 종류 (기본값: "alloy")
         model: TTS 모델명 (기본값: "gpt-4o-mini-tts")
         speed: 말하기 속도 (기본값: 1.0)
-        max_retries: API 호출 최대 재시도 횟수 (기본값: 3)
-        retry_delay: 재시도 대기 시간(초) (기본값: 2.0)
+        max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
+        initial_wait: 초기 대기 시간 초 (기본값: 1.0)
+        max_wait: 최대 대기 시간 초 (기본값: 60.0)
         dry_run: True일 경우 API 호출 없이 더미 파일 생성 (기본값: False)
 
     Returns:
@@ -229,19 +308,17 @@ def run(
         logger.info("🧪 DRY RUN 모드: 실제 API 호출 없이 더미 파일 생성")
         _create_dummy_audio(output_path)
     else:
-        # 실제 TTS 생성
-        audio_data = _generate_audio_openai(
+        # 실제 TTS 생성 (파일에 직접 저장됨)
+        _generate_audio_openai(
             text=script_text,
+            output_path=output_path,
             model=model,
             voice=voice,
             speed=speed,
             max_retries=max_retries,
-            retry_delay=retry_delay
+            initial_wait=initial_wait,
+            max_wait=max_wait
         )
-
-        # 파일 저장
-        with open(output_path, "wb") as f:
-            f.write(audio_data)
 
         logger.info(f"✅ MP3 파일 저장 완료: {output_path.absolute()}")
 
@@ -316,15 +393,22 @@ def main():
     parser.add_argument(
         "--max-retries",
         type=int,
-        default=3,
-        help="API 호출 최대 재시도 횟수 (기본값: 3)"
+        default=8,
+        help="API 호출 최대 재시도 횟수 (기본값: 8, 지수 백오프 적용)"
     )
 
     parser.add_argument(
-        "--retry-delay",
+        "--initial-wait",
         type=float,
-        default=2.0,
-        help="재시도 대기 시간(초) (기본값: 2.0)"
+        default=1.0,
+        help="초기 대기 시간 초 (기본값: 1.0, 지수 백오프 시작 값)"
+    )
+
+    parser.add_argument(
+        "--max-wait",
+        type=float,
+        default=60.0,
+        help="최대 대기 시간 초 (기본값: 60.0, 지수 백오프 상한)"
     )
 
     parser.add_argument(
@@ -344,7 +428,8 @@ def main():
             model=args.model,
             speed=args.speed,
             max_retries=args.max_retries,
-            retry_delay=args.retry_delay,
+            initial_wait=args.initial_wait,
+            max_wait=args.max_wait,
             dry_run=args.dry_run
         )
 
