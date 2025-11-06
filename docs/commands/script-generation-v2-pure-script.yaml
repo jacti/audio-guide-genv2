@@ -1,0 +1,469 @@
+# 스크립트 생성 파이프라인 v2 개발 명령서 (순수 스크립트 포맷)
+# 발행 일시: 2025-11-07 07:50:00
+# 발행자: Main Reviewer Agent
+# 담당: Workflow-02_ScriptGeneration Agent
+
+version: "v2.0"
+pipeline: "script_gen"
+priority: "high"
+estimated_effort: "3-4 hours"
+
+# 개발 목표
+objective: |
+  오디오 생성 파이프라인에서 별도 변환 없이 바로 TTS 입력으로 사용할 수 있도록
+  Markdown 구조(#, ##) 없이 순수 스크립트 텍스트만 생성하는 프롬프트를 설계하고 테스트합니다.
+
+# 현재 상태 분석
+current_status:
+  version: "v1.0"
+  issues:
+    - description: "Markdown 헤더(#, ##)가 포함되어 TTS 변환 시 부자연스러움"
+      severity: "medium"
+      example: |
+        현재 출력:
+        # 사유의 방 오디오 가이드
+
+        ## 인사 및 소개
+        안녕하세요, 여러분!
+
+        문제점:
+        - "샵 사유의 방 오디오 가이드" (# 기호가 읽힘)
+        - "샵샵 인사 및 소개" (## 기호가 읽힘)
+
+    - description: "섹션 구분자가 TTS 출력에 포함됨"
+      severity: "medium"
+      impact: "자연스러운 오디오 흐름 방해"
+
+  strengths:
+    - "프롬프트 템플릿화 완벽 (prompts/script_generation/v1.yaml)"
+    - "톤과 스타일 제어 우수"
+    - "길이 조절 정확 (~1분)"
+
+# v2 요구사항
+requirements:
+
+  # 1. 순수 스크립트 프롬프트 v2 작성
+  pure_script_prompt:
+    priority: "high"
+    tasks:
+      - task: "v2 프롬프트 템플릿 작성"
+        file: "prompts/script_generation/v2.yaml"
+        key_changes:
+          - "Markdown 헤더 제거 지시"
+          - "섹션 구분을 자연스러운 문단 전환으로 대체"
+          - "TTS 친화적 표현 강조"
+
+        example_prompt: |
+          system_prompt: |
+            당신은 오디오 가이드 스크립트 작가입니다.
+            TTS(Text-to-Speech) 시스템이 직접 읽을 수 있도록
+            순수한 텍스트 스크립트만 작성해주세요.
+
+            **중요한 규칙:**
+            1. Markdown 헤더(#, ##, ###)를 절대 사용하지 마세요
+            2. 섹션 제목을 별도로 넣지 말고, 문단 전환으로 자연스럽게 연결
+            3. 모든 텍스트는 사람이 말하는 것처럼 자연스럽게 작성
+            4. 괄호 설명이나 메타 정보 제외
+            5. 1분 내외의 길이 (약 150-200 단어)
+
+            **스크립트 구조 (내부 흐름, 명시하지 않음):**
+            - 시작: 친근한 인사와 주제 소개
+            - 중간: 역사적 배경 → 시각적 특징 → 문화적 의미
+            - 끝: 부드러운 마무리
+
+            **톤:**
+            - 친근하고 대화적
+            - 시각적 이미지를 유도하는 표현 사용
+            - 전문 용어는 쉽게 풀어서 설명
+
+          user_prompt: |
+            아래 문화유산 정보를 바탕으로 1분 분량의 오디오 가이드 스크립트를 작성해주세요.
+
+            **정보:**
+            {info_content}
+
+            **중요:**
+            - Markdown 헤더나 섹션 제목 없이 순수한 대화체로 작성
+            - 문단 구분은 자연스러운 흐름으로
+            - TTS가 바로 읽을 수 있는 형태
+
+            **출력 형식:**
+            (제목 없이) 바로 스크립트 시작
+
+      - task: "v2 프롬프트 메타데이터"
+        content: |
+          name: "순수 스크립트 (TTS 최적화)"
+          description: "Markdown 헤더 없이 TTS가 바로 읽을 수 있는 순수 텍스트 스크립트"
+          version: "2.0"
+          tags:
+            - "tts-optimized"
+            - "pure-text"
+            - "no-markdown"
+
+  # 2. 기존 프롬프트와 비교 테스트
+  comparison_testing:
+    priority: "high"
+    tasks:
+      - task: "동일 키워드로 v1/v2 비교 생성"
+        test_keywords:
+          - "청자 상감운학문 매병"
+          - "석굴암"
+          - "사유의 방"
+
+        comparison_metrics:
+          - metric: "Markdown 헤더 포함 여부"
+            v1_expected: "포함 (#, ##)"
+            v2_expected: "없음"
+
+          - metric: "섹션 구분 방식"
+            v1_expected: "명시적 제목"
+            v2_expected: "자연스러운 문단 전환"
+
+          - metric: "TTS 친화도"
+            v1_expected: "중간 (헤더 읽힘)"
+            v2_expected: "높음 (순수 텍스트)"
+
+          - metric: "길이"
+            both_expected: "~1분 (150-200 단어)"
+
+          - metric: "톤 일관성"
+            both_expected: "친근하고 대화적"
+
+      - task: "실제 TTS 변환 테스트"
+        description: |
+          v1과 v2 스크립트를 오디오 생성 파이프라인에 입력하여
+          실제 음성 출력 품질 비교 (API 크레딧이 있을 경우)
+
+  # 3. 프롬프트 버전 관리 강화
+  version_management:
+    priority: "medium"
+    tasks:
+      - task: "프롬프트 선택 로직 개선"
+        file: "src/pipelines/script_gen.py"
+        changes:
+          - "기본 프롬프트 버전을 v2로 변경"
+          - "--prompt-version 옵션으로 v1/v2 선택 가능 유지"
+          - "프롬프트 메타데이터 로깅 강화"
+
+      - task: "프롬프트 설명 CLI 출력"
+        command: "python -m src.pipelines.script_gen --list-prompts"
+        expected_output: |
+          사용 가능한 프롬프트 버전:
+          ============================================================
+
+          v1:
+            이름: 기본 오디오 가이드
+            설명: Markdown 구조의 오디오 가이드 스크립트
+            태그: structured, markdown
+
+          v2:
+            이름: 순수 스크립트 (TTS 최적화)
+            설명: Markdown 헤더 없이 TTS가 바로 읽을 수 있는 순수 텍스트 스크립트
+            태그: tts-optimized, pure-text, no-markdown
+
+# 구현 가이드
+implementation_guide:
+
+  # 1단계: v2 프롬프트 작성
+  phase1_create_v2_prompt:
+    duration: "1 hour"
+    steps:
+      - step: "v2.yaml 파일 생성"
+        file: "prompts/script_generation/v2.yaml"
+        template: |
+          name: "순수 스크립트 (TTS 최적화)"
+          description: "Markdown 헤더 없이 TTS가 바로 읽을 수 있는 순수 텍스트 스크립트"
+          version: "2.0"
+          tags:
+            - "tts-optimized"
+            - "pure-text"
+            - "no-markdown"
+
+          system_prompt: |
+            (위에 명시한 system_prompt 내용)
+
+          user_prompt_template: |
+            (위에 명시한 user_prompt 내용)
+
+      - step: "프롬프트 로더 검증"
+        command: "python -m src.pipelines.script_gen --list-prompts"
+        expected: "v2 프롬프트가 목록에 나타남"
+
+  # 2단계: 비교 테스트
+  phase2_comparison_testing:
+    duration: "1-2 hours"
+    steps:
+      - step: "v1 스크립트 생성"
+        commands:
+          - keyword: "청자 상감운학문 매병"
+            command: |
+              python -m src.pipelines.script_gen \
+                --keyword "청자 상감운학문 매병" \
+                --prompt-version v1 \
+                --output-dir outputs/script/v1_test
+
+          - keyword: "석굴암"
+            command: |
+              python -m src.pipelines.script_gen \
+                --keyword "석굴암" \
+                --prompt-version v1 \
+                --output-dir outputs/script/v1_test
+
+      - step: "v2 스크립트 생성"
+        commands:
+          - keyword: "청자 상감운학문 매병"
+            command: |
+              python -m src.pipelines.script_gen \
+                --keyword "청자 상감운학문 매병" \
+                --prompt-version v2 \
+                --output-dir outputs/script/v2_test
+
+          - keyword: "석굴암"
+            command: |
+              python -m src.pipelines.script_gen \
+                --keyword "석굴암" \
+                --prompt-version v2 \
+                --output-dir outputs/script/v2_test
+
+      - step: "결과 비교"
+        actions:
+          - "각 키워드별 v1/v2 스크립트 파일 열기"
+          - "Markdown 헤더 유무 확인"
+          - "섹션 구분 방식 비교"
+          - "자연스러운 흐름 평가"
+
+  # 3단계: TTS 변환 테스트 (선택적)
+  phase3_tts_testing:
+    duration: "1 hour"
+    prerequisite: "OpenAI API 크레딧 충전 필요"
+    steps:
+      - step: "v1 스크립트로 TTS 생성"
+        command: |
+          python -m src.pipelines.audio_gen \
+            --keyword "청자 상감운학문 매병" \
+            --script-dir outputs/script/v1_test \
+            --output-dir outputs/audio/v1_test
+
+      - step: "v2 스크립트로 TTS 생성"
+        command: |
+          python -m src.pipelines.audio_gen \
+            --keyword "청자 상감운학문 매병" \
+            --script-dir outputs/script/v2_test \
+            --output-dir outputs/audio/v2_test
+
+      - step: "음성 품질 비교"
+        evaluation:
+          - "Markdown 헤더 읽힘 여부"
+          - "자연스러운 흐름"
+          - "문단 전환 자연스러움"
+          - "전체적인 청취 경험"
+
+  # 4단계: 기본 프롬프트 변경
+  phase4_update_default:
+    duration: "30 minutes"
+    steps:
+      - step: "script_gen.py 기본값 변경"
+        file: "src/pipelines/script_gen.py"
+        change:
+          from: 'prompt_version: str = "v1"'
+          to: 'prompt_version: str = "v2"'
+
+      - step: "main.py 기본값 변경"
+        file: "src/main.py"
+        change:
+          from: 'prompt_version: str = "v1"'
+          to: 'prompt_version: str = "v2"'
+
+      - step: "전체 파이프라인 테스트"
+        command: |
+          python -m src.main --keyword "테스트" --dry-run
+        expected: "v2 프롬프트로 스크립트 생성"
+
+# 테스트 계획
+testing_plan:
+
+  # 단위 테스트
+  unit_tests:
+    - test: "v2 프롬프트 로딩"
+      command: "python -m src.pipelines.script_gen --list-prompts"
+      expected: "v2가 목록에 표시"
+
+    - test: "v2 스크립트 생성"
+      command: |
+        python -m src.pipelines.script_gen \
+          --keyword "테스트" \
+          --prompt-version v2 \
+          --dry-run
+      expected: "Markdown 헤더 없는 순수 텍스트 생성"
+
+  # 비교 테스트
+  comparison_tests:
+    test_keywords:
+      - "청자 상감운학문 매병"
+      - "석굴암"
+      - "사유의 방"
+
+    for_each_keyword:
+      - "v1 스크립트 생성"
+      - "v2 스크립트 생성"
+      - "내용 비교 및 품질 평가"
+
+  # 통합 테스트
+  integration_tests:
+    - test: "전체 파이프라인 (v2 프롬프트)"
+      command: "python -m src.main --keyword '테스트' --dry-run"
+      expected: "info → script(v2) → audio 순차 실행"
+
+    - test: "TTS 변환 (API 크레딧 있을 경우)"
+      command: "python -m src.main --keyword '첨성대' --prompt-version v2"
+      expected: "v2 스크립트로 자연스러운 음성 생성"
+
+# 성공 기준
+success_criteria:
+  - criterion: "v2 프롬프트 작성 완료"
+    measurement: "prompts/script_generation/v2.yaml 파일 존재"
+
+  - criterion: "Markdown 헤더 제거"
+    measurement: "v2 스크립트에 #, ## 기호 없음"
+
+  - criterion: "자연스러운 문단 전환"
+    measurement: "섹션 제목 없이 흐름이 자연스러움"
+
+  - criterion: "v1/v2 비교 테스트 완료"
+    measurement: "3개 키워드로 각각 v1/v2 생성 및 비교"
+
+  - criterion: "기본 프롬프트 v2 변경"
+    measurement: "main.py와 script_gen.py 기본값이 v2"
+
+# 예상 출력 예시
+expected_output_example:
+  v1_output: |
+    # 청자 상감운학문 매병 오디오 가이드
+
+    ## 인사 및 소개
+    안녕하세요! 오늘은 청자 상감운학문 매병에 대해 알아보겠습니다.
+
+    ## 역사적 배경
+    이 작품은 고려시대 12세기에 제작되었습니다...
+
+  v2_output: |
+    안녕하세요! 오늘은 청자 상감운학문 매병에 대해 알아보겠습니다.
+
+    이 아름다운 청자는 고려시대 12세기에 제작되었습니다. 당시 고려청자의 전성기를 대표하는 작품으로...
+
+    여러분이 직접 보신다면, 비취색 유약과 정교한 상감 기법에 감탄하시게 될 것입니다. 구름과 학의 문양이 우아하게 조화를 이루고 있습니다.
+
+    이 매병은 단순한 공예품이 아니라, 고려인의 미적 감각과 기술력이 응집된 문화유산입니다. 오늘 감상해주셔서 감사합니다.
+
+  comparison:
+    v1_issues:
+      - "# 기호가 TTS에서 '샵'으로 읽힐 수 있음"
+      - "섹션 제목이 부자연스럽게 읽힘"
+
+    v2_improvements:
+      - "순수 텍스트로 자연스러운 흐름"
+      - "TTS가 바로 읽을 수 있는 형태"
+
+# 리스크 및 대응
+risks:
+  - risk: "v2 프롬프트가 섹션 구조를 무시하고 무질서한 스크립트 생성"
+    mitigation: |
+      - 프롬프트에 "내부 흐름" 가이드 명시
+      - 여러 번 테스트하여 안정성 확인
+    priority: "medium"
+
+  - risk: "v2 스크립트 길이가 부정확 (1분 초과/미만)"
+    mitigation: "프롬프트에 단어 수 제한 명시 (150-200 단어)"
+    priority: "low"
+
+  - risk: "v1과 비교하여 품질 저하"
+    mitigation: "v1은 유지하고 v2는 옵션으로 제공, 충분한 테스트 후 기본값 변경"
+    priority: "low"
+
+# 후속 작업
+follow_up:
+  immediate:
+    - "v1/v2 비교 테스트 완료"
+    - "3개 키워드로 품질 검증"
+    - "TTS 변환 테스트 (API 크레딧 충전 후)"
+
+  future:
+    - "v3: 다양한 톤 변형 (감성/교육/아동용)"
+    - "길이별 프롬프트 (30초/1분/2분)"
+    - "다국어 스크립트 생성"
+
+# 참고 자료
+references:
+  existing_code:
+    - "src/pipelines/script_gen.py"
+    - "prompts/script_generation/v1.yaml"
+    - "src/utils/prompt_loader.py"
+
+  logs:
+    - "dev-log/[script-agent]2025-11-06_22-08.md"
+    - "dev-log/[main-reviewer]2025-11-07_07-41-53.md"
+
+# 제출 산출물
+deliverables:
+  code:
+    - file: "prompts/script_generation/v2.yaml"
+      status: "신규 작성"
+
+    - file: "src/pipelines/script_gen.py"
+      changes:
+        - "기본 prompt_version을 v2로 변경 (선택적)"
+
+    - file: "src/main.py"
+      changes:
+        - "기본 prompt_version을 v2로 변경 (선택적)"
+
+  testing:
+    - "v1/v2 비교 테스트 결과 (3개 키워드)"
+    - "TTS 변환 품질 비교 (가능한 경우)"
+
+  documentation:
+    - file: "dev-log/[script-agent]2025-11-XX_v2-pure-script.md"
+      content:
+        - "v2 프롬프트 설계 배경"
+        - "v1/v2 비교 결과"
+        - "TTS 변환 품질 평가"
+        - "향후 개선 방향"
+
+# 에이전트에게 전달하는 메시지
+message_to_agent: |
+  스크립트 생성 파이프라인 v2 개발을 시작합니다.
+
+  핵심 목표: TTS가 바로 읽을 수 있도록 Markdown 헤더 없이
+             순수 텍스트 스크립트만 생성하는 프롬프트 설계
+
+  주요 작업:
+  1. v2 프롬프트 작성 (prompts/script_generation/v2.yaml)
+     - Markdown 헤더(#, ##) 제거
+     - 섹션 제목 없이 자연스러운 문단 전환
+     - TTS 친화적 표현 강조
+
+  2. v1/v2 비교 테스트
+     - 동일 키워드로 v1/v2 스크립트 생성
+     - Markdown 헤더 유무 확인
+     - 자연스러운 흐름 평가
+
+  3. (선택적) TTS 변환 테스트
+     - API 크레딧이 있으면 실제 음성 품질 비교
+
+  4. (선택적) 기본 프롬프트를 v2로 변경
+
+  우선순위:
+  - High: v2 프롬프트 작성, v1/v2 비교 테스트
+  - Medium: 프롬프트 버전 관리 강화
+  - Low: TTS 변환 테스트 (API 크레딧 필요)
+
+  성공 기준:
+  - v2 스크립트에 Markdown 헤더 없음
+  - 자연스러운 문단 전환
+  - v1 기능 유지 (버전 선택 가능)
+
+  예상 출력:
+  v1: "# 제목\n\n## 섹션\n내용"
+  v2: "제목 없이 바로 내용으로 시작, 자연스러운 흐름"
+
+  질문이나 불명확한 사항이 있으면 Main Reviewer에게 질문해 주세요.

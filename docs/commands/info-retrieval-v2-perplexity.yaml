@@ -1,0 +1,364 @@
+# 정보 검색 파이프라인 v2 개발 명령서 (Perplexity API 통합)
+# 발행 일시: 2025-11-07 07:45:00
+# 발행자: Main Reviewer Agent
+# 담당: Workflow-01_InfoRetrieval Agent
+
+version: "v2.0"
+pipeline: "info_retrieval"
+priority: "high"
+estimated_effort: "4-6 hours"
+
+# 개발 목표
+objective: |
+  정보 검색의 정확도를 높이기 위해 Perplexity API를 활용하여
+  위키피디아와 나무위키에서 문화유산 정보를 검색하고,
+  기존 OpenAI LLM 기반 검색 결과와 통합하여 더욱 정확한 정보를 제공합니다.
+
+# 현재 상태 분석
+current_status:
+  version: "v1.0"
+  issues:
+    - description: "OpenAI LLM만 사용하여 정보 정확도가 떨어질 수 있음"
+      severity: "medium"
+      example: "실제 문화재 정보와 다른 내용 생성 가능성"
+
+    - description: "웹 검색 기능 미구현 (exa-py 주석 처리 상태)"
+      severity: "medium"
+      file: "requirements.txt:6"
+
+  strengths:
+    - "기본 LLM 검색 구조 안정적"
+    - "dry_run 모드 완벽 구현"
+    - "에러 처리 및 로깅 우수"
+
+# v2 요구사항
+requirements:
+
+  # 1. Perplexity API 통합
+  perplexity_integration:
+    priority: "high"
+    tasks:
+      - task: "Perplexity API 클라이언트 구현"
+        description: |
+          - requirements.txt에 이미 perplexityai 패키지 추가됨
+          - .env에 PERPLEXITY_API_KEY 설정 완료
+          - Perplexity API를 호출하여 위키피디아와 나무위키에서 검색
+
+        implementation:
+          - file: "src/pipelines/info_retrieval.py"
+          - function: "_search_with_perplexity(keyword: str) -> str"
+          - api_endpoint: "Perplexity API chat completions"
+          - search_domains:
+              - "ko.wikipedia.org (한국어 위키피디아)"
+              - "namu.wiki (나무위키)"
+
+        example_usage: |
+          from openai import OpenAI  # Perplexity는 OpenAI 호환 API 사용
+
+          client = OpenAI(
+              api_key=os.getenv("PERPLEXITY_API_KEY"),
+              base_url="https://api.perplexity.ai"
+          )
+
+          response = client.chat.completions.create(
+              model="llama-3.1-sonar-large-128k-online",
+              messages=[
+                  {
+                      "role": "system",
+                      "content": "당신은 한국 문화유산 전문가입니다. 위키피디아와 나무위키의 정보를 기반으로 정확한 답변을 제공해주세요."
+                  },
+                  {
+                      "role": "user",
+                      "content": f"'{keyword}'에 대한 상세한 정보를 위키피디아와 나무위키에서 검색하여 정리해주세요."
+                  }
+              ]
+          )
+
+      - task: "검색 소스 명시"
+        description: "Perplexity 응답에 포함된 citations를 활용하여 출처 명시"
+        implementation:
+          - response.citations 파싱하여 참고 자료 섹션에 추가
+          - 위키피디아/나무위키 링크 명시
+
+  # 2. 하이브리드 검색 전략
+  hybrid_search_strategy:
+    priority: "high"
+    description: |
+      OpenAI LLM과 Perplexity 검색 결과를 통합하여 최종 정보 생성
+
+    tasks:
+      - task: "검색 모드 추가"
+        options:
+          - mode: "openai"
+            description: "기존 OpenAI LLM만 사용 (v1 방식)"
+            use_case: "빠른 테스트, API 크레딧 절약"
+
+          - mode: "perplexity"
+            description: "Perplexity API만 사용"
+            use_case: "정확도 최우선, 웹 검색 기반 정보"
+
+          - mode: "hybrid"
+            description: "OpenAI + Perplexity 결과 통합 (기본값)"
+            use_case: "최고 정확도, 다양한 출처"
+
+        implementation:
+          - CLI 파라미터: --search-mode {openai,perplexity,hybrid}
+          - run() 함수 시그니처: search_mode: str = "hybrid"
+
+      - task: "결과 통합 로직"
+        description: |
+          hybrid 모드일 때 두 검색 결과를 병합하는 로직 구현
+
+        approach:
+          - step1: "Perplexity로 1차 검색 (웹 기반 정확한 정보)"
+          - step2: "OpenAI로 2차 검색 (보완 및 재구성)"
+          - step3: "두 결과를 비교하여 최종 Markdown 생성"
+          - step4: "출처 섹션에 Perplexity citations 추가"
+
+  # 3. 프롬프트 개선
+  prompt_enhancement:
+    priority: "medium"
+    tasks:
+      - task: "Perplexity 전용 프롬프트"
+        content: |
+          시스템 프롬프트:
+          "당신은 한국 문화유산 전문가입니다.
+          위키피디아(ko.wikipedia.org)와 나무위키(namu.wiki)의 정보를 우선적으로 활용하여
+          정확하고 검증된 정보만 제공해주세요.
+
+          응답 형식:
+          - 명확한 출처 명시
+          - 연도, 지정번호 등 객관적 정보 우선
+          - 불확실한 정보는 '추정', '전해진다' 등으로 표현"
+
+      - task: "하이브리드 모드 통합 프롬프트"
+        content: |
+          "아래는 웹 검색으로 수집한 정보입니다:
+
+          [Perplexity 검색 결과]
+          {perplexity_result}
+
+          위 정보를 바탕으로, 아래 형식의 Markdown을 작성해주세요:
+          (기존 섹션 구조 유지)"
+
+# 구현 가이드
+implementation_guide:
+
+  # 1단계: Perplexity API 기본 연동
+  phase1_basic_integration:
+    duration: "1-2 hours"
+    steps:
+      - step: "의존성 확인"
+        commands:
+          - "source .venv/bin/activate"
+          - "pip install perplexityai"
+          - "pip list | grep perplexity"
+
+      - step: ".env 파일 검증"
+        check: "PERPLEXITY_API_KEY가 설정되어 있는지 확인"
+        file: ".env"
+
+      - step: "_search_with_perplexity() 함수 구현"
+        location: "src/pipelines/info_retrieval.py"
+        example: |
+          def _search_with_perplexity(keyword: str) -> dict:
+              """
+              Perplexity API를 사용하여 위키피디아/나무위키에서 검색
+
+              Returns:
+                  dict: {"content": str, "citations": list}
+              """
+              api_key = os.getenv("PERPLEXITY_API_KEY")
+              if not api_key:
+                  raise ValueError("PERPLEXITY_API_KEY가 설정되지 않았습니다.")
+
+              client = OpenAI(
+                  api_key=api_key,
+                  base_url="https://api.perplexity.ai"
+              )
+
+              # ... API 호출 로직
+
+      - step: "테스트"
+        command: |
+          python -m src.pipelines.info_retrieval \
+            --keyword "첨성대" \
+            --search-mode perplexity
+
+  # 2단계: 하이브리드 모드 구현
+  phase2_hybrid_mode:
+    duration: "2-3 hours"
+    steps:
+      - step: "검색 모드 파라미터 추가"
+        file: "src/pipelines/info_retrieval.py"
+        changes:
+          - "run() 함수에 search_mode 파라미터 추가"
+          - "CLI argparse에 --search-mode 옵션 추가"
+
+      - step: "_merge_search_results() 함수 구현"
+        description: "OpenAI와 Perplexity 결과 병합"
+        logic: |
+          - Perplexity 결과를 1차 소스로 사용
+          - OpenAI로 가독성 개선 및 재구성
+          - citations를 참고 자료 섹션에 추가
+
+      - step: "테스트"
+        commands:
+          - "python -m src.pipelines.info_retrieval --keyword '청자 상감운학문 매병' --search-mode openai"
+          - "python -m src.pipelines.info_retrieval --keyword '청자 상감운학문 매병' --search-mode perplexity"
+          - "python -m src.pipelines.info_retrieval --keyword '청자 상감운학문 매병' --search-mode hybrid"
+
+      - step: "결과 비교"
+        description: |
+          - 세 모드의 출력 파일을 비교하여 정확도 평가
+          - 위키피디아/나무위키 정보 반영 여부 확인
+          - 출처 명시 완성도 점검
+
+  # 3단계: 로깅 및 에러 처리
+  phase3_logging_error_handling:
+    duration: "1 hour"
+    tasks:
+      - "Perplexity API 호출 실패 시 fallback 처리"
+      - "검색 모드별 로그 메시지 구분"
+      - "API 응답 시간 로깅"
+      - "citations 파싱 실패 시 안전 처리"
+
+# 테스트 계획
+testing_plan:
+
+  # 단위 테스트
+  unit_tests:
+    - test: "Perplexity API 연동"
+      keyword: "첨성대"
+      expected: "위키피디아/나무위키 정보 포함"
+
+    - test: "검색 모드 선택"
+      cases:
+        - mode: "openai"
+          expected: "기존 v1 방식 동작"
+        - mode: "perplexity"
+          expected: "Perplexity 검색 결과만 사용"
+        - mode: "hybrid"
+          expected: "두 결과 통합"
+
+  # 통합 테스트
+  integration_tests:
+    - test: "전체 파이프라인 (main.py)"
+      command: "python -m src.main --keyword '사유의 방'"
+      expected: "info 파이프라인이 Perplexity로 정확한 정보 검색"
+
+    - test: "정확도 검증"
+      keywords:
+        - "석굴암"
+        - "첨성대"
+        - "청자 상감운학문 매병"
+      validation:
+        - "지정 문화재 번호 정확성"
+        - "시대/연도 정확성"
+        - "소장처 정확성"
+
+# 성공 기준
+success_criteria:
+  - criterion: "Perplexity API 정상 연동"
+    measurement: "API 호출 성공률 100%"
+
+  - criterion: "정보 정확도 개선"
+    measurement: |
+      - 문화재 지정번호 정확도 90% 이상
+      - 위키피디아/나무위키 출처 명시 100%
+
+  - criterion: "하이브리드 모드 구현"
+    measurement: "세 가지 검색 모드 모두 정상 작동"
+
+  - criterion: "기존 기능 유지"
+    measurement: "v1 기능(dry_run, 에러 처리 등) 정상 작동"
+
+# 리스크 및 대응
+risks:
+  - risk: "Perplexity API 크레딧 소진"
+    mitigation: "dry_run 모드 활용, 기본 모드를 openai로 유지"
+    priority: "medium"
+
+  - risk: "Perplexity 응답 형식 변경"
+    mitigation: "응답 파싱 실패 시 OpenAI fallback"
+    priority: "low"
+
+  - risk: "한국어 검색 품질"
+    mitigation: "프롬프트에 한국어 위키피디아/나무위키 명시"
+    priority: "medium"
+
+# 후속 작업
+follow_up:
+  immediate:
+    - "세 가지 검색 모드 모두 테스트"
+    - "정확도 비교 로그 작성"
+    - "README에 Perplexity API 사용법 추가"
+
+  future:
+    - "museum.go.kr API 추가 (v2.1)"
+    - "검색 결과 캐싱 (v2.2)"
+    - "다국어 지원 (v3.0)"
+
+# 참고 자료
+references:
+  perplexity_api:
+    - "https://docs.perplexity.ai/guides/getting-started"
+    - "https://docs.perplexity.ai/reference/post_chat_completions"
+
+  existing_code:
+    - "src/pipelines/info_retrieval.py"
+    - "dev-log/[info agent]2025-11-06_22-15-00.md"
+
+  requirements:
+    - "requirements.txt:8 (perplexityai 패키지)"
+    - ".env (PERPLEXITY_API_KEY)"
+
+# 제출 산출물
+deliverables:
+  code:
+    - file: "src/pipelines/info_retrieval.py"
+      changes:
+        - "_search_with_perplexity() 함수 추가"
+        - "_merge_search_results() 함수 추가"
+        - "run() 함수에 search_mode 파라미터 추가"
+        - "CLI argparse에 --search-mode 추가"
+
+  documentation:
+    - file: "dev-log/[info-agent]2025-11-XX_perplexity-integration.md"
+      content:
+        - "구현 내용 상세 기록"
+        - "테스트 결과 (세 가지 모드 비교)"
+        - "정확도 개선 사항"
+        - "후속 작업 제안"
+
+  testing:
+    - "세 가지 검색 모드 실행 결과"
+    - "정확도 비교 리포트"
+
+# 에이전트에게 전달하는 메시지
+message_to_agent: |
+  정보 검색 파이프라인 v2 개발을 시작합니다.
+
+  핵심 목표: Perplexity API를 활용하여 위키피디아와 나무위키에서
+             정확한 문화유산 정보를 검색하고, 정보 정확도를 대폭 개선
+
+  주요 작업:
+  1. Perplexity API 클라이언트 구현 (_search_with_perplexity)
+  2. 세 가지 검색 모드 구현 (openai, perplexity, hybrid)
+  3. 하이브리드 모드에서 두 검색 결과 통합 로직
+  4. 출처(citations) 명시 기능
+
+  우선순위:
+  - High: Perplexity API 연동, 하이브리드 모드 구현
+  - Medium: 프롬프트 최적화, 정확도 검증
+
+  성공 기준:
+  - Perplexity API 호출 성공
+  - 위키피디아/나무위키 정보 반영
+  - 세 가지 검색 모드 모두 정상 작동
+  - 기존 v1 기능(dry_run 등) 유지
+
+  requirements.txt와 .env는 이미 설정되어 있으므로,
+  바로 구현을 시작할 수 있습니다.
+
+  질문이나 불명확한 사항이 있으면 Main Reviewer에게 질문해 주세요.

@@ -1,0 +1,669 @@
+# 오디오 생성 파이프라인 v2 개발 명령서 (Multi-TTS Provider)
+# 발행 일시: 2025-11-07 08:00:00
+# 발행자: Main Reviewer Agent
+# 담당: Workflow-03_AudioGeneration Agent
+
+version: "v2.0"
+pipeline: "audio_gen"
+priority: "high"
+estimated_effort: "6-8 hours"
+
+# 개발 목표
+objective: |
+  OpenAI TTS 실패 시 대체 서비스(ElevenLabs, Google TTS)를 자동으로 사용하는
+  Plan B 파이프라인을 구축하고, 사용자가 원하는 TTS 제공자를 직접 선택할 수 있는 기능을 추가합니다.
+
+# 현재 상태 분석
+current_status:
+  version: "v1.0"
+  issues:
+    - description: "OpenAI TTS API 크레딧 소진 시 파이프라인 전체 실패"
+      severity: "high"
+      impact: "최종 사용자에게 MP3 파일 미제공"
+      example: "통합 테스트에서 429 에러로 오디오 생성 실패"
+
+    - description: "단일 TTS 제공자 의존"
+      severity: "medium"
+      risk: "OpenAI 서비스 장애 시 대응 불가"
+
+  strengths:
+    - "지수 백오프 및 에러 처리 탁월"
+    - "최신 OpenAI SDK 사용"
+    - "voice, speed 파라미터 커스터마이징 우수"
+    - "로깅 상세"
+
+# v2 요구사항
+requirements:
+
+  # 1. Multi-Provider 아키텍처
+  multi_provider_architecture:
+    priority: "high"
+    description: |
+      TTS 제공자를 추상화하고, 여러 서비스를 플러그인 방식으로 지원
+
+    providers:
+      - name: "OpenAI TTS"
+        priority: 1
+        model: "gpt-4o-mini-tts"
+        voices: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+        pros:
+          - "고품질 음성"
+          - "다양한 voice 옵션"
+        cons:
+          - "API 크레딧 필요"
+          - "할당량 제한"
+        status: "현재 구현됨"
+
+      - name: "ElevenLabs"
+        priority: 2
+        voices: ["Rachel", "Domi", "Bella", "Antoni", "Elli", "Josh"]
+        pros:
+          - "매우 자연스러운 음성"
+          - "감정 표현 우수"
+        cons:
+          - "API 크레딧 필요"
+          - "상대적으로 비쌈"
+        status: "신규 추가"
+        env_key: "ELEVENLABS_API_KEY"
+
+      - name: "Google Cloud TTS"
+        priority: 3
+        voices: ["ko-KR-Standard-A", "ko-KR-Standard-B", "ko-KR-Wavenet-A"]
+        pros:
+          - "무료 할당량 제공"
+          - "안정적인 서비스"
+        cons:
+          - "음질이 OpenAI/ElevenLabs보다 낮음"
+        status: "신규 추가"
+        env_key: "GOOGLE_APPLICATION_CREDENTIALS"
+
+    fallback_logic:
+      description: "우선순위에 따라 자동 fallback"
+      flow: |
+        1. OpenAI 시도
+           ↓ (실패 시)
+        2. ElevenLabs 시도
+           ↓ (실패 시)
+        3. Google TTS 시도
+           ↓ (실패 시)
+        4. 에러 발생 및 사용자 안내
+
+  # 2. Provider 선택 기능
+  provider_selection:
+    priority: "high"
+    tasks:
+      - task: "CLI 파라미터로 TTS 제공자 선택"
+        parameter: "--tts-provider {openai,elevenlabs,google,auto}"
+        options:
+          - value: "openai"
+            description: "OpenAI TTS만 사용 (기존 v1 방식)"
+
+          - value: "elevenlabs"
+            description: "ElevenLabs만 사용"
+
+          - value: "google"
+            description: "Google Cloud TTS만 사용"
+
+          - value: "auto"
+            description: "자동 fallback (기본값, 우선순위에 따라 시도)"
+
+      - task: "Provider별 voice 매핑"
+        description: |
+          사용자가 --voice 옵션을 지정하면 각 provider의 유사한 음성으로 매핑
+
+        example:
+          input: "--voice alloy --tts-provider elevenlabs"
+          mapping: "alloy (OpenAI) → Rachel (ElevenLabs)"
+          logic: "provider별 voice 매핑 테이블 구현"
+
+  # 3. Provider 추상화 클래스
+  provider_abstraction:
+    priority: "high"
+    tasks:
+      - task: "BaseTTSProvider 추상 클래스 작성"
+        file: "src/pipelines/tts_providers/base.py"
+        interface: |
+          from abc import ABC, abstractmethod
+          from pathlib import Path
+
+          class BaseTTSProvider(ABC):
+              """TTS 제공자 추상 클래스"""
+
+              @abstractmethod
+              def generate(
+                  self,
+                  text: str,
+                  output_path: Path,
+                  voice: str,
+                  speed: float = 1.0,
+                  **kwargs
+              ) -> None:
+                  """
+                  텍스트를 음성으로 변환하여 파일에 저장
+
+                  Args:
+                      text: 변환할 텍스트
+                      output_path: 출력 MP3 파일 경로
+                      voice: 음성 종류
+                      speed: 말하기 속도
+                      **kwargs: Provider별 추가 파라미터
+                  """
+                  pass
+
+              @abstractmethod
+              def is_available(self) -> bool:
+                  """
+                  이 provider가 사용 가능한지 확인 (API 키 존재 여부 등)
+
+                  Returns:
+                      bool: 사용 가능 여부
+                  """
+                  pass
+
+              @abstractmethod
+              def get_available_voices(self) -> list[str]:
+                  """
+                  이 provider가 지원하는 음성 목록 반환
+
+                  Returns:
+                      list[str]: 음성 이름 리스트
+                  """
+                  pass
+
+      - task: "OpenAITTSProvider 구현"
+        file: "src/pipelines/tts_providers/openai_provider.py"
+        description: "기존 audio_gen.py의 OpenAI TTS 로직을 이 클래스로 이동"
+
+      - task: "ElevenLabsProvider 구현"
+        file: "src/pipelines/tts_providers/elevenlabs_provider.py"
+        dependencies: "pip install elevenlabs"
+        example: |
+          from elevenlabs import Voice, VoiceSettings, save
+          from elevenlabs.client import ElevenLabs
+
+          class ElevenLabsProvider(BaseTTSProvider):
+              def __init__(self):
+                  api_key = os.getenv("ELEVENLABS_API_KEY")
+                  if not api_key:
+                      raise ValueError("ELEVENLABS_API_KEY가 설정되지 않았습니다.")
+                  self.client = ElevenLabs(api_key=api_key)
+
+              def generate(self, text, output_path, voice, speed=1.0, **kwargs):
+                  audio = self.client.generate(
+                      text=text,
+                      voice=Voice(
+                          voice_id=self._map_voice(voice),
+                          settings=VoiceSettings(
+                              stability=0.5,
+                              similarity_boost=0.75,
+                              style=0.0,
+                              use_speaker_boost=True
+                          )
+                      )
+                  )
+                  save(audio, str(output_path))
+
+      - task: "GoogleTTSProvider 구현"
+        file: "src/pipelines/tts_providers/google_provider.py"
+        dependencies: "pip install google-cloud-texttospeech"
+        example: |
+          from google.cloud import texttospeech
+
+          class GoogleTTSProvider(BaseTTSProvider):
+              def __init__(self):
+                  # GOOGLE_APPLICATION_CREDENTIALS 환경변수로 인증
+                  self.client = texttospeech.TextToSpeechClient()
+
+              def generate(self, text, output_path, voice, speed=1.0, **kwargs):
+                  synthesis_input = texttospeech.SynthesisInput(text=text)
+
+                  voice_params = texttospeech.VoiceSelectionParams(
+                      language_code="ko-KR",
+                      name=self._map_voice(voice)
+                  )
+
+                  audio_config = texttospeech.AudioConfig(
+                      audio_encoding=texttospeech.AudioEncoding.MP3,
+                      speaking_rate=speed
+                  )
+
+                  response = self.client.synthesize_speech(
+                      input=synthesis_input,
+                      voice=voice_params,
+                      audio_config=audio_config
+                  )
+
+                  with open(output_path, "wb") as out:
+                      out.write(response.audio_content)
+
+  # 4. Provider 팩토리 및 Fallback 로직
+  provider_factory:
+    priority: "high"
+    tasks:
+      - task: "TTSProviderFactory 클래스 작성"
+        file: "src/pipelines/tts_providers/factory.py"
+        purpose: "Provider 생성 및 fallback 로직 관리"
+        interface: |
+          class TTSProviderFactory:
+              """TTS Provider 팩토리 및 fallback 관리"""
+
+              # Provider 우선순위 (auto 모드용)
+              PRIORITY_ORDER = ["openai", "elevenlabs", "google"]
+
+              @staticmethod
+              def create(provider_name: str) -> BaseTTSProvider:
+                  """
+                  Provider 이름으로 인스턴스 생성
+
+                  Args:
+                      provider_name: "openai", "elevenlabs", "google"
+
+                  Returns:
+                      BaseTTSProvider 인스턴스
+
+                  Raises:
+                      ValueError: 지원하지 않는 provider
+                  """
+                  pass
+
+              @staticmethod
+              def create_with_fallback() -> list[BaseTTSProvider]:
+                  """
+                  사용 가능한 provider들을 우선순위 순으로 반환
+
+                  Returns:
+                      list[BaseTTSProvider]: 사용 가능한 provider 리스트
+                  """
+                  providers = []
+                  for name in TTSProviderFactory.PRIORITY_ORDER:
+                      try:
+                          provider = TTSProviderFactory.create(name)
+                          if provider.is_available():
+                              providers.append(provider)
+                      except Exception as e:
+                          logger.warning(f"{name} provider 초기화 실패: {e}")
+                  return providers
+
+      - task: "audio_gen.py 리팩토링"
+        file: "src/pipelines/audio_gen.py"
+        changes:
+          - description: "기존 OpenAI TTS 로직을 OpenAITTSProvider로 이동"
+          - description: "run() 함수에 tts_provider 파라미터 추가"
+          - description: "auto 모드일 때 fallback 로직 구현"
+
+        example_logic: |
+          def run(
+              keyword: str,
+              *,
+              tts_provider: str = "auto",
+              ...
+          ) -> Path:
+              if tts_provider == "auto":
+                  # Fallback 로직
+                  providers = TTSProviderFactory.create_with_fallback()
+                  if not providers:
+                      raise Exception("사용 가능한 TTS 제공자가 없습니다.")
+
+                  for provider in providers:
+                      try:
+                          logger.info(f"TTS 생성 시도: {provider.__class__.__name__}")
+                          provider.generate(text, output_path, voice, speed)
+                          logger.info(f"✅ TTS 생성 성공: {provider.__class__.__name__}")
+                          return output_path
+                      except Exception as e:
+                          logger.warning(f"❌ {provider.__class__.__name__} 실패: {e}")
+                          continue
+
+                  raise Exception("모든 TTS 제공자 실패")
+
+              else:
+                  # 특정 provider만 사용
+                  provider = TTSProviderFactory.create(tts_provider)
+                  provider.generate(text, output_path, voice, speed)
+
+# 구현 가이드
+implementation_guide:
+
+  # 1단계: Provider 추상화 구조 구축
+  phase1_abstraction:
+    duration: "2 hours"
+    steps:
+      - step: "디렉토리 생성"
+        command: "mkdir -p src/pipelines/tts_providers"
+
+      - step: "BaseTTSProvider 작성"
+        file: "src/pipelines/tts_providers/base.py"
+        content: "위에 명시한 추상 클래스"
+
+      - step: "__init__.py 작성"
+        file: "src/pipelines/tts_providers/__init__.py"
+        content: |
+          from .base import BaseTTSProvider
+          from .openai_provider import OpenAITTSProvider
+          from .elevenlabs_provider import ElevenLabsProvider
+          from .google_provider import GoogleTTSProvider
+          from .factory import TTSProviderFactory
+
+          __all__ = [
+              "BaseTTSProvider",
+              "OpenAITTSProvider",
+              "ElevenLabsProvider",
+              "GoogleTTSProvider",
+              "TTSProviderFactory",
+          ]
+
+  # 2단계: OpenAI Provider 구현 (기존 로직 이동)
+  phase2_openai_provider:
+    duration: "1 hour"
+    steps:
+      - step: "OpenAITTSProvider 작성"
+        file: "src/pipelines/tts_providers/openai_provider.py"
+        source: "기존 audio_gen.py의 _generate_audio_openai() 로직"
+
+      - step: "테스트"
+        command: |
+          python -c "
+          from src.pipelines.tts_providers import OpenAITTSProvider
+          provider = OpenAITTSProvider()
+          print(provider.is_available())
+          print(provider.get_available_voices())
+          "
+
+  # 3단계: ElevenLabs Provider 구현
+  phase3_elevenlabs_provider:
+    duration: "2 hours"
+    steps:
+      - step: "의존성 설치"
+        command: "pip install elevenlabs"
+
+      - step: ".env 설정"
+        file: ".env"
+        add: "ELEVENLABS_API_KEY=your_key_here"
+
+      - step: "ElevenLabsProvider 작성"
+        file: "src/pipelines/tts_providers/elevenlabs_provider.py"
+
+      - step: "voice 매핑 테이블 작성"
+        mapping: |
+          VOICE_MAPPING = {
+              "alloy": "Rachel",
+              "echo": "Domi",
+              "fable": "Bella",
+              "onyx": "Antoni",
+              "nova": "Elli",
+              "shimmer": "Josh"
+          }
+
+      - step: "테스트"
+        command: |
+          python -m src.pipelines.audio_gen \
+            --keyword "테스트" \
+            --tts-provider elevenlabs \
+            --dry-run
+
+  # 4단계: Google TTS Provider 구현
+  phase4_google_provider:
+    duration: "2 hours"
+    steps:
+      - step: "의존성 설치"
+        command: "pip install google-cloud-texttospeech"
+
+      - step: "Google Cloud 인증 설정"
+        instructions: |
+          1. Google Cloud Console에서 프로젝트 생성
+          2. Text-to-Speech API 활성화
+          3. 서비스 계정 키 다운로드 (JSON)
+          4. .env에 추가: GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json
+
+      - step: "GoogleTTSProvider 작성"
+        file: "src/pipelines/tts_providers/google_provider.py"
+
+      - step: "voice 매핑 테이블 작성"
+        mapping: |
+          VOICE_MAPPING = {
+              "alloy": "ko-KR-Standard-A",
+              "echo": "ko-KR-Standard-B",
+              "fable": "ko-KR-Wavenet-A",
+              "onyx": "ko-KR-Wavenet-B",
+              "nova": "ko-KR-Wavenet-C",
+              "shimmer": "ko-KR-Wavenet-D"
+          }
+
+      - step: "테스트"
+        command: |
+          python -m src.pipelines.audio_gen \
+            --keyword "테스트" \
+            --tts-provider google \
+            --dry-run
+
+  # 5단계: Provider Factory 및 Fallback 로직
+  phase5_factory_fallback:
+    duration: "1-2 hours"
+    steps:
+      - step: "TTSProviderFactory 작성"
+        file: "src/pipelines/tts_providers/factory.py"
+
+      - step: "audio_gen.py 리팩토링"
+        file: "src/pipelines/audio_gen.py"
+        changes:
+          - "tts_provider 파라미터 추가"
+          - "auto 모드 fallback 로직 구현"
+          - "CLI argparse에 --tts-provider 추가"
+
+      - step: "main.py 업데이트"
+        file: "src/main.py"
+        add_parameter: "tts_provider: str = 'auto'"
+
+      - step: "테스트 (auto 모드)"
+        command: |
+          python -m src.pipelines.audio_gen \
+            --keyword "테스트" \
+            --tts-provider auto
+
+        expected_flow: |
+          1. OpenAI 시도 → 실패 (크레딧 없음)
+          2. ElevenLabs 시도 → 성공 또는 실패
+          3. Google TTS 시도 → 성공 (무료 할당량)
+
+# 테스트 계획
+testing_plan:
+
+  # 단위 테스트
+  unit_tests:
+    - test: "각 Provider is_available() 확인"
+      commands:
+        - "python -c 'from src.pipelines.tts_providers import OpenAITTSProvider; print(OpenAITTSProvider().is_available())'"
+        - "python -c 'from src.pipelines.tts_providers import ElevenLabsProvider; print(ElevenLabsProvider().is_available())'"
+        - "python -c 'from src.pipelines.tts_providers import GoogleTTSProvider; print(GoogleTTSProvider().is_available())'"
+
+    - test: "각 Provider get_available_voices() 확인"
+      expected: "각 provider별 voice 리스트 반환"
+
+  # Provider별 TTS 생성 테스트
+  provider_tests:
+    - test: "OpenAI Provider"
+      command: "python -m src.pipelines.audio_gen --keyword '테스트' --tts-provider openai"
+      expected: "OpenAI TTS로 생성 (크레딧 있을 경우)"
+
+    - test: "ElevenLabs Provider"
+      command: "python -m src.pipelines.audio_gen --keyword '테스트' --tts-provider elevenlabs"
+      expected: "ElevenLabs로 생성"
+
+    - test: "Google Provider"
+      command: "python -m src.pipelines.audio_gen --keyword '테스트' --tts-provider google"
+      expected: "Google TTS로 생성"
+
+  # Fallback 로직 테스트
+  fallback_tests:
+    - test: "Auto 모드 (OpenAI 크레딧 없을 경우)"
+      command: "python -m src.pipelines.audio_gen --keyword '테스트' --tts-provider auto"
+      expected: |
+        1. OpenAI 시도 → 실패 (429 error)
+        2. ElevenLabs 시도 → 성공 또는 실패
+        3. Google TTS 시도 → 성공
+
+    - test: "모든 provider 실패 시나리오"
+      setup: "모든 API 키 제거 또는 무효화"
+      expected: "명확한 에러 메시지: '사용 가능한 TTS 제공자가 없습니다.'"
+
+  # 통합 테스트
+  integration_tests:
+    - test: "전체 파이프라인 (auto 모드)"
+      command: "python -m src.main --keyword '첨성대' --tts-provider auto"
+      expected: "info → script → audio(자동 fallback) 성공"
+
+    - test: "전체 파이프라인 (특정 provider)"
+      command: "python -m src.main --keyword '석굴암' --tts-provider google"
+      expected: "Google TTS로 오디오 생성"
+
+# 성공 기준
+success_criteria:
+  - criterion: "3개 Provider 모두 구현"
+    measurement: "OpenAI, ElevenLabs, Google 각각 정상 작동"
+
+  - criterion: "Fallback 로직 구현"
+    measurement: "auto 모드에서 우선순위대로 시도"
+
+  - criterion: "Provider 선택 기능"
+    measurement: "--tts-provider 옵션으로 원하는 provider 선택 가능"
+
+  - criterion: "기존 기능 유지"
+    measurement: "v1 기능(지수 백오프, 에러 처리) 정상 작동"
+
+# 의존성 업데이트
+dependencies:
+  requirements_txt:
+    add:
+      - "elevenlabs>=1.0.0          # ElevenLabs TTS API"
+      - "google-cloud-texttospeech>=2.14.0  # Google Cloud TTS API"
+
+  env_file:
+    add:
+      - "ELEVENLABS_API_KEY=your_key_here"
+      - "GOOGLE_APPLICATION_CREDENTIALS=/path/to/google-key.json"
+
+# 리스크 및 대응
+risks:
+  - risk: "ElevenLabs/Google API 크레딧 소진"
+    mitigation: |
+      - auto 모드에서 우선순위를 OpenAI → ElevenLabs → Google 순으로 설정
+      - Google TTS 무료 할당량 활용
+    priority: "medium"
+
+  - risk: "Provider별 음질 차이"
+    mitigation: "README에 각 provider 특징 명시, 사용자 선택 권장"
+    priority: "low"
+
+  - risk: "Voice 매핑 불완전"
+    mitigation: "기본 voice 제공, 매핑 실패 시 provider 기본값 사용"
+    priority: "low"
+
+  - risk: "Google Cloud 인증 복잡도"
+    mitigation: "상세한 설정 가이드 제공, 인증 실패 시 명확한 안내"
+    priority: "medium"
+
+# 후속 작업
+follow_up:
+  immediate:
+    - "3개 provider 모두 테스트"
+    - "음질 비교 리포트 작성"
+    - "README에 Multi-Provider 사용법 추가"
+
+  future:
+    - "Azure TTS, AWS Polly 추가 (v2.1)"
+    - "Provider별 음성 품질 메트릭 (v2.2)"
+    - "비용 최적화 로직 (가장 저렴한 provider 자동 선택)"
+
+# 참고 자료
+references:
+  apis:
+    - "https://platform.openai.com/docs/guides/text-to-speech"
+    - "https://elevenlabs.io/docs/introduction"
+    - "https://cloud.google.com/text-to-speech/docs"
+
+  existing_code:
+    - "src/pipelines/audio_gen.py"
+    - "dev-log/[audio-agent]2025-11-06-18-35-00.md"
+
+# 제출 산출물
+deliverables:
+  code:
+    new_files:
+      - "src/pipelines/tts_providers/__init__.py"
+      - "src/pipelines/tts_providers/base.py"
+      - "src/pipelines/tts_providers/openai_provider.py"
+      - "src/pipelines/tts_providers/elevenlabs_provider.py"
+      - "src/pipelines/tts_providers/google_provider.py"
+      - "src/pipelines/tts_providers/factory.py"
+
+    modified_files:
+      - file: "src/pipelines/audio_gen.py"
+        changes: "Provider 추상화로 리팩토링, tts_provider 파라미터 추가"
+
+      - file: "src/main.py"
+        changes: "tts_provider 파라미터 추가"
+
+      - file: "requirements.txt"
+        changes: "elevenlabs, google-cloud-texttospeech 추가"
+
+  documentation:
+    - file: "dev-log/[audio-agent]2025-11-XX_multi-provider.md"
+      content:
+        - "Multi-Provider 아키텍처 설계"
+        - "각 Provider 구현 상세"
+        - "Fallback 로직 동작 방식"
+        - "음질 비교 결과"
+        - "후속 작업 제안"
+
+    - file: "README.md"
+      section: "TTS Provider 사용법"
+      content:
+        - "지원하는 TTS 제공자 목록"
+        - "각 Provider API 키 설정 방법"
+        - "--tts-provider 옵션 사용 예시"
+        - "auto 모드 동작 방식"
+
+  testing:
+    - "3개 Provider별 TTS 생성 결과 (MP3 파일)"
+    - "음질 비교 리포트"
+    - "Fallback 로직 테스트 로그"
+
+# 에이전트에게 전달하는 메시지
+message_to_agent: |
+  오디오 생성 파이프라인 v2 개발을 시작합니다.
+
+  핵심 목표: OpenAI TTS 실패 시 자동으로 대체 서비스(ElevenLabs, Google TTS)를 사용하는
+             Multi-Provider 아키텍처 구축
+
+  주요 작업:
+  1. Provider 추상화 (BaseTTSProvider 추상 클래스)
+  2. 3개 Provider 구현
+     - OpenAITTSProvider (기존 로직 이동)
+     - ElevenLabsProvider (신규)
+     - GoogleTTSProvider (신규)
+  3. Provider Factory 및 Fallback 로직
+  4. CLI 파라미터로 Provider 선택 기능
+
+  우선순위:
+  - High: Provider 추상화, OpenAI/Google Provider 구현, Fallback 로직
+  - Medium: ElevenLabs Provider 구현, Voice 매핑
+  - Low: 음질 비교, 문서화
+
+  Fallback 우선순위:
+  1. OpenAI (고품질, 현재 크레딧 소진)
+  2. ElevenLabs (고품질, API 키 필요)
+  3. Google TTS (중품질, 무료 할당량 있음)
+
+  성공 기준:
+  - 3개 Provider 모두 정상 작동
+  - auto 모드에서 자동 fallback
+  - --tts-provider 옵션으로 특정 provider 선택 가능
+  - 기존 v1 기능 유지 (지수 백오프, 에러 처리)
+
+  의존성:
+  - pip install elevenlabs
+  - pip install google-cloud-texttospeech
+  - .env에 ELEVENLABS_API_KEY, GOOGLE_APPLICATION_CREDENTIALS 추가
+
+  이 작업은 파이프라인의 안정성을 크게 개선할 것입니다.
+  질문이나 불명확한 사항이 있으면 Main Reviewer에게 질문해 주세요.
