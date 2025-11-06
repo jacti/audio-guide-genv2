@@ -1,5 +1,5 @@
 # requirements.txt
-openai>=1.0.0         # LLM 및 TTS API 호출 (OpenAI 클래스 지원)
+openai>=1.0.0         # LLM 및 TTS API 호출 (SDK 1.x 이상 필수)
 python-dotenv>=1.0.0  # 환경변수 관리
 pyyaml>=6.0.0         # 프롬프트 템플릿 로딩 (YAML 파일 파싱)
 langchain-openai>=0.1.0  # 프롬프트/체인 구조 확장용 (선택적이지만 권장)
