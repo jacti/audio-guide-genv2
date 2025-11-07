@@ -1,0 +1,47 @@
+# 트랙 기반 배치 오디오 가이드 생성 설정 파일
+# 이 파일은 여러 오디오 파일을 하나의 트랙으로 묶어 일괄 생성하는 데 사용됩니다.
+
+# 트랙 기본 정보
+track_name: "꿀팁 가이드"
+description: "박물관 이용에 도움이 되는 필수 가이드"
+
+# 메타데이터 (선택적)
+metadata:
+  author: "국립중앙박물관"
+  version: "1.0"
+  tags: ["tutorial", "tips", "beginner"]
+  created_date: "2025-11-07"
+
+# 공통 설정 (모든 파일에 기본 적용, 개별 파일에서 오버라이드 가능)
+defaults:
+  model: "gpt-4.1"                # LLM 모델
+  prompt_version: "v2-tts"        # 스크립트 프롬프트 버전
+  voice: "alloy"                  # TTS 음성 (alloy, echo, fable, onyx, nova, shimmer)
+  speed: 1.0                      # TTS 속도 (0.25 ~ 4.0)
+  temperature: 0.7                # LLM temperature (0.0 ~ 1.0)
+  max_retries: 8                  # API 재시도 횟수
+  dry_run: false                  # 테스트 모드 (true: API 호출 없이 목업 생성)
+
+# 트랙에 포함될 오디오 파일 목록
+# 순서대로 실행되며, output_name에 번호를 붙여 순서를 명확히 하는 것을 권장합니다.
+files:
+  - output_name: "1_박물관소개"
+    keyword: "국립중앙박물관 역사와 위치 소개"
+    # 개별 설정 없이 defaults 사용
+
+  - output_name: "2_전시관소개"
+    keyword: "국립중앙박물관 전시관 구성과 주요 관 소개"
+    # 개별 설정 없이 defaults 사용
+
+  - output_name: "3_앱사용꿀팁"
+    keyword: "국립중앙박물관 앱 사용법과 오디오가이드 이용법"
+    voice: "nova"                 # 이 파일만 다른 목소리 사용 (오버라이드 예시)
+    temperature: 0.8              # 조금 더 창의적인 스크립트 생성
+
+# 추가 파일 예시 (주석 처리)
+#  - output_name: "4_관람예절"
+#    keyword: "박물관 관람 시 주의사항과 에티켓"
+#    speed: 0.9                   # 조금 더 천천히
+#
+#  - output_name: "5_편의시설"
+#    keyword: "국립중앙박물관 편의시설 안내"

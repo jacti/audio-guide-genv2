@@ -240,7 +240,8 @@ pip-selfcheck.json
 __MACOSX/
 .AppleDouble
 .LSOverride
-Icon[]
+Icon[
+]
 
 # Thumbnails
 ._*
@@ -268,9 +269,12 @@ outputs/script/*.md
 outputs/audio/*.mp3
 outputs/mock/
 
+outputs/
+
 # 메타데이터 파일도 제외
 *.metadata.json
 
 # 단, .gitkeep 파일은 디렉토리 구조 유지를 위해 포함
 !outputs/**/.gitkeep
 !outputs/examples/
+
