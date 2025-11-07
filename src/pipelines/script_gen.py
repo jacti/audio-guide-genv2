@@ -90,7 +90,8 @@ def run(
     prompt_version: str = "v1",
     dry_run: bool = False,
     temperature: float = 0.7,
-    model: str = "gpt-4o-mini"
+    model: str = "gpt-4o-mini",
+    output_name: Optional[str] = None
 ) -> Path:
     """
     스크립트 생성 파이프라인 실행
@@ -103,6 +104,7 @@ def run(
         dry_run: True이면 API 호출 없이 고정 템플릿 생성
         temperature: LLM temperature 파라미터 (0.0~1.0)
         model: 사용할 OpenAI 모델명
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
 
     Returns:
         생성된 스크립트 파일의 경로 (Path 객체)
@@ -125,8 +127,8 @@ def run(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
-    info_file = info_markdown_path(keyword, info_dir)
-    output_file = script_markdown_path(keyword, output_dir)
+    info_file = info_markdown_path(keyword, info_dir, output_name)
+    output_file = script_markdown_path(keyword, output_dir, output_name)
 
     logger.info(f"스크립트 생성 파이프라인 시작: {keyword}")
     logger.info(f"프롬프트 버전: {prompt_version}")
@@ -312,6 +314,12 @@ def main():
         action="store_true",
         help="사용 가능한 프롬프트 버전 목록 출력"
     )
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default=None,
+        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+    )
 
     args = parser.parse_args()
 
@@ -349,7 +357,8 @@ def main():
             prompt_version=args.prompt_version,
             dry_run=args.dry_run,
             temperature=args.temperature,
-            model=args.model
+            model=args.model,
+            output_name=args.output_name
         )
 
         print("\n" + "="*60)

@@ -253,7 +253,8 @@ def run(
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
-    dry_run: bool = False
+    dry_run: bool = False,
+    output_name: Optional[str] = None
 ) -> Path:
     """
     오디오 생성 파이프라인 메인 진입점.
@@ -272,6 +273,7 @@ def run(
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
         dry_run: True일 경우 API 호출 없이 더미 파일 생성 (기본값: False)
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
 
     Returns:
         Path: 생성된 MP3 파일의 절대 경로
@@ -303,8 +305,8 @@ def run(
     logger.info(f"출력 디렉토리: {output_dir.absolute()}")
 
     # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
-    script_path = script_markdown_path(keyword, script_dir)
-    output_path = audio_output_path(keyword, output_dir)
+    script_path = script_markdown_path(keyword, script_dir, output_name)
+    output_path = audio_output_path(keyword, output_dir, output_name)
 
     # 스크립트 파일 읽기
     script_text = _read_script(script_path)
@@ -448,6 +450,13 @@ def main():
         help="API 호출 없이 더미 파일만 생성 (테스트용)"
     )
 
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default=None,
+        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+    )
+
     args = parser.parse_args()
 
     try:
@@ -461,7 +470,8 @@ def main():
             max_retries=args.max_retries,
             initial_wait=args.initial_wait,
             max_wait=args.max_wait,
-            dry_run=args.dry_run
+            dry_run=args.dry_run,
+            output_name=args.output_name
         )
 
         print(f"\n🎵 오디오 파일이 생성되었습니다: {output_path}")

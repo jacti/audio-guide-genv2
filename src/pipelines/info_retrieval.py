@@ -171,7 +171,8 @@ def run(
     *,
     output_dir: Optional[Path] = None,
     model: str = DEFAULT_MODEL,
-    dry_run: bool = False
+    dry_run: bool = False,
+    output_name: Optional[str] = None
 ) -> Path:
     """
     정보 검색 파이프라인 실행
@@ -184,6 +185,7 @@ def run(
         output_dir: 출력 디렉토리 (기본값: outputs/info)
         model: 사용할 OpenAI 모델명 (기본값: gpt-4o-mini)
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
 
     Returns:
         Path: 생성된 Markdown 파일의 절대 경로
@@ -196,6 +198,8 @@ def run(
         >>> from pathlib import Path
         >>> output_path = run("청자 상감운학문 매병")
         >>> print(f"저장 완료: {output_path}")
+        >>> output_path = run("국립 중앙 박물관에 있는 사유의 방", output_name="사유의방")
+        >>> print(f"저장 완료: {output_path}")  # outputs/info/사유의방.md
     """
     # 입력 검증
     if not keyword or not keyword.strip():
@@ -221,7 +225,7 @@ def run(
         content = _search_with_llm(keyword, model=model)
 
     # 파일 경로 생성 (공통 헬퍼 사용)
-    output_path = info_markdown_path(keyword, output_dir)
+    output_path = info_markdown_path(keyword, output_dir, output_name)
 
     try:
         output_path.write_text(content, encoding="utf-8")
@@ -295,6 +299,13 @@ def main():
         help="API 호출 없이 목업 데이터로 테스트"
     )
 
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default=None,
+        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+    )
+
     args = parser.parse_args()
 
     try:
@@ -302,7 +313,8 @@ def main():
             keyword=args.keyword,
             output_dir=Path(args.output_dir) if args.output_dir else None,
             model=args.model,
-            dry_run=args.dry_run
+            dry_run=args.dry_run,
+            output_name=args.output_name
         )
 
         print(f"\n✅ 정보 검색 완료!")

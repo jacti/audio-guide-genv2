@@ -50,7 +50,8 @@ def run_full_pipeline(
     temperature: float = 0.7,
     prompt_version: str = "v2-tts",
     dry_run: bool = False,
-    max_retries: int = 8
+    max_retries: int = 8,
+    output_name: Optional[str] = None
 ) -> dict:
     """
     전체 파이프라인을 순차 실행합니다.
@@ -64,6 +65,7 @@ def run_full_pipeline(
         prompt_version: 스크립트 프롬프트 버전
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
         max_retries: API 재시도 횟수
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
 
     Returns:
         dict: 각 파이프라인 결과 경로를 담은 딕셔너리
@@ -93,7 +95,8 @@ def run_full_pipeline(
         info_path = info_retrieval.run(
             keyword=keyword,
             model=model,
-            dry_run=dry_run
+            dry_run=dry_run,
+            output_name=output_name
         )
         results["info"] = info_path
         logger.info(f"✅ [1/3] 정보 검색 완료 → {info_path}\n")
@@ -110,7 +113,8 @@ def run_full_pipeline(
             prompt_version=prompt_version,
             temperature=temperature,
             model=model,
-            dry_run=dry_run
+            dry_run=dry_run,
+            output_name=output_name
         )
         results["script"] = script_path
         logger.info(f"✅ [2/3] 스크립트 생성 완료 → {script_path}\n")
@@ -127,7 +131,8 @@ def run_full_pipeline(
             voice=voice,
             speed=speed,
             max_retries=max_retries,
-            dry_run=dry_run
+            dry_run=dry_run,
+            output_name=output_name
         )
         results["audio"] = audio_path
         logger.info(f"✅ [3/3] 오디오 생성 완료 → {audio_path}\n")
@@ -231,6 +236,13 @@ def main():
         help="테스트 모드 (API 호출 없이 목업 데이터 생성)"
     )
 
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        default=None,
+        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+    )
+
     args = parser.parse_args()
 
     try:
@@ -242,7 +254,8 @@ def main():
             temperature=args.temperature,
             prompt_version=args.prompt_version,
             dry_run=args.dry_run,
-            max_retries=args.max_retries
+            max_retries=args.max_retries,
+            output_name=args.output_name
         )
 
         # 성공 메시지 출력
