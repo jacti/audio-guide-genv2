@@ -137,6 +137,8 @@ def run(
     try:
         prompt_template = load_prompt(prompt_version)
         logger.info(f"프롬프트 템플릿 로드 완료: {prompt_template.name}")
+        logger.info(f"프롬프트 설명: {prompt_template.description}")
+        logger.info(f"프롬프트 태그: {', '.join(prompt_template.tags)}")
     except FileNotFoundError as e:
         logger.error(f"프롬프트 템플릿 로드 실패: {e}")
         available = list_prompts()
@@ -316,17 +318,23 @@ def main():
     # 프롬프트 목록 출력 모드
     if args.list_prompts:
         print("\n사용 가능한 프롬프트 버전:")
-        print("="*60)
+        print("="*70)
         for version in list_prompts():
             try:
                 template = load_prompt(version)
-                print(f"\n{version}:")
-                print(f"  이름: {template.name}")
-                print(f"  설명: {template.description}")
-                print(f"  태그: {', '.join(template.tags)}")
+                print(f"\n📝 {version}:")
+                print(f"    이름: {template.name}")
+                print(f"    설명: {template.description}")
+                print(f"    태그: {', '.join(template.tags)}")
+                if hasattr(template, 'parameters'):
+                    print(f"    파라미터: {template.parameters}")
             except Exception as e:
-                print(f"\n{version}: (로드 실패 - {e})")
-        print("="*60)
+                print(f"\n❌ {version}: (로드 실패 - {e})")
+        print("\n" + "="*70)
+        print("\n💡 사용 예시:")
+        print("  python src/pipelines/script_gen.py --keyword \"청자 매병\" --prompt-version v1")
+        print("  python src/pipelines/script_gen.py --keyword \"석굴암\" --prompt-version v2-tts")
+        print("="*70)
         return
 
     # keyword 필수 체크
