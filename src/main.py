@@ -44,11 +44,11 @@ class PipelineError(Exception):
 def run_full_pipeline(
     keyword: str,
     *,
-    model: str = "gpt-4o-mini",
+    model: str = "gpt-4.1",
     voice: str = "alloy",
     speed: float = 1.0,
     temperature: float = 0.7,
-    prompt_version: str = "v1",
+    prompt_version: str = "v2-tts",
     dry_run: bool = False,
     max_retries: int = 8
 ) -> dict:
@@ -185,8 +185,8 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default="gpt-4o-mini",
-        help="OpenAI 모델명 (기본값: gpt-4o-mini)"
+        default="gpt-4.1",
+        help="OpenAI 모델명 (기본값: gpt-4.1)"
     )
 
     parser.add_argument(
@@ -214,8 +214,8 @@ def main():
     parser.add_argument(
         "--prompt-version",
         type=str,
-        default="v1",
-        help="스크립트 프롬프트 버전 (기본값: v1)"
+        default="v2-tts",
+        help="스크립트 프롬프트 버전 (기본값: v2-tts)"
     )
 
     parser.add_argument(

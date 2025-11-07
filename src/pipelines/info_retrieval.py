@@ -35,7 +35,8 @@ logging.basicConfig(
 # 기본 설정
 DEFAULT_OUTPUT_DIR = Path("outputs/info")
 DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/info")
-DEFAULT_MODEL = "gpt-4o-mini"
+# [TODO] 4.1추천 -> 
+DEFAULT_MODEL = "gpt-4.1"
 
 
 def _validate_api_key() -> str:
@@ -74,10 +75,12 @@ def _search_with_llm(keyword: str, model: str = DEFAULT_MODEL) -> str:
     api_key = _validate_api_key()
     client = OpenAI(api_key=api_key)
 
+    # Structured output ->  
     # 프롬프트 구성: 구조화된 Markdown 생성 요청
     system_prompt = """당신은 한국 문화유산 전문가입니다.
 주어진 문화유산에 대해 정확하고 체계적인 정보를 제공해주세요.
-응답은 반드시 아래 형식의 Markdown으로 작성해주세요:
+
+유물의 경우 응답은 반드시 아래 형식의 Markdown으로 작성해주세요:
 
 # {문화유산 이름}
 
@@ -101,24 +104,22 @@ def _search_with_llm(keyword: str, model: str = DEFAULT_MODEL) -> str:
 
 ## 참고 자료
 - 주요 출처나 참고할 만한 정보
-"""
 
-    user_prompt = f"'{keyword}'에 대한 상세한 정보를 위 형식으로 작성해주세요."
+그 외의 경우 자유롭게 정리하여 Markdown으로 작성해주세요.
+"""
 
     logger.info(f"LLM 검색 시작: {keyword} (모델: {model})")
 
     try:
-        response = client.chat.completions.create(
+        # responses API 사용 (웹 검색 기능 포함)
+        response = client.responses.create(
             model=model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7,
-            max_tokens=2000
+            instructions=system_prompt,
+            input=f"'{keyword}'에 대한 상세한 정보를 작성해주세요.",
+            tools=[{"type": "web_search_preview"}]
         )
 
-        content = response.choices[0].message.content
+        content = response.output_text
         logger.info(f"LLM 검색 완료: {len(content)} 글자")
         return content
 
