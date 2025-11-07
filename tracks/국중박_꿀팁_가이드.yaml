@@ -1,0 +1,59 @@
+# ============================================
+# 국립중앙박물관 방문 전 꿀팁 가이드
+# 파일: tracks/꿀팁_가이드.yaml
+# ============================================
+
+track_name: "국립중앙박물관 방문 전 꿀팁 가이드"
+description: "방문 전에 알면 훨씬 즐거워지는 국립중앙박물관의 역사, 전시관 구성, 앱 이용법, 시설 및 굿즈샵 정보를 담은 10~15분짜리 오디오 가이드."
+
+defaults:
+  model: "gpt-4.1"
+  prompt_version: "v2-tts"
+  voice: "alloy"
+  speed: 1.0
+  temperature: 0.7
+  dry_run: false
+
+files:
+  - output_name: "1_박물관소개"
+    keyword: |
+      국립중앙박물관의 역사와 설립 배경, 위치, 그리고 대한민국 대표 문화유산기관으로서의 역할을 소개해주세요.
+      서울 용산구 서빙고로 137에 위치한 국립중앙박물관은 2005년 용산 이전 이후, 한국 문화예술의 중심이자 세계적인 박물관으로 자리잡았습니다.
+      주요 전시공간: 선사·고대관(https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760&showroomCode=DM0002),
+      중·근세관(https://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759&showroomCode=DM0036),
+      서화관(https://www.museum.go.kr/MUSEUM/contents/M0201050100.do?showHallId=758&showroomCode=DM0028),
+      기증관(https://www.museum.go.kr/MUSEUM/contents/M0201060100.do?showHallId=755&showroomCode=DM0078),
+      사유의 방(https://www.museum.go.kr/MUSEUM/contents/M0201070100.do?showHallId=631120&showroomCode=DM0075),
+      조각·공예관, 세계문화관, 역사의 길, 야외전시 등을 포함합니다.
+
+  - output_name: "2_전시관소개"
+    keyword: |
+      국립중앙박물관의 전시관 구성과 관람 순서를 소개해주세요.
+      관람객이 처음 방문했을 때, 각 전시관의 분위기와 주요 특징을 직관적으로 이해할 수 있게 설명해주세요.
+      특히 선사·고대관, 중·근세관, 서화관, 기증관, 사유의 방, 조각·공예관, 세계문화관, 역사의 길, 야외 전시의 역할과 차이를 요약해주세요.
+      공식 홈페이지 링크를 참고하여 설명해주세요: https://www.museum.go.kr
+
+  - output_name: "3_앱사용꿀팁"
+    keyword: |
+      `Museum Wander, Museum of Korea` 앱과 그 사용법에 대해 간단하게 리뷰해주세요.
+      공식 홈페이지 링크를 참고하세요. https://museum-wander.com/ko/
+
+  - output_name: "4_방문팁"
+    keyword: |
+      국립중앙박물관의 운영시간과 방문하기 좋은 시간대를 알려주세요.
+      수요일, 토요일은 21시까지 야간 개장을 한다는 점, 휴관일은 월요일이라는 점을 포함해주세요.
+      대중교통(지하철 4호선 이촌역과 연결), 주차장 위치와 요금, 혼잡시간 피하는 팁 등을 안내해주세요.
+      참고 링크: https://www.museum.go.kr/site/main/content/open_time
+
+  - output_name: "5_시설안내"
+    keyword: |
+      국립중앙박물관 내부의 편의시설을 소개해주세요.
+      물품보관함, 푸드코트, 카페, 기념촬영 포인트, 유아차 대여소, 장애인 편의시설 등의 위치와 이용법을 포함해주세요.
+      관람객이 하루 종일 편하게 머물 수 있는 공간임을 강조해주세요.
+
+  - output_name: "6_굿즈샵뮤즈"
+    keyword: |
+      국립중앙박물관 1층에 위치한 대표 굿즈샵 ‘뮤즈(Muse)’를 소개해주세요.
+      반가사유상 피규어, 전통 문양 노트, 엽서, 키링, 북마크 등 인기 굿즈를 소개하고,
+      “박물관의 추억을 집으로 가져가는 공간”이라는 감성적인 표현으로 마무리해주세요.
+      참고: https://www.museum.go.kr/MUSEUM/contents/M0201110100.do

@@ -1,0 +1,109 @@
+# ============================================
+# 국립중앙박물관 한국의 역사 완전정복
+# 파일: tracks/한국사_완전정복.yaml
+# ============================================
+
+track_name: "국립중앙박물관 한국의 역사 완전정복"
+description: "국립중앙박물관의 주요 전시관과 대표 유물을 따라가며 한국사의 흐름을 익히는 본편 트랙 (2~3시간)."
+
+defaults:
+  model: "gpt-4.1"
+  prompt_version: "v2-tts"
+  voice: "alloy"
+  speed: 1.0
+  temperature: 0.7
+  dry_run: false
+
+files:
+  - output_name: "00_테마소개"
+    keyword: |
+      국립중앙박물관에서 선사시대부터 조선 후기까지의 유물을 따라가며 한국의 역사를 배우는 테마를 소개해주세요.
+      본 가이드는 선사·고대관에서 중·근세관까지 이어지며, '유물로 배우는 한국사'라는 콘셉트입니다.
+      관람 순서와 전체 구성 요약, 그리고 "한국의 역사를 제대로 느끼겠다!"는 관람객에게 전하는 인사로 마무리해주세요.
+
+  - output_name: "01_선사고대관"
+    keyword: |
+      선사·고대관은 인류가 한반도에 살기 시작한 구석기 시대부터 통일신라와 발해까지의 문화를 시간 순으로 보여주는 전시관입니다.
+      주요 전시실: 구석기실, 신석기실, 청동기·철기실, 고조선·삼한실, 고구려·백제·신라·가야·통일신라·발해실
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760&showroomCode=DM0002
+
+  - output_name: "02_주먹도끼"
+    keyword: |
+      구석기실(1층 선사·고대관)에서 볼 수 있는 대표 유물 주먹도끼를 설명해주세요.
+      인류 최초의 석기 도구 중 하나로, 사냥과 가공에 사용된 의미를 중심으로 다뤄주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836
+
+  - output_name: "03_고인류"
+    keyword: |
+      국립중앙박물관 선사·고대관의 고인류 화석 전시를 소개해주세요.
+      한반도에서 발견된 초기 인류의 흔적과 그 의미를 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840
+
+  - output_name: "04_신석기_뼈바늘과가락바퀴"
+    keyword: |
+      신석기 시대 유물 ‘뼈바늘과 가락바퀴’를 설명해주세요.
+      당시 의복 제작과 생활 문화 발전을 보여주는 대표적 도구입니다.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29855
+
+  - output_name: "05_신석기_고산리식토기"
+    keyword: |
+      제주 고산리식 토기를 중심으로 신석기 시대 도기의 특징과 제작 기술을 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29856
+
+  - output_name: "06_청동기_민무늬토기"
+    keyword: |
+      청동기 시대의 대표 토기 ‘민무늬토기’의 제작 방식과 생활상 변화를 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29880
+
+  - output_name: "07_청동기_농경문청동기"
+    keyword: |
+      청동기 시대의 ‘농경문 청동기’를 통해 당시의 농경 문화와 의례를 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030300.do?schM=view&showHallId=760&relicId=10997
+
+  - output_name: "08_고조선비파형동검"
+    keyword: |
+      고조선과 부여, 삼한 지역에서 사용된 비파형 동검의 형태와 의미를 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030400.do?schM=view&showHallId=760&relicId=29833
+
+  - output_name: "09_고구려금동관"
+    keyword: |
+      고구려 금동관의 화려한 장식과 상징성을 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=28
+
+  - output_name: "10_백제금동대향로"
+    keyword: |
+      백제의 대표 유물 금동대향로의 제작 기술과 예술적 가치, 그리고 향 문화의 의미를 중심으로 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=27092
+
+  - output_name: "11_신라금관"
+    keyword: |
+      신라 금관과 금허리띠를 설명해주세요.
+      왕권 상징, 장례 의식, APEC 당시 대통령 선물 사례 등을 함께 언급해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=85
+
+  - output_name: "12_통일신라_사천왕전"
+    keyword: |
+      통일신라 시대 사천왕전의 의미와 수호신 신앙을 중심으로 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201030900.do?schM=view&showHallId=760&relicId=16550
+
+  - output_name: "13_중근세관"
+    keyword: |
+      고려~조선~대한제국까지의 역사적 전환을 보여주는 중·근세관을 소개해주세요.
+      관람 포인트와 대표 전시를 함께 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759&showroomCode=DM0036
+
+  - output_name: "14_고려_초조대장경"
+    keyword: |
+      세계 최초의 금속활자 인쇄 문화로 이어진 ‘초조대장경’의 제작과 기술적 중요성을 설명해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=29645
+
+  - output_name: "15_조선_대동여지도"
+    keyword: |
+      조선 후기 김정호가 제작한 ‘대동여지도’의 제작 과정과 과학적 성취를 중심으로 설명해주세요.
+      영화 “고산자, 대동여지도”도 간단히 언급해주세요.
+      링크: https://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=700
+
+  - output_name: "16_마무리"
+    keyword: |
+      국립중앙박물관에서의 역사 여행을 마무리하는 인사말과 감상 정리를 담아주세요.
+      오늘 들은 한국사의 흐름을 되돌아보며, 관람객에게 감사의 인사를 전해주세요.
