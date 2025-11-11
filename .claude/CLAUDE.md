@@ -35,7 +35,8 @@ source .venv/bin/activate
 **Python version:** See `.python-version` file (currently 3.12.12)
 
 **Key dependencies:**
-- `openai>=1.0.0` - For LLM API calls and TTS generation (SDK 1.x+ required)
+- `openai>=1.0.0` - For LLM API calls in info/script pipelines (SDK 1.x+ required)
+- `google-genai` - For Gemini TTS API in audio pipeline
 - `python-dotenv>=1.0.0` - Environment variable management (requires `.env` file with API keys)
 - `pyyaml>=6.0.0` - For YAML-based prompt template parsing
 - `langchain-openai>=0.1.0` - For prompt/chain structures (optional but recommended)
@@ -68,11 +69,13 @@ Each pipeline stage is independent and communicates through file I/O:
 
 **Pipeline 3: Audio Generation** (`src.pipelines/audio_gen.py`)
 - Input: `/outputs/script/[keyword]_script.md`
-- Process: OpenAI TTS API conversion with exponential backoff retry logic (`backoff` package)
-- Default model: "gpt-4o-mini-tts", voice: "alloy", speed: 1.0
-- Output: MP3 file in `/outputs/audio/[keyword].mp3`
-- Extension point: Voice selection (alloy/echo/fable/onyx/nova/shimmer), speed adjustment, BGM mixing
-- CLI: `python -m src.pipelines.audio_gen --keyword "유물명" --voice alloy --speed 1.0 [--dry-run]`
+- Process: Gemini TTS API conversion with exponential backoff retry logic (`backoff` package)
+- Default model: "gemini-2.5-pro-preview-tts", voice: "Zephyr"
+- Output: WAV/MP3 file in `/outputs/audio/[keyword].wav`
+- Extension point: Voice selection (30+ Gemini voices), model selection (Pro/Flash), BGM mixing
+- Supported voices: Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
+- **주의**: speed 파라미터는 현재 Gemini API에서 지원하지 않음
+- CLI: `python -m src.pipelines.audio_gen --keyword "유물명" --voice Zephyr --model gemini-2.5-pro-preview-tts [--dry-run]`
 
 ### Shared Utilities
 
@@ -99,14 +102,19 @@ Each pipeline stage is independent and communicates through file I/O:
 # Basic usage
 python -m src.main --keyword "청자 상감운학문 매병"
 
-# With custom settings
+# With custom settings (Korean voice)
 python -m src.main --keyword "석굴암" \
   --model gpt-4o \
   --prompt-version v2-tts \
-  --voice nova \
+  --voice ko-KR-Wavenet-A \
   --speed 1.1 \
   --temperature 0.7 \
   --max-retries 8
+
+# English voice
+python -m src.main --keyword "Celadon Vase" \
+  --voice en-US-Neural2-C \
+  --speed 1.0
 
 # Dry-run mode (no API calls, uses mock data)
 python -m src.main --keyword "사유의 방" --dry-run
@@ -200,7 +208,7 @@ description: "박물관 이용에 도움이 되는 필수 가이드"
 defaults:
   model: "gpt-4.1"
   prompt_version: "v2-tts"
-  voice: "alloy"
+  voice: "ko-KR-Neural2-A"
   speed: 1.0
   temperature: 0.7
   dry_run: false
@@ -212,7 +220,7 @@ files:
 
   - output_name: "2_전시관소개"
     keyword: "국립중앙박물관 전시관 구성과 주요 관 소개"
-    voice: "nova"  # 개별 설정 오버라이드 예시
+    voice: "ko-KR-Wavenet-A"  # 개별 설정 오버라이드 예시
 ```
 
 **필수 필드**:
@@ -292,18 +300,18 @@ outputs/tracks/[트랙명]/
 
 ```yaml
 defaults:
-  voice: "alloy"
+  voice: "ko-KR-Neural2-A"
   speed: 1.0
 
 files:
   - output_name: "1_일반가이드"
     keyword: "..."
-    # defaults 사용 (voice: alloy, speed: 1.0)
+    # defaults 사용 (voice: ko-KR-Neural2-A, speed: 1.0)
 
   - output_name: "2_어린이가이드"
     keyword: "..."
-    voice: "nova"      # 이 파일만 nova 목소리
-    speed: 0.9         # 이 파일만 느린 속도
+    voice: "ko-KR-Wavenet-B"      # 이 파일만 다른 목소리
+    speed: 0.9                    # 이 파일만 느린 속도
 ```
 
 ## Working with Claude Code
@@ -357,6 +365,18 @@ files:
 
 Create a `.env` file in the project root with:
 ```
-OPENAI_API_KEY=your_key_here
-# Add EXA_API_KEY when enabling web search
+# OpenAI API (for info and script generation pipelines)
+OPENAI_API_KEY=your_openai_key_here
+
+# Gemini API (for audio generation pipeline)
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Optional: Alternative web search
+# EXA_API_KEY=your_exa_key_here
 ```
+
+**Gemini API Key 발급:**
+1. https://ai.google.dev/ 접속
+2. "Get API Key" 클릭
+3. 새 API 키 생성
+4. `.env` 파일에 `GEMINI_API_KEY` 추가

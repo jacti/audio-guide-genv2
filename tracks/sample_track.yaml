@@ -14,10 +14,11 @@ metadata:
 
 # 공통 설정 (모든 파일에 기본 적용, 개별 파일에서 오버라이드 가능)
 defaults:
-  model: "gpt-4.1"                # LLM 모델
+  model: "gpt-4.1"                # LLM 모델 (info, script 파이프라인용)
   prompt_version: "v2-tts"        # 스크립트 프롬프트 버전
-  voice: "alloy"                  # TTS 음성 (alloy, echo, fable, onyx, nova, shimmer)
-  speed: 1.0                      # TTS 속도 (0.25 ~ 4.0)
+  voice: "Zephyr"                 # Gemini TTS 음성 (예: Zephyr, Puck, Charon, Kore)
+  tts_model: "gemini-2.5-pro-preview-tts"  # Gemini TTS 모델
+  speed: 1.0                      # TTS 속도 (주의: Gemini API 미지원)
   temperature: 0.7                # LLM temperature (0.0 ~ 1.0)
   max_retries: 8                  # API 재시도 횟수
   dry_run: false                  # 테스트 모드 (true: API 호출 없이 목업 생성)
@@ -35,7 +36,7 @@ files:
 
   - output_name: "3_앱사용꿀팁"
     keyword: "국립중앙박물관 앱 사용법과 오디오가이드 이용법"
-    voice: "nova"                 # 이 파일만 다른 목소리 사용 (오버라이드 예시)
+    voice: "Puck"                 # 이 파일만 다른 목소리 사용 (오버라이드 예시)
     temperature: 0.8              # 조금 더 창의적인 스크립트 생성
 
 # 추가 파일 예시 (주석 처리)

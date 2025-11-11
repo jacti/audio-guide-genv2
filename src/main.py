@@ -45,7 +45,8 @@ def run_full_pipeline(
     keyword: str,
     *,
     model: str = "gpt-4.1",
-    voice: str = "alloy",
+    voice: str = "Zephyr",
+    tts_model: str = "gemini-2.5-pro-preview-tts",
     speed: float = 1.0,
     temperature: float = 0.7,
     prompt_version: str = "v2-tts",
@@ -58,9 +59,10 @@ def run_full_pipeline(
 
     Args:
         keyword: 문화유산 키워드 (예: "청자 상감운학문 매병")
-        model: OpenAI 모델명 (info, script 공통 사용)
-        voice: TTS 음성 종류 (audio 파이프라인)
-        speed: TTS 말하기 속도 (audio 파이프라인)
+        model: OpenAI 모델명 (info, script 파이프라인에 사용)
+        voice: Gemini TTS 음성 이름 (audio 파이프라인, 예: Zephyr)
+        tts_model: Gemini TTS 모델명 (audio 파이프라인)
+        speed: TTS 말하기 속도 (audio 파이프라인, 주의: Gemini API 미지원)
         temperature: LLM temperature (script 파이프라인)
         prompt_version: 스크립트 프롬프트 버전
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
@@ -129,6 +131,7 @@ def run_full_pipeline(
         audio_path = audio_gen.run(
             keyword=keyword,
             voice=voice,
+            model=tts_model,
             speed=speed,
             max_retries=max_retries,
             dry_run=dry_run,
@@ -170,13 +173,19 @@ def main():
   # 커스텀 설정
   python -m src.main --keyword "석굴암" \\
     --model gpt-4o \\
-    --voice nova \\
-    --speed 1.1 \\
+    --voice Puck \\
+    --tts-model gemini-2.5-flash-preview-tts \\
     --prompt-version v2
 
+  # 다른 voice 사용
+  python -m src.main --keyword "유물명" \\
+    --voice Charon
+
 참고:
-  - API 키는 .env 파일에 OPENAI_API_KEY로 설정해야 합니다.
+  - OPENAI_API_KEY: info/script 파이프라인용 (.env 파일)
+  - GEMINI_API_KEY: audio 파이프라인용 (Gemini TTS, .env 파일)
   - dry-run 모드는 목업 데이터만 생성하므로 API 키 불필요합니다.
+  - speed 파라미터는 현재 Gemini API에서 지원하지 않습니다.
         """
     )
 
@@ -197,9 +206,16 @@ def main():
     parser.add_argument(
         "--voice",
         type=str,
-        default="alloy",
-        choices=["alloy", "echo", "fable", "onyx", "nova", "shimmer"],
-        help="TTS 음성 종류 (기본값: alloy)"
+        default="Zephyr",
+        help="Gemini TTS 음성 이름 (기본값: Zephyr, 예: Puck, Charon, Kore)"
+    )
+
+    parser.add_argument(
+        "--tts-model",
+        type=str,
+        default="gemini-2.5-pro-preview-tts",
+        choices=["gemini-2.5-pro-preview-tts", "gemini-2.5-flash-preview-tts"],
+        help="Gemini TTS 모델명 (기본값: gemini-2.5-pro-preview-tts)"
     )
 
     parser.add_argument(
@@ -250,6 +266,7 @@ def main():
             keyword=args.keyword,
             model=args.model,
             voice=args.voice,
+            tts_model=args.tts_model,
             speed=args.speed,
             temperature=args.temperature,
             prompt_version=args.prompt_version,
