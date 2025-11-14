@@ -8,8 +8,9 @@ description: "국립중앙박물관의 주요 전시관과 대표 유물을 따�
 
 defaults:
   model: "gpt-4.1"
-  prompt_version: "v2-tts"
-  voice: "alloy"
+  prompt_version: "v3-tts"
+  voice: "Laomedeia"
+  tts_model: "gemini-2.5-flash-preview-tts"  # Flash 모델 명시
   speed: 1.0
   temperature: 0.7
   dry_run: false

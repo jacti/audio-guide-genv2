@@ -8,8 +8,8 @@ description: "방문 전에 알면 훨씬 즐거워지는 국립중앙박물관�
 
 defaults:
   model: "gpt-4.1"
-  prompt_version: "v2-tts"
-  voice: "alloy"
+  prompt_version: "v3-tts"
+  voice: "Laomedeia"
   speed: 1.0
   temperature: 0.7
   dry_run: false

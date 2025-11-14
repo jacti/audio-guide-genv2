@@ -52,7 +52,8 @@ def run_full_pipeline(
     prompt_version: str = "v2-tts",
     dry_run: bool = False,
     max_retries: int = 8,
-    output_name: Optional[str] = None
+    output_name: Optional[str] = None,
+    stages: list = [1, 2, 3]
 ) -> dict:
     """
     전체 파이프라인을 순차 실행합니다.
@@ -68,13 +69,14 @@ def run_full_pipeline(
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
         max_retries: API 재시도 횟수
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
+        stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
         dict: 각 파이프라인 결과 경로를 담은 딕셔너리
             {
-                "info": Path,
-                "script": Path,
-                "audio": Path
+                "info": Path (실행된 경우),
+                "script": Path (실행된 경우),
+                "audio": Path (실행된 경우)
             }
 
     Raises:
@@ -89,69 +91,82 @@ def run_full_pipeline(
     logger.info(f"키워드: {keyword}")
     logger.info(f"모델: {model} | 음성: {voice} | 속도: {speed}x")
     logger.info(f"프롬프트: {prompt_version} | Temperature: {temperature}")
+    logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
     # Pipeline 1: 정보 검색
-    try:
-        logger.info(f"[1/3] 📚 정보 검색 파이프라인 시작...")
-        info_path = info_retrieval.run(
-            keyword=keyword,
-            model=model,
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        results["info"] = info_path
-        logger.info(f"✅ [1/3] 정보 검색 완료 → {info_path}\n")
+    if 1 in stages:
+        try:
+            logger.info(f"[1/3] 📚 정보 검색 파이프라인 시작...")
+            info_path = info_retrieval.run(
+                keyword=keyword,
+                model=model,
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            results["info"] = info_path
+            logger.info(f"✅ [1/3] 정보 검색 완료 → {info_path}\n")
 
-    except Exception as e:
-        logger.error(f"❌ [1/3] 정보 검색 실패: {e}")
-        raise PipelineError("정보 검색", str(e)) from e
+        except Exception as e:
+            logger.error(f"❌ [1/3] 정보 검색 실패: {e}")
+            raise PipelineError("정보 검색", str(e)) from e
+    else:
+        logger.info(f"⊘ [1/3] 정보 검색 건너뜀 (이미 존재하는 파일 사용)\n")
 
     # Pipeline 2: 스크립트 생성
-    try:
-        logger.info(f"[2/3] 📝 스크립트 생성 파이프라인 시작...")
-        script_path = script_gen.run(
-            keyword=keyword,
-            prompt_version=prompt_version,
-            temperature=temperature,
-            model=model,
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        results["script"] = script_path
-        logger.info(f"✅ [2/3] 스크립트 생성 완료 → {script_path}\n")
+    if 2 in stages:
+        try:
+            logger.info(f"[2/3] 📝 스크립트 생성 파이프라인 시작...")
+            script_path = script_gen.run(
+                keyword=keyword,
+                prompt_version=prompt_version,
+                temperature=temperature,
+                model=model,
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            results["script"] = script_path
+            logger.info(f"✅ [2/3] 스크립트 생성 완료 → {script_path}\n")
 
-    except Exception as e:
-        logger.error(f"❌ [2/3] 스크립트 생성 실패: {e}")
-        raise PipelineError("스크립트 생성", str(e)) from e
+        except Exception as e:
+            logger.error(f"❌ [2/3] 스크립트 생성 실패: {e}")
+            raise PipelineError("스크립트 생성", str(e)) from e
+    else:
+        logger.info(f"⊘ [2/3] 스크립트 생성 건너뜀 (이미 존재하는 파일 사용)\n")
 
     # Pipeline 3: 오디오 생성
-    try:
-        logger.info(f"[3/3] 🎤 오디오 생성 파이프라인 시작...")
-        audio_path = audio_gen.run(
-            keyword=keyword,
-            voice=voice,
-            model=tts_model,
-            speed=speed,
-            max_retries=max_retries,
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        results["audio"] = audio_path
-        logger.info(f"✅ [3/3] 오디오 생성 완료 → {audio_path}\n")
+    if 3 in stages:
+        try:
+            logger.info(f"[3/3] 🎤 오디오 생성 파이프라인 시작...")
+            audio_path = audio_gen.run(
+                keyword=keyword,
+                voice=voice,
+                model=tts_model,
+                speed=speed,
+                max_retries=max_retries,
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            results["audio"] = audio_path
+            logger.info(f"✅ [3/3] 오디오 생성 완료 → {audio_path}\n")
 
-    except Exception as e:
-        logger.error(f"❌ [3/3] 오디오 생성 실패: {e}")
-        raise PipelineError("오디오 생성", str(e)) from e
+        except Exception as e:
+            logger.error(f"❌ [3/3] 오디오 생성 실패: {e}")
+            raise PipelineError("오디오 생성", str(e)) from e
+    else:
+        logger.info(f"⊘ [3/3] 오디오 생성 건너뜀 (이미 존재하는 파일 사용)\n")
 
     # 완료 요약
     elapsed = time.time() - start_time
     logger.info(f"\n{'='*70}")
-    logger.info(f"🎉 전체 파이프라인 완료! (소요 시간: {elapsed:.1f}초)")
+    logger.info(f"🎉 파이프라인 완료! (소요 시간: {elapsed:.1f}초)")
     logger.info(f"{'='*70}")
-    logger.info(f"📄 정보 파일: {results['info']}")
-    logger.info(f"📝 스크립트: {results['script']}")
-    logger.info(f"🎵 오디오: {results['audio']}")
+    if "info" in results:
+        logger.info(f"📄 정보 파일: {results['info']}")
+    if "script" in results:
+        logger.info(f"📝 스크립트: {results['script']}")
+    if "audio" in results:
+        logger.info(f"🎵 오디오: {results['audio']}")
     logger.info(f"{'='*70}\n")
 
     return results
@@ -259,7 +274,26 @@ def main():
         help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
     )
 
+    parser.add_argument(
+        "--stages",
+        type=str,
+        default="1,2,3",
+        help="실행할 파이프라인 단계 (기본값: 1,2,3). 예: '2' 또는 '2,3'"
+    )
+
     args = parser.parse_args()
+
+    # stages 파싱
+    try:
+        stages = [int(s.strip()) for s in args.stages.split(",")]
+        for stage in stages:
+            if stage not in [1, 2, 3]:
+                logger.error(f"유효하지 않은 stage 번호: {stage}. 1, 2, 3 중 하나여야 합니다.")
+                sys.exit(1)
+        stages = sorted(set(stages))  # 정렬 및 중복 제거
+    except ValueError:
+        logger.error(f"잘못된 --stages 형식: {args.stages}. 예: '1,2,3' 또는 '2'")
+        sys.exit(1)
 
     try:
         results = run_full_pipeline(
@@ -272,20 +306,27 @@ def main():
             prompt_version=args.prompt_version,
             dry_run=args.dry_run,
             max_retries=args.max_retries,
-            output_name=args.output_name
+            output_name=args.output_name,
+            stages=stages
         )
 
         # 성공 메시지 출력
         print("\n" + "🎉 " * 20)
-        print("오디오 가이드 생성이 완료되었습니다!")
+        print("파이프라인 실행이 완료되었습니다!")
         print("🎉 " * 20)
         print(f"\n📍 생성된 파일:")
-        print(f"  정보: {results['info']}")
-        print(f"  스크립트: {results['script']}")
-        print(f"  오디오: {results['audio']}")
+        if "info" in results:
+            print(f"  정보: {results['info']}")
+        if "script" in results:
+            print(f"  스크립트: {results['script']}")
+        if "audio" in results:
+            print(f"  오디오: {results['audio']}")
+
         print(f"\n💡 다음 단계:")
-        print(f"  - 오디오 재생: open {results['audio']}")
-        print(f"  - 스크립트 확인: cat {results['script']}")
+        if "audio" in results:
+            print(f"  - 오디오 재생: open {results['audio']}")
+        if "script" in results:
+            print(f"  - 스크립트 확인: cat {results['script']}")
 
         sys.exit(0)
 

@@ -148,8 +148,8 @@ def parse_audio_mime_type(mime_type: str) -> dict:
 def _generate_audio_gemini(
     text: str,
     output_path: Path,
-    voice: str = "Zephyr",
-    model: str = "gemini-2.5-pro-preview-tts",
+    voice: str = "Laomedeia",
+    model: str = "gemini-2.5-flash-preview-tts",
     speed: float = 1.0,
     max_retries: int = 8,
     initial_wait: float = 1.0,

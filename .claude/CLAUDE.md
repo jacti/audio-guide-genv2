@@ -32,7 +32,7 @@ source .venv/bin/activate
 ./setup-venv.sh
 ```
 
-**Python version:** See `.python-version` file (currently 3.12.12)
+**Python version:** See `.python-version` file (currently 3.13.9)
 
 **Key dependencies:**
 - `openai>=1.0.0` - For LLM API calls in info/script pipelines (SDK 1.x+ required)
@@ -52,10 +52,12 @@ Each pipeline stage is independent and communicates through file I/O:
 
 **Pipeline 1: Information Retrieval** (`src/pipelines/info_retrieval.py`)
 - Input: Artifact keyword (user input)
-- Process: Uses GPT or LangChain + Perplexity AI (`perplexityai` package) to search and summarize web information
+- Process: Uses GPT with Responses API + web search to retrieve and summarize information
+- **Prompt System**: YAML-based templates in `/prompts/info_retrieval/` (same system as Pipeline 2)
 - Output: Markdown file in `/outputs/info/[keyword].md`
-- Extension point: Domain-specific retriever can be swapped in
-- CLI: `python -m src.pipelines.info_retrieval --keyword "유물명" [--dry-run]`
+- Extension point: Multiple prompt styles (detailed, simple, children-friendly, etc.)
+- CLI: `python -m src.pipelines.info_retrieval --keyword "유물명" --prompt-version default [--dry-run]`
+- List prompts: `python -m src.pipelines.info_retrieval --list-prompts`
 
 **Pipeline 2: Script Generation** (`src/pipelines/script_gen.py`)
 - Input: `/outputs/info/[keyword].md`
@@ -85,10 +87,15 @@ Each pipeline stage is independent and communicates through file I/O:
 - Removes filesystem-unsafe characters while preserving spaces
 - All pipelines use `output_name` parameter for custom naming (overrides keyword)
 
-**Prompt Loading** (`src/utils/prompt_loader.py`)
-- YAML-based prompt template system for script generation
-- Templates contain: `system_prompt`, `user_prompt_template`, `parameters`, `tags`
-- Auto-discovers prompts in `prompts/script_generation/*.yaml`
+**Prompt Loading** (`src/utils/prompt_loader.py`) - 통합 시스템
+- YAML-based prompt template system for **all pipelines**
+- Supports both API types:
+  - Chat Completions API: `system_prompt` + `user_prompt_template` (Pipeline 2)
+  - Responses API: `instructions` + `input_template` + `tools` (Pipeline 1)
+- Auto-discovers prompts in:
+  - `prompts/info_retrieval/*.yaml` (Pipeline 1)
+  - `prompts/script_generation/*.yaml` (Pipeline 2)
+- Templates contain: `name`, `description`, `tags`, `parameters`, `metadata`, `api_type`
 
 **Metadata Tracking** (`src/utils/metadata.py`)
 - Records pipeline execution details (keyword, model, timestamp, mode)
@@ -121,6 +128,13 @@ python -m src.main --keyword "사유의 방" --dry-run
 
 # Custom output naming
 python -m src.main --keyword "청자 매병" --output-name "celadon_vase_01"
+
+# 특정 파이프라인만 실행 (NEW in v0.2)
+# 스크립트만 재생성 (info 파일은 이미 존재)
+python -m src.main --keyword "청자 매병" --stages 2
+
+# 오디오만 재생성 (script 파일은 이미 존재)
+python -m src.main --keyword "청자 매병" --stages 3
 ```
 
 Expected output flow:
@@ -134,6 +148,7 @@ Expected output flow:
 **Important flags:**
 - `--dry-run`: Test mode - generates mock data without API calls (useful for testing flow)
 - `--output-name`: Override filename (default uses keyword with sanitization)
+- `--stages`: Select which pipeline stages to run (1=info, 2=script, 3=audio). Default: 1,2,3
 - All pipelines support independent CLI execution for debugging specific stages
 
 ## Directory Structure
@@ -144,28 +159,37 @@ script_gen_v2/
 │   └── CLAUDE.md          # This file
 ├── src/
 │   ├── main.py            # Pipeline orchestration (runs all 3 stages)
+│   ├── batch_runner.py    # Track-based batch execution
 │   ├── pipelines/
 │   │   ├── info_retrieval.py    # Stage 1: Web search & summarization
 │   │   ├── script_gen.py        # Stage 2: LLM script generation
 │   │   └── audio_gen.py         # Stage 3: TTS conversion
 │   └── utils/
-│       ├── prompt_loader.py     # YAML prompt template loader
+│       ├── prompt_loader.py     # Unified YAML prompt template loader
 │       ├── path_sanitizer.py    # Filename sanitization logic
 │       └── metadata.py          # Execution metadata tracking
 ├── prompts/
-│   └── script_generation/       # YAML prompt templates (v1, v2, v2-tts)
+│   ├── info_retrieval/          # Pipeline 1 prompts (default.yaml)
+│   └── script_generation/       # Pipeline 2 prompts (v1, v2, v2-tts)
+├── notebooks/
+│   └── prompt_optimizer.ipynb   # Interactive prompt testing & comparison tool
+├── test_results/                # Saved prompt test results
+│   ├── info_retrieval/
+│   └── script_generation/
 ├── outputs/
 │   ├── info/              # Stage 1 output (markdown info files)
 │   ├── script/            # Stage 2 output (audio guide scripts)
 │   ├── audio/             # Stage 3 output (mp3 files)
+│   ├── tracks/            # Batch execution outputs (organized by track)
 │   └── mock/              # Dry-run mode outputs
+├── tracks/                # Track configuration YAML files
 ├── docs/
 │   ├── plan.md            # Detailed design document
 │   └── commands/          # Command reference YAML files
 ├── dev-log/               # Development logs (timestamped)
 ├── setup-venv.sh          # Automated venv setup script
 ├── requirements.txt       # Python dependencies
-└── .python-version        # pyenv Python version (3.12.12)
+└── .python-version        # pyenv Python version (3.13.9)
 ```
 
 ## Development Guidelines
@@ -207,8 +231,9 @@ description: "박물관 이용에 도움이 되는 필수 가이드"
 # 공통 설정 (모든 파일에 적용, 개별 오버라이드 가능)
 defaults:
   model: "gpt-4.1"
-  prompt_version: "v2-tts"
-  voice: "ko-KR-Neural2-A"
+  info_prompt_version: "default"       # Pipeline 1 프롬프트
+  script_prompt_version: "v2-tts"      # Pipeline 2 프롬프트
+  voice: "Zephyr"                      # Gemini TTS voice
   speed: 1.0
   temperature: 0.7
   dry_run: false
@@ -220,7 +245,8 @@ files:
 
   - output_name: "2_전시관소개"
     keyword: "국립중앙박물관 전시관 구성과 주요 관 소개"
-    voice: "ko-KR-Wavenet-A"  # 개별 설정 오버라이드 예시
+    info_prompt_version: "default"     # 개별 설정 오버라이드 예시
+    script_prompt_version: "v1"        # 이 파일만 다른 스크립트 프롬프트 사용
 ```
 
 **필수 필드**:
@@ -235,12 +261,52 @@ files:
 ### 배치 실행 명령어
 
 ```bash
-# 기본 실행
+# 기본 실행 (모든 파이프라인)
 python -m src.batch_runner --track-file tracks/sample_track.yaml
 
 # Dry-run 모드 (API 호출 없이 테스트)
 python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
+
+# 특정 파이프라인만 재실행 (NEW in v0.2)
+# Stage 1: 정보 검색, Stage 2: 스크립트 생성, Stage 3: 오디오 생성
+
+# 스크립트만 재생성 (info 파일은 이미 존재)
+python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
+
+# 스크립트 + 오디오만 재생성
+python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3
+
+# 오디오만 재생성 (script 파일은 이미 존재)
+python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
 ```
+
+**선택적 파이프라인 실행 (--stages 옵션)**:
+- `--stages 1`: 정보 검색만 실행
+- `--stages 2`: 스크립트 생성만 실행 (info 파일 필요)
+- `--stages 3`: 오디오 생성만 실행 (script 파일 필요)
+- `--stages 1,2`: 정보 검색 + 스크립트 생성
+- `--stages 2,3`: 스크립트 생성 + 오디오 생성
+- `--stages 1,2,3`: 전체 파이프라인 (기본값)
+
+**주의사항**:
+- Stage 2를 실행하려면 Stage 1의 출력 파일(info)이 필요합니다
+- Stage 3을 실행하려면 Stage 2의 출력 파일(script)이 필요합니다
+- 필요한 파일이 없으면 명확한 에러 메시지와 함께 즉시 중단됩니다
+
+**사용 예시 - 프롬프트 테스트 워크플로우**:
+```bash
+# 1단계: 전체 파이프라인으로 초기 생성
+python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml
+
+# 2단계: 새로운 프롬프트(v3-tts)로 스크립트만 재생성
+# (info 파일은 그대로 유지, script만 새로 생성)
+python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml --stages 2
+
+# 3단계: 스크립트 결과 확인 후 만족하면 오디오만 생성
+python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml --stages 3
+```
+
+이 방식으로 비용과 시간을 절약하면서 프롬프트를 반복적으로 테스트할 수 있습니다.
 
 ### 출력 디렉토리 구조
 
@@ -354,12 +420,49 @@ files:
 - Development logs and session summaries go in `dev-log/` with timestamps
 - Keep `docs/` for persistent documentation, `dev-log/` for chronological records
 
+**Prompt Management System (통합):**
+
+All pipelines now use a unified YAML-based prompt system:
+
+- **Pipeline 1 (info_retrieval)**: `prompts/info_retrieval/`
+  - API Type: Responses API
+  - Fields: `instructions`, `input_template`, `tools`
+  - Example: `default.yaml`
+
+- **Pipeline 2 (script_gen)**: `prompts/script_generation/`
+  - API Type: Chat Completions API
+  - Fields: `system_prompt`, `user_prompt_template`
+  - Examples: `v1.yaml`, `v2-tts.yaml`
+
 **Adding New Prompt Templates:**
-1. Create a new YAML file in `prompts/script_generation/[version].yaml`
-2. Include: `name`, `description`, `tags`, `parameters`, `system_prompt`, `user_prompt_template`
-3. Use `{info_content}` placeholder in `user_prompt_template` for info file content
-4. Test with: `python -m src.pipelines.script_gen --keyword "테스트" --prompt-version [version] --dry-run`
-5. Verify with `--list-prompts`
+
+For **info_retrieval**:
+1. Create `prompts/info_retrieval/[version].yaml`
+2. Include: `api_type: responses`, `instructions`, `input_template`, `tools`
+3. Use `{keyword}` placeholder in `input_template`
+4. Test: `python -m src.pipelines.info_retrieval --keyword "테스트" --prompt-version [version] --dry-run`
+5. Verify: `python -m src.pipelines.info_retrieval --list-prompts`
+
+For **script_generation**:
+1. Create `prompts/script_generation/[version].yaml`
+2. Include: `api_type: chat`, `system_prompt`, `user_prompt_template`
+3. Use `{info_content}` placeholder in `user_prompt_template`
+4. Test: `python -m src.pipelines.script_gen --keyword "테스트" --prompt-version [version] --dry-run`
+5. Verify: `python -m src.pipelines.script_gen --list-prompts`
+
+**Prompt Optimization Workflow:**
+
+Use the interactive Jupyter notebook for testing and comparing prompts:
+```bash
+cd notebooks
+jupyter notebook prompt_optimizer.ipynb
+```
+
+Features:
+- Edit prompts directly in cells and test immediately
+- Save results with timestamps to `test_results/`
+- Compare multiple prompt versions side-by-side
+- Track metrics (length, quality, tone)
 
 ## Environment Variables
 

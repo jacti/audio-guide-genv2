@@ -6,6 +6,7 @@
 
 주요 기능:
 - OpenAI GPT 모델을 활용한 문화유산 정보 검색 및 요약
+- YAML 기반 프롬프트 템플릿 시스템 지원 (버전별 관리 가능)
 - 서론, 역사/배경, 특징, 추가 사실, 참고 문헌 등 구조화된 Markdown 생성
 - outputs/info/ 디렉토리에 파일 저장
 - 에러 처리 및 dry_run 모드 지원
@@ -21,6 +22,7 @@ from openai import OpenAI
 
 from src.utils.path_sanitizer import info_markdown_path
 from src.utils.metadata import create_metadata
+from src.utils.prompt_loader import load_prompt, list_prompts
 
 # 환경변수 로드
 load_dotenv()
@@ -58,13 +60,18 @@ def _validate_api_key() -> str:
     return api_key
 
 
-def _search_with_llm(keyword: str, model: str = DEFAULT_MODEL) -> str:
+def _search_with_llm(
+    keyword: str,
+    model: str = DEFAULT_MODEL,
+    prompt_version: str = "default"
+) -> str:
     """
     OpenAI LLM을 활용해 문화유산 정보를 검색하고 요약한다.
 
     Args:
         keyword: 검색할 문화유산 키워드
         model: 사용할 OpenAI 모델명
+        prompt_version: 프롬프트 템플릿 버전 (기본값: "default")
 
     Returns:
         str: LLM이 생성한 구조화된 정보
@@ -75,48 +82,31 @@ def _search_with_llm(keyword: str, model: str = DEFAULT_MODEL) -> str:
     api_key = _validate_api_key()
     client = OpenAI(api_key=api_key)
 
-    # Structured output ->  
-    # 프롬프트 구성: 구조화된 Markdown 생성 요청
-    system_prompt = """당신은 한국 문화유산 전문가입니다.
-주어진 문화유산에 대해 정확하고 체계적인 정보를 제공해주세요.
-
-유물의 경우 응답은 반드시 아래 형식의 Markdown으로 작성해주세요:
-
-# {문화유산 이름}
-
-## 개요
-간단한 소개 (2-3문장)
-
-## 역사 및 배경
-- 시대적 배경
-- 제작 시기 및 장소
-- 역사적 의미
-
-## 주요 특징
-- 외형적 특징
-- 기술적 특징
-- 예술적 가치
-
-## 추가 정보
-- 현재 소장처
-- 지정 문화재 정보 (해당하는 경우)
-- 관련 일화나 흥미로운 사실
-
-## 참고 자료
-- 주요 출처나 참고할 만한 정보
-
-그 외의 경우 자유롭게 정리하여 Markdown으로 작성해주세요.
-"""
+    # YAML 프롬프트 템플릿 로드
+    try:
+        prompt_template = load_prompt(
+            version=prompt_version,
+            pipeline_type="info_retrieval"
+        )
+        logger.info(f"프롬프트 템플릿 로드 완료: {prompt_template.name} (버전: {prompt_version})")
+        logger.info(f"프롬프트 설명: {prompt_template.description}")
+        logger.info(f"API 타입: {prompt_template.api_type}")
+    except FileNotFoundError as e:
+        logger.error(f"프롬프트 템플릿 로드 실패: {e}")
+        available = list_prompts(pipeline_type="info_retrieval")
+        logger.info(f"사용 가능한 버전: {', '.join(available)}")
+        raise
 
     logger.info(f"LLM 검색 시작: {keyword} (모델: {model})")
 
     try:
-        # responses API 사용 (웹 검색 기능 포함)
+        # Responses API 사용 (웹 검색 기능 포함)
+        # YAML 템플릿에서 프롬프트와 tools 가져오기
         response = client.responses.create(
             model=model,
-            instructions=system_prompt,
-            input=f"'{keyword}'에 대한 상세한 정보를 작성해주세요.",
-            tools=[{"type": "web_search_preview"}]
+            instructions=prompt_template.instructions,
+            input=prompt_template.format_input(keyword=keyword),
+            tools=prompt_template.tools
         )
 
         content = response.output_text
@@ -171,6 +161,7 @@ def run(
     *,
     output_dir: Optional[Path] = None,
     model: str = DEFAULT_MODEL,
+    prompt_version: str = "default",
     dry_run: bool = False,
     output_name: Optional[str] = None
 ) -> Path:
@@ -183,7 +174,8 @@ def run(
     Args:
         keyword: 검색할 문화유산 키워드
         output_dir: 출력 디렉토리 (기본값: outputs/info)
-        model: 사용할 OpenAI 모델명 (기본값: gpt-4o-mini)
+        model: 사용할 OpenAI 모델명 (기본값: gpt-4.1)
+        prompt_version: 프롬프트 템플릿 버전 (기본값: "default")
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
 
@@ -208,6 +200,7 @@ def run(
     keyword = keyword.strip()
     mode = "dry_run" if dry_run else "production"
     logger.info(f"{'[DRY RUN] ' if dry_run else ''}정보 검색 파이프라인 시작: {keyword}")
+    logger.info(f"프롬프트 버전: {prompt_version}")
 
     # 출력 디렉토리 설정: dry_run 모드일 경우 outputs/mock/info/ 사용
     if output_dir is None:
@@ -222,7 +215,7 @@ def run(
         logger.info("DRY RUN 모드: 목업 데이터 사용")
         content = _get_mock_data(keyword)
     else:
-        content = _search_with_llm(keyword, model=model)
+        content = _search_with_llm(keyword, model=model, prompt_version=prompt_version)
 
     # 파일 경로 생성 (공통 헬퍼 사용)
     output_path = info_markdown_path(keyword, output_dir, output_name)
@@ -258,24 +251,32 @@ def main():
     Example:
         $ python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
         $ python -m src.pipelines.info_retrieval --keyword "석굴암" --dry-run
+        $ python -m src.pipelines.info_retrieval --list-prompts
     """
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="문화유산 정보 검색 파이프라인",
+        description="문화유산 정보 검색 파이프라인 (YAML 프롬프트 시스템 지원)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
+  # 기본 사용
   python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
-  python -m src.pipelines.info_retrieval --keyword "석굴암" --dry-run
-  python -m src.pipelines.info_retrieval --keyword "훈민정음" --model gpt-4o
+
+  # 프롬프트 버전 지정
+  python -m src.pipelines.info_retrieval --keyword "석굴암" --prompt-version default
+
+  # Dry-run 모드
+  python -m src.pipelines.info_retrieval --keyword "훈민정음" --dry-run
+
+  # 사용 가능한 프롬프트 버전 확인
+  python -m src.pipelines.info_retrieval --list-prompts
         """
     )
 
     parser.add_argument(
         "--keyword",
         type=str,
-        required=True,
         help="검색할 문화유산 키워드"
     )
 
@@ -294,6 +295,13 @@ def main():
     )
 
     parser.add_argument(
+        "--prompt-version",
+        type=str,
+        default="default",
+        help="프롬프트 템플릿 버전 (기본값: default)"
+    )
+
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="API 호출 없이 목업 데이터로 테스트"
@@ -306,19 +314,51 @@ def main():
         help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
     )
 
+    parser.add_argument(
+        "--list-prompts",
+        action="store_true",
+        help="사용 가능한 프롬프트 버전 목록 출력"
+    )
+
     args = parser.parse_args()
+
+    # 프롬프트 목록 출력 모드
+    if args.list_prompts:
+        print("\n사용 가능한 프롬프트 버전:")
+        print("="*70)
+        for version in list_prompts(pipeline_type="info_retrieval"):
+            try:
+                template = load_prompt(version, pipeline_type="info_retrieval")
+                print(f"\n📝 {version}:")
+                print(f"    이름: {template.name}")
+                print(f"    설명: {template.description}")
+                print(f"    API 타입: {template.api_type}")
+                print(f"    태그: {', '.join(template.tags)}")
+            except Exception as e:
+                print(f"\n❌ {version}: (로드 실패 - {e})")
+        print("\n" + "="*70)
+        print("\n💡 사용 예시:")
+        print('  python -m src.pipelines.info_retrieval --keyword "청자 매병" --prompt-version default')
+        print("="*70)
+        return
+
+    # keyword 필수 체크
+    if not args.keyword:
+        parser.error("--keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
 
     try:
         output_path = run(
             keyword=args.keyword,
             output_dir=Path(args.output_dir) if args.output_dir else None,
             model=args.model,
+            prompt_version=args.prompt_version,
             dry_run=args.dry_run,
             output_name=args.output_name
         )
 
         print(f"\n✅ 정보 검색 완료!")
         print(f"📄 파일 위치: {output_path}")
+        print(f"프롬프트 버전: {args.prompt_version}")
         print(f"\n다음 단계: 생성된 파일을 확인하세요.")
         print(f"  cat {output_path}")
 

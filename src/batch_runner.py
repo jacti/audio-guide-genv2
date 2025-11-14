@@ -32,7 +32,11 @@ except ImportError:
 
 # 파이프라인 모듈 임포트
 from src.pipelines import info_retrieval, script_gen, audio_gen
-from src.utils.path_sanitizer import sanitize_keyword_for_path
+from src.utils.path_sanitizer import (
+    sanitize_keyword_for_path,
+    info_markdown_path,
+    script_markdown_path
+)
 
 # 로거 설정
 logging.basicConfig(
@@ -176,20 +180,63 @@ def merge_file_config(file_config: Dict[str, Any], defaults: Dict[str, Any]) -> 
     return merged
 
 
+def validate_stage_dependencies(
+    stages: List[int],
+    output_name: str,
+    keyword: str,
+    track_dirs: Dict[str, Path]
+) -> None:
+    """
+    선택된 파이프라인 단계의 의존성을 검증합니다.
+
+    이전 단계의 출력 파일이 존재하지 않으면 에러를 발생시킵니다.
+
+    Args:
+        stages: 실행할 파이프라인 단계 리스트 (1: info, 2: script, 3: audio)
+        output_name: 출력 파일명
+        keyword: 키워드
+        track_dirs: 트랙 디렉토리 경로 딕셔너리
+
+    Raises:
+        FileNotFoundError: 필요한 입력 파일이 존재하지 않을 때
+    """
+    # Stage 2 (script_gen)를 실행하려면 Stage 1 (info)의 출력이 필요
+    if 2 in stages and 1 not in stages:
+        info_path = info_markdown_path(keyword, track_dirs["info"], output_name)
+        if not info_path.exists():
+            raise FileNotFoundError(
+                f"❌ Stage 2 (스크립트 생성)를 실행하려면 info 파일이 필요합니다.\n"
+                f"   필요한 파일: {info_path}\n"
+                f"   해결 방법: --stages 1,2 로 실행하거나 먼저 Stage 1을 실행하세요."
+            )
+
+    # Stage 3 (audio_gen)를 실행하려면 Stage 2 (script)의 출력이 필요
+    if 3 in stages and 2 not in stages:
+        script_path = script_markdown_path(keyword, track_dirs["script"], output_name)
+        if not script_path.exists():
+            raise FileNotFoundError(
+                f"❌ Stage 3 (오디오 생성)을 실행하려면 script 파일이 필요합니다.\n"
+                f"   필요한 파일: {script_path}\n"
+                f"   해결 방법: --stages 2,3 로 실행하거나 먼저 Stage 2를 실행하세요."
+            )
+
+
 def run_single_file(
     file_config: Dict[str, Any],
     track_dirs: Dict[str, Path],
     file_index: int,
-    total_files: int
+    total_files: int,
+    stages: List[int] = [1, 2, 3]
 ) -> Dict[str, Any]:
     """
-    단일 파일에 대해 전체 파이프라인을 실행합니다.
+    단일 파일에 대해 지정된 파이프라인 단계를 실행합니다.
 
     Args:
         file_config: 파일 설정 (defaults와 병합된 상태)
         track_dirs: 트랙 디렉토리 경로 딕셔너리
         file_index: 현재 파일 인덱스 (1부터 시작)
         total_files: 전체 파일 개수
+        stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
         실행 결과 딕셔너리
@@ -200,7 +247,8 @@ def run_single_file(
             "error": str (실패 시),
             "audio_path": str,
             "started_at": str,
-            "completed_at": str
+            "completed_at": str,
+            "stages_run": List[int]
         }
 
     Raises:
@@ -214,57 +262,73 @@ def run_single_file(
         "output_name": output_name,
         "keyword": keyword,
         "started_at": datetime.now().isoformat(),
-        "status": "pending"
+        "status": "pending",
+        "stages_run": stages
     }
 
     logger.info(f"\n{'='*70}")
     logger.info(f"[{file_index}/{total_files}] {output_name}")
     logger.info(f"키워드: {keyword}")
+    logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}")
 
     try:
+        # 의존성 검증
+        validate_stage_dependencies(stages, output_name, keyword, track_dirs)
+
         # Pipeline 1: 정보 검색
-        logger.info("  → 정보 검색 중...")
-        info_path = info_retrieval.run(
-            keyword=keyword,
-            model=file_config.get("model", "gpt-4.1"),
-            output_dir=track_dirs["info"],
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        logger.info(f"  ✓ 정보 검색 완료: {info_path.name}")
+        if 1 in stages:
+            logger.info("  → [Stage 1] 정보 검색 중...")
+            info_path = info_retrieval.run(
+                keyword=keyword,
+                model=file_config.get("model", "gpt-4.1"),
+                prompt_version=file_config.get("info_prompt_version", "default"),
+                output_dir=track_dirs["info"],
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
+        else:
+            logger.info("  ⊘ [Stage 1] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 2: 스크립트 생성
-        logger.info("  → 스크립트 생성 중...")
-        script_path = script_gen.run(
-            keyword=keyword,
-            info_dir=track_dirs["info"],
-            output_dir=track_dirs["script"],
-            prompt_version=file_config.get("prompt_version", "v2-tts"),
-            temperature=file_config.get("temperature", 0.7),
-            model=file_config.get("model", "gpt-4.1"),
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        logger.info(f"  ✓ 스크립트 생성 완료: {script_path.name}")
+        if 2 in stages:
+            logger.info("  → [Stage 2] 스크립트 생성 중...")
+            script_path = script_gen.run(
+                keyword=keyword,
+                info_dir=track_dirs["info"],
+                output_dir=track_dirs["script"],
+                prompt_version=file_config.get("script_prompt_version",
+                                              file_config.get("prompt_version", "v2-tts")),  # 하위 호환
+                temperature=file_config.get("temperature", 0.7),
+                model=file_config.get("model", "gpt-4.1"),
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
+        else:
+            logger.info("  ⊘ [Stage 2] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 3: 오디오 생성
-        logger.info("  → 오디오 생성 중...")
-        audio_path = audio_gen.run(
-            keyword=keyword,
-            script_dir=track_dirs["script"],
-            output_dir=track_dirs["audio"],
-            voice=file_config.get("voice", "Zephyr"),
-            model=file_config.get("tts_model", "gemini-2.5-pro-preview-tts"),
-            speed=file_config.get("speed", 1.0),
-            max_retries=file_config.get("max_retries", 8),
-            dry_run=dry_run,
-            output_name=output_name
-        )
-        logger.info(f"  ✓ 오디오 생성 완료: {audio_path.name}")
+        if 3 in stages:
+            logger.info("  → [Stage 3] 오디오 생성 중...")
+            audio_path = audio_gen.run(
+                keyword=keyword,
+                script_dir=track_dirs["script"],
+                output_dir=track_dirs["audio"],
+                voice=file_config.get("voice", "Zephyr"),
+                model=file_config.get("tts_model", "gemini-2.5-pro-preview-tts"),
+                speed=file_config.get("speed", 1.0),
+                max_retries=file_config.get("max_retries", 8),
+                dry_run=dry_run,
+                output_name=output_name
+            )
+            logger.info(f"  ✓ [Stage 3] 오디오 생성 완료: {audio_path.name}")
+            result["audio_path"] = str(audio_path)
+        else:
+            logger.info("  ⊘ [Stage 3] 건너뜀 (이미 존재하는 파일 사용)")
 
         result["status"] = "success"
-        result["audio_path"] = str(audio_path)
         result["completed_at"] = datetime.now().isoformat()
 
         logger.info(f"✅ [{file_index}/{total_files}] {output_name} 완료\n")
@@ -333,7 +397,8 @@ def generate_batch_report(
 
 def run_batch(
     track_config: Dict[str, Any],
-    override_dry_run: Optional[bool] = None
+    override_dry_run: Optional[bool] = None,
+    stages: List[int] = [1, 2, 3]
 ) -> Dict[str, Any]:
     """
     트랙 전체를 배치 실행합니다.
@@ -341,6 +406,7 @@ def run_batch(
     Args:
         track_config: 트랙 설정 딕셔너리
         override_dry_run: dry_run 모드 강제 설정 (None이면 설정 파일 따름)
+        stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
         실행 결과 요약 딕셔너리
@@ -361,6 +427,7 @@ def run_batch(
     logger.info(f"\n{'='*70}")
     logger.info(f"🎬 배치 실행 시작: {track_name}")
     logger.info(f"총 {total_files}개 파일")
+    logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
     # 트랙 디렉토리 생성
@@ -381,7 +448,8 @@ def run_batch(
                 file_config=file_config,
                 track_dirs=track_dirs,
                 file_index=idx,
-                total_files=total_files
+                total_files=total_files,
+                stages=stages
             )
             results.append(result)
 
@@ -444,6 +512,35 @@ def run_batch(
     }
 
 
+def parse_stages(stages_str: str) -> List[int]:
+    """
+    쉼표로 구분된 스테이지 문자열을 정수 리스트로 파싱합니다.
+
+    Args:
+        stages_str: "1,2,3" 또는 "2" 같은 형식의 문자열
+
+    Returns:
+        정수 리스트 (예: [1, 2, 3])
+
+    Raises:
+        ValueError: 잘못된 형식이거나 유효하지 않은 스테이지 번호
+    """
+    try:
+        stages = [int(s.strip()) for s in stages_str.split(",")]
+    except ValueError:
+        raise ValueError(f"잘못된 stages 형식: {stages_str}. 예: '1,2,3' 또는 '2'")
+
+    # 유효성 검증
+    for stage in stages:
+        if stage not in [1, 2, 3]:
+            raise ValueError(f"유효하지 않은 stage 번호: {stage}. 1, 2, 3 중 하나여야 합니다.")
+
+    # 정렬 및 중복 제거
+    stages = sorted(set(stages))
+
+    return stages
+
+
 def main():
     """CLI 진입점"""
     parser = argparse.ArgumentParser(
@@ -451,20 +548,26 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
-  # 기본 실행
+  # 기본 실행 (모든 파이프라인)
   python -m src.batch_runner --track-file tracks/sample_track.yaml
 
   # Dry-run 모드 (API 호출 없이 테스트)
   python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
 
-  # 특정 트랙 실행
-  python -m src.batch_runner --track-file tracks/cultural_heritage.yaml
+  # 스크립트 생성만 재실행 (info 파일은 이미 존재)
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
+
+  # 스크립트 + 오디오만 재생성
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3
+
+  # 오디오만 재생성 (script 파일은 이미 존재)
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
 
 출력 구조:
   outputs/tracks/[트랙명]/
-  ├── info/       - 정보 파일
-  ├── script/     - 스크립트 파일
-  ├── audio/      - 오디오 파일 (최종 결과물)
+  ├── info/       - 정보 파일 (Stage 1)
+  ├── script/     - 스크립트 파일 (Stage 2)
+  ├── audio/      - 오디오 파일 (Stage 3, 최종 결과물)
   └── batch_report.json - 실행 결과 리포트
         """
     )
@@ -482,25 +585,37 @@ def main():
         help="테스트 모드 (API 호출 없이 목업 데이터 생성, YAML defaults 오버라이드)"
     )
 
+    parser.add_argument(
+        "--stages",
+        type=str,
+        default="1,2,3",
+        help="실행할 파이프라인 단계 (기본값: 1,2,3). 예: '2' 또는 '2,3'"
+    )
+
     args = parser.parse_args()
 
     # 환경변수 로드
     load_dotenv()
 
     try:
-        # 1. YAML 설정 로드
+        # 1. stages 파싱
+        stages = parse_stages(args.stages)
+        logger.info(f"실행할 파이프라인 단계: {stages}")
+
+        # 2. YAML 설정 로드
         track_config = load_track_config(args.track_file)
 
-        # 2. 설정 검증
+        # 3. 설정 검증
         validate_track_config(track_config)
 
-        # 3. 배치 실행
+        # 4. 배치 실행
         result = run_batch(
             track_config=track_config,
-            override_dry_run=args.dry_run if args.dry_run else None
+            override_dry_run=args.dry_run if args.dry_run else None,
+            stages=stages
         )
 
-        # 4. 성공 메시지
+        # 5. 성공 메시지
         print("\n" + "🎉 " * 20)
         print(f"배치 실행이 완료되었습니다!")
         print("🎉 " * 20)
