@@ -12,25 +12,53 @@ This is an audio guide generation pipeline for cultural heritage artifacts. The 
 
 Each pipeline stage is designed to be independently extensible and can be run separately or as part of the full workflow.
 
+## Quick Start Commands
+
+**Environment setup:**
+```bash
+# Initial setup (installs Python, creates venv, installs dependencies)
+./setup-venv.sh
+source .venv/bin/activate
+
+# After pulling changes
+source .venv/bin/activate
+./setup-venv.sh
+```
+
+**Basic usage:**
+```bash
+# Single file generation (full pipeline)
+python -m src.main --search-keyword "청자 상감운학문 매병"
+
+# Batch generation from track file
+python -m src.batch_runner --track-file tracks/sample_track.yaml
+
+# Test mode (no API calls)
+python -m src.main --search-keyword "테스트" --dry-run
+python -m src.batch_runner --track-file tracks/sample_track.yaml --dry-run
+
+# Run specific stages only
+python -m src.main --search-keyword "유물명" --stages 2,3  # Skip info retrieval
+python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2  # Re-generate scripts only
+```
+
+**Individual pipeline testing:**
+```bash
+# Pipeline 1: Info retrieval
+python -m src.pipelines.info_retrieval --search-keyword "유물명" --dry-run
+python -m src.pipelines.info_retrieval --list-prompts
+
+# Pipeline 2: Script generation
+python -m src.pipelines.script_gen --search-keyword "유물명" --script-prompt-version v2-tts --dry-run
+python -m src.pipelines.script_gen --list-prompts
+
+# Pipeline 3: Audio generation
+python -m src.pipelines.audio_gen --search-keyword "유물명" --voice Zephyr --dry-run
+```
+
 ## Environment Setup
 
 This project uses pyenv for Python version management and a `.venv` virtual environment.
-
-**Initial setup:**
-```bash
-# Run the setup script (handles pyenv, venv, and dependencies)
-./setup-venv.sh
-
-# Activate the virtual environment (if not already active)
-source .venv/bin/activate
-```
-
-**After pulling changes:**
-```bash
-# Ensure venv is activated, then run setup script to update dependencies
-source .venv/bin/activate
-./setup-venv.sh
-```
 
 **Python version:** See `.python-version` file (currently 3.13.9)
 
@@ -46,38 +74,54 @@ source .venv/bin/activate
 
 ## Architecture
 
+### Core Design Principles
+
+**Pipeline Independence:** Each of the three stages (info → script → audio) is:
+- Independently executable with its own CLI
+- Testable in isolation using `--dry-run` mode
+- Extensible through YAML-based prompt templates
+
+**File-Based Communication:** Stages communicate through markdown/audio files on disk:
+- Enables debugging intermediate outputs
+- Allows re-running individual stages without full pipeline
+- Supports partial pipeline execution via `--stages` parameter
+
+**Unified Prompt Management:** Both pipelines use YAML templates (`src/utils/prompt_loader.py`):
+- Info pipeline: Responses API format (`instructions`, `input_template`, `tools`)
+- Script pipeline: Chat Completions API format (`system_prompt`, `user_prompt_template`)
+
 ### Three-Stage Pipeline Design
 
 Each pipeline stage is independent and communicates through file I/O:
 
 **Pipeline 1: Information Retrieval** (`src/pipelines/info_retrieval.py`)
-- Input: Artifact keyword (user input)
-- Process: Uses GPT with Responses API + web search to retrieve and summarize information
-- **Prompt System**: YAML-based templates in `/prompts/info_retrieval/` (same system as Pipeline 2)
-- Output: Markdown file in `/outputs/info/[keyword].md`
+- Input: Search keyword (user input)
+- Process: Uses Perplexity AI web search to retrieve and summarize information
+- **Prompt System**: YAML-based templates in `/prompts/info_retrieval/` using Responses API format
+- Output: Markdown file in `/outputs/info/[search_keyword].md`
 - Extension point: Multiple prompt styles (detailed, simple, children-friendly, etc.)
-- CLI: `python -m src.pipelines.info_retrieval --keyword "유물명" --prompt-version default [--dry-run]`
+- CLI: `python -m src.pipelines.info_retrieval --search-keyword "유물명" --prompt-version default [--dry-run]`
 - List prompts: `python -m src.pipelines.info_retrieval --list-prompts`
 
 **Pipeline 2: Script Generation** (`src/pipelines/script_gen.py`)
-- Input: `/outputs/info/[keyword].md`
+- Input: `/outputs/info/[search_keyword].md`
 - Process: Uses LLM to transform information into audio guide script (1 min duration, friendly tone, visual imagery)
 - Prompt system: YAML-based templates in `/prompts/script_generation/` (loaded via `src.utils.prompt_loader`)
 - Current default: `v2-tts` (TTS-optimized, no markdown headers)
-- Output: Script markdown in `/outputs/script/[keyword]_script.md`
+- **New**: Supports custom user prompts via `script_gen_prompt` field (appended to base prompt)
+- Output: Script markdown in `/outputs/script/[search_keyword]_script.md`
 - Extension point: Tone/style parameters, length control, session segmentation
-- CLI: `python -m src.pipelines.script_gen --keyword "유물명" --prompt-version v2-tts [--dry-run]`
+- CLI: `python -m src.pipelines.script_gen --search-keyword "유물명" --script-prompt-version v2-tts [--custom-prompt "전문적인 톤"] [--dry-run]`
 - List prompts: `python -m src.pipelines.script_gen --list-prompts`
 
-**Pipeline 3: Audio Generation** (`src.pipelines/audio_gen.py`)
-- Input: `/outputs/script/[keyword]_script.md`
+**Pipeline 3: Audio Generation** (`src/pipelines/audio_gen.py`)
+- Input: `/outputs/script/[search_keyword]_script.md`
 - Process: Gemini TTS API conversion with exponential backoff retry logic (`backoff` package)
 - Default model: "gemini-2.5-pro-preview-tts", voice: "Zephyr"
-- Output: WAV/MP3 file in `/outputs/audio/[keyword].wav`
+- Output: WAV/MP3 file in `/outputs/audio/[search_keyword].wav`
 - Extension point: Voice selection (30+ Gemini voices), model selection (Pro/Flash), BGM mixing
-- Supported voices: Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
-- **주의**: speed 파라미터는 현재 Gemini API에서 지원하지 않음
-- CLI: `python -m src.pipelines.audio_gen --keyword "유물명" --voice Zephyr --model gemini-2.5-pro-preview-tts [--dry-run]`
+- Supported voices: Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Laomedeia 등 30+ voices
+- CLI: `python -m src.pipelines.audio_gen --search-keyword "유물명" --voice Zephyr --model gemini-2.5-pro-preview-tts [--dry-run]`
 
 ### Shared Utilities
 
@@ -107,34 +151,33 @@ Each pipeline stage is independent and communicates through file I/O:
 
 ```bash
 # Basic usage
-python -m src.main --keyword "청자 상감운학문 매병"
+python -m src.main --search-keyword "청자 상감운학문 매병"
 
-# With custom settings (Korean voice)
-python -m src.main --keyword "석굴암" \
-  --model gpt-4o \
-  --prompt-version v2-tts \
-  --voice ko-KR-Wavenet-A \
-  --speed 1.1 \
+# With custom settings
+python -m src.main --search-keyword "석굴암" \
+  --model gpt-4.1 \
+  --info-prompt-version default \
+  --script-prompt-version v2-tts \
+  --voice Zephyr \
   --temperature 0.7 \
   --max-retries 8
 
-# English voice
-python -m src.main --keyword "Celadon Vase" \
-  --voice en-US-Neural2-C \
-  --speed 1.0
+# Different voice selection
+python -m src.main --search-keyword "Celadon Vase" \
+  --voice Puck
 
 # Dry-run mode (no API calls, uses mock data)
-python -m src.main --keyword "사유의 방" --dry-run
+python -m src.main --search-keyword "사유의 방" --dry-run
 
 # Custom output naming
-python -m src.main --keyword "청자 매병" --output-name "celadon_vase_01"
+python -m src.main --search-keyword "청자 매병" --output-name "celadon_vase_01"
 
-# 특정 파이프라인만 실행 (NEW in v0.2)
+# 특정 파이프라인만 실행
 # 스크립트만 재생성 (info 파일은 이미 존재)
-python -m src.main --keyword "청자 매병" --stages 2
+python -m src.main --search-keyword "청자 매병" --stages 2
 
 # 오디오만 재생성 (script 파일은 이미 존재)
-python -m src.main --keyword "청자 매병" --stages 3
+python -m src.main --search-keyword "청자 매병" --stages 3
 ```
 
 Expected output flow:
@@ -147,8 +190,10 @@ Expected output flow:
 
 **Important flags:**
 - `--dry-run`: Test mode - generates mock data without API calls (useful for testing flow)
-- `--output-name`: Override filename (default uses keyword with sanitization)
+- `--output-name`: Override filename (default uses search_keyword with sanitization)
 - `--stages`: Select which pipeline stages to run (1=info, 2=script, 3=audio). Default: 1,2,3
+- `--info-prompt-version`: Pipeline 1 prompt version (default: "default")
+- `--script-prompt-version`: Pipeline 2 prompt version (default: "v2-tts")
 - All pipelines support independent CLI execution for debugging specific stages
 
 ## Directory Structure
@@ -201,11 +246,21 @@ script_gen_v2/
 - File-based I/O between stages is intentional for debugging and extensibility
 - Follow the input/output contract for each pipeline stage
 
+**Testing & Quality Assurance:**
+- Currently no automated tests exist (future improvement)
+- Manual testing workflow:
+  1. Use `--dry-run` flag to test pipeline flow without API costs
+  2. Test individual pipelines: `python -m src.pipelines.[pipeline_name] --dry-run`
+  3. Verify outputs in `outputs/mock/` directory
+  4. Compare prompt versions using `notebooks/prompt_optimizer.ipynb`
+  5. Use `--stages` parameter to test specific pipeline segments
+
 **Planned extensions (v0.2+):**
 - Enhanced search sources: Exa.ai → Wikipedia → museum.go.kr API
 - Tone variations: 감성/교육/아동용 styles
 - BGM auto-mixing with Suno
 - Metadata tracking (JSON format)
+- Automated testing suite
 - UI layer: Streamlit or Next.js interface
 
 ## Batch Execution (트랙 기반 배치 실행)
@@ -230,13 +285,15 @@ description: "박물관 이용에 도움이 되는 필수 가이드"
 
 # 공통 설정 (모든 파일에 적용, 개별 오버라이드 가능)
 defaults:
-  model: "gpt-4.1"
-  info_prompt_version: "default"       # Pipeline 1 프롬프트
-  script_prompt_version: "v2-tts"      # Pipeline 2 프롬프트
-  voice: "Zephyr"                      # Gemini TTS voice
-  speed: 1.0
-  temperature: 0.7
-  dry_run: false
+  model: "gpt-4.1"                     # LLM 모델 (info/script 파이프라인용)
+  info_prompt_version: "default"       # Pipeline 1 프롬프트 버전
+  script_prompt_version: "v2-tts"      # Pipeline 2 프롬프트 버전
+  voice: "Zephyr"                      # Gemini TTS voice (Pipeline 3)
+  tts_model: "gemini-2.5-pro-preview-tts"  # Gemini TTS 모델
+  speed: 1.0                           # TTS 속도 (주의: Gemini API 미지원)
+  temperature: 0.7                     # LLM temperature (script 생성용)
+  max_retries: 8                       # API 재시도 횟수
+  dry_run: false                       # 테스트 모드 여부
 
 # 생성할 파일 목록
 files:
@@ -302,11 +359,25 @@ python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml
 # (info 파일은 그대로 유지, script만 새로 생성)
 python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml --stages 2
 
-# 3단계: 스크립트 결과 확인 후 만족하면 오디오만 생성
+# 3단계: 커스텀 프롬프트를 추가하여 재생성
+# YAML 파일의 defaults에 script_gen_prompt 필드 추가 후:
+python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml --stages 2
+
+# 4단계: 스크립트 결과 확인 후 만족하면 오디오만 생성
 python -m src.batch_runner --track-file tracks/국중박_꿀팁_가이드.yaml --stages 3
 ```
 
 이 방식으로 비용과 시간을 절약하면서 프롬프트를 반복적으로 테스트할 수 있습니다.
+
+**`script_gen_prompt` 사용 예시 (YAML)**:
+```yaml
+defaults:
+  script_prompt_version: "v2-tts"
+  script_gen_prompt: |
+    추가 지시사항:
+    - 전문적이고 학술적인 톤을 사용하세요
+    - 구체적인 연도와 수치를 포함하세요
+```
 
 ### 출력 디렉토리 구조
 
@@ -439,16 +510,21 @@ All pipelines now use a unified YAML-based prompt system:
 For **info_retrieval**:
 1. Create `prompts/info_retrieval/[version].yaml`
 2. Include: `api_type: responses`, `instructions`, `input_template`, `tools`
-3. Use `{keyword}` placeholder in `input_template`
-4. Test: `python -m src.pipelines.info_retrieval --keyword "테스트" --prompt-version [version] --dry-run`
+3. Use `{search_keyword}` placeholder in `input_template`
+4. Test: `python -m src.pipelines.info_retrieval --search-keyword "테스트" --prompt-version [version] --dry-run`
 5. Verify: `python -m src.pipelines.info_retrieval --list-prompts`
 
 For **script_generation**:
 1. Create `prompts/script_generation/[version].yaml`
 2. Include: `api_type: chat`, `system_prompt`, `user_prompt_template`
 3. Use `{info_content}` placeholder in `user_prompt_template`
-4. Test: `python -m src.pipelines.script_gen --keyword "테스트" --prompt-version [version] --dry-run`
+4. Test: `python -m src.pipelines.script_gen --search-keyword "테스트" --script-prompt-version [version] --dry-run`
 5. Verify: `python -m src.pipelines.script_gen --list-prompts`
+
+**Using custom prompts**:
+- Add `script_gen_prompt` field in YAML for batch execution
+- Or use `--custom-prompt` flag for CLI execution
+- Custom prompt is appended as plain text after the base template prompt
 
 **Prompt Optimization Workflow:**
 
@@ -483,3 +559,37 @@ GEMINI_API_KEY=your_gemini_api_key_here
 2. "Get API Key" 클릭
 3. 새 API 키 생성
 4. `.env` 파일에 `GEMINI_API_KEY` 추가
+
+## Troubleshooting
+
+**Common Issues:**
+
+1. **"ModuleNotFoundError" or import errors**
+   - Solution: Ensure venv is activated (`source .venv/bin/activate`)
+   - Check: `which python` should point to `.venv/bin/python`
+   - Reinstall: `./setup-venv.sh`
+
+2. **API authentication errors**
+   - Verify `.env` file exists in project root
+   - Check API keys are set: `cat .env | grep API_KEY`
+   - For dry-run mode, API keys are not required
+
+3. **"File not found" errors when using --stages**
+   - Stage 2 requires Stage 1 output (info file must exist)
+   - Stage 3 requires Stage 2 output (script file must exist)
+   - Solution: Run earlier stages first or use full pipeline
+
+4. **Gemini TTS errors (Pipeline 3)**
+   - Check GEMINI_API_KEY is set correctly
+   - Note: `speed` parameter is currently unsupported by Gemini API
+   - Try different voice names from supported list (Zephyr, Puck, Charon, etc.)
+
+5. **YAML parsing errors in batch runner**
+   - Validate YAML syntax using `python -c "import yaml; yaml.safe_load(open('tracks/your_file.yaml'))"`
+   - Ensure required fields exist: `track_name`, `files` with `output_name` and `keyword`
+   - Check indentation is consistent (use spaces, not tabs)
+
+**Performance Issues:**
+- Use `--dry-run` for testing without API costs
+- Batch runner processes files sequentially (by design for stability)
+- Consider using `--stages` to skip already-completed stages

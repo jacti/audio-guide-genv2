@@ -59,9 +59,9 @@ instructions: |
   그 외의 경우 자유롭게 정리하여 Markdown으로 작성해주세요.
 
 # input_template 필드는 Responses API의 input 파라미터 역할
-# {keyword} 변수를 프롬프트 로더가 치환합니다
+# {search_keyword} 변수를 프롬프트 로더가 치환합니다
 input_template: |
-  '{keyword}'에 대한 상세한 정보를 작성해주세요.
+  '{search_keyword}'에 대한 상세한 정보를 작성해주세요.
 
 # Responses API 전용 설정
 tools:

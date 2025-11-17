@@ -37,22 +37,22 @@ DEFAULT_OUTPUT_DIR = Path("outputs/script")
 DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/script")
 
 
-def _generate_dry_run_script(keyword: str, prompt_version: str) -> str:
+def _generate_dry_run_script(search_keyword: str, script_prompt_version: str) -> str:
     """
     dry_run 모드에서 사용할 고정 템플릿 스크립트 생성
 
     Args:
-        keyword: 유물/장소 키워드
-        prompt_version: 프롬프트 버전
+        search_keyword: 유물/장소 검색 키워드
+        script_prompt_version: 스크립트 프롬프트 버전
 
     Returns:
         테스트용 스크립트 문자열
     """
-    script = f"""# {keyword} 오디오 가이드
+    script = f"""# {search_keyword} 오디오 가이드
 
 ## 인사 및 소개
 
-안녕하세요! 오늘은 {keyword}에 대해 함께 알아보겠습니다.
+안녕하세요! 오늘은 {search_keyword}에 대해 함께 알아보겠습니다.
 
 ## 본문
 
@@ -77,34 +77,36 @@ def _generate_dry_run_script(keyword: str, prompt_version: str) -> str:
 이 유물이 여러분에게 특별한 영감을 주었기를 바랍니다.
 
 ---
-*[DRY RUN 모드로 생성된 테스트 스크립트 - 프롬프트 버전: {prompt_version}]*
+*[DRY RUN 모드로 생성된 테스트 스크립트 - 프롬프트 버전: {script_prompt_version}]*
 """
     return script
 
 
 def run(
-    keyword: str,
+    search_keyword: str,
     *,
     info_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    prompt_version: str = "v1",
+    script_prompt_version: str = "v1",
+    custom_prompt: Optional[str] = None,
     dry_run: bool = False,
     temperature: float = 0.7,
-    model: str = "gpt-4o-mini",
+    model: str = "gpt-4.1",
     output_name: Optional[str] = None
 ) -> Path:
     """
     스크립트 생성 파이프라인 실행
 
     Args:
-        keyword: 유물/장소 키워드 (예: "청자 상감운학문 매병")
+        search_keyword: 유물/장소 검색 키워드 (예: "청자 상감운학문 매병")
         info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info)
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
-        prompt_version: 프롬프트 템플릿 버전 (기본: "v1")
+        script_prompt_version: 스크립트 프롬프트 템플릿 버전 (기본: "v1")
+        custom_prompt: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
         dry_run: True이면 API 호출 없이 고정 템플릿 생성
         temperature: LLM temperature 파라미터 (0.0~1.0)
-        model: 사용할 OpenAI 모델명
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
+        model: 사용할 OpenAI 모델명 (기본: "gpt-4.1")
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
         생성된 스크립트 파일의 경로 (Path 객체)
@@ -127,17 +129,19 @@ def run(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
-    info_file = info_markdown_path(keyword, info_dir, output_name)
-    output_file = script_markdown_path(keyword, output_dir, output_name)
+    info_file = info_markdown_path(search_keyword, info_dir, output_name)
+    output_file = script_markdown_path(search_keyword, output_dir, output_name)
 
-    logger.info(f"스크립트 생성 파이프라인 시작: {keyword}")
-    logger.info(f"프롬프트 버전: {prompt_version}")
+    logger.info(f"스크립트 생성 파이프라인 시작: {search_keyword}")
+    logger.info(f"스크립트 프롬프트 버전: {script_prompt_version}")
+    if custom_prompt:
+        logger.info(f"커스텀 프롬프트 추가: 예")
     logger.info(f"입력 파일: {info_file}")
     logger.info(f"출력 파일: {output_file}")
 
     # 프롬프트 템플릿 로드
     try:
-        prompt_template = load_prompt(prompt_version)
+        prompt_template = load_prompt(script_prompt_version)
         logger.info(f"프롬프트 템플릿 로드 완료: {prompt_template.name}")
         logger.info(f"프롬프트 설명: {prompt_template.description}")
         logger.info(f"프롬프트 태그: {', '.join(prompt_template.tags)}")
@@ -150,7 +154,7 @@ def run(
     # dry_run 모드 처리
     if dry_run:
         logger.info("DRY RUN 모드: 고정 템플릿 스크립트 생성")
-        script_content = _generate_dry_run_script(keyword, prompt_version)
+        script_content = _generate_dry_run_script(search_keyword, script_prompt_version)
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(script_content)
@@ -160,7 +164,7 @@ def run(
         # 메타데이터 생성
         try:
             create_metadata(
-                keyword=keyword,
+                search_keyword=search_keyword,
                 pipeline="script_gen",
                 output_file_path=output_file,
                 mode="dry_run",
@@ -193,6 +197,11 @@ def run(
 
     # 프롬프트 생성
     user_prompt = prompt_template.format_user_prompt(info_content=info_content)
+
+    # 커스텀 프롬프트가 있으면 플레인 텍스트로 추가
+    if custom_prompt:
+        user_prompt += f"\n\n{custom_prompt}"
+        logger.info("커스텀 프롬프트가 기본 프롬프트에 추가되었습니다")
 
     # LLM 호출
     try:
@@ -238,7 +247,7 @@ def run(
     # 메타데이터 생성
     try:
         create_metadata(
-            keyword=keyword,
+            search_keyword=search_keyword,
             pipeline="script_gen",
             output_file_path=output_file,
             mode="production",
@@ -260,19 +269,22 @@ def main():
         epilog="""
 예시:
   # 기본 사용 (v1 프롬프트, dry-run)
-  python src/pipelines/script_gen.py --keyword "청자 상감운학문 매병" --dry-run
+  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병" --dry-run
 
   # v2 프롬프트로 실제 생성
-  python src/pipelines/script_gen.py --keyword "청자 상감운학문 매병" --prompt-version v2
+  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병" --script-prompt-version v2
+
+  # 커스텀 프롬프트 추가
+  python src/pipelines/script_gen.py --search-keyword "청자 매병" --custom-prompt "전문적인 톤 사용"
 
   # 사용 가능한 프롬프트 버전 확인
   python src/pipelines/script_gen.py --list-prompts
         """
     )
     parser.add_argument(
-        "--keyword",
+        "--search-keyword",
         type=str,
-        help="유물/장소 키워드 (예: '청자 상감운학문 매병')"
+        help="유물/장소 검색 키워드 (예: '청자 상감운학문 매병')"
     )
     parser.add_argument(
         "--info-dir",
@@ -287,10 +299,16 @@ def main():
         help="출력 디렉토리 (기본: outputs/script)"
     )
     parser.add_argument(
-        "--prompt-version",
+        "--script-prompt-version",
         type=str,
         default="v1",
-        help="프롬프트 템플릿 버전 (기본: v1)"
+        help="스크립트 프롬프트 템플릿 버전 (기본: v1)"
+    )
+    parser.add_argument(
+        "--custom-prompt",
+        type=str,
+        default=None,
+        help="사용자 커스텀 프롬프트 (기본 프롬프트에 추가됨)"
     )
     parser.add_argument(
         "--dry-run",
@@ -306,8 +324,8 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default="gpt-4o-mini",
-        help="OpenAI 모델명 (기본: gpt-4o-mini)"
+        default="gpt-4.1",
+        help="OpenAI 모델명 (기본: gpt-4.1)"
     )
     parser.add_argument(
         "--list-prompts",
@@ -318,7 +336,7 @@ def main():
         "--output-name",
         type=str,
         default=None,
-        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)"
     )
 
     args = parser.parse_args()
@@ -340,21 +358,22 @@ def main():
                 print(f"\n❌ {version}: (로드 실패 - {e})")
         print("\n" + "="*70)
         print("\n💡 사용 예시:")
-        print("  python src/pipelines/script_gen.py --keyword \"청자 매병\" --prompt-version v1")
-        print("  python src/pipelines/script_gen.py --keyword \"석굴암\" --prompt-version v2-tts")
+        print("  python src/pipelines/script_gen.py --search-keyword \"청자 매병\" --script-prompt-version v1")
+        print("  python src/pipelines/script_gen.py --search-keyword \"석굴암\" --script-prompt-version v2-tts")
         print("="*70)
         return
 
-    # keyword 필수 체크
-    if not args.keyword:
-        parser.error("--keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
+    # search_keyword 필수 체크
+    if not args.search_keyword:
+        parser.error("--search-keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
 
     try:
         output_path = run(
-            keyword=args.keyword,
+            search_keyword=args.search_keyword,
             info_dir=args.info_dir,
             output_dir=args.output_dir,
-            prompt_version=args.prompt_version,
+            script_prompt_version=args.script_prompt_version,
+            custom_prompt=args.custom_prompt,
             dry_run=args.dry_run,
             temperature=args.temperature,
             model=args.model,
@@ -364,8 +383,10 @@ def main():
         print("\n" + "="*60)
         print("✅ 스크립트 생성 완료!")
         print("="*60)
-        print(f"키워드: {args.keyword}")
-        print(f"프롬프트 버전: {args.prompt_version}")
+        print(f"검색 키워드: {args.search_keyword}")
+        print(f"스크립트 프롬프트 버전: {args.script_prompt_version}")
+        if args.custom_prompt:
+            print(f"커스텀 프롬프트: 추가됨")
         print(f"출력 파일: {output_path}")
         print(f"모드: {'DRY RUN (테스트)' if args.dry_run else '실제 생성'}")
         print("="*60)

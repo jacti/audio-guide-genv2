@@ -61,7 +61,7 @@ def _validate_api_key() -> str:
 
 
 def _search_with_llm(
-    keyword: str,
+    search_keyword: str,
     model: str = DEFAULT_MODEL,
     prompt_version: str = "default"
 ) -> str:
@@ -69,7 +69,7 @@ def _search_with_llm(
     OpenAI LLM을 활용해 문화유산 정보를 검색하고 요약한다.
 
     Args:
-        keyword: 검색할 문화유산 키워드
+        search_keyword: 검색할 문화유산 키워드
         model: 사용할 OpenAI 모델명
         prompt_version: 프롬프트 템플릿 버전 (기본값: "default")
 
@@ -97,7 +97,7 @@ def _search_with_llm(
         logger.info(f"사용 가능한 버전: {', '.join(available)}")
         raise
 
-    logger.info(f"LLM 검색 시작: {keyword} (모델: {model})")
+    logger.info(f"LLM 검색 시작: {search_keyword} (모델: {model})")
 
     try:
         # Responses API 사용 (웹 검색 기능 포함)
@@ -105,7 +105,7 @@ def _search_with_llm(
         response = client.responses.create(
             model=model,
             instructions=prompt_template.instructions,
-            input=prompt_template.format_input(keyword=keyword),
+            input=prompt_template.format_input(keyword=search_keyword),
             tools=prompt_template.tools
         )
 
@@ -118,20 +118,20 @@ def _search_with_llm(
         raise
 
 
-def _get_mock_data(keyword: str) -> str:
+def _get_mock_data(search_keyword: str) -> str:
     """
     dry_run 모드용 목업 데이터 생성
 
     Args:
-        keyword: 문화유산 키워드
+        search_keyword: 문화유산 키워드
 
     Returns:
         str: 목업 Markdown 데이터
     """
-    return f"""# {keyword}
+    return f"""# {search_keyword}
 
 ## 개요
-이것은 '{keyword}'에 대한 테스트용 목업 데이터입니다.
+이것은 '{search_keyword}'에 대한 테스트용 목업 데이터입니다.
 실제 API 호출 대신 반환되는 샘플 데이터입니다.
 
 ## 역사 및 배경
@@ -157,7 +157,7 @@ def _get_mock_data(keyword: str) -> str:
 
 
 def run(
-    keyword: str,
+    search_keyword: str,
     *,
     output_dir: Optional[Path] = None,
     model: str = DEFAULT_MODEL,
@@ -172,12 +172,12 @@ def run(
     구조화된 Markdown 파일로 저장한다.
 
     Args:
-        keyword: 검색할 문화유산 키워드
+        search_keyword: 검색할 문화유산 키워드
         output_dir: 출력 디렉토리 (기본값: outputs/info)
         model: 사용할 OpenAI 모델명 (기본값: gpt-4.1)
         prompt_version: 프롬프트 템플릿 버전 (기본값: "default")
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
         Path: 생성된 Markdown 파일의 절대 경로
@@ -194,12 +194,12 @@ def run(
         >>> print(f"저장 완료: {output_path}")  # outputs/info/사유의방.md
     """
     # 입력 검증
-    if not keyword or not keyword.strip():
+    if not search_keyword or not search_keyword.strip():
         raise ValueError("키워드는 비어있을 수 없습니다.")
 
-    keyword = keyword.strip()
+    search_keyword = search_keyword.strip()
     mode = "dry_run" if dry_run else "production"
-    logger.info(f"{'[DRY RUN] ' if dry_run else ''}정보 검색 파이프라인 시작: {keyword}")
+    logger.info(f"{'[DRY RUN] ' if dry_run else ''}정보 검색 파이프라인 시작: {search_keyword}")
     logger.info(f"프롬프트 버전: {prompt_version}")
 
     # 출력 디렉토리 설정: dry_run 모드일 경우 outputs/mock/info/ 사용
@@ -213,12 +213,12 @@ def run(
     # 정보 검색
     if dry_run:
         logger.info("DRY RUN 모드: 목업 데이터 사용")
-        content = _get_mock_data(keyword)
+        content = _get_mock_data(search_keyword)
     else:
-        content = _search_with_llm(keyword, model=model, prompt_version=prompt_version)
+        content = _search_with_llm(search_keyword, model=model, prompt_version=prompt_version)
 
     # 파일 경로 생성 (공통 헬퍼 사용)
-    output_path = info_markdown_path(keyword, output_dir, output_name)
+    output_path = info_markdown_path(search_keyword, output_dir, output_name)
 
     try:
         output_path.write_text(content, encoding="utf-8")
@@ -230,7 +230,7 @@ def run(
     # 메타데이터 생성
     try:
         create_metadata(
-            keyword=keyword,
+            search_keyword=search_keyword,
             pipeline="info_retrieval",
             output_file_path=output_path,
             mode=mode,
@@ -249,8 +249,8 @@ def main():
     argparse를 사용해 명령줄에서 키워드를 입력받아 파이프라인을 실행한다.
 
     Example:
-        $ python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
-        $ python -m src.pipelines.info_retrieval --keyword "석굴암" --dry-run
+        $ python -m src.pipelines.info_retrieval --search-keyword "청자 상감운학문 매병"
+        $ python -m src.pipelines.info_retrieval --search-keyword "석굴암" --dry-run
         $ python -m src.pipelines.info_retrieval --list-prompts
     """
     import argparse
@@ -261,13 +261,13 @@ def main():
         epilog="""
 예시:
   # 기본 사용
-  python -m src.pipelines.info_retrieval --keyword "청자 상감운학문 매병"
+  python -m src.pipelines.info_retrieval --search-keyword "청자 상감운학문 매병"
 
   # 프롬프트 버전 지정
-  python -m src.pipelines.info_retrieval --keyword "석굴암" --prompt-version default
+  python -m src.pipelines.info_retrieval --search-keyword "석굴암" --prompt-version default
 
   # Dry-run 모드
-  python -m src.pipelines.info_retrieval --keyword "훈민정음" --dry-run
+  python -m src.pipelines.info_retrieval --search-keyword "훈민정음" --dry-run
 
   # 사용 가능한 프롬프트 버전 확인
   python -m src.pipelines.info_retrieval --list-prompts
@@ -275,7 +275,7 @@ def main():
     )
 
     parser.add_argument(
-        "--keyword",
+        "--search-keyword",
         type=str,
         help="검색할 문화유산 키워드"
     )
@@ -311,7 +311,7 @@ def main():
         "--output-name",
         type=str,
         default=None,
-        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)"
     )
 
     parser.add_argument(
@@ -338,17 +338,17 @@ def main():
                 print(f"\n❌ {version}: (로드 실패 - {e})")
         print("\n" + "="*70)
         print("\n💡 사용 예시:")
-        print('  python -m src.pipelines.info_retrieval --keyword "청자 매병" --prompt-version default')
+        print('  python -m src.pipelines.info_retrieval --search-keyword "청자 매병" --prompt-version default')
         print("="*70)
         return
 
-    # keyword 필수 체크
-    if not args.keyword:
-        parser.error("--keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
+    # search_keyword 필수 체크
+    if not args.search_keyword:
+        parser.error("--search-keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
 
     try:
         output_path = run(
-            keyword=args.keyword,
+            search_keyword=args.search_keyword,
             output_dir=Path(args.output_dir) if args.output_dir else None,
             model=args.model,
             prompt_version=args.prompt_version,

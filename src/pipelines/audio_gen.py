@@ -150,7 +150,6 @@ def _generate_audio_gemini(
     output_path: Path,
     voice: str = "Laomedeia",
     model: str = "gemini-2.5-flash-preview-tts",
-    speed: float = 1.0,
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0
@@ -169,7 +168,6 @@ def _generate_audio_gemini(
         output_path: 출력 파일 경로 (MP3/WAV)
         voice: Gemini voice 이름 (기본값: "Zephyr")
         model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-preview-tts")
-        speed: 말하기 속도 (현재 Gemini API에서 미지원, 파라미터만 유지)
         max_retries: 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
@@ -195,8 +193,7 @@ def _generate_audio_gemini(
         f"📝 TTS 요청 준비:\n"
         f"  - 텍스트 길이: {text_length} 글자\n"
         f"  - 모델: {model}\n"
-        f"  - 음성: {voice}\n"
-        f"  - 속도: {speed}x (주의: Gemini API는 speed 미지원)"
+        f"  - 음성: {voice}"
     )
 
     # Gemini 클라이언트 초기화
@@ -336,13 +333,12 @@ def _create_dummy_audio(output_path: Path) -> None:
 
 
 def run(
-    keyword: str,
+    search_keyword: str,
     *,
     script_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
     model: str = "gemini-2.5-pro-preview-tts",
-    speed: float = 1.0,
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
@@ -356,17 +352,16 @@ def run(
     지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 자동 대응.
 
     Args:
-        keyword: 유물 키워드 (파일명 결정에 사용)
+        search_keyword: 유물 키워드 (파일명 결정에 사용)
         script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
         model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-preview-tts")
-        speed: 말하기 속도 (현재 Gemini API 미지원, 기본값: 1.0)
         max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
         dry_run: True일 경우 API 호출 없이 더미 파일 생성 (기본값: False)
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
         Path: 생성된 MP3/WAV 파일의 절대 경로
@@ -385,7 +380,7 @@ def run(
         >>> # dry_run 모드
         >>> output_path = run("테스트", dry_run=True)
     """
-    logger.info(f"=== 오디오 생성 파이프라인 시작: '{keyword}' ===")
+    logger.info(f"=== 오디오 생성 파이프라인 시작: '{search_keyword}' ===")
 
     # 기본 경로 설정: dry_run 모드일 때 입력/출력 모두 mock 디렉토리 사용
     if script_dir is None:
@@ -398,8 +393,8 @@ def run(
     logger.info(f"출력 디렉토리: {output_dir.absolute()}")
 
     # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
-    script_path = script_markdown_path(keyword, script_dir, output_name)
-    output_path = audio_output_path(keyword, output_dir, output_name)
+    script_path = script_markdown_path(search_keyword, script_dir, output_name)
+    output_path = audio_output_path(search_keyword, output_dir, output_name)
 
     # 스크립트 파일 읽기
     script_text = _read_script(script_path)
@@ -411,7 +406,7 @@ def run(
         # 메타데이터 생성 (dry_run)
         try:
             create_metadata(
-                keyword=keyword,
+                search_keyword=search_keyword,
                 pipeline="audio_gen",
                 output_file_path=output_path,
                 mode="dry_run",
@@ -427,7 +422,6 @@ def run(
             output_path=output_path,
             voice=voice,
             model=model,
-            speed=speed,
             max_retries=max_retries,
             initial_wait=initial_wait,
             max_wait=max_wait
@@ -438,7 +432,7 @@ def run(
         # 메타데이터 생성 (production)
         try:
             create_metadata(
-                keyword=keyword,
+                search_keyword=search_keyword,
                 pipeline="audio_gen",
                 output_file_path=output_path,
                 mode="production",
@@ -453,8 +447,7 @@ def run(
         f"  - 입력 스크립트: {script_path}\n"
         f"  - 출력 파일: {output_path.absolute()}\n"
         f"  - Model: {model}\n"
-        f"  - Voice: {voice}\n"
-        f"  - Speed: {speed}x (주의: Gemini API 미지원)"
+        f"  - Voice: {voice}"
     )
 
     return output_path.absolute()
@@ -468,27 +461,24 @@ def main():
         epilog="""
 사용 예시:
   # 기본 실행 (Zephyr voice)
-  python src/pipelines/audio_gen.py --keyword "청자 상감운학문 매병"
+  python src/pipelines/audio_gen.py --search-keyword "청자 상감운학문 매병"
 
   # 다른 voice 사용
-  python src/pipelines/audio_gen.py --keyword "석굴암" --voice Puck
+  python src/pipelines/audio_gen.py --search-keyword "석굴암" --voice Puck
 
   # Flash 모델 사용 (빠르고 저렴)
-  python src/pipelines/audio_gen.py --keyword "유물명" --model gemini-2.5-flash-preview-tts
+  python src/pipelines/audio_gen.py --search-keyword "유물명" --model gemini-2.5-flash-preview-tts
 
   # Dry-run 모드
-  python src/pipelines/audio_gen.py --keyword "테스트" --dry-run
+  python src/pipelines/audio_gen.py --search-keyword "테스트" --dry-run
 
 지원 음성 (일부):
   Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
-
-주의:
-  - speed 파라미터는 현재 Gemini API에서 지원하지 않습니다.
         """
     )
 
     parser.add_argument(
-        "--keyword",
+        "--search-keyword",
         type=str,
         required=True,
         help="유물 키워드 (파일명 결정에 사용)"
@@ -524,13 +514,6 @@ def main():
     )
 
     parser.add_argument(
-        "--speed",
-        type=float,
-        default=1.0,
-        help="말하기 속도 (현재 Gemini API 미지원, 기본값: 1.0)"
-    )
-
-    parser.add_argument(
         "--max-retries",
         type=int,
         default=8,
@@ -561,19 +544,18 @@ def main():
         "--output-name",
         type=str,
         default=None,
-        help="파일명으로 사용할 이름 (미제공 시 keyword 사용)"
+        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)"
     )
 
     args = parser.parse_args()
 
     try:
         output_path = run(
-            keyword=args.keyword,
+            search_keyword=args.search_keyword,
             script_dir=args.script_dir,
             output_dir=args.output_dir,
             voice=args.voice,
             model=args.model,
-            speed=args.speed,
             max_retries=args.max_retries,
             initial_wait=args.initial_wait,
             max_wait=args.max_wait,

@@ -42,14 +42,14 @@ class PipelineError(Exception):
 
 
 def run_full_pipeline(
-    keyword: str,
+    search_keyword: str,
     *,
     model: str = "gpt-4.1",
     voice: str = "Zephyr",
     tts_model: str = "gemini-2.5-pro-preview-tts",
-    speed: float = 1.0,
     temperature: float = 0.7,
-    prompt_version: str = "v2-tts",
+    script_prompt_version: str = "v2-tts",
+    info_prompt_version: str = "default",
     dry_run: bool = False,
     max_retries: int = 8,
     output_name: Optional[str] = None,
@@ -59,16 +59,16 @@ def run_full_pipeline(
     전체 파이프라인을 순차 실행합니다.
 
     Args:
-        keyword: 문화유산 키워드 (예: "청자 상감운학문 매병")
+        search_keyword: 문화유산 검색 키워드 (예: "청자 상감운학문 매병")
         model: OpenAI 모델명 (info, script 파이프라인에 사용)
         voice: Gemini TTS 음성 이름 (audio 파이프라인, 예: Zephyr)
         tts_model: Gemini TTS 모델명 (audio 파이프라인)
-        speed: TTS 말하기 속도 (audio 파이프라인, 주의: Gemini API 미지원)
         temperature: LLM temperature (script 파이프라인)
-        prompt_version: 스크립트 프롬프트 버전
+        script_prompt_version: 스크립트 생성 프롬프트 버전
+        info_prompt_version: 정보 검색 프롬프트 버전
         dry_run: True일 경우 API 호출 없이 목업 데이터 사용
         max_retries: API 재시도 횟수
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 keyword 사용)
+        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
@@ -88,9 +88,10 @@ def run_full_pipeline(
     mode_str = "[DRY RUN] " if dry_run else ""
     logger.info(f"\n{'='*70}")
     logger.info(f"{mode_str}오디오 가이드 생성 파이프라인 시작")
-    logger.info(f"키워드: {keyword}")
-    logger.info(f"모델: {model} | 음성: {voice} | 속도: {speed}x")
-    logger.info(f"프롬프트: {prompt_version} | Temperature: {temperature}")
+    logger.info(f"검색 키워드: {search_keyword}")
+    logger.info(f"모델: {model} | 음성: {voice}")
+    logger.info(f"정보 프롬프트: {info_prompt_version} | 스크립트 프롬프트: {script_prompt_version}")
+    logger.info(f"Temperature: {temperature}")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
@@ -99,8 +100,9 @@ def run_full_pipeline(
         try:
             logger.info(f"[1/3] 📚 정보 검색 파이프라인 시작...")
             info_path = info_retrieval.run(
-                keyword=keyword,
+                search_keyword=search_keyword,
                 model=model,
+                prompt_version=info_prompt_version,
                 dry_run=dry_run,
                 output_name=output_name
             )
@@ -118,8 +120,8 @@ def run_full_pipeline(
         try:
             logger.info(f"[2/3] 📝 스크립트 생성 파이프라인 시작...")
             script_path = script_gen.run(
-                keyword=keyword,
-                prompt_version=prompt_version,
+                search_keyword=search_keyword,
+                script_prompt_version=script_prompt_version,
                 temperature=temperature,
                 model=model,
                 dry_run=dry_run,
@@ -139,10 +141,9 @@ def run_full_pipeline(
         try:
             logger.info(f"[3/3] 🎤 오디오 생성 파이프라인 시작...")
             audio_path = audio_gen.run(
-                keyword=keyword,
+                search_keyword=search_keyword,
                 voice=voice,
                 model=tts_model,
-                speed=speed,
                 max_retries=max_retries,
                 dry_run=dry_run,
                 output_name=output_name
@@ -180,35 +181,35 @@ def main():
         epilog="""
 사용 예시:
   # 기본 실행 (실제 API 호출)
-  python -m src.main --keyword "청자 상감운학문 매병"
+  python -m src.main --search-keyword "청자 상감운학문 매병"
 
   # Dry-run 모드 (API 호출 없이 테스트)
-  python -m src.main --keyword "사유의 방" --dry-run
+  python -m src.main --search-keyword "사유의 방" --dry-run
 
   # 커스텀 설정
-  python -m src.main --keyword "석굴암" \\
+  python -m src.main --search-keyword "석굴암" \\
     --model gpt-4o \\
     --voice Puck \\
     --tts-model gemini-2.5-flash-preview-tts \\
-    --prompt-version v2
+    --script-prompt-version v2 \\
+    --info-prompt-version detailed
 
   # 다른 voice 사용
-  python -m src.main --keyword "유물명" \\
+  python -m src.main --search-keyword "유물명" \\
     --voice Charon
 
 참고:
   - OPENAI_API_KEY: info/script 파이프라인용 (.env 파일)
   - GEMINI_API_KEY: audio 파이프라인용 (Gemini TTS, .env 파일)
   - dry-run 모드는 목업 데이터만 생성하므로 API 키 불필요합니다.
-  - speed 파라미터는 현재 Gemini API에서 지원하지 않습니다.
         """
     )
 
     parser.add_argument(
-        "--keyword",
+        "--search-keyword",
         type=str,
         required=True,
-        help="문화유산 키워드 (예: '청자 상감운학문 매병')"
+        help="문화유산 검색 키워드 (예: '청자 상감운학문 매병')"
     )
 
     parser.add_argument(
@@ -234,13 +235,6 @@ def main():
     )
 
     parser.add_argument(
-        "--speed",
-        type=float,
-        default=1.0,
-        help="TTS 말하기 속도 (0.25 ~ 4.0, 기본값: 1.0)"
-    )
-
-    parser.add_argument(
         "--temperature",
         type=float,
         default=0.7,
@@ -248,10 +242,17 @@ def main():
     )
 
     parser.add_argument(
-        "--prompt-version",
+        "--script-prompt-version",
         type=str,
         default="v2-tts",
-        help="스크립트 프롬프트 버전 (기본값: v2-tts)"
+        help="스크립트 생성 프롬프트 버전 (기본값: v2-tts)"
+    )
+
+    parser.add_argument(
+        "--info-prompt-version",
+        type=str,
+        default="default",
+        help="정보 검색 프롬프트 버전 (기본값: default)"
     )
 
     parser.add_argument(
@@ -297,13 +298,13 @@ def main():
 
     try:
         results = run_full_pipeline(
-            keyword=args.keyword,
+            search_keyword=args.search_keyword,
             model=args.model,
             voice=args.voice,
             tts_model=args.tts_model,
-            speed=args.speed,
             temperature=args.temperature,
-            prompt_version=args.prompt_version,
+            script_prompt_version=args.script_prompt_version,
+            info_prompt_version=args.info_prompt_version,
             dry_run=args.dry_run,
             max_retries=args.max_retries,
             output_name=args.output_name,

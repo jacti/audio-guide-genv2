@@ -99,7 +99,7 @@ class PromptTemplate:
         input 템플릿에 변수 치환 (Responses API용)
 
         Args:
-            **kwargs: 템플릿 변수 (예: keyword)
+            **kwargs: 템플릿 변수 (예: search_keyword)
 
         Returns:
             치환된 input 문자열
@@ -259,6 +259,6 @@ if __name__ == "__main__":
         print(f"태그: {', '.join(template.tags)}")
 
         if template.is_responses_api():
-            input_text = template.format_input(keyword="청자 매병")
+            input_text = template.format_input(search_keyword="청자 매병")
             print(f"\ninput 미리보기: {input_text}")
             print(f"tools: {template.tools}")

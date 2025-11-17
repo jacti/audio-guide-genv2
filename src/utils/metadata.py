@@ -19,7 +19,7 @@ class PipelineMetadata:
 
     def __init__(
         self,
-        keyword: str,
+        search_keyword: str,
         pipeline: str,
         mode: str = "production",
         model: Optional[str] = None,
@@ -29,13 +29,13 @@ class PipelineMetadata:
         메타데이터 객체 초기화
 
         Args:
-            keyword: 입력 키워드 (예: "청자 상감운학문 매병")
+            search_keyword: 검색 키워드 (예: "청자 상감운학문 매병")
             pipeline: 파이프라인 이름 (info_retrieval, script_gen, audio_gen)
             mode: 실행 모드 ("production" 또는 "dry_run")
             model: 사용된 모델명 (예: "gpt-4o-mini")
             **extra_fields: 추가 메타데이터 필드
         """
-        self.keyword = keyword
+        self.search_keyword = search_keyword
         self.pipeline = pipeline
         self.mode = mode
         self.model = model
@@ -45,7 +45,7 @@ class PipelineMetadata:
     def to_dict(self) -> Dict[str, Any]:
         """메타데이터를 딕셔너리로 변환"""
         data = {
-            "keyword": self.keyword,
+            "search_keyword": self.search_keyword,
             "pipeline": self.pipeline,
             "mode": self.mode,
             "timestamp": self.timestamp,
@@ -113,15 +113,18 @@ class PipelineMetadata:
         with open(metadata_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # 필수 필드 추출
-        keyword = data.pop("keyword")
+        # 필수 필드 추출 (하위 호환성: keyword도 지원)
+        search_keyword = data.pop("search_keyword", None) or data.pop("keyword", None)
+        if not search_keyword:
+            raise ValueError("메타데이터에 search_keyword 또는 keyword 필드가 없습니다.")
+
         pipeline = data.pop("pipeline")
         mode = data.pop("mode", "production")
         model = data.pop("model", None)
 
         # timestamp는 extra_fields로 보존
         return cls(
-            keyword=keyword,
+            search_keyword=search_keyword,
             pipeline=pipeline,
             mode=mode,
             model=model,
@@ -130,7 +133,7 @@ class PipelineMetadata:
 
 
 def create_metadata(
-    keyword: str,
+    search_keyword: str,
     pipeline: str,
     output_file_path: Path,
     mode: str = "production",
@@ -141,7 +144,7 @@ def create_metadata(
     메타데이터를 생성하고 저장하는 헬퍼 함수
 
     Args:
-        keyword: 입력 키워드
+        search_keyword: 검색 키워드
         pipeline: 파이프라인 이름
         output_file_path: 산출물 파일 경로
         mode: 실행 모드 ("production" 또는 "dry_run")
@@ -153,7 +156,7 @@ def create_metadata(
 
     Example:
         >>> create_metadata(
-        ...     keyword="석굴암",
+        ...     search_keyword="석굴암",
         ...     pipeline="info_retrieval",
         ...     output_file_path=Path("outputs/info/석굴암.md"),
         ...     mode="dry_run",
@@ -161,7 +164,7 @@ def create_metadata(
         ... )
     """
     metadata = PipelineMetadata(
-        keyword=keyword,
+        search_keyword=search_keyword,
         pipeline=pipeline,
         mode=mode,
         model=model,
@@ -208,7 +211,7 @@ if __name__ == "__main__":
 
     # 메타데이터 생성
     meta_path = create_metadata(
-        keyword="테스트",
+        search_keyword="테스트",
         pipeline="info_retrieval",
         output_file_path=test_file,
         mode="dry_run",
