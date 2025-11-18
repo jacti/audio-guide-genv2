@@ -105,7 +105,7 @@ def _search_with_llm(
         response = client.responses.create(
             model=model,
             instructions=prompt_template.instructions,
-            input=prompt_template.format_input(keyword=search_keyword),
+            input=prompt_template.format_input(search_keyword=search_keyword),
             tools=prompt_template.tools
         )
 

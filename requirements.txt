@@ -6,5 +6,5 @@ langchain-openai>=0.1.0  # 프롬프트/체인 구조 확장용 (선택적이지
 exa-py>=1.0.0        # 웹 검색 SDK (현재는 주석 처리)
 backoff>=2.0.0       # 지수 백오프를 통한 API 재시도 로직
 perplexityai         # 웹 검색 SDK (퍼플렉시티)
-google-genai         # Gemini API (audio 파이프라인용 TTS)
+google-cloud-texttospeech>=2.29.0  # Gemini TTS API (audio 파이프라인용)
 # requests>=2.30.0     # 추가 웹 요청이 필요할 경우 (선택적)

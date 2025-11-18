@@ -117,11 +117,11 @@ Each pipeline stage is independent and communicates through file I/O:
 **Pipeline 3: Audio Generation** (`src/pipelines/audio_gen.py`)
 - Input: `/outputs/script/[search_keyword]_script.md`
 - Process: Gemini TTS API conversion with exponential backoff retry logic (`backoff` package)
-- Default model: "gemini-2.5-pro-preview-tts", voice: "Zephyr"
+- Default model: "gemini-2.5-flash-tts", voice: "Zephyr"
 - Output: WAV/MP3 file in `/outputs/audio/[search_keyword].wav`
 - Extension point: Voice selection (30+ Gemini voices), model selection (Pro/Flash), BGM mixing
 - Supported voices: Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Laomedeia 등 30+ voices
-- CLI: `python -m src.pipelines.audio_gen --search-keyword "유물명" --voice Zephyr --model gemini-2.5-pro-preview-tts [--dry-run]`
+- CLI: `python -m src.pipelines.audio_gen --search-keyword "유물명" --voice Zephyr --model gemini-2.5-flash-tts [--dry-run]`
 
 ### Shared Utilities
 
@@ -289,7 +289,7 @@ defaults:
   info_prompt_version: "default"       # Pipeline 1 프롬프트 버전
   script_prompt_version: "v2-tts"      # Pipeline 2 프롬프트 버전
   voice: "Zephyr"                      # Gemini TTS voice (Pipeline 3)
-  tts_model: "gemini-2.5-pro-preview-tts"  # Gemini TTS 모델
+  tts_model: "gemini-2.5-flash-tts"  # Gemini TTS 모델
   speed: 1.0                           # TTS 속도 (주의: Gemini API 미지원)
   temperature: 0.7                     # LLM temperature (script 생성용)
   max_retries: 8                       # API 재시도 횟수
@@ -544,21 +544,13 @@ Features:
 
 Create a `.env` file in the project root with:
 ```
-# OpenAI API (for info and script generation pipelines)
 OPENAI_API_KEY=your_openai_key_here
-
-# Gemini API (for audio generation pipeline)
 GEMINI_API_KEY=your_gemini_api_key_here
-
-# Optional: Alternative web search
-# EXA_API_KEY=your_exa_key_here
 ```
 
-**Gemini API Key 발급:**
-1. https://ai.google.dev/ 접속
-2. "Get API Key" 클릭
-3. 새 API 키 생성
-4. `.env` 파일에 `GEMINI_API_KEY` 추가
+**API 키 발급:**
+- OpenAI: https://platform.openai.com/api-keys
+- Gemini: https://aistudio.google.com/apikey
 
 ## Troubleshooting
 

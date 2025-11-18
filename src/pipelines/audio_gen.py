@@ -4,7 +4,7 @@
 스크립트 파일(Markdown)을 읽어 Gemini API를 통해 음성 파일(MP3/WAV)로 변환합니다.
 
 주요 기능:
-- Gemini TTS API 연동 (gemini-2.5-pro-preview-tts 모델 사용)
+- Gemini TTS API 연동 (gemini-2.5-flash-tts 모델 사용)
 - 재시도 로직 (네트워크 오류 대응)
 - dry_run 모드 (테스트용 더미 파일 생성)
 - 로깅 및 예외 처리
@@ -20,8 +20,7 @@ from typing import Optional
 import argparse
 
 import backoff
-from google import genai
-from google.genai import types
+from google.cloud import texttospeech
 from dotenv import load_dotenv
 
 from src.utils.path_sanitizer import script_markdown_path, audio_output_path
@@ -145,29 +144,89 @@ def parse_audio_mime_type(mime_type: str) -> dict:
     return {"bits_per_sample": bits_per_sample, "rate": rate}
 
 
+def split_script_by_paragraphs(text: str, max_bytes: int = 4000) -> list[str]:
+    """
+    스크립트를 문단 단위로 분할하여 각 청크가 max_bytes 이하가 되도록 합니다.
+
+    - 문단 구분: \n\n (두 줄 바꿈)
+    - 문단 경계에서만 분할 (문단 중간에서 자르지 않음)
+    - 각 청크는 4000 bytes 이전의 가장 큰 문단까지 포함
+
+    Args:
+        text: 분할할 전체 스크립트 텍스트
+        max_bytes: 청크 최대 크기 (기본값: 4000)
+
+    Returns:
+        문단 단위로 분할된 텍스트 청크 리스트
+
+    Raises:
+        ValueError: 단일 문단이 max_bytes를 초과하는 경우
+    """
+    paragraphs = text.split('\n\n')
+    chunks = []
+    current_chunk = []
+    current_bytes = 0
+
+    for para in paragraphs:
+        # 문단이 비어있으면 스킵
+        if not para.strip():
+            continue
+
+        para_bytes = len(para.encode('utf-8'))
+
+        # 단일 문단이 제한을 초과하는 경우
+        if para_bytes > max_bytes:
+            raise ValueError(
+                f"단일 문단이 {max_bytes} bytes를 초과합니다 ({para_bytes} bytes).\n"
+                f"스크립트를 더 짧은 문단으로 나눠주세요.\n"
+                f"문단 미리보기: {para[:100]}..."
+            )
+
+        # 현재 청크에 추가 시 제한을 초과하는지 체크
+        # +2는 문단 사이의 \n\n
+        separator_bytes = 2 if current_chunk else 0
+        if current_bytes + separator_bytes + para_bytes <= max_bytes:
+            current_chunk.append(para)
+            current_bytes += separator_bytes + para_bytes
+        else:
+            # 현재 청크 저장 (4000 bytes 이전의 가장 큰 문단까지)
+            if current_chunk:
+                chunks.append('\n\n'.join(current_chunk))
+            # 새 청크 시작
+            current_chunk = [para]
+            current_bytes = para_bytes
+
+    # 마지막 청크 저장
+    if current_chunk:
+        chunks.append('\n\n'.join(current_chunk))
+
+    return chunks
+
+
 def _generate_audio_gemini(
     text: str,
     output_path: Path,
-    voice: str = "Laomedeia",
-    model: str = "gemini-2.5-flash-preview-tts",
+    voice: str = "Zephyr",
+    model: str = "gemini-2.5-flash-tts",
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0
 ) -> None:
     """
-    Gemini API를 호출하여 음성 파일을 생성합니다.
+    Google Cloud Text-to-Speech API (Gemini TTS)를 호출하여 음성 파일을 생성합니다.
 
     지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 대응.
     생성된 오디오는 output_path에 직접 저장됩니다.
 
     인증 방법:
-    1. GEMINI_API_KEY 환경변수 설정 (필수)
+    1. GOOGLE_APPLICATION_CREDENTIALS 환경변수로 서비스 계정 키 파일 경로 설정
+    2. 또는 gcloud CLI로 인증된 사용자 계정 사용
 
     Args:
         text: 변환할 텍스트
         output_path: 출력 파일 경로 (MP3/WAV)
         voice: Gemini voice 이름 (기본값: "Zephyr")
-        model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-preview-tts")
+        model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
         max_retries: 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
@@ -176,35 +235,42 @@ def _generate_audio_gemini(
         None (파일에 직접 저장)
 
     Raises:
-        ValueError: API 키가 설정되지 않았거나 파라미터가 유효하지 않을 경우
+        ValueError: 파라미터가 유효하지 않을 경우
         Exception: API 호출 실패 시 (인증 오류 포함)
     """
-    # API Key 검증
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "GEMINI_API_KEY 환경변수가 설정되지 않았습니다.\n"
-            ".env 파일에 API 키를 설정해주세요."
-        )
-
-    # 요청 정보 로깅
+    # 텍스트를 청크로 분할
+    text_bytes = len(text.encode('utf-8'))
     text_length = len(text)
-    logger.info(
-        f"📝 TTS 요청 준비:\n"
-        f"  - 텍스트 길이: {text_length} 글자\n"
-        f"  - 모델: {model}\n"
-        f"  - 음성: {voice}"
-    )
 
-    # Gemini 클라이언트 초기화
+    # 4000 bytes 초과 시 청크 분할
+    if text_bytes > 4000:
+        logger.info(
+            f"📝 TTS 요청 준비:\n"
+            f"  - 텍스트 길이: {text_length} 글자 ({text_bytes} bytes)\n"
+            f"  - 4000 bytes 초과로 문단 단위 분할 시작...\n"
+            f"  - 모델: {model}\n"
+            f"  - 음성: {voice}"
+        )
+        text_chunks = split_script_by_paragraphs(text, max_bytes=4000)
+        logger.info(f"  - ✓ {len(text_chunks)}개 청크로 분할 완료")
+    else:
+        logger.info(
+            f"📝 TTS 요청 준비:\n"
+            f"  - 텍스트 길이: {text_length} 글자 ({text_bytes} bytes)\n"
+            f"  - 모델: {model}\n"
+            f"  - 음성: {voice}"
+        )
+        text_chunks = [text]  # 단일 청크
+
+    # Google Cloud Text-to-Speech 클라이언트 초기화
     try:
-        client = genai.Client(api_key=api_key)
-        logger.info("✓ Gemini API 클라이언트 초기화 완료")
+        client = texttospeech.TextToSpeechClient()
+        logger.info("✓ Google Cloud Text-to-Speech API 클라이언트 초기화 완료")
     except Exception as e:
         logger.error(
-            f"❌ Gemini API 인증 실패:\n"
+            f"❌ Google Cloud Text-to-Speech API 인증 실패:\n"
             f"  - 오류: {e}\n"
-            f"  - 해결 방법: GEMINI_API_KEY 환경변수 확인"
+            f"  - 해결 방법: GOOGLE_APPLICATION_CREDENTIALS 환경변수 확인 또는 gcloud auth login 실행"
         )
         raise
 
@@ -223,87 +289,72 @@ def _generate_audio_gemini(
             f"❌ 최대 재시도 횟수 초과 ({max_retries}회): API 호출 포기"
         )
 
-    # 지수 백오프를 적용한 내부 API 호출 함수
+    # 지수 백오프를 적용한 단일 청크 API 호출 함수
     @backoff.on_exception(
         backoff.expo,
-        Exception,  # Gemini API의 예외를 포괄적으로 처리
+        Exception,  # Google Cloud API의 예외를 포괄적으로 처리
         max_tries=max_retries,
         max_value=max_wait,
         on_backoff=on_backoff,
         on_giveup=on_giveup,
         jitter=backoff.full_jitter
     )
-    def _call_api_with_backoff():
-        """지수 백오프가 적용된 실제 API 호출 함수"""
-        try:
-            logger.info(f"🎤 Gemini TTS API 호출 시작...")
+    def _call_api_for_chunk(chunk_text: str) -> bytes:
+        """단일 청크에 대해 지수 백오프가 적용된 API 호출"""
+        # 입력 텍스트 설정
+        synthesis_input = texttospeech.SynthesisInput(text=chunk_text)
 
-            # Contents 구성
-            contents = [
-                types.Content(
-                    role="user",
-                    parts=[types.Part.from_text(text=text)]
-                )
-            ]
+        # 음성 설정
+        voice_params = texttospeech.VoiceSelectionParams(
+            language_code="en-US",  # Gemini TTS voices는 주로 en-US
+            name=voice,
+            model_name=model
+        )
 
-            # Config 구성
-            generate_content_config = types.GenerateContentConfig(
-                temperature=1,
-                response_modalities=["audio"],
-                speech_config=types.SpeechConfig(
-                    voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                            voice_name=voice
-                        )
-                    )
-                )
-            )
+        # 오디오 설정
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3
+        )
 
-            # 스트리밍 호출 및 오디오 데이터 수집
-            audio_chunks = []
-            for chunk in client.models.generate_content_stream(
-                model=model,
-                contents=contents,
-                config=generate_content_config,
-            ):
-                if (
-                    chunk.candidates is None
-                    or chunk.candidates[0].content is None
-                    or chunk.candidates[0].content.parts is None
-                ):
-                    continue
+        # API 호출
+        response = client.synthesize_speech(
+            input=synthesis_input,
+            voice=voice_params,
+            audio_config=audio_config
+        )
 
-                part = chunk.candidates[0].content.parts[0]
-                if part.inline_data and part.inline_data.data:
-                    inline_data = part.inline_data
-                    data_buffer = inline_data.data
+        return response.audio_content
 
-                    # WAV 변환이 필요한 경우
-                    file_extension = mimetypes.guess_extension(inline_data.mime_type)
-                    if file_extension is None:
-                        file_extension = ".wav"
-                        data_buffer = convert_to_wav(inline_data.data, inline_data.mime_type)
-
-                    audio_chunks.append(data_buffer)
-
-            # 모든 청크를 합쳐서 파일로 저장
-            if not audio_chunks:
-                raise Exception("API로부터 오디오 데이터를 받지 못했습니다.")
-
-            final_audio = b"".join(audio_chunks)
-            with open(output_path, "wb") as out:
-                out.write(final_audio)
-
-            logger.info(f"✅ 음성 생성 완료: {output_path}")
-
-        except Exception as e:
-            logger.error(f"🔴 Gemini API 에러: {e}")
-            raise
-
-    # 실제 API 호출 실행
+    # 모든 청크 처리 및 오디오 결합
     try:
-        _call_api_with_backoff()
+        audio_chunks = []
+        total_chunks = len(text_chunks)
+
+        for i, chunk in enumerate(text_chunks, 1):
+            chunk_bytes = len(chunk.encode('utf-8'))
+            logger.info(f"🎤 청크 {i}/{total_chunks} 생성 중... ({len(chunk)} 글자, {chunk_bytes} bytes)")
+
+            audio_data = _call_api_for_chunk(chunk)
+            audio_chunks.append(audio_data)
+
+            logger.info(f"✅ 청크 {i}/{total_chunks} 완료")
+
+        # 모든 오디오 청크 결합
+        if len(audio_chunks) > 1:
+            logger.info(f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중...")
+
+        combined_audio = b''.join(audio_chunks)
+
+        # 최종 파일 저장
+        with open(output_path, "wb") as out:
+            out.write(combined_audio)
+
+        if len(audio_chunks) > 1:
+            logger.info(f"✅ 오디오 결합 완료")
+        logger.info(f"✅ 음성 생성 완료: {output_path}")
+
     except Exception as e:
+        logger.error(f"🔴 Gemini API 에러: {e}")
         raise Exception(
             f"⚠️ Gemini TTS 생성 실패 ({max_retries}회 재시도)\n"
             f"상세 정보: {e}"
@@ -338,7 +389,7 @@ def run(
     script_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
-    model: str = "gemini-2.5-pro-preview-tts",
+    model: str = "gemini-2.5-flash-tts",
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
@@ -356,7 +407,7 @@ def run(
         script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
-        model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-preview-tts")
+        model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
         max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
@@ -508,9 +559,9 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default="gemini-2.5-pro-preview-tts",
-        choices=["gemini-2.5-pro-preview-tts", "gemini-2.5-flash-preview-tts"],
-        help="Gemini TTS 모델명 (기본값: gemini-2.5-pro-preview-tts)"
+        default="gemini-2.5-flash-tts",
+        choices=["gemini-2.5-flash-tts", "gemini-2.5-pro-tts"],
+        help="Gemini TTS 모델명 (기본값: gemini-2.5-flash-tts)"
     )
 
     parser.add_argument(

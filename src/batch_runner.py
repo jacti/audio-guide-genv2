@@ -317,7 +317,7 @@ def run_single_file(
                 script_dir=track_dirs["script"],
                 output_dir=track_dirs["audio"],
                 voice=file_config.get("voice", "Zephyr"),
-                model=file_config.get("tts_model", "gemini-2.5-pro-preview-tts"),
+                model=file_config.get("tts_model", "gemini-2.5-flash-tts"),
                 max_retries=file_config.get("max_retries", 8),
                 dry_run=dry_run,
                 output_name=output_name

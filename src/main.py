@@ -46,7 +46,7 @@ def run_full_pipeline(
     *,
     model: str = "gpt-4.1",
     voice: str = "Zephyr",
-    tts_model: str = "gemini-2.5-pro-preview-tts",
+    tts_model: str = "gemini-2.5-flash-tts",
     temperature: float = 0.7,
     script_prompt_version: str = "v2-tts",
     info_prompt_version: str = "default",
@@ -229,9 +229,9 @@ def main():
     parser.add_argument(
         "--tts-model",
         type=str,
-        default="gemini-2.5-pro-preview-tts",
-        choices=["gemini-2.5-pro-preview-tts", "gemini-2.5-flash-preview-tts"],
-        help="Gemini TTS 모델명 (기본값: gemini-2.5-pro-preview-tts)"
+        default="gemini-2.5-flash-tts",
+        choices=["gemini-2.5-flash-tts", "gemini-2.5-pro-tts"],
+        help="Gemini TTS 모델명 (기본값: gemini-2.5-flash-tts)"
     )
 
     parser.add_argument(
