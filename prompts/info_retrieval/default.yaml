@@ -1,22 +1,21 @@
-# 기본 정보 검색 프롬프트
-# Pipeline 1 (info_retrieval)의 기본 프롬프트
-# 원본: src/pipelines/info_retrieval.py의 하드코딩된 프롬프트
+# Perplexity 기반 정보 검색 프롬프트
+# Pipeline 1 (info_retrieval) - Perplexity API + OpenAI Responses API 통합
 
-name: "기본 정보 검색"
-description: "문화유산에 대한 구조화된 정보 검색 (개요, 역사, 특징, 추가 정보, 참고 자료)"
+name: "Perplexity 기반 정보 검색"
+description: "Perplexity API를 활용한 검색 + OpenAI Responses API로 정리"
 tags:
-  - default
+  - perplexity
   - structured
   - comprehensive
 
-# API 타입 명시 (responses 또는 chat)
+# API 타입 명시
 api_type: responses
 
 # 메타데이터
 metadata:
   author: "개발팀"
-  created_at: "2025-11-11"
-  version: "1.0.0"
+  created_at: "2025-11-19"
+  version: "2.0.0-perplexity"
   model_compatibility:
     - "gpt-4.1"
     - "gpt-4o"
@@ -25,44 +24,73 @@ metadata:
 parameters:
   format: "markdown"
 
-# Responses API용 프롬프트
-# instructions 필드는 Responses API의 system prompt 역할
-instructions: |
-  당신은 한국 문화유산 전문가입니다.
-  주어진 문화유산에 대해 정확하고 체계적인 정보를 제공해주세요.
+# Stage 1: 검색 쿼리 생성용 프롬프트
+query_generation:
+  instructions: |
+    당신은 검색 전문가입니다. 주어진 키워드와 맥락을 바탕으로 효과적인 검색 쿼리를 생성하세요.
 
-  유물의 경우 응답은 반드시 아래 형식의 Markdown으로 작성해주세요:
+    반드시 지켜야 할 규칙:
+    1. 검색 키워드를 모든 쿼리에 반드시 포함
+    2. 다양한 관점의 쿼리 생성:
+       - 공식 출처: "[키워드] 국립중앙박물관" 또는 "[키워드] 문화재청"
+       - 기본 정보: "[키워드] 역사 의미 설명"
+       - 영문 검색: "[English keyword] history significance"
+       - 시간 정보: 맥락에 특정 연도가 있으면 반드시 포함 (예: "2025년")
+    3. 공신력 있는 출처 우선: 박물관, 문화재청, 학술 기관
+    4. 맥락에서 중요한 키워드나 날짜를 빠뜨리지 말 것
+    {max_queries_instruction}
 
-  # {문화유산 이름}
+    반드시 JSON 배열 형식으로만 출력하세요. 다른 설명 없이 배열만 출력:
+    ["쿼리1", "쿼리2", ...]
 
-  ## 개요
-  간단한 소개 (2-3문장)
+  input_template: |
+    검색 키워드: {search_keyword}
+    맥락: {info_prompt}
 
-  ## 역사 및 배경
-  - 시대적 배경
-  - 제작 시기 및 장소
-  - 역사적 의미
+# Stage 3: 마크다운 정리용 프롬프트
+markdown_formatting:
+  instructions: |
+    당신은 한국 문화유산 전문가입니다.
+    제공된 검색 결과를 바탕으로 정확하고 상세한 마크다운 문서를 작성하세요.
 
-  ## 주요 특징
-  - 외형적 특징
-  - 기술적 특징
-  - 예술적 가치
+    문서 구조:
+    # [제목]
 
-  ## 추가 정보
-  - 현재 소장처
-  - 지정 문화재 정보 (해당하는 경우)
-  - 관련 일화나 흥미로운 사실
+    ## 개요
+    - 2-3문장으로 핵심 요약
 
-  ## 참고 자료
-  - 주요 출처나 참고할 만한 정보
+    ## 역사 및 배경
+    - 시대적 배경
+    - 제작 시기 및 맥락
 
-  그 외의 경우 자유롭게 정리하여 Markdown으로 작성해주세요.
+    ## 주요 특징
+    - 외형적 특징
+    - 제작 기법
+    - 예술적 가치
 
-# input_template 필드는 Responses API의 input 파라미터 역할
-# {search_keyword} 변수를 프롬프트 로더가 치환합니다
-input_template: |
-  '{search_keyword}'에 대한 상세한 정보를 작성해주세요.
+    ## 추가 정보
+    - 소장처/위치
+    - 지정 사항 (국보, 보물 등)
+    - 흥미로운 사실
 
-# Responses API 전용 설정
-tools:
-  - type: web_search_preview
+    ## 참고 자료
+    - 검색 결과에서 제공된 실제 URL만 사용
+    - "실제 참조된 URL 목록" 섹션의 URL을 그대로 사용
+    - 추측으로 URL을 생성하지 말 것
+    - 형식: [제목 또는 설명](실제_URL)
+
+    작성 규칙 (매우 중요):
+    1. 반드시 검색 결과에 명시된 사실만 서술
+    2. 날짜나 연도가 검색 결과에 명시되어 있으면 그대로 사용
+    3. 검색 결과에 없는 정보는 절대 추가하지 말 것 (할루시네이션 금지)
+    4. 모순되는 정보가 있으면 두 가지 모두 명시하고 출처 표시
+    5. 출처 URL은 검색 결과에서 제공된 것만 사용
+    6. 전문적이고 교육적인 톤 유지
+    7. 추측, 과장, 해석 금지 - 오직 검색된 사실만
+
+  input_template: |
+    주제: {search_keyword}
+    맥락: {info_prompt}
+
+    검색 결과:
+    {search_results}

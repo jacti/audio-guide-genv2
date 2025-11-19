@@ -285,6 +285,8 @@ def run_single_file(
                 search_keyword=search_keyword,
                 model=file_config.get("model", "gpt-4.1"),
                 prompt_version=file_config.get("info_prompt_version", "default"),
+                info_prompt=file_config.get("info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."),
+                max_queries=file_config.get("max_queries", None),
                 output_dir=track_dirs["info"],
                 dry_run=dry_run,
                 output_name=output_name

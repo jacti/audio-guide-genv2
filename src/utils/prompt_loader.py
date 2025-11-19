@@ -62,6 +62,9 @@ class PromptTemplate:
         self.input_template = template_data.get("input_template", "")
         self.tools = template_data.get("tools", [])
 
+        # Perplexity 파이프라인용 필드 (다단계 프롬프트)
+        self.data = template_data  # 전체 데이터 보존 (query_generation, markdown_formatting 접근용)
+
     def _detect_api_type(self, template_data: Dict[str, Any]) -> str:
         """
         YAML 스키마를 기반으로 API 타입 자동 감지
@@ -115,6 +118,86 @@ class PromptTemplate:
     def is_chat_api(self) -> bool:
         """Chat Completions API 타입인지 확인"""
         return self.api_type == "chat"
+
+    def format_query_generation_instructions(self, max_queries: Optional[int] = None) -> str:
+        """
+        query_generation.instructions 포맷팅 (Perplexity 파이프라인용)
+        max_queries_instruction 동적 삽입
+
+        Args:
+            max_queries: 쿼리 개수 제한 (None이면 제한 없음)
+
+        Returns:
+            포맷팅된 instructions 문자열
+        """
+        if "query_generation" not in self.data:
+            raise ValueError("query_generation 섹션이 템플릿에 없습니다")
+
+        if max_queries is None:
+            instruction = "4. 필요한 만큼 충분히 생성하세요 (개수 제한 없음)"
+        else:
+            instruction = f"4. 최대 {max_queries}개까지만 생성하세요"
+
+        return self.data['query_generation']['instructions'].format(
+            max_queries_instruction=instruction
+        )
+
+    def format_query_generation_input(self, search_keyword: str, info_prompt: str) -> str:
+        """
+        query_generation.input_template 포맷팅 (Perplexity 파이프라인용)
+
+        Args:
+            search_keyword: 검색 키워드
+            info_prompt: 검색 맥락
+
+        Returns:
+            포맷팅된 input 문자열
+        """
+        if "query_generation" not in self.data:
+            raise ValueError("query_generation 섹션이 템플릿에 없습니다")
+
+        return self.data['query_generation']['input_template'].format(
+            search_keyword=search_keyword,
+            info_prompt=info_prompt
+        )
+
+    def get_markdown_formatting_instructions(self) -> str:
+        """
+        markdown_formatting.instructions 반환 (Perplexity 파이프라인용)
+
+        Returns:
+            instructions 문자열
+        """
+        if "markdown_formatting" not in self.data:
+            raise ValueError("markdown_formatting 섹션이 템플릿에 없습니다")
+
+        return self.data['markdown_formatting']['instructions']
+
+    def format_markdown_formatting_input(
+        self,
+        search_keyword: str,
+        info_prompt: str,
+        search_results: str
+    ) -> str:
+        """
+        markdown_formatting.input_template 포맷팅 (Perplexity 파이프라인용)
+
+        Args:
+            search_keyword: 검색 키워드
+            info_prompt: 검색 맥락
+            search_results: Perplexity 검색 결과 (텍스트)
+
+        Returns:
+            포맷팅된 input 문자열
+        """
+        if "markdown_formatting" not in self.data:
+            raise ValueError("markdown_formatting 섹션이 템플릿에 없습니다")
+
+        return self.data['markdown_formatting']['input_template'].format(
+            search_keyword=search_keyword,
+            info_prompt=info_prompt,
+            search_results=search_results
+        )
 
 
 def load_prompt(
