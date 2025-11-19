@@ -64,7 +64,7 @@ This project uses pyenv for Python version management and a `.venv` virtual envi
 
 **Key dependencies:**
 - `openai>=1.0.0` - For LLM API calls in info/script pipelines (SDK 1.x+ required)
-- `google-genai` - For Gemini TTS API in audio pipeline
+- `google-cloud-texttospeech>=2.29.0` - For Google TTS API in audio pipeline (check implementation for actual SDK used)
 - `python-dotenv>=1.0.0` - Environment variable management (requires `.env` file with API keys)
 - `pyyaml>=6.0.0` - For YAML-based prompt template parsing
 - `langchain-openai>=0.1.0` - For prompt/chain structures (optional but recommended)
@@ -116,12 +116,14 @@ Each pipeline stage is independent and communicates through file I/O:
 
 **Pipeline 3: Audio Generation** (`src/pipelines/audio_gen.py`)
 - Input: `/outputs/script/[search_keyword]_script.md`
-- Process: Gemini TTS API conversion with exponential backoff retry logic (`backoff` package)
-- Default model: "gemini-2.5-flash-tts", voice: "Zephyr"
+- Process: Google TTS API conversion with exponential backoff retry logic (`backoff` package)
+- **Note**: Implementation may use either `google-cloud-texttospeech` or `google-genai` SDK
+- Default model: "gemini-2.5-flash-tts", voice: "Zephyr" (model name may vary by API version)
 - Output: WAV/MP3 file in `/outputs/audio/[search_keyword].wav`
-- Extension point: Voice selection (30+ Gemini voices), model selection (Pro/Flash), BGM mixing
+- Extension point: Voice selection (30+ voices), model selection, BGM mixing
 - Supported voices: Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Laomedeia 등 30+ voices
 - CLI: `python -m src.pipelines.audio_gen --search-keyword "유물명" --voice Zephyr --model gemini-2.5-flash-tts [--dry-run]`
+- **If model errors occur**: Verify the correct model name for your installed SDK version
 
 ### Shared Utilities
 
@@ -318,24 +320,41 @@ files:
 ### 배치 실행 명령어
 
 ```bash
-# 기본 실행 (모든 파이프라인)
+# 기본 실행 (순차 처리, 모든 파이프라인)
 python -m src.batch_runner --track-file tracks/sample_track.yaml
+
+# 병렬 실행 (3개 워커, 2-3배 속도 향상)
+python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel
+
+# 병렬 실행 + 워커 수 지정
+python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --max-workers 2
 
 # Dry-run 모드 (API 호출 없이 테스트)
 python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
 
-# 특정 파이프라인만 재실행 (NEW in v0.2)
+# 병렬 + Dry-run (테스트)
+python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --dry-run
+
+# 특정 파이프라인만 재실행
 # Stage 1: 정보 검색, Stage 2: 스크립트 생성, Stage 3: 오디오 생성
 
 # 스크립트만 재생성 (info 파일은 이미 존재)
 python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
 
-# 스크립트 + 오디오만 재생성
-python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3
+# 스크립트 + 오디오만 병렬 재생성
+python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3 --parallel
 
 # 오디오만 재생성 (script 파일은 이미 존재)
 python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
 ```
+
+**병렬 처리 모드 (`--parallel`)**:
+- 여러 파일을 동시에 처리하여 속도 향상 (2-3배)
+- 기본 워커 수: 3개 (Gemini TTS API 제약)
+- 먼저 완료된 워커가 다음 파일을 자동으로 처리
+- 하나의 파일이라도 실패 시 전체 중단
+- Ctrl+C로 중단 시 모든 워커 즉시 종료
+- **주의**: API quota를 빠르게 소진할 수 있으므로 대량 배치에만 사용 권장
 
 **선택적 파이프라인 실행 (--stages 옵션)**:
 - `--stages 1`: 정보 검색만 실행
@@ -426,10 +445,19 @@ outputs/tracks/[트랙명]/
 
 ### 에러 처리
 
-- **순차 실행**: 파일을 순서대로 하나씩 처리
-- **즉시 중단**: 에러 발생 시 전체 배치 중단
-- **부분 리포트**: 실패 시점까지의 결과를 리포트에 기록
-- **상세 로그**: 어느 파일의 어느 단계에서 실패했는지 명확히 표시
+**순차 처리 모드**:
+- 파일을 순서대로 하나씩 처리
+- 에러 발생 시 전체 배치 즉시 중단
+- 부분 리포트 생성 (실패 시점까지의 결과)
+- 상세 로그: 어느 파일의 어느 단계에서 실패했는지 명확히 표시
+
+**병렬 처리 모드 (`--parallel`)**:
+- 여러 워커가 동시에 파일 처리
+- **하나의 워커라도 에러 발생 시 전체 중단**
+- 실행 중인 모든 워커 즉시 취소
+- 부분 리포트 생성 (완료된 파일들의 결과)
+- Ctrl+C (KeyboardInterrupt) 시 모든 워커 graceful shutdown
+- 워커별 로그: `[Worker-1]`, `[Worker-2]` 형식으로 표시
 
 ### 개별 파일 설정 오버라이드
 
@@ -546,11 +574,19 @@ Create a `.env` file in the project root with:
 ```
 OPENAI_API_KEY=your_openai_key_here
 GEMINI_API_KEY=your_gemini_api_key_here
+
+# OR for Google Cloud Text-to-Speech (if using google-cloud-texttospeech):
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
 ```
 
 **API 키 발급:**
 - OpenAI: https://platform.openai.com/api-keys
-- Gemini: https://aistudio.google.com/apikey
+- Gemini API (google-genai): https://aistudio.google.com/apikey
+- Google Cloud (google-cloud-texttospeech): Requires service account JSON from Google Cloud Console
+
+**Authentication methods for Pipeline 3 (Audio):**
+- If using `google-genai` SDK: Set `GEMINI_API_KEY` in `.env`
+- If using `google-cloud-texttospeech` SDK: Set `GOOGLE_APPLICATION_CREDENTIALS` or use `gcloud auth login`
 
 ## Troubleshooting
 
@@ -572,9 +608,11 @@ GEMINI_API_KEY=your_gemini_api_key_here
    - Solution: Run earlier stages first or use full pipeline
 
 4. **Gemini TTS errors (Pipeline 3)**
-   - Check GEMINI_API_KEY is set correctly
+   - **Model not found error (404)**: The model name `gemini-2.5-flash-tts` may not be available. Check Google's documentation for current TTS model names.
+   - Check GEMINI_API_KEY or GOOGLE_APPLICATION_CREDENTIALS is set correctly
    - Note: `speed` parameter is currently unsupported by Gemini API
    - Try different voice names from supported list (Zephyr, Puck, Charon, etc.)
+   - Verify which Google TTS API is being used (google-cloud-texttospeech vs google-genai SDK)
 
 5. **YAML parsing errors in batch runner**
    - Validate YAML syntax using `python -c "import yaml; yaml.safe_load(open('tracks/your_file.yaml'))"`

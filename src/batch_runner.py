@@ -18,10 +18,12 @@ import json
 import logging
 import time
 import argparse
+import threading
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # YAML 파서
 try:
@@ -417,6 +419,10 @@ def run_batch(
     files = track_config["files"]
     defaults = track_config.get("defaults", {})
 
+    # defaults가 None인 경우 처리
+    if defaults is None:
+        defaults = {}
+
     # dry_run 오버라이드 처리
     if override_dry_run is not None:
         defaults["dry_run"] = override_dry_run
@@ -511,6 +517,234 @@ def run_batch(
     }
 
 
+def run_batch_parallel(
+    track_config: Dict[str, Any],
+    override_dry_run: Optional[bool] = None,
+    stages: List[int] = [1, 2, 3],
+    max_workers: int = 3
+) -> Dict[str, Any]:
+    """
+    트랙 전체를 병렬로 배치 실행합니다.
+
+    ThreadPoolExecutor를 사용하여 여러 파일을 동시에 처리합니다.
+    먼저 완료된 워커가 다음 파일을 받아 처리하는 동적 할당 방식입니다.
+
+    Args:
+        track_config: 트랙 설정 딕셔너리
+        override_dry_run: dry_run 모드 강제 설정 (None이면 설정 파일 따름)
+        stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
+        max_workers: 최대 동시 워커 수 (기본값: 3, Gemini TTS 제약)
+
+    Returns:
+        실행 결과 요약 딕셔너리
+
+    Raises:
+        BatchRunnerError: 실행 중 오류 발생
+        KeyboardInterrupt: 사용자 중단
+    """
+    track_name = track_config["track_name"]
+    files = track_config["files"]
+    defaults = track_config.get("defaults", {})
+
+    # defaults가 None인 경우 처리
+    if defaults is None:
+        defaults = {}
+
+    # dry_run 오버라이드 처리
+    if override_dry_run is not None:
+        defaults["dry_run"] = override_dry_run
+
+    total_files = len(files)
+
+    logger.info(f"\n{'='*70}")
+    logger.info(f"🎬 병렬 배치 실행 시작: {track_name}")
+    logger.info(f"총 {total_files}개 파일 | 워커 수: {max_workers}")
+    logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
+    logger.info(f"{'='*70}\n")
+
+    # 트랙 디렉토리 생성
+    track_dirs = create_track_directories(track_name)
+
+    # 실행 시작
+    started_at = datetime.now().isoformat()
+    start_time = time.time()
+    results = []
+    results_lock = threading.Lock()
+
+    # 에러 플래그 (첫 에러 발생 시 다른 워커들도 중단)
+    error_occurred = threading.Event()
+    first_error = {"exception": None}
+
+    def run_file_worker(file_item: Dict[str, Any], idx: int) -> Dict[str, Any]:
+        """
+        워커 스레드에서 실행될 단일 파일 처리 함수
+
+        Args:
+            file_item: 파일 설정
+            idx: 파일 인덱스 (1부터 시작)
+
+        Returns:
+            실행 결과 딕셔너리
+        """
+        # 다른 워커에서 에러 발생 시 즉시 중단
+        if error_occurred.is_set():
+            return {
+                "output_name": file_item.get("output_name", "unknown"),
+                "search_keyword": file_item.get("search_keyword", "unknown"),
+                "status": "cancelled",
+                "error": "다른 파일 처리 중 에러 발생으로 취소됨"
+            }
+
+        try:
+            # defaults와 개별 설정 병합
+            file_config = merge_file_config(file_item, defaults)
+
+            # 워커 ID를 포함한 로그
+            worker_name = threading.current_thread().name
+            logger.info(f"[{worker_name}] 📁 {file_config['output_name']} 처리 시작... ({idx}/{total_files})")
+
+            # 파이프라인 실행
+            result = run_single_file(
+                file_config=file_config,
+                track_dirs=track_dirs,
+                file_index=idx,
+                total_files=total_files,
+                stages=stages
+            )
+
+            # 완료 카운트 업데이트 (thread-safe)
+            with results_lock:
+                completed = len([r for r in results if r.get("status") in ["success", "failed"]])
+                logger.info(f"[{worker_name}] ✅ {file_config['output_name']} 완료 ({completed + 1}/{total_files})")
+
+            return result
+
+        except Exception as e:
+            # 첫 번째 에러 기록
+            if not error_occurred.is_set():
+                error_occurred.set()
+                first_error["exception"] = e
+                logger.error(f"[{threading.current_thread().name}] ❌ 에러 발생! 모든 워커 중단 중...")
+
+            raise
+
+    try:
+        with ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="Worker") as executor:
+            # 모든 파일에 대한 Future 생성
+            future_to_file = {
+                executor.submit(run_file_worker, file_item, idx): (file_item, idx)
+                for idx, file_item in enumerate(files, start=1)
+            }
+
+            # 완료된 작업부터 결과 수집
+            for future in as_completed(future_to_file):
+                file_item, idx = future_to_file[future]
+
+                try:
+                    result = future.result()
+
+                    with results_lock:
+                        results.append(result)
+
+                except BatchRunnerError as e:
+                    # 에러 발생 시 즉시 중단
+                    logger.error(f"\n❌ 파일 처리 실패: {e.file_name}")
+
+                    # 실행 중인 모든 작업 취소
+                    for f in future_to_file:
+                        f.cancel()
+
+                    # 에러 발생 시점까지의 결과로 부분 리포트 생성
+                    completed_at = datetime.now().isoformat()
+                    duration = time.time() - start_time
+
+                    logger.info("부분 실행 결과 리포트를 생성합니다...")
+                    generate_batch_report(
+                        track_config=track_config,
+                        results=results,
+                        track_dirs=track_dirs,
+                        started_at=started_at,
+                        completed_at=completed_at,
+                        duration=duration
+                    )
+
+                    raise
+
+                except Exception as e:
+                    # 예상치 못한 에러
+                    logger.error(f"\n❌ 예상치 못한 에러: {e}")
+
+                    # 모든 작업 취소
+                    for f in future_to_file:
+                        f.cancel()
+
+                    raise BatchRunnerError(
+                        message=f"파일 처리 중 예상치 못한 에러: {e}",
+                        file_name=file_item.get("output_name", "unknown")
+                    ) from e
+
+    except KeyboardInterrupt:
+        logger.warning("\n⚠️ 사용자에 의해 중단되었습니다. 모든 워커를 종료합니다...")
+
+        # 부분 리포트 생성
+        completed_at = datetime.now().isoformat()
+        duration = time.time() - start_time
+
+        if results:
+            generate_batch_report(
+                track_config=track_config,
+                results=results,
+                track_dirs=track_dirs,
+                started_at=started_at,
+                completed_at=completed_at,
+                duration=duration
+            )
+
+        raise
+
+    # 완료 처리
+    completed_at = datetime.now().isoformat()
+    duration = time.time() - start_time
+
+    # 결과 리포트 생성
+    report_path = generate_batch_report(
+        track_config=track_config,
+        results=results,
+        track_dirs=track_dirs,
+        started_at=started_at,
+        completed_at=completed_at,
+        duration=duration
+    )
+
+    # 완료 요약 출력
+    successful = sum(1 for r in results if r["status"] == "success")
+    failed = sum(1 for r in results if r["status"] == "failed")
+
+    logger.info(f"\n{'='*70}")
+    logger.info(f"🎉 병렬 배치 실행 완료!")
+    logger.info(f"{'='*70}")
+    logger.info(f"트랙: {track_name}")
+    logger.info(f"성공: {successful}/{total_files}")
+    logger.info(f"실패: {failed}/{total_files}")
+    logger.info(f"소요 시간: {duration:.1f}초")
+    logger.info(f"워커 수: {max_workers}")
+    logger.info(f"결과 리포트: {report_path}")
+    logger.info(f"오디오 파일 위치: {track_dirs['audio']}")
+    logger.info(f"{'='*70}\n")
+
+    return {
+        "track_name": track_name,
+        "successful": successful,
+        "failed": failed,
+        "total": total_files,
+        "duration": duration,
+        "report_path": report_path,
+        "audio_dir": track_dirs["audio"],
+        "parallel": True,
+        "max_workers": max_workers
+    }
+
+
 def parse_stages(stages_str: str) -> List[int]:
     """
     쉼표로 구분된 스테이지 문자열을 정수 리스트로 파싱합니다.
@@ -547,17 +781,26 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
-  # 기본 실행 (모든 파이프라인)
+  # 기본 실행 (순차 처리, 모든 파이프라인)
   python -m src.batch_runner --track-file tracks/sample_track.yaml
+
+  # 병렬 실행 (3개 워커, 속도 향상)
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel
+
+  # 병렬 실행 + 워커 수 지정
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --max-workers 2
 
   # Dry-run 모드 (API 호출 없이 테스트)
   python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
 
+  # 병렬 + Dry-run (테스트)
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --dry-run
+
   # 스크립트 생성만 재실행 (info 파일은 이미 존재)
   python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
 
-  # 스크립트 + 오디오만 재생성
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3
+  # 스크립트 + 오디오만 병렬 재생성
+  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3 --parallel
 
   # 오디오만 재생성 (script 파일은 이미 존재)
   python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
@@ -568,6 +811,11 @@ def main():
   ├── script/     - 스크립트 파일 (Stage 2)
   ├── audio/      - 오디오 파일 (Stage 3, 최종 결과물)
   └── batch_report.json - 실행 결과 리포트
+
+주의사항:
+  - 병렬 처리는 API quota를 빠르게 소진할 수 있습니다
+  - Gemini TTS API는 약 3개 동시 요청만 지원하므로 max-workers=3 권장
+  - 에러 발생 시 모든 워커가 즉시 중단되며 부분 리포트가 생성됩니다
         """
     )
 
@@ -591,6 +839,19 @@ def main():
         help="실행할 파이프라인 단계 (기본값: 1,2,3). 예: '2' 또는 '2,3'"
     )
 
+    parser.add_argument(
+        "--parallel",
+        action="store_true",
+        help="병렬 처리 모드 활성화 (3개 워커 동시 실행, 기본값: 순차 처리)"
+    )
+
+    parser.add_argument(
+        "--max-workers",
+        type=int,
+        default=3,
+        help="병렬 처리 시 최대 워커 수 (기본값: 3, Gemini TTS API 제약)"
+    )
+
     args = parser.parse_args()
 
     # 환경변수 로드
@@ -607,12 +868,22 @@ def main():
         # 3. 설정 검증
         validate_track_config(track_config)
 
-        # 4. 배치 실행
-        result = run_batch(
-            track_config=track_config,
-            override_dry_run=args.dry_run if args.dry_run else None,
-            stages=stages
-        )
+        # 4. 배치 실행 (병렬 또는 순차)
+        if args.parallel:
+            logger.info(f"🔄 병렬 처리 모드 (워커 수: {args.max_workers})")
+            result = run_batch_parallel(
+                track_config=track_config,
+                override_dry_run=args.dry_run if args.dry_run else None,
+                stages=stages,
+                max_workers=args.max_workers
+            )
+        else:
+            logger.info(f"➡️  순차 처리 모드")
+            result = run_batch(
+                track_config=track_config,
+                override_dry_run=args.dry_run if args.dry_run else None,
+                stages=stages
+            )
 
         # 5. 성공 메시지
         print("\n" + "🎉 " * 20)
