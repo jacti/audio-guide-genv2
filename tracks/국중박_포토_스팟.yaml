@@ -13,7 +13,6 @@ defaults:
 metadata:
   author: "국립중앙박물관"
   version: "1.1"
-  tags: ["spot", "favorite", "photospot", "mustsee"]
   created_date: "2025-11-19"
 
 
