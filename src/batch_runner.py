@@ -283,10 +283,10 @@ def run_single_file(
             logger.info("  → [Stage 1] 정보 검색 중...")
             info_path = info_retrieval.run(
                 search_keyword=search_keyword,
-                model=file_config.get("model", "gpt-4.1"),
+                model=file_config.get("model", "sonar-pro"),  # Perplexity 모델로 변경
                 prompt_version=file_config.get("info_prompt_version", "default"),
                 info_prompt=file_config.get("info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."),
-                max_queries=file_config.get("max_queries", None),
+                # max_queries 파라미터 제거됨 (Perplexity Chat API 단일 호출)
                 output_dir=track_dirs["info"],
                 dry_run=dry_run,
                 output_name=output_name

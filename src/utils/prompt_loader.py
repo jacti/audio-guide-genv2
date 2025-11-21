@@ -199,6 +199,15 @@ class PromptTemplate:
             search_results=search_results
         )
 
+    def get_system_prompt(self) -> str:
+        """
+        system_prompt 반환 (Chat API용)
+
+        Returns:
+            시스템 프롬프트 문자열
+        """
+        return self.system_prompt
+
 
 def load_prompt(
     version: str = "v1",
