@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
 
 # 기본 설정
@@ -95,19 +95,19 @@ def convert_to_wav(audio_data: bytes, mime_type: str) -> bytes:
     # http://soundfile.sapp.org/doc/WaveFormat/
     header = struct.pack(
         "<4sI4s4sIHHIIHH4sI",
-        b"RIFF",          # ChunkID
-        chunk_size,       # ChunkSize (total file size - 8 bytes)
-        b"WAVE",          # Format
-        b"fmt ",          # Subchunk1ID
-        16,               # Subchunk1Size (16 for PCM)
-        1,                # AudioFormat (1 for PCM)
-        num_channels,     # NumChannels
-        sample_rate,      # SampleRate
-        byte_rate,        # ByteRate
-        block_align,      # BlockAlign
+        b"RIFF",  # ChunkID
+        chunk_size,  # ChunkSize (total file size - 8 bytes)
+        b"WAVE",  # Format
+        b"fmt ",  # Subchunk1ID
+        16,  # Subchunk1Size (16 for PCM)
+        1,  # AudioFormat (1 for PCM)
+        num_channels,  # NumChannels
+        sample_rate,  # SampleRate
+        byte_rate,  # ByteRate
+        block_align,  # BlockAlign
         bits_per_sample,  # BitsPerSample
-        b"data",          # Subchunk2ID
-        data_size         # Subchunk2Size (size of audio data)
+        b"data",  # Subchunk2ID
+        data_size,  # Subchunk2Size (size of audio data)
     )
     return header + audio_data
 
@@ -162,7 +162,7 @@ def split_script_by_paragraphs(text: str, max_bytes: int = 4000) -> list[str]:
     Raises:
         ValueError: 단일 문단이 max_bytes를 초과하는 경우
     """
-    paragraphs = text.split('\n\n')
+    paragraphs = text.split("\n\n")
     chunks = []
     current_chunk = []
     current_bytes = 0
@@ -172,7 +172,7 @@ def split_script_by_paragraphs(text: str, max_bytes: int = 4000) -> list[str]:
         if not para.strip():
             continue
 
-        para_bytes = len(para.encode('utf-8'))
+        para_bytes = len(para.encode("utf-8"))
 
         # 단일 문단이 제한을 초과하는 경우
         if para_bytes > max_bytes:
@@ -191,14 +191,14 @@ def split_script_by_paragraphs(text: str, max_bytes: int = 4000) -> list[str]:
         else:
             # 현재 청크 저장 (4000 bytes 이전의 가장 큰 문단까지)
             if current_chunk:
-                chunks.append('\n\n'.join(current_chunk))
+                chunks.append("\n\n".join(current_chunk))
             # 새 청크 시작
             current_chunk = [para]
             current_bytes = para_bytes
 
     # 마지막 청크 저장
     if current_chunk:
-        chunks.append('\n\n'.join(current_chunk))
+        chunks.append("\n\n".join(current_chunk))
 
     return chunks
 
@@ -206,11 +206,13 @@ def split_script_by_paragraphs(text: str, max_bytes: int = 4000) -> list[str]:
 def _generate_audio_gemini(
     text: str,
     output_path: Path,
-    voice: str = "Zephyr",
-    model: str = "gemini-2.5-flash-tts",
-    max_retries: int = 8,
-    initial_wait: float = 1.0,
-    max_wait: float = 60.0
+    voice: str,
+    tts_language: str,
+    tts_prompt: str,
+    model: str,
+    max_retries: int,
+    initial_wait: float,
+    max_wait: float,
 ) -> None:
     """
     Google Cloud Text-to-Speech API (Gemini TTS)를 호출하여 음성 파일을 생성합니다.
@@ -226,6 +228,7 @@ def _generate_audio_gemini(
         text: 변환할 텍스트
         output_path: 출력 파일 경로 (MP3/WAV)
         voice: Gemini voice 이름 (기본값: "Zephyr")
+        tts_language: Gemini TTS 언어 (기본값: "ko-KR")
         model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
         max_retries: 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
@@ -239,7 +242,7 @@ def _generate_audio_gemini(
         Exception: API 호출 실패 시 (인증 오류 포함)
     """
     # 텍스트를 청크로 분할
-    text_bytes = len(text.encode('utf-8'))
+    text_bytes = len(text.encode("utf-8"))
     text_length = len(text)
 
     # 4000 bytes 초과 시 청크 분할
@@ -276,8 +279,8 @@ def _generate_audio_gemini(
 
     # 백오프 핸들러: 재시도 시 로깅
     def on_backoff(details):
-        wait_time = details['wait']
-        tries = details['tries']
+        wait_time = details["wait"]
+        tries = details["tries"]
         logger.warning(
             f"⏳ 지수 백오프 적용: {wait_time:.2f}초 대기 중 "
             f"(재시도 {tries}/{max_retries})"
@@ -285,9 +288,7 @@ def _generate_audio_gemini(
 
     # 포기 시 핸들러: 최종 실패 로깅
     def on_giveup(details):
-        logger.error(
-            f"❌ 최대 재시도 횟수 초과 ({max_retries}회): API 호출 포기"
-        )
+        logger.error(f"❌ 최대 재시도 횟수 초과 ({max_retries}회): API 호출 포기")
 
     # 지수 백오프를 적용한 단일 청크 API 호출 함수
     @backoff.on_exception(
@@ -297,18 +298,21 @@ def _generate_audio_gemini(
         max_value=max_wait,
         on_backoff=on_backoff,
         on_giveup=on_giveup,
-        jitter=backoff.full_jitter
+        jitter=backoff.full_jitter,
     )
     def _call_api_for_chunk(chunk_text: str) -> bytes:
         """단일 청크에 대해 지수 백오프가 적용된 API 호출"""
         # 입력 텍스트 설정
-        synthesis_input = texttospeech.SynthesisInput(text=chunk_text)
+        synthesis_input = texttospeech.SynthesisInput(
+            text=chunk_text, prompt=tts_prompt
+        )
 
         # 음성 설정
         voice_params = texttospeech.VoiceSelectionParams(
-            language_code="en-US",  # Gemini TTS voices는 주로 en-US
+            # language_code="en-US",  # Gemini TTS voices는 주로 en-US
+            language_code=tts_language,  # Gemini TTS voices는 주로 en-US
             name=voice,
-            model_name=model
+            model_name=model,
         )
 
         # 오디오 설정
@@ -318,9 +322,7 @@ def _generate_audio_gemini(
 
         # API 호출
         response = client.synthesize_speech(
-            input=synthesis_input,
-            voice=voice_params,
-            audio_config=audio_config
+            input=synthesis_input, voice=voice_params, audio_config=audio_config
         )
 
         return response.audio_content
@@ -331,8 +333,10 @@ def _generate_audio_gemini(
         total_chunks = len(text_chunks)
 
         for i, chunk in enumerate(text_chunks, 1):
-            chunk_bytes = len(chunk.encode('utf-8'))
-            logger.info(f"🎤 청크 {i}/{total_chunks} 생성 중... ({len(chunk)} 글자, {chunk_bytes} bytes)")
+            chunk_bytes = len(chunk.encode("utf-8"))
+            logger.info(
+                f"🎤 청크 {i}/{total_chunks} 생성 중... ({len(chunk)} 글자, {chunk_bytes} bytes)"
+            )
 
             audio_data = _call_api_for_chunk(chunk)
             audio_chunks.append(audio_data)
@@ -343,7 +347,7 @@ def _generate_audio_gemini(
         if len(audio_chunks) > 1:
             logger.info(f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중...")
 
-        combined_audio = b''.join(audio_chunks)
+        combined_audio = b"".join(audio_chunks)
 
         # 최종 파일 저장
         with open(output_path, "wb") as out:
@@ -356,8 +360,7 @@ def _generate_audio_gemini(
     except Exception as e:
         logger.error(f"🔴 Gemini API 에러: {e}")
         raise Exception(
-            f"⚠️ Gemini TTS 생성 실패 ({max_retries}회 재시도)\n"
-            f"상세 정보: {e}"
+            f"⚠️ Gemini TTS 생성 실패 ({max_retries}회 재시도)\n" f"상세 정보: {e}"
         ) from e
 
 
@@ -369,11 +372,22 @@ def _create_dummy_audio(output_path: Path) -> None:
         output_path: 더미 파일을 생성할 경로
     """
     # 간단한 MP3 헤더 (실제 재생은 안되지만 파일 형식은 유지)
-    dummy_mp3_header = bytes([
-        0xFF, 0xFB, 0x90, 0x00,  # MP3 동기 워드와 기본 헤더
-        0x00, 0x00, 0x00, 0x00,
-        0x49, 0x6E, 0x66, 0x6F   # "Info" 태그
-    ])
+    dummy_mp3_header = bytes(
+        [
+            0xFF,
+            0xFB,
+            0x90,
+            0x00,  # MP3 동기 워드와 기본 헤더
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x49,
+            0x6E,
+            0x66,
+            0x6F,  # "Info" 태그
+        ]
+    )
 
     with open(output_path, "wb") as f:
         f.write(dummy_mp3_header)
@@ -389,12 +403,14 @@ def run(
     script_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
-    model: str = "gemini-2.5-flash-tts",
+    tts_language: str = "ko-KR",
+    tts_prompt: str = """당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.""",
+    model: str = "gemini-2.5-pro-tts",
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
     dry_run: bool = False,
-    output_name: Optional[str] = None
+    output_name: Optional[str] = None,
 ) -> Path:
     """
     오디오 생성 파이프라인 메인 진입점.
@@ -407,6 +423,8 @@ def run(
         script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
+        tts_language: Gemini TTS 언어 (기본값: "ko-KR")
+        tts_prompt: Gemini TTS 프롬프트 (기본값: "")
         model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
         max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
@@ -462,7 +480,7 @@ def run(
                 output_file_path=output_path,
                 mode="dry_run",
                 model=model,
-                voice=voice
+                voice=voice,
             )
         except Exception as e:
             logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
@@ -472,10 +490,12 @@ def run(
             text=script_text,
             output_path=output_path,
             voice=voice,
+            tts_language=tts_language,
+            tts_prompt=tts_prompt,
             model=model,
             max_retries=max_retries,
             initial_wait=initial_wait,
-            max_wait=max_wait
+            max_wait=max_wait,
         )
 
         logger.info(f"✅ 오디오 파일 저장 완료: {output_path.absolute()}")
@@ -488,7 +508,7 @@ def run(
                 output_file_path=output_path,
                 mode="production",
                 model=model,
-                voice=voice
+                voice=voice,
             )
         except Exception as e:
             logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
@@ -525,35 +545,35 @@ def main():
 
 지원 음성 (일부):
   Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
-        """
+        """,
     )
 
     parser.add_argument(
         "--search-keyword",
         type=str,
         required=True,
-        help="유물 키워드 (파일명 결정에 사용)"
+        help="유물 키워드 (파일명 결정에 사용)",
     )
 
     parser.add_argument(
         "--script-dir",
         type=Path,
         default=None,
-        help="스크립트 디렉토리 경로 (기본값: outputs/script)"
+        help="스크립트 디렉토리 경로 (기본값: outputs/script)",
     )
 
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="출력 디렉토리 경로 (기본값: outputs/audio)"
+        help="출력 디렉토리 경로 (기본값: outputs/audio)",
     )
 
     parser.add_argument(
         "--voice",
         type=str,
         default="Zephyr",
-        help="Gemini TTS 음성 이름 (기본값: Zephyr)"
+        help="Gemini TTS 음성 이름 (기본값: Zephyr)",
     )
 
     parser.add_argument(
@@ -561,41 +581,41 @@ def main():
         type=str,
         default="gemini-2.5-flash-tts",
         choices=["gemini-2.5-flash-tts", "gemini-2.5-pro-tts"],
-        help="Gemini TTS 모델명 (기본값: gemini-2.5-flash-tts)"
+        help="Gemini TTS 모델명 (기본값: gemini-2.5-flash-tts)",
     )
 
     parser.add_argument(
         "--max-retries",
         type=int,
         default=8,
-        help="API 호출 최대 재시도 횟수 (기본값: 8, 지수 백오프 적용)"
+        help="API 호출 최대 재시도 횟수 (기본값: 8, 지수 백오프 적용)",
     )
 
     parser.add_argument(
         "--initial-wait",
         type=float,
         default=1.0,
-        help="초기 대기 시간 초 (기본값: 1.0, 지수 백오프 시작 값)"
+        help="초기 대기 시간 초 (기본값: 1.0, 지수 백오프 시작 값)",
     )
 
     parser.add_argument(
         "--max-wait",
         type=float,
         default=60.0,
-        help="최대 대기 시간 초 (기본값: 60.0, 지수 백오프 상한)"
+        help="최대 대기 시간 초 (기본값: 60.0, 지수 백오프 상한)",
     )
 
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="API 호출 없이 더미 파일만 생성 (테스트용)"
+        help="API 호출 없이 더미 파일만 생성 (테스트용)",
     )
 
     parser.add_argument(
         "--output-name",
         type=str,
         default=None,
-        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)"
+        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)",
     )
 
     args = parser.parse_args()
@@ -611,7 +631,7 @@ def main():
             initial_wait=args.initial_wait,
             max_wait=args.max_wait,
             dry_run=args.dry_run,
-            output_name=args.output_name
+            output_name=args.output_name,
         )
 
         print(f"\n🎵 오디오 파일이 생성되었습니다: {output_path}")

@@ -37,21 +37,24 @@ from src.pipelines import info_retrieval, script_gen, audio_gen
 from src.utils.path_sanitizer import (
     sanitize_keyword_for_path,
     info_markdown_path,
-    script_markdown_path
+    script_markdown_path,
 )
 
 # 로거 설정
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
 )
 logger = logging.getLogger(__name__)
 
 
 class BatchRunnerError(Exception):
     """배치 실행 중 발생하는 예외"""
-    def __init__(self, message: str, file_name: Optional[str] = None, stage: Optional[str] = None):
+
+    def __init__(
+        self, message: str, file_name: Optional[str] = None, stage: Optional[str] = None
+    ):
         self.message = message
         self.file_name = file_name
         self.stage = stage
@@ -112,7 +115,9 @@ def validate_track_config(config: Dict[str, Any]) -> bool:
         raise BatchRunnerError("필수 필드 누락 또는 형식 오류: files (리스트여야 함)")
 
     if len(config["files"]) == 0:
-        raise BatchRunnerError("files 리스트가 비어있습니다. 최소 1개 이상의 파일이 필요합니다.")
+        raise BatchRunnerError(
+            "files 리스트가 비어있습니다. 최소 1개 이상의 파일이 필요합니다."
+        )
 
     # 각 파일 항목 검증
     for idx, file_item in enumerate(config["files"]):
@@ -129,7 +134,9 @@ def validate_track_config(config: Dict[str, Any]) -> bool:
     return True
 
 
-def create_track_directories(track_name: str, base_dir: Path = Path("outputs/tracks")) -> Dict[str, Path]:
+def create_track_directories(
+    track_name: str, base_dir: Path = Path("outputs/tracks")
+) -> Dict[str, Path]:
     """
     트랙별 출력 디렉토리 구조를 생성합니다.
 
@@ -155,7 +162,7 @@ def create_track_directories(track_name: str, base_dir: Path = Path("outputs/tra
         "track_root": track_root,
         "info": track_root / "info",
         "script": track_root / "script",
-        "audio": track_root / "audio"
+        "audio": track_root / "audio",
     }
 
     for dir_path in dirs.values():
@@ -166,7 +173,9 @@ def create_track_directories(track_name: str, base_dir: Path = Path("outputs/tra
     return dirs
 
 
-def merge_file_config(file_config: Dict[str, Any], defaults: Dict[str, Any]) -> Dict[str, Any]:
+def merge_file_config(
+    file_config: Dict[str, Any], defaults: Dict[str, Any]
+) -> Dict[str, Any]:
     """
     개별 파일 설정과 기본 설정을 병합합니다.
 
@@ -186,7 +195,7 @@ def validate_stage_dependencies(
     stages: List[int],
     output_name: str,
     search_keyword: str,
-    track_dirs: Dict[str, Path]
+    track_dirs: Dict[str, Path],
 ) -> None:
     """
     선택된 파이프라인 단계의 의존성을 검증합니다.
@@ -214,7 +223,9 @@ def validate_stage_dependencies(
 
     # Stage 3 (audio_gen)를 실행하려면 Stage 2 (script)의 출력이 필요
     if 3 in stages and 2 not in stages:
-        script_path = script_markdown_path(search_keyword, track_dirs["script"], output_name)
+        script_path = script_markdown_path(
+            search_keyword, track_dirs["script"], output_name
+        )
         if not script_path.exists():
             raise FileNotFoundError(
                 f"❌ Stage 3 (오디오 생성)을 실행하려면 script 파일이 필요합니다.\n"
@@ -228,7 +239,7 @@ def run_single_file(
     track_dirs: Dict[str, Path],
     file_index: int,
     total_files: int,
-    stages: List[int] = [1, 2, 3]
+    stages: List[int] = [1, 2, 3],
 ) -> Dict[str, Any]:
     """
     단일 파일에 대해 지정된 파이프라인 단계를 실행합니다.
@@ -265,7 +276,7 @@ def run_single_file(
         "search_keyword": search_keyword,
         "started_at": datetime.now().isoformat(),
         "status": "pending",
-        "stages_run": stages
+        "stages_run": stages,
     }
 
     logger.info(f"\n{'='*70}")
@@ -285,11 +296,13 @@ def run_single_file(
                 search_keyword=search_keyword,
                 model=file_config.get("model", "sonar-pro"),  # Perplexity 모델로 변경
                 prompt_version=file_config.get("info_prompt_version", "default"),
-                info_prompt=file_config.get("info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."),
+                info_prompt=file_config.get(
+                    "info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."
+                ),
                 # max_queries 파라미터 제거됨 (Perplexity Chat API 단일 호출)
                 output_dir=track_dirs["info"],
                 dry_run=dry_run,
-                output_name=output_name
+                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
         else:
@@ -302,12 +315,14 @@ def run_single_file(
                 search_keyword=search_keyword,
                 info_dir=track_dirs["info"],
                 output_dir=track_dirs["script"],
-                script_prompt_version=file_config.get("script_prompt_version", "v2-tts"),
+                script_prompt_version=file_config.get(
+                    "script_prompt_version", "v2-tts"
+                ),
                 custom_prompt=file_config.get("script_gen_prompt", None),
                 temperature=file_config.get("temperature", 0.7),
                 model=file_config.get("model", "gpt-4.1"),
                 dry_run=dry_run,
-                output_name=output_name
+                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
         else:
@@ -321,10 +336,12 @@ def run_single_file(
                 script_dir=track_dirs["script"],
                 output_dir=track_dirs["audio"],
                 voice=file_config.get("voice", "Zephyr"),
-                model=file_config.get("tts_model", "gemini-2.5-flash-tts"),
+                tts_language=file_config.get("tts_language", "ko-KR"),
+                tts_prompt=file_config.get("tts_prompt", ""),
+                model=file_config.get("tts_model", "gemini-2.5-pro-tts"),
                 max_retries=file_config.get("max_retries", 8),
                 dry_run=dry_run,
-                output_name=output_name
+                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 3] 오디오 생성 완료: {audio_path.name}")
             result["audio_path"] = str(audio_path)
@@ -347,9 +364,7 @@ def run_single_file(
         result["completed_at"] = datetime.now().isoformat()
 
         raise BatchRunnerError(
-            message=error_msg,
-            file_name=output_name,
-            stage="파이프라인 실행"
+            message=error_msg, file_name=output_name, stage="파이프라인 실행"
         ) from e
 
 
@@ -359,7 +374,7 @@ def generate_batch_report(
     track_dirs: Dict[str, Path],
     started_at: str,
     completed_at: str,
-    duration: float
+    duration: float,
 ) -> Path:
     """
     배치 실행 결과 리포트를 JSON 파일로 생성합니다.
@@ -385,7 +400,7 @@ def generate_batch_report(
         "total_files": len(results),
         "successful": sum(1 for r in results if r["status"] == "success"),
         "failed": sum(1 for r in results if r["status"] == "failed"),
-        "files": results
+        "files": results,
     }
 
     report_path = track_dirs["track_root"] / "batch_report.json"
@@ -401,7 +416,7 @@ def generate_batch_report(
 def run_batch(
     track_config: Dict[str, Any],
     override_dry_run: Optional[bool] = None,
-    stages: List[int] = [1, 2, 3]
+    stages: List[int] = [1, 2, 3],
 ) -> Dict[str, Any]:
     """
     트랙 전체를 배치 실행합니다.
@@ -456,7 +471,7 @@ def run_batch(
                 track_dirs=track_dirs,
                 file_index=idx,
                 total_files=total_files,
-                stages=stages
+                stages=stages,
             )
             results.append(result)
 
@@ -474,7 +489,7 @@ def run_batch(
             track_dirs=track_dirs,
             started_at=started_at,
             completed_at=completed_at,
-            duration=duration
+            duration=duration,
         )
 
         raise
@@ -490,7 +505,7 @@ def run_batch(
         track_dirs=track_dirs,
         started_at=started_at,
         completed_at=completed_at,
-        duration=duration
+        duration=duration,
     )
 
     # 완료 요약 출력
@@ -515,7 +530,7 @@ def run_batch(
         "total": total_files,
         "duration": duration,
         "report_path": report_path,
-        "audio_dir": track_dirs["audio"]
+        "audio_dir": track_dirs["audio"],
     }
 
 
@@ -523,7 +538,7 @@ def run_batch_parallel(
     track_config: Dict[str, Any],
     override_dry_run: Optional[bool] = None,
     stages: List[int] = [1, 2, 3],
-    max_workers: int = 3
+    max_workers: int = 3,
 ) -> Dict[str, Any]:
     """
     트랙 전체를 병렬로 배치 실행합니다.
@@ -594,7 +609,7 @@ def run_batch_parallel(
                 "output_name": file_item.get("output_name", "unknown"),
                 "search_keyword": file_item.get("search_keyword", "unknown"),
                 "status": "cancelled",
-                "error": "다른 파일 처리 중 에러 발생으로 취소됨"
+                "error": "다른 파일 처리 중 에러 발생으로 취소됨",
             }
 
         try:
@@ -603,7 +618,9 @@ def run_batch_parallel(
 
             # 워커 ID를 포함한 로그
             worker_name = threading.current_thread().name
-            logger.info(f"[{worker_name}] 📁 {file_config['output_name']} 처리 시작... ({idx}/{total_files})")
+            logger.info(
+                f"[{worker_name}] 📁 {file_config['output_name']} 처리 시작... ({idx}/{total_files})"
+            )
 
             # 파이프라인 실행
             result = run_single_file(
@@ -611,13 +628,17 @@ def run_batch_parallel(
                 track_dirs=track_dirs,
                 file_index=idx,
                 total_files=total_files,
-                stages=stages
+                stages=stages,
             )
 
             # 완료 카운트 업데이트 (thread-safe)
             with results_lock:
-                completed = len([r for r in results if r.get("status") in ["success", "failed"]])
-                logger.info(f"[{worker_name}] ✅ {file_config['output_name']} 완료 ({completed + 1}/{total_files})")
+                completed = len(
+                    [r for r in results if r.get("status") in ["success", "failed"]]
+                )
+                logger.info(
+                    f"[{worker_name}] ✅ {file_config['output_name']} 완료 ({completed + 1}/{total_files})"
+                )
 
             return result
 
@@ -626,12 +647,16 @@ def run_batch_parallel(
             if not error_occurred.is_set():
                 error_occurred.set()
                 first_error["exception"] = e
-                logger.error(f"[{threading.current_thread().name}] ❌ 에러 발생! 모든 워커 중단 중...")
+                logger.error(
+                    f"[{threading.current_thread().name}] ❌ 에러 발생! 모든 워커 중단 중..."
+                )
 
             raise
 
     try:
-        with ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="Worker") as executor:
+        with ThreadPoolExecutor(
+            max_workers=max_workers, thread_name_prefix="Worker"
+        ) as executor:
             # 모든 파일에 대한 Future 생성
             future_to_file = {
                 executor.submit(run_file_worker, file_item, idx): (file_item, idx)
@@ -667,7 +692,7 @@ def run_batch_parallel(
                         track_dirs=track_dirs,
                         started_at=started_at,
                         completed_at=completed_at,
-                        duration=duration
+                        duration=duration,
                     )
 
                     raise
@@ -682,7 +707,7 @@ def run_batch_parallel(
 
                     raise BatchRunnerError(
                         message=f"파일 처리 중 예상치 못한 에러: {e}",
-                        file_name=file_item.get("output_name", "unknown")
+                        file_name=file_item.get("output_name", "unknown"),
                     ) from e
 
     except KeyboardInterrupt:
@@ -699,7 +724,7 @@ def run_batch_parallel(
                 track_dirs=track_dirs,
                 started_at=started_at,
                 completed_at=completed_at,
-                duration=duration
+                duration=duration,
             )
 
         raise
@@ -715,7 +740,7 @@ def run_batch_parallel(
         track_dirs=track_dirs,
         started_at=started_at,
         completed_at=completed_at,
-        duration=duration
+        duration=duration,
     )
 
     # 완료 요약 출력
@@ -743,7 +768,7 @@ def run_batch_parallel(
         "report_path": report_path,
         "audio_dir": track_dirs["audio"],
         "parallel": True,
-        "max_workers": max_workers
+        "max_workers": max_workers,
     }
 
 
@@ -768,7 +793,9 @@ def parse_stages(stages_str: str) -> List[int]:
     # 유효성 검증
     for stage in stages:
         if stage not in [1, 2, 3]:
-            raise ValueError(f"유효하지 않은 stage 번호: {stage}. 1, 2, 3 중 하나여야 합니다.")
+            raise ValueError(
+                f"유효하지 않은 stage 번호: {stage}. 1, 2, 3 중 하나여야 합니다."
+            )
 
     # 정렬 및 중복 제거
     stages = sorted(set(stages))
@@ -818,40 +845,40 @@ def main():
   - 병렬 처리는 API quota를 빠르게 소진할 수 있습니다
   - Gemini TTS API는 약 3개 동시 요청만 지원하므로 max-workers=3 권장
   - 에러 발생 시 모든 워커가 즉시 중단되며 부분 리포트가 생성됩니다
-        """
+        """,
     )
 
     parser.add_argument(
         "--track-file",
         type=Path,
         required=True,
-        help="트랙 설정 YAML 파일 경로 (예: tracks/sample_track.yaml)"
+        help="트랙 설정 YAML 파일 경로 (예: tracks/sample_track.yaml)",
     )
 
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="테스트 모드 (API 호출 없이 목업 데이터 생성, YAML defaults 오버라이드)"
+        help="테스트 모드 (API 호출 없이 목업 데이터 생성, YAML defaults 오버라이드)",
     )
 
     parser.add_argument(
         "--stages",
         type=str,
         default="1,2,3",
-        help="실행할 파이프라인 단계 (기본값: 1,2,3). 예: '2' 또는 '2,3'"
+        help="실행할 파이프라인 단계 (기본값: 1,2,3). 예: '2' 또는 '2,3'",
     )
 
     parser.add_argument(
         "--parallel",
         action="store_true",
-        help="병렬 처리 모드 활성화 (3개 워커 동시 실행, 기본값: 순차 처리)"
+        help="병렬 처리 모드 활성화 (3개 워커 동시 실행, 기본값: 순차 처리)",
     )
 
     parser.add_argument(
         "--max-workers",
         type=int,
         default=3,
-        help="병렬 처리 시 최대 워커 수 (기본값: 3, Gemini TTS API 제약)"
+        help="병렬 처리 시 최대 워커 수 (기본값: 3, Gemini TTS API 제약)",
     )
 
     args = parser.parse_args()
@@ -877,14 +904,14 @@ def main():
                 track_config=track_config,
                 override_dry_run=args.dry_run if args.dry_run else None,
                 stages=stages,
-                max_workers=args.max_workers
+                max_workers=args.max_workers,
             )
         else:
             logger.info(f"➡️  순차 처리 모드")
             result = run_batch(
                 track_config=track_config,
                 override_dry_run=args.dry_run if args.dry_run else None,
-                stages=stages
+                stages=stages,
             )
 
         # 5. 성공 메시지
@@ -921,6 +948,7 @@ def main():
     except Exception as e:
         logger.error(f"\n❌ 예상치 못한 오류 발생: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
