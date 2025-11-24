@@ -1,0 +1,9 @@
+{
+  "output_name": "test_sample",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:33:36.624732",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Leda",
+  "file_size": 874656
+}

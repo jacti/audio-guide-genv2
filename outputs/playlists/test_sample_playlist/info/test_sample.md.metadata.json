@@ -1,0 +1,15 @@
+{
+  "output_name": "test_sample",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T16:53:00.634588",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "신라 금관에 대한 상세한 정보를 조사해주세요.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 740,
+    "completion_tokens": 1361,
+    "total_tokens": 2101
+  },
+  "file_size": 4010
+}

@@ -4,7 +4,7 @@
 스크립트 파일(Markdown)을 읽어 Gemini API를 통해 음성 파일(MP3/WAV)로 변환합니다.
 
 주요 기능:
-- Gemini TTS API 연동 (gemini-2.5-flash-tts 모델 사용)
+- Gemini TTS API 연동 (gemini-2.5-pro-tts 모델 사용)
 - 재시도 로직 (네트워크 오류 대응)
 - dry_run 모드 (테스트용 더미 파일 생성)
 - 로깅 및 예외 처리
@@ -19,7 +19,6 @@ from pathlib import Path
 from typing import Optional
 import argparse
 
-import backoff
 from google.cloud import texttospeech
 from dotenv import load_dotenv
 
@@ -207,17 +206,13 @@ def _generate_audio_gemini(
     output_path: Path,
     voice: str,
     tts_language: str,
-    tts_system_prompt: str,
     gemini_tts_model: str,
-    max_retries: int,
-    initial_wait: float,
-    max_wait: float,
 ) -> None:
     """
     Google Cloud Text-to-Speech API (Gemini TTS)를 호출하여 음성 파일을 생성합니다.
 
-    지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 대응.
     생성된 오디오는 output_path에 직접 저장됩니다.
+    에러 발생 시 즉시 실패합니다 (재시도 로직 없음).
 
     인증 방법:
     1. GOOGLE_APPLICATION_CREDENTIALS 환경변수로 서비스 계정 키 파일 경로 설정
@@ -228,11 +223,7 @@ def _generate_audio_gemini(
         output_path: 출력 파일 경로 (MP3/WAV)
         voice: Gemini voice 이름 (기본값: "Zephyr")
         tts_language: Gemini TTS 언어 (기본값: "ko-KR")
-        tts_system_prompt: Gemini TTS 시스템 프롬프트
-        gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
-        max_retries: 최대 재시도 횟수 (기본값: 8)
-        initial_wait: 초기 대기 시간 초 (기본값: 1.0)
-        max_wait: 최대 대기 시간 초 (기본값: 60.0)
+        gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-tts")
 
     Returns:
         None (파일에 직접 저장)
@@ -241,6 +232,36 @@ def _generate_audio_gemini(
         ValueError: 파라미터가 유효하지 않을 경우
         Exception: API 호출 실패 시 (인증 오류 포함)
     """
+
+    ### 내부 함수 선언
+
+    def _call_api_for_chunk(chunk_text: str) -> bytes:
+        """단일 청크 API 호출"""
+        # 입력 텍스트 설정
+        synthesis_input = texttospeech.SynthesisInput(text=chunk_text)
+
+        # 음성 설정
+        voice_params = texttospeech.VoiceSelectionParams(
+            # language_code="en-US",  # Gemini TTS voices는 주로 en-US
+            language_code=tts_language,  # Gemini TTS voices는 주로 en-US
+            name=voice,
+            model_name=gemini_tts_model,
+        )
+
+        # 오디오 설정
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3
+        )
+
+        # API 호출
+        response = client.synthesize_speech(
+            input=synthesis_input, voice=voice_params, audio_config=audio_config
+        )
+
+        return response.audio_content
+
+    ### 본문
+
     # 텍스트를 청크로 분할
     text_bytes = len(text.encode("utf-8"))
     text_length = len(text)
@@ -277,56 +298,6 @@ def _generate_audio_gemini(
         )
         raise
 
-    # 백오프 핸들러: 재시도 시 로깅
-    def on_backoff(details):
-        wait_time = details["wait"]
-        tries = details["tries"]
-        logger.warning(
-            f"⏳ 지수 백오프 적용: {wait_time:.2f}초 대기 중 "
-            f"(재시도 {tries}/{max_retries})"
-        )
-
-    # 포기 시 핸들러: 최종 실패 로깅
-    def on_giveup(details):
-        logger.error(f"❌ 최대 재시도 횟수 초과 ({max_retries}회): API 호출 포기")
-
-    # 지수 백오프를 적용한 단일 청크 API 호출 함수
-    @backoff.on_exception(
-        backoff.expo,
-        Exception,  # Google Cloud API의 예외를 포괄적으로 처리
-        max_tries=max_retries,
-        max_value=max_wait,
-        on_backoff=on_backoff,
-        on_giveup=on_giveup,
-        jitter=backoff.full_jitter,
-    )
-    def _call_api_for_chunk(chunk_text: str) -> bytes:
-        """단일 청크에 대해 지수 백오프가 적용된 API 호출"""
-        # 입력 텍스트 설정
-        synthesis_input = texttospeech.SynthesisInput(
-            text=chunk_text, prompt=tts_system_prompt
-        )
-
-        # 음성 설정
-        voice_params = texttospeech.VoiceSelectionParams(
-            # language_code="en-US",  # Gemini TTS voices는 주로 en-US
-            language_code=tts_language,  # Gemini TTS voices는 주로 en-US
-            name=voice,
-            model_name=gemini_tts_model,
-        )
-
-        # 오디오 설정
-        audio_config = texttospeech.AudioConfig(
-            audio_encoding=texttospeech.AudioEncoding.MP3
-        )
-
-        # API 호출
-        response = client.synthesize_speech(
-            input=synthesis_input, voice=voice_params, audio_config=audio_config
-        )
-
-        return response.audio_content
-
     # 모든 청크 처리 및 오디오 결합
     try:
         audio_chunks = []
@@ -359,40 +330,29 @@ def _generate_audio_gemini(
 
     except Exception as e:
         logger.error(f"🔴 Gemini API 에러: {e}")
-        raise Exception(
-            f"⚠️ Gemini TTS 생성 실패 ({max_retries}회 재시도)\n" f"상세 정보: {e}"
-        ) from e
+        raise Exception(f"⚠️ Gemini TTS 생성 실패\n상세 정보: {e}") from e
 
 
 def run(
     output_name: str,
     tts_language: str,
-    tts_system_prompt: str,
     script_gen_result_file_path: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
     gemini_tts_model: str = "gemini-2.5-pro-tts",
-    max_retries: int = 8,
-    initial_wait: float = 1.0,
-    max_wait: float = 60.0,
 ) -> Path:
     """
     오디오 생성 파이프라인 메인 진입점.
 
     스크립트 파일을 읽어 Gemini TTS API를 통해 MP3/WAV 파일로 변환합니다.
-    지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 자동 대응.
 
     Args:
         output_name: 파일명 (식별자로 사용됨)
         tts_language: Gemini TTS 언어
-        tts_system_prompt: Gemini TTS 시스템 프롬프트
         script_gen_result_file_path: 스크립트 생성 결과 파일 경로 (필수)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
         gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-tts")
-        max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
-        initial_wait: 초기 대기 시간 초 (기본값: 1.0)
-        max_wait: 최대 대기 시간 초 (기본값: 60.0)
 
     Returns:
         Path: 생성된 MP3/WAV 파일의 절대 경로
@@ -404,7 +364,7 @@ def run(
 
     Examples:
         >>> # 기본 사용법
-        >>> output_path = run("01_celadon", tts_language="ko-KR", tts_system_prompt="...")
+        >>> output_path = run("01_celadon", tts_language="ko-KR")
     """
     logger.info(f"=== 오디오 생성 파이프라인 시작: '{output_name}' ===")
 
@@ -433,11 +393,7 @@ def run(
         output_path=output_path,
         voice=voice,
         tts_language=tts_language,
-        tts_system_prompt=tts_system_prompt,
         gemini_tts_model=gemini_tts_model,
-        max_retries=max_retries,
-        initial_wait=initial_wait,
-        max_wait=max_wait,
     )
 
     logger.info(f"✅ 오디오 파일 저장 완료: {output_path.absolute()}")
@@ -518,30 +474,9 @@ def main():
     parser.add_argument(
         "--gemini-tts-model",
         type=str,
-        default="gemini-2.5-flash-tts",
-        choices=["gemini-2.5-flash-tts", "gemini-2.5-pro-tts"],
-        help="Gemini TTS 모델명 (기본값: gemini-2.5-flash-tts)",
-    )
-
-    parser.add_argument(
-        "--max-retries",
-        type=int,
-        default=8,
-        help="API 호출 최대 재시도 횟수 (기본값: 8, 지수 백오프 적용)",
-    )
-
-    parser.add_argument(
-        "--initial-wait",
-        type=float,
-        default=1.0,
-        help="초기 대기 시간 초 (기본값: 1.0, 지수 백오프 시작 값)",
-    )
-
-    parser.add_argument(
-        "--max-wait",
-        type=float,
-        default=60.0,
-        help="최대 대기 시간 초 (기본값: 60.0, 지수 백오프 상한)",
+        default="gemini-2.5-pro-tts",
+        choices=["gemini-2.5-pro-tts", "gemini-2.5-pro-tts"],
+        help="Gemini TTS 모델명 (기본값: gemini-2.5-pro-tts)",
     )
 
     parser.add_argument(
@@ -551,27 +486,16 @@ def main():
         help="Gemini TTS 언어 (기본값: ko-KR)",
     )
 
-    parser.add_argument(
-        "--tts-system-prompt",
-        type=str,
-        default="당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
-        help="Gemini TTS 프롬프트",
-    )
-
     args = parser.parse_args()
 
     try:
         output_path = run(
             output_name=args.output_name,
             tts_language=args.tts_language,
-            tts_system_prompt=args.tts_system_prompt,
             script_gen_result_file_path=args.script_file,
             output_dir=args.output_dir,
             voice=args.voice,
             gemini_tts_model=args.gemini_tts_model,
-            max_retries=args.max_retries,
-            initial_wait=args.initial_wait,
-            max_wait=args.max_wait,
         )
 
         print(f"\n🎵 오디오 파일이 생성되었습니다: {output_path}")

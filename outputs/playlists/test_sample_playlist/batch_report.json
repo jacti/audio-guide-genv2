@@ -1,0 +1,22 @@
+{
+  "playlist_name": "test_sample_playlist",
+  "description": "단일 파일 테스트용 플레이리스트",
+  "metadata": {},
+  "started_at": "2025-11-24T19:35:34.269091",
+  "completed_at": "2025-11-24T19:35:48.129862",
+  "duration_seconds": 13.86,
+  "total_files": 1,
+  "successful": 1,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "test_sample",
+      "started_at": "2025-11-24T19:35:34.269096",
+      "status": "success",
+      "stages_run": [
+        2
+      ],
+      "completed_at": "2025-11-24T19:35:48.129845"
+    }
+  ]
+}

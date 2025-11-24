@@ -25,13 +25,13 @@ class PipelineMetadata:
         model: Optional[str] = None,
         info_retrieval_user_content_text: Optional[str] = None,
         script_gen_user_content_text: Optional[str] = None,
-        **extra_fields: Any
+        **extra_fields: Any,
     ):
         """
         메타데이터 객체 초기화
 
         Args:
-            output_name: 결과물 식별자 (tracks YAML의 files.output_name)
+            output_name: 결과물 식별자 (playlists YAML의 files.output_name)
             pipeline: 파이프라인 이름 (info_retrieval, script_gen, audio_gen)
             mode: 실행 모드 (기본값: "production")
             model: 사용된 모델명 (예: "gpt-4o-mini")
@@ -140,7 +140,7 @@ class PipelineMetadata:
             pipeline=pipeline,
             mode=mode,
             model=model,
-            **data  # 나머지 필드 전달
+            **data,  # 나머지 필드 전달
         )
 
 
@@ -152,7 +152,7 @@ def create_metadata(
     model: Optional[str] = None,
     info_retrieval_user_content_text: Optional[str] = None,
     script_gen_user_content_text: Optional[str] = None,
-    **extra_fields: Any
+    **extra_fields: Any,
 ) -> Path:
     """
     메타데이터를 생성하고 저장하는 헬퍼 함수
@@ -185,7 +185,7 @@ def create_metadata(
         model=model,
         info_retrieval_user_content_text=info_retrieval_user_content_text,
         script_gen_user_content_text=script_gen_user_content_text,
-        **extra_fields
+        **extra_fields,
     )
     return metadata.save(output_file_path)
 

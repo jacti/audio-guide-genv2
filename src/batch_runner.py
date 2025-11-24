@@ -1,14 +1,14 @@
 """
-트랙 기반 배치 오디오 가이드 생성 스크립트
+플레이리스트 기반 배치 오디오 가이드 생성 스크립트
 
-YAML 설정 파일을 읽어 여러 개의 오디오 가이드를 일괄 생성합니다.
-트랙별로 계층적 디렉토리 구조를 유지하며, 실행 결과 리포트를 자동 생성합니다.
+YAML 설정 파일을 읽어 여러 개의 오디오 트랙을 일괄 생성합니다.
+플레이리스트별로 계층적 디렉토리 구조를 유지하며, 실행 결과 리포트를 자동 생성합니다.
 
 주요 기능:
-- YAML 기반 트랙 설정 파싱
+- YAML 기반 플레이리스트 설정 파싱
 - 순차적 파이프라인 실행 (info → script → audio)
 - 실시간 진행률 표시
-- 트랙별 출력 디렉토리 구조 생성
+- 플레이리스트별 출력 디렉토리 구조 생성
 - 실행 결과 JSON 리포트 생성
 - 에러 발생 시 즉시 중단 및 상세 로그
 """
@@ -66,9 +66,9 @@ class BatchRunnerError(Exception):
             super().__init__(message)
 
 
-def load_track_config(yaml_path: Path) -> Dict[str, Any]:
+def load_playlist_config(yaml_path: Path) -> Dict[str, Any]:
     """
-    YAML 트랙 설정 파일을 로드합니다.
+    YAML 플레이리스트 설정 파일을 로드합니다.
 
     Args:
         yaml_path: YAML 파일 경로
@@ -81,9 +81,11 @@ def load_track_config(yaml_path: Path) -> Dict[str, Any]:
         yaml.YAMLError: YAML 파싱 오류
     """
     if not yaml_path.exists():
-        raise FileNotFoundError(f"트랙 설정 파일을 찾을 수 없습니다: {yaml_path}")
+        raise FileNotFoundError(
+            f"플레이리스트 설정 파일을 찾을 수 없습니다: {yaml_path}"
+        )
 
-    logger.info(f"트랙 설정 파일 로드: {yaml_path}")
+    logger.info(f"플레이리스트 설정 파일 로드: {yaml_path}")
 
     with open(yaml_path, "r", encoding="utf-8") as f:
         try:
@@ -94,12 +96,12 @@ def load_track_config(yaml_path: Path) -> Dict[str, Any]:
     return config
 
 
-def validate_track_config(config: Dict[str, Any]) -> bool:
+def validate_playlist_config(config: Dict[str, Any]) -> bool:
     """
-    트랙 설정 파일의 유효성을 검증합니다.
+    플레이리스트 설정 파일의 유효성을 검증합니다.
 
     Args:
-        config: 트랙 설정 딕셔너리
+        config: 플레이리스트 설정 딕셔너리
 
     Returns:
         검증 성공 여부
@@ -108,8 +110,8 @@ def validate_track_config(config: Dict[str, Any]) -> bool:
         BatchRunnerError: 필수 필드 누락 또는 잘못된 설정
     """
     # 필수 필드 확인
-    if "track_name" not in config:
-        raise BatchRunnerError("필수 필드 누락: track_name")
+    if "playlist_name" not in config:
+        raise BatchRunnerError("필수 필드 누락: playlist_name")
 
     if "files" not in config or not isinstance(config["files"], list):
         raise BatchRunnerError("필수 필드 누락 또는 형식 오류: files (리스트여야 함)")
@@ -131,41 +133,41 @@ def validate_track_config(config: Dict[str, Any]) -> bool:
     return True
 
 
-def create_track_directories(
-    track_name: str, base_dir: Path = Path("outputs/tracks")
+def create_playlist_directories(
+    playlist_name: str, base_dir: Path = Path("outputs/playlists")
 ) -> Dict[str, Path]:
     """
-    트랙별 출력 디렉토리 구조를 생성합니다.
+    플레이리스트별 출력 디렉토리 구조를 생성합니다.
 
     Args:
-        track_name: 트랙 이름
+        playlist_name: 플레이리스트 이름
         base_dir: 기본 출력 디렉토리
 
     Returns:
         생성된 디렉토리 경로 딕셔너리
         {
-            "track_root": Path,
+            "playlist_root": Path,
             "info": Path,
             "script": Path,
             "audio": Path
         }
     """
-    # 트랙 이름을 파일시스템 안전한 형태로 변환
-    safe_track_name = sanitize_keyword_for_path(track_name)
-    track_root = base_dir / safe_track_name
+    # 플레이리스트 이름을 파일시스템 안전한 형태로 변환
+    safe_playlist_name = sanitize_keyword_for_path(playlist_name)
+    playlist_root = base_dir / safe_playlist_name
 
     # 디렉토리 생성
     dirs = {
-        "track_root": track_root,
-        "info": track_root / "info",
-        "script": track_root / "script",
-        "audio": track_root / "audio",
+        "playlist_root": playlist_root,
+        "info": playlist_root / "info",
+        "script": playlist_root / "script",
+        "audio": playlist_root / "audio",
     }
 
     for dir_path in dirs.values():
         dir_path.mkdir(parents=True, exist_ok=True)
 
-    logger.info(f"📁 트랙 디렉토리 생성 완료: {track_root}")
+    logger.info(f"📁 플레이리스트 디렉토리 생성 완료: {playlist_root}")
 
     return dirs
 
@@ -191,7 +193,7 @@ def merge_file_config(
 def validate_stage_dependencies(
     stages: List[int],
     output_name: str,
-    track_dirs: Dict[str, Path],
+    playlist_dirs: Dict[str, Path],
 ) -> None:
     """
     선택된 파이프라인 단계의 의존성을 검증합니다.
@@ -201,14 +203,14 @@ def validate_stage_dependencies(
     Args:
         stages: 실행할 파이프라인 단계 리스트 (1: info, 2: script, 3: audio)
         output_name: 출력 파일명
-        track_dirs: 트랙 디렉토리 경로 딕셔너리
+        playlist_dirs: 플레이리스트 디렉토리 경로 딕셔너리
 
     Raises:
         FileNotFoundError: 필요한 입력 파일이 존재하지 않을 때
     """
     # Stage 2 (script_gen)를 실행하려면 Stage 1 (info)의 출력이 필요
     if 2 in stages and 1 not in stages:
-        info_path = info_markdown_path(output_name, track_dirs["info"])
+        info_path = info_markdown_path(output_name, playlist_dirs["info"])
         if not info_path.exists():
             raise FileNotFoundError(
                 f"❌ Stage 2 (스크립트 생성)를 실행하려면 info 파일이 필요합니다.\n"
@@ -218,7 +220,7 @@ def validate_stage_dependencies(
 
     # Stage 3 (audio_gen)를 실행하려면 Stage 2 (script)의 출력이 필요
     if 3 in stages and 2 not in stages:
-        script_path = script_markdown_path(output_name, track_dirs["script"])
+        script_path = script_markdown_path(output_name, playlist_dirs["script"])
         if not script_path.exists():
             raise FileNotFoundError(
                 f"❌ Stage 3 (오디오 생성)을 실행하려면 script 파일이 필요합니다.\n"
@@ -229,7 +231,7 @@ def validate_stage_dependencies(
 
 def run_single_file(
     file_config: Dict[str, Any],
-    track_dirs: Dict[str, Path],
+    playlist_dirs: Dict[str, Path],
     file_index: int,
     total_files: int,
     stages: List[int] = [1, 2, 3],
@@ -239,7 +241,7 @@ def run_single_file(
 
     Args:
         file_config: 파일 설정 (defaults와 병합된 상태)
-        track_dirs: 트랙 디렉토리 경로 딕셔너리
+        playlist_dirs: 플레이리스트 디렉토리 경로 딕셔너리
         file_index: 현재 파일 인덱스 (1부터 시작)
         total_files: 전체 파일 개수
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
@@ -277,7 +279,7 @@ def run_single_file(
     script_path = None
     try:
         # 의존성 검증
-        validate_stage_dependencies(stages, output_name, track_dirs)
+        validate_stage_dependencies(stages, output_name, playlist_dirs)
 
         # Pipeline 1: 정보 검색
         if 1 in stages:
@@ -292,11 +294,11 @@ def run_single_file(
                     "info_retrieval_user_content_text",
                     "한국 문화유산에 대한 상세한 정보를 수집해주세요.",
                 ),
-                output_dir=track_dirs["info"],
+                output_dir=playlist_dirs["info"],
             )
             logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
         else:
-            info_path = info_markdown_path(output_name, track_dirs["info"])
+            info_path = info_markdown_path(output_name, playlist_dirs["info"])
             logger.info("  ⊘ [Stage 1] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 2: 스크립트 생성
@@ -309,7 +311,7 @@ def run_single_file(
                 ],
                 script_gen_model=file_config.get("script_gen_model", "gpt-4o"),
                 info_retrieval_result_file_path=info_path,
-                output_dir=track_dirs["script"],
+                output_dir=playlist_dirs["script"],
                 script_gen_user_content_text=file_config.get(
                     "script_gen_user_content_text"
                 ),
@@ -317,7 +319,7 @@ def run_single_file(
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
         else:
-            script_path = script_markdown_path(output_name, track_dirs["script"])
+            script_path = script_markdown_path(output_name, playlist_dirs["script"])
             logger.info("  ⊘ [Stage 2] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 3: 오디오 생성
@@ -326,17 +328,12 @@ def run_single_file(
             audio_path = audio_gen.run(
                 output_name=output_name,
                 tts_language=file_config.get("tts_language", "ko-KR"),
-                tts_system_prompt=file_config.get(
-                    "tts_system_prompt",
-                    "당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
-                ),
                 script_gen_result_file_path=script_path,
-                output_dir=track_dirs["audio"],
+                output_dir=playlist_dirs["audio"],
                 voice=file_config.get("voice", "Zephyr"),
                 gemini_tts_model=file_config.get(
                     "gemini_tts_model", "gemini-2.5-pro-tts"
                 ),
-                max_retries=file_config.get("max_retries", 8),
             )
             logger.info(f"  ✓ [Stage 3] 오디오 생성 완료: {audio_path.name}")
             result["audio_path"] = str(audio_path)
@@ -364,9 +361,9 @@ def run_single_file(
 
 
 def generate_batch_report(
-    track_config: Dict[str, Any],
+    playlist_config: Dict[str, Any],
     results: List[Dict[str, Any]],
-    track_dirs: Dict[str, Path],
+    playlist_dirs: Dict[str, Path],
     started_at: str,
     completed_at: str,
     duration: float,
@@ -375,9 +372,9 @@ def generate_batch_report(
     배치 실행 결과 리포트를 JSON 파일로 생성합니다.
 
     Args:
-        track_config: 트랙 설정
+        playlist_config: 플레이리스트 설정
         results: 각 파일 실행 결과 리스트
-        track_dirs: 트랙 디렉토리 경로
+        playlist_dirs: 플레이리스트 디렉토리 경로
         started_at: 시작 시각 (ISO format)
         completed_at: 완료 시각 (ISO format)
         duration: 소요 시간 (초)
@@ -386,9 +383,9 @@ def generate_batch_report(
         생성된 리포트 파일 경로
     """
     report = {
-        "track_name": track_config["track_name"],
-        "description": track_config.get("description", ""),
-        "metadata": track_config.get("metadata", {}),
+        "playlist_name": playlist_config["playlist_name"],
+        "description": playlist_config.get("description", ""),
+        "metadata": playlist_config.get("metadata", {}),
         "started_at": started_at,
         "completed_at": completed_at,
         "duration_seconds": round(duration, 2),
@@ -398,7 +395,7 @@ def generate_batch_report(
         "files": results,
     }
 
-    report_path = track_dirs["track_root"] / "batch_report.json"
+    report_path = playlist_dirs["playlist_root"] / "batch_report.json"
 
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
@@ -409,14 +406,14 @@ def generate_batch_report(
 
 
 def run_batch(
-    track_config: Dict[str, Any],
+    playlist_config: Dict[str, Any],
     stages: List[int] = [1, 2, 3],
 ) -> Dict[str, Any]:
     """
-    트랙 전체를 배치 실행합니다.
+    플레이리스트 전체를 배치 실행합니다.
 
     Args:
-        track_config: 트랙 설정 딕셔너리
+        playlist_config: 플레이리스트 설정 딕셔너리
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
@@ -425,9 +422,9 @@ def run_batch(
     Raises:
         BatchRunnerError: 실행 중 오류 발생
     """
-    track_name = track_config["track_name"]
-    files = track_config["files"]
-    defaults = track_config.get("defaults", {})
+    playlist_name = playlist_config["playlist_name"]
+    files = playlist_config["files"]
+    defaults = playlist_config.get("defaults", {})
 
     # defaults가 None인 경우 처리
     if defaults is None:
@@ -436,13 +433,13 @@ def run_batch(
     total_files = len(files)
 
     logger.info(f"\n{'='*70}")
-    logger.info(f"🎬 배치 실행 시작: {track_name}")
+    logger.info(f"🎬 배치 실행 시작: {playlist_name}")
     logger.info(f"총 {total_files}개 파일")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
-    # 트랙 디렉토리 생성
-    track_dirs = create_track_directories(track_name)
+    # 플레이리스트 디렉토리 생성
+    playlist_dirs = create_playlist_directories(playlist_name)
 
     # 실행 시작
     started_at = datetime.now().isoformat()
@@ -457,7 +454,7 @@ def run_batch(
             # 파이프라인 실행
             result = run_single_file(
                 file_config=file_config,
-                track_dirs=track_dirs,
+                playlist_dirs=playlist_dirs,
                 file_index=idx,
                 total_files=total_files,
                 stages=stages,
@@ -473,9 +470,9 @@ def run_batch(
         logger.info("부분 실행 결과 리포트를 생성합니다...")
 
         generate_batch_report(
-            track_config=track_config,
+            playlist_config=playlist_config,
             results=results,
-            track_dirs=track_dirs,
+            playlist_dirs=playlist_dirs,
             started_at=started_at,
             completed_at=completed_at,
             duration=duration,
@@ -489,9 +486,9 @@ def run_batch(
 
     # 결과 리포트 생성
     report_path = generate_batch_report(
-        track_config=track_config,
+        playlist_config=playlist_config,
         results=results,
-        track_dirs=track_dirs,
+        playlist_dirs=playlist_dirs,
         started_at=started_at,
         completed_at=completed_at,
         duration=duration,
@@ -504,38 +501,38 @@ def run_batch(
     logger.info(f"\n{'='*70}")
     logger.info(f"🎉 배치 실행 완료!")
     logger.info(f"{'='*70}")
-    logger.info(f"트랙: {track_name}")
+    logger.info(f"플레이리스트: {playlist_name}")
     logger.info(f"성공: {successful}/{total_files}")
     logger.info(f"실패: {failed}/{total_files}")
     logger.info(f"소요 시간: {duration:.1f}초")
     logger.info(f"결과 리포트: {report_path}")
-    logger.info(f"오디오 파일 위치: {track_dirs['audio']}")
+    logger.info(f"오디오 파일 위치: {playlist_dirs['audio']}")
     logger.info(f"{'='*70}\n")
 
     return {
-        "track_name": track_name,
+        "playlist_name": playlist_name,
         "successful": successful,
         "failed": failed,
         "total": total_files,
         "duration": duration,
         "report_path": report_path,
-        "audio_dir": track_dirs["audio"],
+        "audio_dir": playlist_dirs["audio"],
     }
 
 
 def run_batch_parallel(
-    track_config: Dict[str, Any],
+    playlist_config: Dict[str, Any],
     stages: List[int] = [1, 2, 3],
     max_workers: int = 3,
 ) -> Dict[str, Any]:
     """
-    트랙 전체를 병렬로 배치 실행합니다.
+    플레이리스트 전체를 병렬로 배치 실행합니다.
 
     ThreadPoolExecutor를 사용하여 여러 파일을 동시에 처리합니다.
     먼저 완료된 워커가 다음 파일을 받아 처리하는 동적 할당 방식입니다.
 
     Args:
-        track_config: 트랙 설정 딕셔너리
+        playlist_config: 플레이리스트 설정 딕셔너리
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
         max_workers: 최대 동시 워커 수 (기본값: 3, Gemini TTS 제약)
 
@@ -546,9 +543,9 @@ def run_batch_parallel(
         BatchRunnerError: 실행 중 오류 발생
         KeyboardInterrupt: 사용자 중단
     """
-    track_name = track_config["track_name"]
-    files = track_config["files"]
-    defaults = track_config.get("defaults", {})
+    playlist_name = playlist_config["playlist_name"]
+    files = playlist_config["files"]
+    defaults = playlist_config.get("defaults", {})
 
     # defaults가 None인 경우 처리
     if defaults is None:
@@ -557,13 +554,13 @@ def run_batch_parallel(
     total_files = len(files)
 
     logger.info(f"\n{'='*70}")
-    logger.info(f"🎬 병렬 배치 실행 시작: {track_name}")
+    logger.info(f"🎬 병렬 배치 실행 시작: {playlist_name}")
     logger.info(f"총 {total_files}개 파일 | 워커 수: {max_workers}")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
-    # 트랙 디렉토리 생성
-    track_dirs = create_track_directories(track_name)
+    # 플레이리스트 디렉토리 생성
+    playlist_dirs = create_playlist_directories(playlist_name)
 
     # 실행 시작
     started_at = datetime.now().isoformat()
@@ -607,7 +604,7 @@ def run_batch_parallel(
             # 파이프라인 실행
             result = run_single_file(
                 file_config=file_config,
-                track_dirs=track_dirs,
+                playlist_dirs=playlist_dirs,
                 file_index=idx,
                 total_files=total_files,
                 stages=stages,
@@ -669,9 +666,9 @@ def run_batch_parallel(
 
                     logger.info("부분 실행 결과 리포트를 생성합니다...")
                     generate_batch_report(
-                        track_config=track_config,
+                        playlist_config=playlist_config,
                         results=results,
-                        track_dirs=track_dirs,
+                        playlist_dirs=playlist_dirs,
                         started_at=started_at,
                         completed_at=completed_at,
                         duration=duration,
@@ -701,9 +698,9 @@ def run_batch_parallel(
 
         if results:
             generate_batch_report(
-                track_config=track_config,
+                playlist_config=playlist_config,
                 results=results,
-                track_dirs=track_dirs,
+                playlist_dirs=playlist_dirs,
                 started_at=started_at,
                 completed_at=completed_at,
                 duration=duration,
@@ -717,9 +714,9 @@ def run_batch_parallel(
 
     # 결과 리포트 생성
     report_path = generate_batch_report(
-        track_config=track_config,
+        playlist_config=playlist_config,
         results=results,
-        track_dirs=track_dirs,
+        playlist_dirs=playlist_dirs,
         started_at=started_at,
         completed_at=completed_at,
         duration=duration,
@@ -732,23 +729,23 @@ def run_batch_parallel(
     logger.info(f"\n{'='*70}")
     logger.info(f"🎉 병렬 배치 실행 완료!")
     logger.info(f"{'='*70}")
-    logger.info(f"트랙: {track_name}")
+    logger.info(f"플레이리스트: {playlist_name}")
     logger.info(f"성공: {successful}/{total_files}")
     logger.info(f"실패: {failed}/{total_files}")
     logger.info(f"소요 시간: {duration:.1f}초")
     logger.info(f"워커 수: {max_workers}")
     logger.info(f"결과 리포트: {report_path}")
-    logger.info(f"오디오 파일 위치: {track_dirs['audio']}")
+    logger.info(f"오디오 파일 위치: {playlist_dirs['audio']}")
     logger.info(f"{'='*70}\n")
 
     return {
-        "track_name": track_name,
+        "playlist_name": playlist_name,
         "successful": successful,
         "failed": failed,
         "total": total_files,
         "duration": duration,
         "report_path": report_path,
-        "audio_dir": track_dirs["audio"],
+        "audio_dir": playlist_dirs["audio"],
         "parallel": True,
         "max_workers": max_workers,
     }
@@ -788,30 +785,30 @@ def parse_stages(stages_str: str) -> List[int]:
 def main():
     """CLI 진입점"""
     parser = argparse.ArgumentParser(
-        description="트랙 기반 배치 오디오 가이드 생성",
+        description="플레이리스트 기반 배치 오디오 가이드 생성",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
   # 기본 실행 (순차 처리, 모든 파이프라인)
-  python -m src.batch_runner --track-file tracks/sample_track.yaml
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml
 
   # 병렬 실행 (3개 워커, 속도 향상)
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --parallel
 
   # 병렬 실행 + 워커 수 지정
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --max-workers 2
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --parallel --max-workers 2
 
   # 스크립트 생성만 재실행 (info 파일은 이미 존재)
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --stages 2
 
   # 스크립트 + 오디오만 병렬 재생성
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2,3 --parallel
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --stages 2,3 --parallel
 
   # 오디오만 재생성 (script 파일은 이미 존재)
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --stages 3
 
 출력 구조:
-  outputs/tracks/[트랙명]/
+  outputs/playlists/[플레이리스트명]/
   ├── info/       - 정보 파일 (Stage 1)
   ├── script/     - 스크립트 파일 (Stage 2)
   ├── audio/      - 오디오 파일 (Stage 3, 최종 결과물)
@@ -825,10 +822,10 @@ def main():
     )
 
     parser.add_argument(
-        "--track-file",
+        "--playlist-file",
         type=Path,
         required=True,
-        help="트랙 설정 YAML 파일 경로 (예: tracks/sample_track.yaml)",
+        help="플레이리스트 설정 YAML 파일 경로 (예: playlists/sample_playlist.yaml)",
     )
 
     parser.add_argument(
@@ -862,23 +859,23 @@ def main():
         logger.info(f"실행할 파이프라인 단계: {stages}")
 
         # 2. YAML 설정 로드
-        track_config = load_track_config(args.track_file)
+        playlist_config = load_playlist_config(args.playlist_file)
 
         # 3. 설정 검증
-        validate_track_config(track_config)
+        validate_playlist_config(playlist_config)
 
         # 4. 배치 실행 (병렬 또는 순차)
         if args.parallel:
             logger.info(f"🔄 병렬 처리 모드 (워커 수: {args.max_workers})")
             result = run_batch_parallel(
-                track_config=track_config,
+                playlist_config=playlist_config,
                 stages=stages,
                 max_workers=args.max_workers,
             )
         else:
             logger.info(f"➡️  순차 처리 모드")
             result = run_batch(
-                track_config=track_config,
+                playlist_config=playlist_config,
                 stages=stages,
             )
 
@@ -887,7 +884,7 @@ def main():
         print(f"배치 실행이 완료되었습니다!")
         print("🎉 " * 20)
         print(f"\n📍 결과:")
-        print(f"  트랙: {result['track_name']}")
+        print(f"  플레이리스트: {result['playlist_name']}")
         print(f"  성공: {result['successful']}/{result['total']}")
         print(f"  오디오 파일: {result['audio_dir']}")
         print(f"  리포트: {result['report_path']}")
