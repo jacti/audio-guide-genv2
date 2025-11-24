@@ -39,7 +39,6 @@ logging.basicConfig(
 
 # 기본 설정
 DEFAULT_OUTPUT_DIR = Path("outputs/audio")
-DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/audio")
 
 
 def _read_script(script_path: Path) -> str:
@@ -364,39 +363,6 @@ def _generate_audio_gemini(
         ) from e
 
 
-def _create_dummy_audio(output_path: Path) -> None:
-    """
-    dry_run 모드에서 사용할 더미 MP3 파일을 생성합니다.
-
-    Args:
-        output_path: 더미 파일을 생성할 경로
-    """
-    # 간단한 MP3 헤더 (실제 재생은 안되지만 파일 형식은 유지)
-    dummy_mp3_header = bytes(
-        [
-            0xFF,
-            0xFB,
-            0x90,
-            0x00,  # MP3 동기 워드와 기본 헤더
-            0x00,
-            0x00,
-            0x00,
-            0x00,
-            0x49,
-            0x6E,
-            0x66,
-            0x6F,  # "Info" 태그
-        ]
-    )
-
-    with open(output_path, "wb") as f:
-        f.write(dummy_mp3_header)
-        # 더미 메타데이터 추가
-        f.write(b"\x00" * 100)
-
-    logger.info(f"더미 MP3 파일 생성 완료: {output_path}")
-
-
 def run(
     search_keyword: str,
     *,
@@ -409,7 +375,6 @@ def run(
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
-    dry_run: bool = False,
     output_name: Optional[str] = None,
 ) -> Path:
     """
@@ -429,7 +394,6 @@ def run(
         max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
-        dry_run: True일 경우 API 호출 없이 더미 파일 생성 (기본값: False)
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
@@ -445,17 +409,14 @@ def run(
         >>> output_path = run("청자 상감운학문 매병")
         >>> print(output_path)
         /path/to/outputs/audio/청자 상감운학문 매병.mp3
-
-        >>> # dry_run 모드
-        >>> output_path = run("테스트", dry_run=True)
     """
     logger.info(f"=== 오디오 생성 파이프라인 시작: '{search_keyword}' ===")
 
-    # 기본 경로 설정: dry_run 모드일 때 입력/출력 모두 mock 디렉토리 사용
+    # 기본 경로 설정
     if script_dir is None:
-        script_dir = Path("outputs/mock/script") if dry_run else Path("outputs/script")
+        script_dir = Path("outputs/script")
     if output_dir is None:
-        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
+        output_dir = DEFAULT_OUTPUT_DIR
 
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -468,50 +429,33 @@ def run(
     # 스크립트 파일 읽기
     script_text = _read_script(script_path)
 
-    if dry_run:
-        logger.info("🧪 DRY RUN 모드: 실제 API 호출 없이 더미 파일 생성")
-        _create_dummy_audio(output_path)
+    # 실제 TTS 생성 (파일에 직접 저장됨)
+    _generate_audio_gemini(
+        text=script_text,
+        output_path=output_path,
+        voice=voice,
+        tts_language=tts_language,
+        tts_prompt=tts_prompt,
+        model=model,
+        max_retries=max_retries,
+        initial_wait=initial_wait,
+        max_wait=max_wait,
+    )
 
-        # 메타데이터 생성 (dry_run)
-        try:
-            create_metadata(
-                search_keyword=search_keyword,
-                pipeline="audio_gen",
-                output_file_path=output_path,
-                mode="dry_run",
-                model=model,
-                voice=voice,
-            )
-        except Exception as e:
-            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
-    else:
-        # 실제 TTS 생성 (파일에 직접 저장됨)
-        _generate_audio_gemini(
-            text=script_text,
-            output_path=output_path,
-            voice=voice,
-            tts_language=tts_language,
-            tts_prompt=tts_prompt,
+    logger.info(f"✅ 오디오 파일 저장 완료: {output_path.absolute()}")
+
+    # 메타데이터 생성 (production)
+    try:
+        create_metadata(
+            search_keyword=search_keyword,
+            pipeline="audio_gen",
+            output_file_path=output_path,
+            mode="production",
             model=model,
-            max_retries=max_retries,
-            initial_wait=initial_wait,
-            max_wait=max_wait,
+            voice=voice,
         )
-
-        logger.info(f"✅ 오디오 파일 저장 완료: {output_path.absolute()}")
-
-        # 메타데이터 생성 (production)
-        try:
-            create_metadata(
-                search_keyword=search_keyword,
-                pipeline="audio_gen",
-                output_file_path=output_path,
-                mode="production",
-                model=model,
-                voice=voice,
-            )
-        except Exception as e:
-            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
+    except Exception as e:
+        logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
     logger.info(
         f"=== 오디오 생성 파이프라인 완료 ===\n"
@@ -540,10 +484,7 @@ def main():
   # Flash 모델 사용 (빠르고 저렴)
   python src/pipelines/audio_gen.py --search-keyword "유물명" --model gemini-2.5-flash-preview-tts
 
-  # Dry-run 모드
-  python src/pipelines/audio_gen.py --search-keyword "테스트" --dry-run
-
-지원 음성 (일부):
+  # 지원 음성 (일부):
   Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
         """,
     )
@@ -606,12 +547,6 @@ def main():
     )
 
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="API 호출 없이 더미 파일만 생성 (테스트용)",
-    )
-
-    parser.add_argument(
         "--output-name",
         type=str,
         default=None,
@@ -630,7 +565,6 @@ def main():
             max_retries=args.max_retries,
             initial_wait=args.initial_wait,
             max_wait=args.max_wait,
-            dry_run=args.dry_run,
             output_name=args.output_name,
         )
 

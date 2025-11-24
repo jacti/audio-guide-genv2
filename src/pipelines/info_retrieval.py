@@ -37,7 +37,6 @@ logging.basicConfig(
 
 # 기본 설정
 DEFAULT_OUTPUT_DIR = Path("outputs/info")
-DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/info")
 DEFAULT_MODEL = "sonar-pro"  # Perplexity 모델
 
 
@@ -71,7 +70,6 @@ def _chat_with_perplexity(
     info_prompt: str,
     prompt_template,
     model: str = "sonar-pro",
-    dry_run: bool = False
 ) -> Tuple[str, Dict]:
     """
     Perplexity Chat API로 검색 + 마크다운 생성 (단일 호출)
@@ -81,36 +79,10 @@ def _chat_with_perplexity(
         info_prompt: 추가 맥락 및 요구사항
         prompt_template: 프롬프트 템플릿 객체
         model: Perplexity 모델 (sonar, sonar-pro)
-        dry_run: 테스트 모드
 
     Returns:
         (markdown_content, metadata_dict)
     """
-    if dry_run:
-        # Dry-run 모드: Mock 데이터 반환
-        mock_content = f"""# {search_keyword}
-
-## 개요
-[Dry-run] 이것은 테스트용 마크다운 콘텐츠입니다.
-
-## 역사 및 흥미로운 이야기
-[Dry-run] 테스트 히스토리 내용입니다.
-
-## 주요 특징
-[Dry-run] 테스트 특징 내용입니다.
-
-## 관람 팁
-[Dry-run] 테스트 관람 팁 내용입니다.
-
-## 흥미로운 사실
-[Dry-run] 테스트 흥미로운 사실입니다.
-
-## 참고 자료
-- [테스트 링크 1](https://example.com/1)
-- [테스트 링크 2](https://example.com/2)
-"""
-        return mock_content, {}
-
     # Perplexity API 호출
     api_key = _validate_api_key()
 
@@ -171,7 +143,6 @@ def save_metadata(
     search_keyword: str,
     model: str,
     info_prompt: str,
-    dry_run: bool,
     **extra_metadata
 ) -> None:
     """
@@ -183,14 +154,13 @@ def save_metadata(
         search_keyword: 검색 키워드
         model: 사용한 모델
         info_prompt: 입력 프롬프트
-        dry_run: dry-run 모드 여부
         **extra_metadata: 추가 메타데이터
     """
     metadata_path = create_metadata(
         search_keyword=search_keyword,
         pipeline=pipeline,
         output_file_path=output_path,
-        mode="dry_run" if dry_run else "production",
+        mode="production",
         model=model,
         info_prompt=info_prompt,
         **extra_metadata
@@ -205,7 +175,6 @@ def run(
     prompt_version: str = "default",
     info_prompt: str = "한국 문화유산에 대한 상세한 정보를 수집해주세요.",
     output_dir: Optional[Path] = None,
-    dry_run: bool = False,
     output_name: Optional[str] = None
 ) -> Path:
     """
@@ -217,7 +186,6 @@ def run(
         prompt_version: 프롬프트 버전 (default, ...)
         info_prompt: 추가 맥락 및 요구사항
         output_dir: 출력 디렉토리 (기본: outputs/info/)
-        dry_run: 테스트 모드 (API 호출 없음)
         output_name: 커스텀 파일명 (기본: search_keyword 사용)
 
     Returns:
@@ -232,15 +200,11 @@ def run(
             search_keyword="청자 매병",
             info_prompt="2025년 APEC 관련 내용 포함, 사진 촬영 팁 중심"
         )
-
-        # Dry-run 테스트
-        run("테스트", dry_run=True)
     """
     logger.info(f"=== 정보 검색 파이프라인 시작 ===")
     logger.info(f"검색 키워드: {search_keyword}")
     logger.info(f"모델: {model}")
     logger.info(f"프롬프트 버전: {prompt_version}")
-    logger.info(f"Dry-run: {dry_run}")
 
     # 1. 프롬프트 템플릿 로드
     try:
@@ -256,14 +220,13 @@ def run(
         info_prompt=info_prompt,
         prompt_template=template,
         model=model,
-        dry_run=dry_run
     )
 
     logger.info(f"마크다운 생성 완료 ({len(content)} chars)")
 
     # 3. 파일 저장
     if output_dir is None:
-        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
+        output_dir = DEFAULT_OUTPUT_DIR
 
     output_path = info_markdown_path(
         search_keyword, output_dir, output_name
@@ -281,7 +244,6 @@ def run(
         search_keyword=search_keyword,
         model=model,
         info_prompt=info_prompt,
-        dry_run=dry_run,
         **api_metadata
     )
 
@@ -332,11 +294,6 @@ def main():
         help="커스텀 파일명"
     )
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="테스트 모드 (API 호출 없음)"
-    )
-    parser.add_argument(
         "--list-prompts",
         action="store_true",
         help="사용 가능한 프롬프트 버전 목록 출력"
@@ -360,7 +317,6 @@ def main():
             prompt_version=args.prompt_version,
             info_prompt=args.info_prompt,
             output_dir=args.output_dir,
-            dry_run=args.dry_run,
             output_name=args.output_name
         )
         print(f"\n✅ 완료: {output_path}")

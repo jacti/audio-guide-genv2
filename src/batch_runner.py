@@ -269,7 +269,6 @@ def run_single_file(
     """
     output_name = file_config["output_name"]
     search_keyword = file_config["search_keyword"]
-    dry_run = file_config.get("dry_run", False)
 
     result = {
         "output_name": output_name,
@@ -301,7 +300,6 @@ def run_single_file(
                 ),
                 # max_queries 파라미터 제거됨 (Perplexity Chat API 단일 호출)
                 output_dir=track_dirs["info"],
-                dry_run=dry_run,
                 output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
@@ -321,7 +319,6 @@ def run_single_file(
                 custom_prompt=file_config.get("script_gen_prompt", None),
                 temperature=file_config.get("temperature", 0.7),
                 model=file_config.get("model", "gpt-4.1"),
-                dry_run=dry_run,
                 output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
@@ -340,7 +337,6 @@ def run_single_file(
                 tts_prompt=file_config.get("tts_prompt", ""),
                 model=file_config.get("tts_model", "gemini-2.5-pro-tts"),
                 max_retries=file_config.get("max_retries", 8),
-                dry_run=dry_run,
                 output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 3] 오디오 생성 완료: {audio_path.name}")
@@ -415,7 +411,6 @@ def generate_batch_report(
 
 def run_batch(
     track_config: Dict[str, Any],
-    override_dry_run: Optional[bool] = None,
     stages: List[int] = [1, 2, 3],
 ) -> Dict[str, Any]:
     """
@@ -423,7 +418,6 @@ def run_batch(
 
     Args:
         track_config: 트랙 설정 딕셔너리
-        override_dry_run: dry_run 모드 강제 설정 (None이면 설정 파일 따름)
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
 
     Returns:
@@ -439,10 +433,6 @@ def run_batch(
     # defaults가 None인 경우 처리
     if defaults is None:
         defaults = {}
-
-    # dry_run 오버라이드 처리
-    if override_dry_run is not None:
-        defaults["dry_run"] = override_dry_run
 
     total_files = len(files)
 
@@ -536,7 +526,6 @@ def run_batch(
 
 def run_batch_parallel(
     track_config: Dict[str, Any],
-    override_dry_run: Optional[bool] = None,
     stages: List[int] = [1, 2, 3],
     max_workers: int = 3,
 ) -> Dict[str, Any]:
@@ -548,7 +537,6 @@ def run_batch_parallel(
 
     Args:
         track_config: 트랙 설정 딕셔너리
-        override_dry_run: dry_run 모드 강제 설정 (None이면 설정 파일 따름)
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
         max_workers: 최대 동시 워커 수 (기본값: 3, Gemini TTS 제약)
 
@@ -566,10 +554,6 @@ def run_batch_parallel(
     # defaults가 None인 경우 처리
     if defaults is None:
         defaults = {}
-
-    # dry_run 오버라이드 처리
-    if override_dry_run is not None:
-        defaults["dry_run"] = override_dry_run
 
     total_files = len(files)
 
@@ -819,12 +803,6 @@ def main():
   # 병렬 실행 + 워커 수 지정
   python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --max-workers 2
 
-  # Dry-run 모드 (API 호출 없이 테스트)
-  python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
-
-  # 병렬 + Dry-run (테스트)
-  python -m src.batch_runner --track-file tracks/sample_track.yaml --parallel --dry-run
-
   # 스크립트 생성만 재실행 (info 파일은 이미 존재)
   python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
 
@@ -853,12 +831,6 @@ def main():
         type=Path,
         required=True,
         help="트랙 설정 YAML 파일 경로 (예: tracks/sample_track.yaml)",
-    )
-
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="테스트 모드 (API 호출 없이 목업 데이터 생성, YAML defaults 오버라이드)",
     )
 
     parser.add_argument(
@@ -902,7 +874,6 @@ def main():
             logger.info(f"🔄 병렬 처리 모드 (워커 수: {args.max_workers})")
             result = run_batch_parallel(
                 track_config=track_config,
-                override_dry_run=args.dry_run if args.dry_run else None,
                 stages=stages,
                 max_workers=args.max_workers,
             )
@@ -910,7 +881,6 @@ def main():
             logger.info(f"➡️  순차 처리 모드")
             result = run_batch(
                 track_config=track_config,
-                override_dry_run=args.dry_run if args.dry_run else None,
                 stages=stages,
             )
 

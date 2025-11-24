@@ -8,8 +8,6 @@ defaults:
   voice: "Zephyr"
   temperature: 0.7
   max_retries: 8
-  dry_run: false
-  max_queries: 5  # 쿼리 개수 제한
 
 files:
   - output_name: "04_신라금관허리띠"

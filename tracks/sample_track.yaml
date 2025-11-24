@@ -21,7 +21,6 @@ voice: "Zephyr"                           # Gemini TTS 음성 (예: Zephyr, Puck
 tts_model: "gemini-2.5-flash-tts"         # Gemini TTS 모델
 temperature: 0.7                          # LLM temperature (0.0 ~ 1.0)
 max_retries: 1                            # API 재시도 횟수
-dry_run: false                            # 테스트 모드 (true: API 호출 없이 목업 생성)
 
 # 트랙에 포함될 오디오 파일 목록
 # 순서대로 실행되며, output_name에 번호를 붙여 순서를 명확히 하는 것을 권장합니다.

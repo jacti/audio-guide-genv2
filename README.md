@@ -22,7 +22,6 @@ python -m src.pipelines.info_retrieval --search-keyword "청자 상감운학문 
 - `--prompt-version default` : 정보 검색 프롬프트 버전 (기본값: `default`)
 - `--output-dir outputs/custom-info` : 결과 저장 경로 변경
 - `--output-name custom_name` : 커스텀 출력 파일명 (검색 키워드 대신 사용)
-- `--dry-run` : API 호출 없이 목업 Markdown 생성
 - `--list-prompts` : 사용 가능한 프롬프트 템플릿 목록 출력
 
 ## 3. Pipeline 2 – 스크립트 생성 (`script_gen`)
@@ -39,7 +38,6 @@ python -m src.pipelines.script_gen --search-keyword "청자 상감운학문 매�
 - `--model gpt-4.1` : LLM 모델 (기본값: `gpt-4.1`)
 - `--temperature 0.7` : LLM temperature (기본값: `0.7`)
 - `--output-name custom_name` : 커스텀 출력 파일명
-- `--dry-run` : API 호출 대신 고정 스크립트 예시 생성
 - `--list-prompts` : 사용 가능한 프롬프트 목록 출력
 
 ## 4. Pipeline 3 – 오디오 생성 (`audio_gen`)
@@ -59,7 +57,6 @@ python -m src.pipelines.audio_gen --search-keyword "청자 상감운학문 매�
 - `--initial-wait 1.0` : 초기 대기 시간(초)
 - `--max-wait 60.0` : 최대 대기 시간(초)
 - `--output-name custom_name` : 커스텀 출력 파일명
-- `--dry-run` : 더미 MP3를 생성하여 흐름만 검증
 
 **참고:** Gemini TTS는 `speed` 파라미터를 지원하지 않습니다.
 
@@ -81,7 +78,6 @@ python -m src.main --search-keyword "청자 상감운학문 매병"
 - `--max-retries 8` : 오디오 생성 재시도 횟수 (기본값: `8`)
 - `--output-name custom_name` : 커스텀 출력 파일명
 - `--stages 1,2,3` : 실행할 파이프라인 단계 선택 (기본값: `1,2,3`)
-- `--dry-run` : 테스트 모드 (API 호출 없이 목업 데이터 생성)
 
 ### 선택적 파이프라인 실행 (`--stages`)
 특정 단계만 재실행할 수 있습니다. 비용 절감과 반복 테스트에 유용합니다.
@@ -115,11 +111,6 @@ python -m src.main --search-keyword "석굴암" \
   --max-retries 10
 ```
 
-### 예시 3 – Dry-run 테스트
-```bash
-python -m src.main --search-keyword "사유의 방" --dry-run
-```
-
 ## 6. 배치 실행 (트랙 기반) – `src/batch_runner.py`
 여러 오디오 가이드를 하나의 트랙으로 묶어 일괄 생성합니다.
 
@@ -147,7 +138,6 @@ defaults:
   tts_model: "gemini-2.5-flash-tts"         # Gemini TTS 모델
   temperature: 0.7                          # LLM temperature
   max_retries: 8                            # API 재시도 횟수
-  dry_run: false                            # 테스트 모드
 
 # 생성할 파일 목록
 files:
@@ -187,9 +177,6 @@ files:
 # 기본 실행 (전체 파이프라인)
 python -m src.batch_runner --track-file tracks/sample_track.yaml
 
-# Dry-run 모드 (API 호출 없이 테스트)
-python -m src.batch_runner --track-file tracks/my_track.yaml --dry-run
-
 # 선택적 파이프라인 실행 (--stages)
 # 스크립트만 재생성 (info 파일은 이미 존재)
 python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 2
@@ -203,7 +190,6 @@ python -m src.batch_runner --track-file tracks/sample_track.yaml --stages 3
 
 **주요 옵션:**
 - `--track-file` : YAML 트랙 설정 파일 경로 (필수)
-- `--dry-run` : 테스트 모드 (YAML defaults 오버라이드)
 - `--stages 1,2,3` : 실행할 파이프라인 단계 (기본값: `1,2,3`)
 
 ### 6.3. 출력 디렉토리 구조
@@ -373,9 +359,6 @@ GEMINI_API_KEY=your_gemini_api_key_here
 - 스크립트: `outputs/tracks/{track_name}/script/{output_name}_script.md`
 - 오디오: `outputs/tracks/{track_name}/audio/{output_name}.mp3`
 - 리포트: `outputs/tracks/{track_name}/batch_report.json`
-
-**Dry-run 모드:**
-- 모든 출력: `outputs/mock/` 디렉토리에 저장
 
 각 단계는 실행 시 파일 경로를 로그로 안내하므로, 완료 후 바로 내용을 확인할 수 있습니다.
 

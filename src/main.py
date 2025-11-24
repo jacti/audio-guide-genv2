@@ -50,7 +50,6 @@ def run_full_pipeline(
     temperature: float = 0.7,
     script_prompt_version: str = "v2-tts",
     info_prompt_version: str = "default",
-    dry_run: bool = False,
     max_retries: int = 8,
     output_name: Optional[str] = None,
     stages: list = [1, 2, 3]
@@ -66,7 +65,6 @@ def run_full_pipeline(
         temperature: LLM temperature (script 파이프라인)
         script_prompt_version: 스크립트 생성 프롬프트 버전
         info_prompt_version: 정보 검색 프롬프트 버전
-        dry_run: True일 경우 API 호출 없이 목업 데이터 사용
         max_retries: API 재시도 횟수
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
         stages: 실행할 파이프라인 단계 리스트 (기본값: [1, 2, 3])
@@ -85,9 +83,8 @@ def run_full_pipeline(
     results = {}
     start_time = time.time()
 
-    mode_str = "[DRY RUN] " if dry_run else ""
     logger.info(f"\n{'='*70}")
-    logger.info(f"{mode_str}오디오 가이드 생성 파이프라인 시작")
+    logger.info(f"오디오 가이드 생성 파이프라인 시작")
     logger.info(f"검색 키워드: {search_keyword}")
     logger.info(f"모델: {model} | 음성: {voice}")
     logger.info(f"정보 프롬프트: {info_prompt_version} | 스크립트 프롬프트: {script_prompt_version}")
@@ -103,7 +100,6 @@ def run_full_pipeline(
                 search_keyword=search_keyword,
                 model=model,
                 prompt_version=info_prompt_version,
-                dry_run=dry_run,
                 output_name=output_name
             )
             results["info"] = info_path
@@ -124,7 +120,6 @@ def run_full_pipeline(
                 script_prompt_version=script_prompt_version,
                 temperature=temperature,
                 model=model,
-                dry_run=dry_run,
                 output_name=output_name
             )
             results["script"] = script_path
@@ -145,7 +140,6 @@ def run_full_pipeline(
                 voice=voice,
                 model=tts_model,
                 max_retries=max_retries,
-                dry_run=dry_run,
                 output_name=output_name
             )
             results["audio"] = audio_path
@@ -183,9 +177,6 @@ def main():
   # 기본 실행 (실제 API 호출)
   python -m src.main --search-keyword "청자 상감운학문 매병"
 
-  # Dry-run 모드 (API 호출 없이 테스트)
-  python -m src.main --search-keyword "사유의 방" --dry-run
-
   # 커스텀 설정
   python -m src.main --search-keyword "석굴암" \\
     --model gpt-4o \\
@@ -201,7 +192,6 @@ def main():
 참고:
   - OPENAI_API_KEY: info/script 파이프라인용 (.env 파일)
   - GEMINI_API_KEY: audio 파이프라인용 (Gemini TTS, .env 파일)
-  - dry-run 모드는 목업 데이터만 생성하므로 API 키 불필요합니다.
         """
     )
 
@@ -263,12 +253,6 @@ def main():
     )
 
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="테스트 모드 (API 호출 없이 목업 데이터 생성)"
-    )
-
-    parser.add_argument(
         "--output-name",
         type=str,
         default=None,
@@ -305,7 +289,6 @@ def main():
             temperature=args.temperature,
             script_prompt_version=args.script_prompt_version,
             info_prompt_version=args.info_prompt_version,
-            dry_run=args.dry_run,
             max_retries=args.max_retries,
             output_name=args.output_name,
             stages=stages

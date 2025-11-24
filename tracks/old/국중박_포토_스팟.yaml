@@ -8,7 +8,6 @@ defaults:
   tts_model: "gemini-2.5-flash-tts"
   temperature: 0.75
   max_retries: 2
-  dry_run: false
 
 metadata:
   author: "국립중앙박물관"

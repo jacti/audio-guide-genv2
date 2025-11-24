@@ -31,7 +31,7 @@ class PipelineMetadata:
         Args:
             search_keyword: 검색 키워드 (예: "청자 상감운학문 매병")
             pipeline: 파이프라인 이름 (info_retrieval, script_gen, audio_gen)
-            mode: 실행 모드 ("production" 또는 "dry_run")
+            mode: 실행 모드 (기본값: "production")
             model: 사용된 모델명 (예: "gpt-4o-mini")
             **extra_fields: 추가 메타데이터 필드
         """
@@ -72,7 +72,7 @@ class PipelineMetadata:
             Path: 생성된 메타데이터 파일 경로
 
         Example:
-            >>> meta = PipelineMetadata("석굴암", "info_retrieval", mode="dry_run")
+            >>> meta = PipelineMetadata("석굴암", "info_retrieval")
             >>> meta_path = meta.save(Path("outputs/info/석굴암.md"))
             >>> # outputs/info/석굴암.md.metadata.json 생성됨
         """
@@ -147,7 +147,7 @@ def create_metadata(
         search_keyword: 검색 키워드
         pipeline: 파이프라인 이름
         output_file_path: 산출물 파일 경로
-        mode: 실행 모드 ("production" 또는 "dry_run")
+        mode: 실행 모드 (기본값: "production")
         model: 사용된 모델명 (선택적)
         **extra_fields: 추가 메타데이터
 
@@ -159,7 +159,6 @@ def create_metadata(
         ...     search_keyword="석굴암",
         ...     pipeline="info_retrieval",
         ...     output_file_path=Path("outputs/info/석굴암.md"),
-        ...     mode="dry_run",
         ...     model="gpt-4o-mini"
         ... )
     """
@@ -214,7 +213,6 @@ if __name__ == "__main__":
         search_keyword="테스트",
         pipeline="info_retrieval",
         output_file_path=test_file,
-        mode="dry_run",
         model="gpt-4o-mini",
         note="This is a test"
     )

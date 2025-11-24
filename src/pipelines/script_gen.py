@@ -33,52 +33,6 @@ logger = logging.getLogger(__name__)
 
 # 기본 설정
 DEFAULT_OUTPUT_DIR = Path("outputs/script")
-DEFAULT_MOCK_OUTPUT_DIR = Path("outputs/mock/script")
-
-
-def _generate_dry_run_script(search_keyword: str, script_prompt_version: str) -> str:
-    """
-    dry_run 모드에서 사용할 고정 템플릿 스크립트 생성
-
-    Args:
-        search_keyword: 유물/장소 검색 키워드
-        script_prompt_version: 스크립트 프롬프트 버전
-
-    Returns:
-        테스트용 스크립트 문자열
-    """
-    script = f"""# {search_keyword} 오디오 가이드
-
-## 인사 및 소개
-
-안녕하세요! 오늘은 {search_keyword}에 대해 함께 알아보겠습니다.
-
-## 본문
-
-### 역사적 배경
-
-(따뜻하게) 이 유물은 우리나라의 찬란한 문화유산 중 하나입니다.
-오랜 세월 동안 많은 이야기를 품고 있습니다.
-
-### 시각적 특징
-
-(천천히) 눈으로 직접 보면, 그 아름다움과 정교함에 감탄하게 됩니다.
-세밀한 문양과 색감이 조화를 이루고 있습니다.
-
-### 문화적 의미
-
-이 유물은 단순한 물건이 아니라, 당시 사람들의 삶과 정신이 담긴
-소중한 역사의 증거입니다.
-
-## 마무리
-
-(부드럽게) 오늘 감상해주셔서 감사합니다.
-이 유물이 여러분에게 특별한 영감을 주었기를 바랍니다.
-
----
-*[DRY RUN 모드로 생성된 테스트 스크립트 - 프롬프트 버전: {script_prompt_version}]*
-"""
-    return script
 
 
 def run(
@@ -88,7 +42,6 @@ def run(
     output_dir: Optional[Path] = None,
     script_prompt_version: str,
     custom_prompt: Optional[str] = None,
-    dry_run: bool = False,
     temperature: float = 0.7,
     model: str = "gpt-4.1",
     output_name: Optional[str] = None,
@@ -102,7 +55,6 @@ def run(
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
         script_prompt_version: 스크립트 프롬프트 템플릿 버전 (기본: 없음, 없을경우 에러 발생)
         custom_prompt: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
-        dry_run: True이면 API 호출 없이 고정 템플릿 생성
         temperature: LLM temperature 파라미터 (0.0~1.0)
         model: 사용할 OpenAI 모델명 (기본: "gpt-4.1")
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
@@ -112,7 +64,7 @@ def run(
 
     Raises:
         FileNotFoundError: 정보 파일 또는 프롬프트 템플릿을 찾을 수 없을 때
-        ValueError: API 키가 설정되지 않았을 때 (dry_run=False인 경우)
+        ValueError: API 키가 설정되지 않았을 때
         Exception: API 호출 실패 등 기타 오류
     """
     if script_prompt_version is None:
@@ -125,7 +77,7 @@ def run(
     if info_dir is None:
         info_dir = Path("outputs/info")
     if output_dir is None:
-        output_dir = DEFAULT_MOCK_OUTPUT_DIR if dry_run else DEFAULT_OUTPUT_DIR
+        output_dir = DEFAULT_OUTPUT_DIR
 
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -152,30 +104,6 @@ def run(
         available = list_prompts()
         logger.info(f"사용 가능한 버전: {', '.join(available)}")
         raise
-
-    # dry_run 모드 처리
-    if dry_run:
-        logger.info("DRY RUN 모드: 고정 템플릿 스크립트 생성")
-        script_content = _generate_dry_run_script(search_keyword, script_prompt_version)
-
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(script_content)
-
-        logger.info(f"✅ 테스트 스크립트 생성 완료: {output_file}")
-
-        # 메타데이터 생성
-        try:
-            create_metadata(
-                search_keyword=search_keyword,
-                pipeline="script_gen",
-                output_file_path=output_file,
-                mode="dry_run",
-                model=None,
-            )
-        except Exception as e:
-            logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
-
-        return output_file
 
     # 정보 파일 존재 확인
     if not info_file.exists():
@@ -265,8 +193,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 예시:
-  # 기본 사용 (v1 프롬프트, dry-run)
-  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병" --dry-run
+  # 기본 사용 (v1 프롬프트)
+  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병"
 
   # v2 프롬프트로 실제 생성
   python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병" --script-prompt-version v2
@@ -306,11 +234,6 @@ def main():
         type=str,
         default=None,
         help="사용자 커스텀 프롬프트 (기본 프롬프트에 추가됨)",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="테스트 모드 (API 호출 없이 고정 템플릿 생성)",
     )
     parser.add_argument(
         "--temperature",
@@ -372,7 +295,6 @@ def main():
             output_dir=args.output_dir,
             script_prompt_version=args.script_prompt_version,
             custom_prompt=args.custom_prompt,
-            dry_run=args.dry_run,
             temperature=args.temperature,
             model=args.model,
             output_name=args.output_name,
@@ -386,7 +308,6 @@ def main():
         if args.custom_prompt:
             print(f"커스텀 프롬프트: 추가됨")
         print(f"출력 파일: {output_path}")
-        print(f"모드: {'DRY RUN (테스트)' if args.dry_run else '실제 생성'}")
         print("=" * 60)
 
         # 생성된 스크립트 미리보기 (처음 200자)

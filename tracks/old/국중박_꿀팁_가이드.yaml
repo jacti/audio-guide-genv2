@@ -6,7 +6,6 @@ defaults:
   script_prompt_version: "v3-tts"
   voice: "Laomedeia"
   temperature: 0.7
-  dry_run: false
 
 files:
   # --------------------------------------
