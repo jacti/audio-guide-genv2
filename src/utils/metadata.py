@@ -19,33 +19,39 @@ class PipelineMetadata:
 
     def __init__(
         self,
-        search_keyword: str,
+        output_name: str,
         pipeline: str,
         mode: str = "production",
         model: Optional[str] = None,
+        info_retrieval_user_content_text: Optional[str] = None,
+        script_gen_user_content_text: Optional[str] = None,
         **extra_fields: Any
     ):
         """
         메타데이터 객체 초기화
 
         Args:
-            search_keyword: 검색 키워드 (예: "청자 상감운학문 매병")
+            output_name: 결과물 식별자 (tracks YAML의 files.output_name)
             pipeline: 파이프라인 이름 (info_retrieval, script_gen, audio_gen)
             mode: 실행 모드 (기본값: "production")
             model: 사용된 모델명 (예: "gpt-4o-mini")
+            info_retrieval_user_content_text: 정보 검색용 사용자 프롬프트
+            script_gen_user_content_text: 스크립트 생성용 사용자 프롬프트
             **extra_fields: 추가 메타데이터 필드
         """
-        self.search_keyword = search_keyword
+        self.output_name = output_name
         self.pipeline = pipeline
         self.mode = mode
         self.model = model
+        self.info_retrieval_user_content_text = info_retrieval_user_content_text
+        self.script_gen_user_content_text = script_gen_user_content_text
         self.timestamp = datetime.now().isoformat()
         self.extra_fields = extra_fields
 
     def to_dict(self) -> Dict[str, Any]:
         """메타데이터를 딕셔너리로 변환"""
         data = {
-            "search_keyword": self.search_keyword,
+            "output_name": self.output_name,
             "pipeline": self.pipeline,
             "mode": self.mode,
             "timestamp": self.timestamp,
@@ -53,6 +59,12 @@ class PipelineMetadata:
 
         if self.model:
             data["model"] = self.model
+        if self.info_retrieval_user_content_text:
+            data["info_retrieval_user_content_text"] = (
+                self.info_retrieval_user_content_text
+            )
+        if self.script_gen_user_content_text:
+            data["script_gen_user_content_text"] = self.script_gen_user_content_text
 
         # 추가 필드 병합
         data.update(self.extra_fields)
@@ -113,10 +125,10 @@ class PipelineMetadata:
         with open(metadata_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        # 필수 필드 추출 (하위 호환성: keyword도 지원)
-        search_keyword = data.pop("search_keyword", None) or data.pop("keyword", None)
-        if not search_keyword:
-            raise ValueError("메타데이터에 search_keyword 또는 keyword 필드가 없습니다.")
+        # 필수 필드 추출
+        output_name = data.pop("output_name", None)
+        if not output_name:
+            raise ValueError("메타데이터에 output_name 필드가 없습니다.")
 
         pipeline = data.pop("pipeline")
         mode = data.pop("mode", "production")
@@ -124,7 +136,7 @@ class PipelineMetadata:
 
         # timestamp는 extra_fields로 보존
         return cls(
-            search_keyword=search_keyword,
+            output_name=output_name,
             pipeline=pipeline,
             mode=mode,
             model=model,
@@ -133,22 +145,26 @@ class PipelineMetadata:
 
 
 def create_metadata(
-    search_keyword: str,
+    output_name: str,
     pipeline: str,
     output_file_path: Path,
     mode: str = "production",
     model: Optional[str] = None,
+    info_retrieval_user_content_text: Optional[str] = None,
+    script_gen_user_content_text: Optional[str] = None,
     **extra_fields: Any
 ) -> Path:
     """
     메타데이터를 생성하고 저장하는 헬퍼 함수
 
     Args:
-        search_keyword: 검색 키워드
+        output_name: 결과물 식별자
         pipeline: 파이프라인 이름
         output_file_path: 산출물 파일 경로
         mode: 실행 모드 (기본값: "production")
         model: 사용된 모델명 (선택적)
+        info_retrieval_user_content_text: 정보 검색용 사용자 프롬프트
+        script_gen_user_content_text: 스크립트 생성용 사용자 프롬프트
         **extra_fields: 추가 메타데이터
 
     Returns:
@@ -156,17 +172,19 @@ def create_metadata(
 
     Example:
         >>> create_metadata(
-        ...     search_keyword="석굴암",
+        ...     output_name="01_seokguram",
         ...     pipeline="info_retrieval",
         ...     output_file_path=Path("outputs/info/석굴암.md"),
         ...     model="gpt-4o-mini"
         ... )
     """
     metadata = PipelineMetadata(
-        search_keyword=search_keyword,
+        output_name=output_name,
         pipeline=pipeline,
         mode=mode,
         model=model,
+        info_retrieval_user_content_text=info_retrieval_user_content_text,
+        script_gen_user_content_text=script_gen_user_content_text,
         **extra_fields
     )
     return metadata.save(output_file_path)
@@ -201,20 +219,18 @@ def read_metadata(file_path: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
-# 사용 예시
 if __name__ == "__main__":
-    # 테스트용 샘플 생성
+    # 간단한 수동 테스트용 샘플
     test_file = Path("outputs/mock/info/테스트.md")
     test_file.parent.mkdir(parents=True, exist_ok=True)
     test_file.write_text("# 테스트\n\n샘플 콘텐츠", encoding="utf-8")
 
-    # 메타데이터 생성
     meta_path = create_metadata(
-        search_keyword="테스트",
+        output_name="테스트",
         pipeline="info_retrieval",
         output_file_path=test_file,
         model="gpt-4o-mini",
-        note="This is a test"
+        info_retrieval_user_content_text="샘플 조사 요구사항",
     )
 
     print(f"메타데이터 생성됨: {meta_path}")

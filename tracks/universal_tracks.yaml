@@ -1,4 +1,4 @@
-track_name: "국립중앙박물관 한국사 완전정복"
+track_name: "국립중앙박물관_한국사_완전정복"
 description: "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드"
 
 metadata:
@@ -9,8 +9,8 @@ metadata:
 
 defaults:
   perplexity_model: "sonar-pro" # 최신 모델 권장
-  info_retrieval_prompt_template_name: "universal_retrieval"
-  script_gen_prompt_template_name: "unniversal_script_gen"
+  info_retrieval_prompt_template_name: "universal_retrieval.yaml"
+  script_gen_prompt_template_name: "unniversal_script_gen.yaml"
   voice: "Laomedeia"
   gemini_tts_model: "gemini-2.5-pro-tts"
   script_gen_model: "gemini-3-pro-preview" # "gpt-4.1" #

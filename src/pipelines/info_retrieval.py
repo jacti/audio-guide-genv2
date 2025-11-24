@@ -23,12 +23,7 @@ import backoff
 
 from src.utils.path_sanitizer import info_markdown_path
 from src.utils.metadata import create_metadata
-from src.utils.prompt_utils import (
-    load_prompt,
-    list_prompts,
-    format_prompt,
-    get_prompt_value,
-)
+from src.utils.yaml_utils import load_yaml, list_yaml_files, format_template, get_value
 
 # 환경변수 로드
 load_dotenv()
@@ -87,26 +82,20 @@ def _chat_with_perplexity(
 
     client = Perplexity(api_key=api_key)
 
-    # 검색 키워드는 이제 user_content_text에 포함된 것으로 간주하거나
-    # 로깅용으로 앞부분만 사용
     logger.info(
         f"[Perplexity Chat] 검색 시작: {info_retrieval_user_content_text[:50]}..."
     )
 
     try:
         # Chat Completions API 호출 (마크다운 직접 생성)
-        # user_prompt_template에서 {search_keyword}가 제거되었으므로
-        # format_user_prompt 호출 시 search_keyword 인자를 제거해야 함
-        system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
-        user_prompt_template = get_prompt_value(
-            prompt_config, "user_prompt_template", ""
-        )
+        system_prompt = get_value(prompt_config, "system_prompt", "")
+        user_prompt_template = get_value(prompt_config, "user_prompt_template", "")
         if not system_prompt or not user_prompt_template:
             raise ValueError(
                 f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
             )
 
-        user_content = format_prompt(
+        user_content = format_template(
             user_prompt_template,
             parameters=prompt_config.get("parameters"),
             info_retrieval_user_content_text=info_retrieval_user_content_text,
@@ -167,7 +156,7 @@ def save_metadata(
         **extra_metadata: 추가 메타데이터
     """
     metadata_path = create_metadata(
-        output_name=output_name,  # search_keyword 대체
+        output_name=output_name,
         pipeline=pipeline,
         output_file_path=output_path,
         mode="production",
@@ -214,18 +203,20 @@ def run(
     logger.info(f"프롬프트 버전: {info_retrieval_prompt_template_name}")
 
     # 1. 프롬프트 템플릿 로드
-    try:
-        prompt_config = load_prompt(
-            info_retrieval_prompt_template_name, pipeline_type="info_retrieval"
-        )
-        logger.info(
-            "프롬프트 로드 완료: %s (v%s)",
-            prompt_config.get("name", info_retrieval_prompt_template_name),
-            prompt_config.get("version"),
-        )
-    except FileNotFoundError as e:
-        logger.error(f"프롬프트 로드 실패: {e}")
-        raise
+    prompt_dir = Path("prompts/info_retrieval")
+    prompt_path = (
+        prompt_dir / info_retrieval_prompt_template_name
+        if info_retrieval_prompt_template_name.endswith(".yaml")
+        else prompt_dir / f"{info_retrieval_prompt_template_name}.yaml"
+    )
+
+    prompt_config = load_yaml(prompt_path)
+    prompt_config["path"] = prompt_path
+    prompt_config.setdefault("parameters", {})
+    logger.info(
+        "프롬프트 로드 완료: %s",
+        prompt_config.get("name", info_retrieval_prompt_template_name),
+    )
 
     # 2. Perplexity Chat API 호출 (검색 + 마크다운 생성)
     content, api_metadata = _chat_with_perplexity(
@@ -304,7 +295,8 @@ def main():
 
     # 프롬프트 목록 출력
     if args.list_prompts:
-        versions = list_prompts(pipeline_type="info_retrieval")
+        prompt_dir = Path("prompts/info_retrieval")
+        versions = list_yaml_files(prompt_dir)
         print(f"\n사용 가능한 프롬프트 버전:")
         for v in versions:
             print(f"  - {v}")

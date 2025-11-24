@@ -248,7 +248,6 @@ def run_single_file(
         실행 결과 딕셔너리
         {
             "output_name": str,
-            "search_keyword": str,
             "status": "success" | "failed",
             "error": str (실패 시),
             "audio_path": str,
@@ -261,8 +260,6 @@ def run_single_file(
         BatchRunnerError: 파이프라인 실행 실패
     """
     output_name = file_config["output_name"]
-    # search_keyword 제거됨, 필요시 로깅을 위해 남겨두거나 제거
-    # search_keyword = file_config["search_keyword"]
 
     result = {
         "output_name": output_name,
@@ -276,6 +273,8 @@ def run_single_file(
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}")
 
+    info_path = None
+    script_path = None
     try:
         # 의존성 검증
         validate_stage_dependencies(stages, output_name, track_dirs)
@@ -297,6 +296,7 @@ def run_single_file(
             )
             logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
         else:
+            info_path = info_markdown_path(output_name, track_dirs["info"])
             logger.info("  ⊘ [Stage 1] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 2: 스크립트 생성
@@ -308,7 +308,7 @@ def run_single_file(
                     "script_gen_prompt_template_name"
                 ],
                 script_gen_model=file_config.get("script_gen_model", "gpt-4o"),
-                info_dir=track_dirs["info"],
+                info_retrieval_result_file_path=info_path,
                 output_dir=track_dirs["script"],
                 script_gen_user_content_text=file_config.get(
                     "script_gen_user_content_text"
@@ -317,6 +317,7 @@ def run_single_file(
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
         else:
+            script_path = script_markdown_path(output_name, track_dirs["script"])
             logger.info("  ⊘ [Stage 2] 건너뜀 (이미 존재하는 파일 사용)")
 
         # Pipeline 3: 오디오 생성
@@ -329,7 +330,7 @@ def run_single_file(
                     "tts_system_prompt",
                     "당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
                 ),
-                script_dir=track_dirs["script"],
+                script_gen_result_file_path=script_path,
                 output_dir=track_dirs["audio"],
                 voice=file_config.get("voice", "Zephyr"),
                 gemini_tts_model=file_config.get(

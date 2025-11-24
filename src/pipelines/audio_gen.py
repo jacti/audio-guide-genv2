@@ -23,7 +23,7 @@ import backoff
 from google.cloud import texttospeech
 from dotenv import load_dotenv
 
-from src.utils.path_sanitizer import script_markdown_path, audio_output_path
+from src.utils.path_sanitizer import audio_output_path
 from src.utils.metadata import create_metadata
 
 # 환경변수 로드
@@ -369,7 +369,6 @@ def run(
     tts_language: str,
     tts_system_prompt: str,
     script_gen_result_file_path: Optional[Path] = None,
-    script_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
     gemini_tts_model: str = "gemini-2.5-pro-tts",
@@ -387,8 +386,7 @@ def run(
         output_name: 파일명 (식별자로 사용됨)
         tts_language: Gemini TTS 언어
         tts_system_prompt: Gemini TTS 시스템 프롬프트
-        script_gen_result_file_path: 스크립트 생성 결과 파일 경로 (선택적, 제공 시 script_dir 무시)
-        script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script, 파일 경로 미제공 시 사용)
+        script_gen_result_file_path: 스크립트 생성 결과 파일 경로 (필수)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
         gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-tts")
@@ -411,8 +409,8 @@ def run(
     logger.info(f"=== 오디오 생성 파이프라인 시작: '{output_name}' ===")
 
     # 기본 경로 설정
-    if script_dir is None:
-        script_dir = Path("outputs/script")
+    if script_gen_result_file_path is None:
+        raise ValueError("script_gen_result_file_path는 필수입니다.")
     if output_dir is None:
         output_dir = DEFAULT_OUTPUT_DIR
 
@@ -421,11 +419,7 @@ def run(
     logger.info(f"출력 디렉토리: {output_dir.absolute()}")
 
     # 입력 파일 경로 결정
-    if script_gen_result_file_path:
-        script_path = script_gen_result_file_path
-    else:
-        # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
-        script_path = script_markdown_path(output_name, script_dir)
+    script_path = script_gen_result_file_path
 
     # 출력 파일 경로 결정
     output_path = audio_output_path(output_name, output_dir)
@@ -503,15 +497,8 @@ def main():
     parser.add_argument(
         "--script-file",
         type=Path,
-        default=None,
-        help="스크립트 파일 경로 (제공 시 --script-dir 무시)",
-    )
-
-    parser.add_argument(
-        "--script-dir",
-        type=Path,
-        default=None,
-        help="스크립트 디렉토리 경로 (기본값: outputs/script)",
+        required=True,
+        help="스크립트 파일 경로 (필수)",
     )
 
     parser.add_argument(
@@ -579,7 +566,6 @@ def main():
             tts_language=args.tts_language,
             tts_system_prompt=args.tts_system_prompt,
             script_gen_result_file_path=args.script_file,
-            script_dir=args.script_dir,
             output_dir=args.output_dir,
             voice=args.voice,
             gemini_tts_model=args.gemini_tts_model,

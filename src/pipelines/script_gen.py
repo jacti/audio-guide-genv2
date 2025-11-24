@@ -12,22 +12,13 @@
 """
 
 import os
-import sys
 import logging
 from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
 
-# 프로젝트 루트를 sys.path에 추가 (utils 모듈 임포트를 위해)
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-from src.utils.prompt_utils import (
-    load_prompt,
-    list_prompts,
-    format_prompt,
-    get_prompt_value,
-)
-from src.utils.path_sanitizer import info_markdown_path, script_markdown_path
+from src.utils.yaml_utils import load_yaml, list_yaml_files, format_template, get_value
+from src.utils.path_sanitizer import script_markdown_path
 from src.utils.metadata import create_metadata
 
 # 로깅 설정
@@ -45,7 +36,6 @@ def run(
     script_gen_prompt_template_name: str,
     script_gen_model: str,
     info_retrieval_result_file_path: Optional[Path] = None,
-    info_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     script_gen_user_content_text: Optional[str] = None,
     temperature: float = 0.7,
@@ -57,8 +47,7 @@ def run(
         output_name: 파일명 (식별자로 사용됨)
         script_gen_prompt_template_name: 스크립트 프롬프트 템플릿 버전
         script_gen_model: 사용할 모델명 (OpenAI 'gpt-*' 또는 Google 'gemini-*')
-        info_retrieval_result_file_path: 정보 검색 결과 파일 경로 (선택적, 제공시 info_dir/output_name 무시)
-        info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info, 파일 경로 미제공 시 사용)
+        info_retrieval_result_file_path: 정보 검색 결과 파일 경로 (필수)
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
         script_gen_user_content_text: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
         temperature: LLM temperature 파라미터 (0.0~1.0)
@@ -75,20 +64,15 @@ def run(
     load_dotenv()
 
     # 기본 경로 설정
-    if info_dir is None:
-        info_dir = Path("outputs/info")
+    if info_retrieval_result_file_path is None:
+        raise ValueError("info_retrieval_result_file_path는 필수입니다.")
     if output_dir is None:
         output_dir = DEFAULT_OUTPUT_DIR
 
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 입력 파일 경로 결정
-    if info_retrieval_result_file_path:
-        info_file = info_retrieval_result_file_path
-    else:
-        # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
-        info_file = info_markdown_path(output_name, info_dir)
+    info_file = info_retrieval_result_file_path
 
     script_gen_result_file_path = script_markdown_path(output_name, output_dir)
 
@@ -101,7 +85,15 @@ def run(
 
     # 프롬프트 템플릿 로드
     try:
-        prompt_config = load_prompt(script_gen_prompt_template_name)
+        prompt_dir = Path("prompts/script_generation")
+        prompt_path = (
+            prompt_dir / script_gen_prompt_template_name
+            if script_gen_prompt_template_name.endswith(".yaml")
+            else prompt_dir / f"{script_gen_prompt_template_name}.yaml"
+        )
+        prompt_config = load_yaml(prompt_path)
+        prompt_config["path"] = prompt_path
+        prompt_config.setdefault("parameters", {})
         logger.info(
             "프롬프트 템플릿 로드 완료: %s",
             prompt_config.get("name", script_gen_prompt_template_name),
@@ -155,15 +147,13 @@ def run(
             safe_custom_prompt = (
                 script_gen_user_content_text if script_gen_user_content_text else "없음"
             )
-            system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
-            user_prompt_template = get_prompt_value(
-                prompt_config, "user_prompt_template", ""
-            )
+            system_prompt = get_value(prompt_config, "system_prompt", "")
+            user_prompt_template = get_value(prompt_config, "user_prompt_template", "")
             if not system_prompt or not user_prompt_template:
                 raise ValueError(
                     f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
                 )
-            user_prompt = format_prompt(
+            user_prompt = format_template(
                 user_prompt_template,
                 parameters=prompt_config.get("parameters"),
                 info_retrieval_result_content_text=info_retrieval_result_content_text,
@@ -204,15 +194,13 @@ def run(
             safe_custom_prompt = (
                 script_gen_user_content_text if script_gen_user_content_text else "없음"
             )
-            system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
-            user_prompt_template = get_prompt_value(
-                prompt_config, "user_prompt_template", ""
-            )
+            system_prompt = get_value(prompt_config, "system_prompt", "")
+            user_prompt_template = get_value(prompt_config, "user_prompt_template", "")
             if not system_prompt or not user_prompt_template:
                 raise ValueError(
                     f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
                 )
-            user_prompt = format_prompt(
+            user_prompt = format_template(
                 user_prompt_template,
                 parameters=prompt_config.get("parameters"),
                 info_retrieval_result_content_text=info_retrieval_result_content_text,
@@ -260,6 +248,7 @@ def run(
             output_file_path=script_gen_result_file_path,
             mode="production",
             model=script_gen_model,
+            script_gen_user_content_text=script_gen_user_content_text,
         )
     except Exception as e:
         logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
@@ -298,14 +287,8 @@ def main():
     parser.add_argument(
         "--info-result-file",
         type=Path,
-        default=None,
-        help="정보 검색 결과 파일 경로 (제공 시 --info-dir 무시)",
-    )
-    parser.add_argument(
-        "--info-dir",
-        type=Path,
-        default=None,
-        help="정보 파일 디렉토리 (기본: outputs/info)",
+        required=True,
+        help="정보 검색 결과 파일 경로 (필수)",
     )
     parser.add_argument(
         "--output-dir",
@@ -349,9 +332,12 @@ def main():
     if args.list_prompts:
         print("\n사용 가능한 프롬프트 버전:")
         print("=" * 70)
-        for version in list_prompts():
+        prompt_dir = Path("prompts/script_generation")
+        for version in list_yaml_files(prompt_dir):
             try:
-                template = load_prompt(version)
+                template = load_yaml(
+                    prompt_dir / (version if version.endswith(".yaml") else f"{version}.yaml")
+                )
                 print(f"\n📝 {version}:")
                 print(f"    이름: {template.get('name', '')}")
                 print(f"    설명: {template.get('description', '')}")
@@ -378,7 +364,6 @@ def main():
         output_path = run(
             output_name=args.output_name,
             info_retrieval_result_file_path=args.info_result_file,
-            info_dir=args.info_dir,
             output_dir=args.output_dir,
             script_gen_prompt_template_name=args.prompt_template_name,
             script_gen_user_content_text=args.user_content_text,
