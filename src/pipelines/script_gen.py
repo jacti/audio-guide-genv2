@@ -38,12 +38,12 @@ DEFAULT_OUTPUT_DIR = Path("outputs/script")
 def run(
     search_keyword: str,
     *,
+    script_prompt_version: str,
+    model: str,
     info_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    script_prompt_version: str,
     custom_prompt: Optional[str] = None,
     temperature: float = 0.7,
-    model: str = "gpt-4.1",
     output_name: Optional[str] = None,
 ) -> Path:
     """
@@ -51,12 +51,12 @@ def run(
 
     Args:
         search_keyword: 유물/장소 검색 키워드 (예: "청자 상감운학문 매병")
+        script_prompt_version: 스크립트 프롬프트 템플릿 버전
+        model: 사용할 OpenAI 모델명
         info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info)
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
-        script_prompt_version: 스크립트 프롬프트 템플릿 버전 (기본: 없음, 없을경우 에러 발생)
         custom_prompt: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
         temperature: LLM temperature 파라미터 (0.0~1.0)
-        model: 사용할 OpenAI 모델명 (기본: "gpt-4.1")
         output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
@@ -67,9 +67,6 @@ def run(
         ValueError: API 키가 설정되지 않았을 때
         Exception: API 호출 실패 등 기타 오류
     """
-    if script_prompt_version is None:
-        raise ValueError("script_prompt_version 인자가 필요합니다.")
-
     # 환경변수 로드
     load_dotenv()
 

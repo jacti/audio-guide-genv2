@@ -293,12 +293,11 @@ def run_single_file(
             logger.info("  → [Stage 1] 정보 검색 중...")
             info_path = info_retrieval.run(
                 search_keyword=search_keyword,
-                model=file_config.get("model", "sonar-pro"),  # Perplexity 모델로 변경
+                model=file_config.get("model", "sonar-pro"),
                 prompt_version=file_config.get("info_prompt_version", "default"),
                 info_prompt=file_config.get(
                     "info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."
                 ),
-                # max_queries 파라미터 제거됨 (Perplexity Chat API 단일 호출)
                 output_dir=track_dirs["info"],
                 output_name=output_name,
             )
@@ -313,12 +312,10 @@ def run_single_file(
                 search_keyword=search_keyword,
                 info_dir=track_dirs["info"],
                 output_dir=track_dirs["script"],
-                script_prompt_version=file_config.get(
-                    "script_prompt_version", "v2-tts"
-                ),
-                custom_prompt=file_config.get("script_gen_prompt", None),
-                temperature=file_config.get("temperature", 0.7),
+                script_prompt_version=file_config["script_prompt_version"],
                 model=file_config.get("model", "gpt-4.1"),
+                custom_prompt=file_config.get("script_gen_prompt"),
+                temperature=file_config.get("temperature", 0.7),
                 output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
@@ -332,9 +329,12 @@ def run_single_file(
                 search_keyword=search_keyword,
                 script_dir=track_dirs["script"],
                 output_dir=track_dirs["audio"],
-                voice=file_config.get("voice", "Zephyr"),
                 tts_language=file_config.get("tts_language", "ko-KR"),
-                tts_prompt=file_config.get("tts_prompt", ""),
+                tts_prompt=file_config.get(
+                    "tts_prompt",
+                    "당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
+                ),
+                voice=file_config.get("voice", "Zephyr"),
                 model=file_config.get("tts_model", "gemini-2.5-pro-tts"),
                 max_retries=file_config.get("max_retries", 8),
                 output_name=output_name,

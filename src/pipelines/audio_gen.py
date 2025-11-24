@@ -553,11 +553,27 @@ def main():
         help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)",
     )
 
+    parser.add_argument(
+        "--tts-language",
+        type=str,
+        default="ko-KR",
+        help="Gemini TTS 언어 (기본값: ko-KR)",
+    )
+
+    parser.add_argument(
+        "--tts-prompt",
+        type=str,
+        default="당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
+        help="Gemini TTS 프롬프트",
+    )
+
     args = parser.parse_args()
 
     try:
         output_path = run(
             search_keyword=args.search_keyword,
+            tts_language=args.tts_language,
+            tts_prompt=args.tts_prompt,
             script_dir=args.script_dir,
             output_dir=args.output_dir,
             voice=args.voice,

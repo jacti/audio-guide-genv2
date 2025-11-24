@@ -69,7 +69,7 @@ def _chat_with_perplexity(
     search_keyword: str,
     info_prompt: str,
     prompt_template,
-    model: str = "sonar-pro",
+    model: str,
 ) -> Tuple[str, Dict]:
     """
     Perplexity Chat API로 검색 + 마크다운 생성 (단일 호출)
@@ -171,9 +171,9 @@ def save_metadata(
 
 def run(
     search_keyword: str,
-    model: str = DEFAULT_MODEL,
-    prompt_version: str = "default",
-    info_prompt: str = "한국 문화유산에 대한 상세한 정보를 수집해주세요.",
+    model: str,
+    prompt_version: str,
+    info_prompt: str,
     output_dir: Optional[Path] = None,
     output_name: Optional[str] = None
 ) -> Path:
@@ -193,12 +193,11 @@ def run(
 
     Examples:
         # 기본 사용
-        run("신라 금관")
-
-        # 커스텀 프롬프트
         run(
-            search_keyword="청자 매병",
-            info_prompt="2025년 APEC 관련 내용 포함, 사진 촬영 팁 중심"
+            search_keyword="신라 금관",
+            model="sonar-pro",
+            prompt_version="default",
+            info_prompt="한국 문화유산에 대한 상세한 정보를 수집해주세요."
         )
     """
     logger.info(f"=== 정보 검색 파이프라인 시작 ===")
