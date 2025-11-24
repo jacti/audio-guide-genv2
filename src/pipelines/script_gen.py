@@ -27,8 +27,7 @@ from src.utils.metadata import create_metadata
 
 # 로깅 설정
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -87,12 +86,12 @@ def run(
     *,
     info_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    script_prompt_version: str = "v1",
+    script_prompt_version: str,
     custom_prompt: Optional[str] = None,
     dry_run: bool = False,
     temperature: float = 0.7,
     model: str = "gpt-4.1",
-    output_name: Optional[str] = None
+    output_name: Optional[str] = None,
 ) -> Path:
     """
     스크립트 생성 파이프라인 실행
@@ -101,7 +100,7 @@ def run(
         search_keyword: 유물/장소 검색 키워드 (예: "청자 상감운학문 매병")
         info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info)
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
-        script_prompt_version: 스크립트 프롬프트 템플릿 버전 (기본: "v1")
+        script_prompt_version: 스크립트 프롬프트 템플릿 버전 (기본: 없음, 없을경우 에러 발생)
         custom_prompt: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
         dry_run: True이면 API 호출 없이 고정 템플릿 생성
         temperature: LLM temperature 파라미터 (0.0~1.0)
@@ -116,6 +115,9 @@ def run(
         ValueError: API 키가 설정되지 않았을 때 (dry_run=False인 경우)
         Exception: API 호출 실패 등 기타 오류
     """
+    if script_prompt_version is None:
+        raise ValueError("script_prompt_version 인자가 필요합니다.")
+
     # 환경변수 로드
     load_dotenv()
 
@@ -168,7 +170,7 @@ def run(
                 pipeline="script_gen",
                 output_file_path=output_file,
                 mode="dry_run",
-                model=None
+                model=None,
             )
         except Exception as e:
             logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
@@ -196,33 +198,28 @@ def run(
         raise ValueError(error_msg)
 
     # 프롬프트 생성
-    user_prompt = prompt_template.format_user_prompt(info_content=info_content)
-
-    # 커스텀 프롬프트가 있으면 플레인 텍스트로 추가
-    if custom_prompt:
-        user_prompt += f"\n\n{custom_prompt}"
-        logger.info("커스텀 프롬프트가 기본 프롬프트에 추가되었습니다")
+    # 템플릿에 {script_gen_prompt} 플레이스홀더가 있는지 확인
+    safe_custom_prompt = custom_prompt if custom_prompt else "없음"
+    user_prompt = prompt_template.format_user_prompt(
+        info_content=info_content, script_gen_prompt=safe_custom_prompt
+    )
+    logger.info(f"템플릿의 {{script_gen_prompt}}에 커스텀 프롬프트를 적용했습니다.")
 
     # LLM 호출
     try:
         logger.info(f"LLM 호출 시작 (모델: {model}, temperature: {temperature})")
 
         from openai import OpenAI
+
         client = OpenAI(api_key=api_key)
 
         response = client.chat.completions.create(
             model=model,
             messages=[
-                {
-                    "role": "system",
-                    "content": prompt_template.system_prompt
-                },
-                {
-                    "role": "user",
-                    "content": user_prompt
-                }
+                {"role": "system", "content": prompt_template.system_prompt},
+                {"role": "user", "content": user_prompt},
             ],
-            temperature=temperature
+            temperature=temperature,
         )
 
         script_content = response.choices[0].message.content
@@ -251,7 +248,7 @@ def run(
             pipeline="script_gen",
             output_file_path=output_file,
             mode="production",
-            model=model
+            model=model,
         )
     except Exception as e:
         logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
@@ -279,64 +276,61 @@ def main():
 
   # 사용 가능한 프롬프트 버전 확인
   python src/pipelines/script_gen.py --list-prompts
-        """
+        """,
     )
     parser.add_argument(
         "--search-keyword",
         type=str,
-        help="유물/장소 검색 키워드 (예: '청자 상감운학문 매병')"
+        help="유물/장소 검색 키워드 (예: '청자 상감운학문 매병')",
     )
     parser.add_argument(
         "--info-dir",
         type=Path,
         default=None,
-        help="정보 파일 디렉토리 (기본: outputs/info)"
+        help="정보 파일 디렉토리 (기본: outputs/info)",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="출력 디렉토리 (기본: outputs/script)"
+        help="출력 디렉토리 (기본: outputs/script)",
     )
     parser.add_argument(
         "--script-prompt-version",
         type=str,
         default="v1",
-        help="스크립트 프롬프트 템플릿 버전 (기본: v1)"
+        help="스크립트 프롬프트 템플릿 버전 (기본: v1)",
     )
     parser.add_argument(
         "--custom-prompt",
         type=str,
         default=None,
-        help="사용자 커스텀 프롬프트 (기본 프롬프트에 추가됨)"
+        help="사용자 커스텀 프롬프트 (기본 프롬프트에 추가됨)",
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="테스트 모드 (API 호출 없이 고정 템플릿 생성)"
+        help="테스트 모드 (API 호출 없이 고정 템플릿 생성)",
     )
     parser.add_argument(
         "--temperature",
         type=float,
         default=0.7,
-        help="LLM temperature (0.0~1.0, 기본: 0.7)"
+        help="LLM temperature (0.0~1.0, 기본: 0.7)",
     )
     parser.add_argument(
-        "--model",
-        type=str,
-        default="gpt-4.1",
-        help="OpenAI 모델명 (기본: gpt-4.1)"
+        "--model", type=str, default="gpt-4.1", help="OpenAI 모델명 (기본: gpt-4.1)"
     )
     parser.add_argument(
         "--list-prompts",
         action="store_true",
-        help="사용 가능한 프롬프트 버전 목록 출력"
+        help="사용 가능한 프롬프트 버전 목록 출력",
     )
     parser.add_argument(
         "--output-name",
         type=str,
         default=None,
-        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)"
+        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)",
     )
 
     args = parser.parse_args()
@@ -344,7 +338,7 @@ def main():
     # 프롬프트 목록 출력 모드
     if args.list_prompts:
         print("\n사용 가능한 프롬프트 버전:")
-        print("="*70)
+        print("=" * 70)
         for version in list_prompts():
             try:
                 template = load_prompt(version)
@@ -352,15 +346,19 @@ def main():
                 print(f"    이름: {template.name}")
                 print(f"    설명: {template.description}")
                 print(f"    태그: {', '.join(template.tags)}")
-                if hasattr(template, 'parameters'):
+                if hasattr(template, "parameters"):
                     print(f"    파라미터: {template.parameters}")
             except Exception as e:
                 print(f"\n❌ {version}: (로드 실패 - {e})")
-        print("\n" + "="*70)
+        print("\n" + "=" * 70)
         print("\n💡 사용 예시:")
-        print("  python src/pipelines/script_gen.py --search-keyword \"청자 매병\" --script-prompt-version v1")
-        print("  python src/pipelines/script_gen.py --search-keyword \"석굴암\" --script-prompt-version v2-tts")
-        print("="*70)
+        print(
+            '  python src/pipelines/script_gen.py --search-keyword "청자 매병" --script-prompt-version v1'
+        )
+        print(
+            '  python src/pipelines/script_gen.py --search-keyword "석굴암" --script-prompt-version v2-tts'
+        )
+        print("=" * 70)
         return
 
     # search_keyword 필수 체크
@@ -377,19 +375,19 @@ def main():
             dry_run=args.dry_run,
             temperature=args.temperature,
             model=args.model,
-            output_name=args.output_name
+            output_name=args.output_name,
         )
 
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("✅ 스크립트 생성 완료!")
-        print("="*60)
+        print("=" * 60)
         print(f"검색 키워드: {args.search_keyword}")
         print(f"스크립트 프롬프트 버전: {args.script_prompt_version}")
         if args.custom_prompt:
             print(f"커스텀 프롬프트: 추가됨")
         print(f"출력 파일: {output_path}")
         print(f"모드: {'DRY RUN (테스트)' if args.dry_run else '실제 생성'}")
-        print("="*60)
+        print("=" * 60)
 
         # 생성된 스크립트 미리보기 (처음 200자)
         with open(output_path, "r", encoding="utf-8") as f:
@@ -397,9 +395,9 @@ def main():
             preview = content[:200]
 
         print("\n📄 스크립트 미리보기:")
-        print("-"*60)
+        print("-" * 60)
         print(preview + "..." if len(content) > 200 else preview)
-        print("-"*60)
+        print("-" * 60)
 
     except FileNotFoundError as e:
         logger.error(f"❌ 파일을 찾을 수 없습니다: {e}")
@@ -410,6 +408,7 @@ def main():
     except Exception as e:
         logger.error(f"❌ 예상치 못한 오류: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 

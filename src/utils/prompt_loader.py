@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 # 파이프라인별 기본 디렉토리 매핑
 PIPELINE_DIRECTORIES = {
     "info_retrieval": "prompts/info_retrieval",
-    "script_generation": "prompts/script_generation"
+    "script_generation": "prompts/script_generation",
 }
 
 
@@ -51,7 +51,9 @@ class PromptTemplate:
         self.metadata = template_data.get("metadata", {})
 
         # API 타입 감지 (명시되지 않았으면 자동 감지)
-        self.api_type = template_data.get("api_type", self._detect_api_type(template_data))
+        self.api_type = template_data.get(
+            "api_type", self._detect_api_type(template_data)
+        )
 
         # Chat Completions API용 필드
         self.system_prompt = template_data.get("system_prompt", "")
@@ -119,7 +121,9 @@ class PromptTemplate:
         """Chat Completions API 타입인지 확인"""
         return self.api_type == "chat"
 
-    def format_query_generation_instructions(self, max_queries: Optional[int] = None) -> str:
+    def format_query_generation_instructions(
+        self, max_queries: Optional[int] = None
+    ) -> str:
         """
         query_generation.instructions 포맷팅 (Perplexity 파이프라인용)
         max_queries_instruction 동적 삽입
@@ -138,11 +142,13 @@ class PromptTemplate:
         else:
             instruction = f"4. 최대 {max_queries}개까지만 생성하세요"
 
-        return self.data['query_generation']['instructions'].format(
+        return self.data["query_generation"]["instructions"].format(
             max_queries_instruction=instruction
         )
 
-    def format_query_generation_input(self, search_keyword: str, info_prompt: str) -> str:
+    def format_query_generation_input(
+        self, search_keyword: str, info_prompt: str
+    ) -> str:
         """
         query_generation.input_template 포맷팅 (Perplexity 파이프라인용)
 
@@ -156,9 +162,8 @@ class PromptTemplate:
         if "query_generation" not in self.data:
             raise ValueError("query_generation 섹션이 템플릿에 없습니다")
 
-        return self.data['query_generation']['input_template'].format(
-            search_keyword=search_keyword,
-            info_prompt=info_prompt
+        return self.data["query_generation"]["input_template"].format(
+            search_keyword=search_keyword, info_prompt=info_prompt
         )
 
     def get_markdown_formatting_instructions(self) -> str:
@@ -171,13 +176,10 @@ class PromptTemplate:
         if "markdown_formatting" not in self.data:
             raise ValueError("markdown_formatting 섹션이 템플릿에 없습니다")
 
-        return self.data['markdown_formatting']['instructions']
+        return self.data["markdown_formatting"]["instructions"]
 
     def format_markdown_formatting_input(
-        self,
-        search_keyword: str,
-        info_prompt: str,
-        search_results: str
+        self, search_keyword: str, info_prompt: str, search_results: str
     ) -> str:
         """
         markdown_formatting.input_template 포맷팅 (Perplexity 파이프라인용)
@@ -193,10 +195,10 @@ class PromptTemplate:
         if "markdown_formatting" not in self.data:
             raise ValueError("markdown_formatting 섹션이 템플릿에 없습니다")
 
-        return self.data['markdown_formatting']['input_template'].format(
+        return self.data["markdown_formatting"]["input_template"].format(
             search_keyword=search_keyword,
             info_prompt=info_prompt,
-            search_results=search_results
+            search_results=search_results,
         )
 
     def get_system_prompt(self) -> str:
@@ -212,7 +214,7 @@ class PromptTemplate:
 def load_prompt(
     version: str = "v1",
     prompt_dir: Optional[Path] = None,
-    pipeline_type: str = "script_generation"
+    pipeline_type: str = "script_generation",
 ) -> PromptTemplate:
     """
     프롬프트 템플릿 로드 (통합 버전)
@@ -272,8 +274,7 @@ def load_prompt(
 
 
 def list_prompts(
-    prompt_dir: Optional[Path] = None,
-    pipeline_type: str = "script_generation"
+    prompt_dir: Optional[Path] = None, pipeline_type: str = "script_generation"
 ) -> List[str]:
     """
     사용 가능한 프롬프트 버전 목록 조회 (통합 버전)
@@ -309,10 +310,7 @@ def list_prompts(
         return []
 
     # .yaml 파일만 필터링하고 확장자 제거
-    versions = [
-        f.stem for f in prompt_dir.glob("*.yaml")
-        if f.is_file()
-    ]
+    versions = [f.stem for f in prompt_dir.glob("*.yaml") if f.is_file()]
     return sorted(versions)
 
 
