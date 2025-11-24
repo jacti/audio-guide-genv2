@@ -27,40 +27,34 @@ def sanitize_keyword_for_path(keyword: str) -> str:
     return sanitized
 
 
-def info_markdown_path(search_keyword: str, base_dir: Path, output_name: str | None = None) -> Path:
+def info_markdown_path(output_name: str, base_dir: Path) -> Path:
     """정보 파이프라인 산출물 경로를 생성한다.
 
     Args:
-        search_keyword: 검색 키워드 (output_name이 없을 경우 파일명으로도 사용)
+        output_name: 파일명으로 사용할 이름 (필수)
         base_dir: 출력 디렉토리
-        output_name: 파일명으로 사용할 이름 (선택적)
     """
-    name = output_name if output_name else search_keyword
-    return Path(base_dir) / f"{sanitize_keyword_for_path(name)}.md"
+    return Path(base_dir) / f"{sanitize_keyword_for_path(output_name)}.md"
 
 
-def script_markdown_path(search_keyword: str, base_dir: Path, output_name: str | None = None) -> Path:
+def script_markdown_path(output_name: str, base_dir: Path) -> Path:
     """스크립트 파이프라인 산출물 경로를 생성한다.
 
     Args:
-        search_keyword: 검색 키워드 (output_name이 없을 경우 파일명으로도 사용)
+        output_name: 파일명으로 사용할 이름 (필수)
         base_dir: 출력 디렉토리
-        output_name: 파일명으로 사용할 이름 (선택적)
     """
-    name = output_name if output_name else search_keyword
-    return Path(base_dir) / f"{sanitize_keyword_for_path(name)}_script.md"
+    return Path(base_dir) / f"{sanitize_keyword_for_path(output_name)}_script.md"
 
 
-def audio_output_path(search_keyword: str, base_dir: Path, output_name: str | None = None) -> Path:
+def audio_output_path(output_name: str, base_dir: Path) -> Path:
     """오디오 파이프라인 산출물 경로를 생성한다.
 
     Args:
-        search_keyword: 검색 키워드 (output_name이 없을 경우 파일명으로도 사용)
+        output_name: 파일명으로 사용할 이름 (필수)
         base_dir: 출력 디렉토리
-        output_name: 파일명으로 사용할 이름 (선택적)
     """
-    name = output_name if output_name else search_keyword
-    return Path(base_dir) / f"{sanitize_keyword_for_path(name)}.mp3"
+    return Path(base_dir) / f"{sanitize_keyword_for_path(output_name)}.mp3"
 
 
 __all__ = [

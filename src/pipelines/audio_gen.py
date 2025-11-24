@@ -207,8 +207,8 @@ def _generate_audio_gemini(
     output_path: Path,
     voice: str,
     tts_language: str,
-    tts_prompt: str,
-    model: str,
+    tts_system_prompt: str,
+    gemini_tts_model: str,
     max_retries: int,
     initial_wait: float,
     max_wait: float,
@@ -228,7 +228,8 @@ def _generate_audio_gemini(
         output_path: 출력 파일 경로 (MP3/WAV)
         voice: Gemini voice 이름 (기본값: "Zephyr")
         tts_language: Gemini TTS 언어 (기본값: "ko-KR")
-        model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
+        tts_system_prompt: Gemini TTS 시스템 프롬프트
+        gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
         max_retries: 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
@@ -250,7 +251,7 @@ def _generate_audio_gemini(
             f"📝 TTS 요청 준비:\n"
             f"  - 텍스트 길이: {text_length} 글자 ({text_bytes} bytes)\n"
             f"  - 4000 bytes 초과로 문단 단위 분할 시작...\n"
-            f"  - 모델: {model}\n"
+            f"  - 모델: {gemini_tts_model}\n"
             f"  - 음성: {voice}"
         )
         text_chunks = split_script_by_paragraphs(text, max_bytes=4000)
@@ -259,7 +260,7 @@ def _generate_audio_gemini(
         logger.info(
             f"📝 TTS 요청 준비:\n"
             f"  - 텍스트 길이: {text_length} 글자 ({text_bytes} bytes)\n"
-            f"  - 모델: {model}\n"
+            f"  - 모델: {gemini_tts_model}\n"
             f"  - 음성: {voice}"
         )
         text_chunks = [text]  # 단일 청크
@@ -303,7 +304,7 @@ def _generate_audio_gemini(
         """단일 청크에 대해 지수 백오프가 적용된 API 호출"""
         # 입력 텍스트 설정
         synthesis_input = texttospeech.SynthesisInput(
-            text=chunk_text, prompt=tts_prompt
+            text=chunk_text, prompt=tts_system_prompt
         )
 
         # 음성 설정
@@ -311,7 +312,7 @@ def _generate_audio_gemini(
             # language_code="en-US",  # Gemini TTS voices는 주로 en-US
             language_code=tts_language,  # Gemini TTS voices는 주로 en-US
             name=voice,
-            model_name=model,
+            model_name=gemini_tts_model,
         )
 
         # 오디오 설정
@@ -364,18 +365,17 @@ def _generate_audio_gemini(
 
 
 def run(
-    search_keyword: str,
-    *,
+    output_name: str,
+    tts_language: str,
+    tts_system_prompt: str,
+    script_gen_result_file_path: Optional[Path] = None,
     script_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
     voice: str = "Zephyr",
-    tts_language: str = "ko-KR",
-    tts_prompt: str = """당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.""",
-    model: str = "gemini-2.5-pro-tts",
+    gemini_tts_model: str = "gemini-2.5-pro-tts",
     max_retries: int = 8,
     initial_wait: float = 1.0,
     max_wait: float = 60.0,
-    output_name: Optional[str] = None,
 ) -> Path:
     """
     오디오 생성 파이프라인 메인 진입점.
@@ -384,17 +384,17 @@ def run(
     지수 백오프(exponential backoff)를 적용하여 Rate Limit 에러 자동 대응.
 
     Args:
-        search_keyword: 유물 키워드 (파일명 결정에 사용)
-        script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script)
+        output_name: 파일명 (식별자로 사용됨)
+        tts_language: Gemini TTS 언어
+        tts_system_prompt: Gemini TTS 시스템 프롬프트
+        script_gen_result_file_path: 스크립트 생성 결과 파일 경로 (선택적, 제공 시 script_dir 무시)
+        script_dir: 스크립트 디렉토리 경로 (기본값: outputs/script, 파일 경로 미제공 시 사용)
         output_dir: 출력 디렉토리 경로 (기본값: outputs/audio)
         voice: Gemini TTS 음성 이름 (기본값: "Zephyr")
-        tts_language: Gemini TTS 언어 (기본값: "ko-KR")
-        tts_prompt: Gemini TTS 프롬프트 (기본값: "")
-        model: Gemini TTS 모델명 (기본값: "gemini-2.5-flash-tts")
+        gemini_tts_model: Gemini TTS 모델명 (기본값: "gemini-2.5-pro-tts")
         max_retries: API 호출 최대 재시도 횟수 (기본값: 8)
         initial_wait: 초기 대기 시간 초 (기본값: 1.0)
         max_wait: 최대 대기 시간 초 (기본값: 60.0)
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
         Path: 생성된 MP3/WAV 파일의 절대 경로
@@ -406,11 +406,9 @@ def run(
 
     Examples:
         >>> # 기본 사용법
-        >>> output_path = run("청자 상감운학문 매병")
-        >>> print(output_path)
-        /path/to/outputs/audio/청자 상감운학문 매병.mp3
+        >>> output_path = run("01_celadon", tts_language="ko-KR", tts_system_prompt="...")
     """
-    logger.info(f"=== 오디오 생성 파이프라인 시작: '{search_keyword}' ===")
+    logger.info(f"=== 오디오 생성 파이프라인 시작: '{output_name}' ===")
 
     # 기본 경로 설정
     if script_dir is None:
@@ -422,21 +420,27 @@ def run(
     output_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"출력 디렉토리: {output_dir.absolute()}")
 
-    # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
-    script_path = script_markdown_path(search_keyword, script_dir, output_name)
-    output_path = audio_output_path(search_keyword, output_dir, output_name)
+    # 입력 파일 경로 결정
+    if script_gen_result_file_path:
+        script_path = script_gen_result_file_path
+    else:
+        # 공통 헬퍼를 사용해 경로 생성 (공백 유지, 특수문자 제거)
+        script_path = script_markdown_path(output_name, script_dir)
+
+    # 출력 파일 경로 결정
+    output_path = audio_output_path(output_name, output_dir)
 
     # 스크립트 파일 읽기
-    script_text = _read_script(script_path)
+    script_gen_result_content_text = _read_script(script_path)
 
     # 실제 TTS 생성 (파일에 직접 저장됨)
     _generate_audio_gemini(
-        text=script_text,
+        text=script_gen_result_content_text,
         output_path=output_path,
         voice=voice,
         tts_language=tts_language,
-        tts_prompt=tts_prompt,
-        model=model,
+        tts_system_prompt=tts_system_prompt,
+        gemini_tts_model=gemini_tts_model,
         max_retries=max_retries,
         initial_wait=initial_wait,
         max_wait=max_wait,
@@ -447,11 +451,11 @@ def run(
     # 메타데이터 생성 (production)
     try:
         create_metadata(
-            search_keyword=search_keyword,
+            output_name=output_name,
             pipeline="audio_gen",
             output_file_path=output_path,
             mode="production",
-            model=model,
+            model=gemini_tts_model,
             voice=voice,
         )
     except Exception as e:
@@ -461,7 +465,7 @@ def run(
         f"=== 오디오 생성 파이프라인 완료 ===\n"
         f"  - 입력 스크립트: {script_path}\n"
         f"  - 출력 파일: {output_path.absolute()}\n"
-        f"  - Model: {model}\n"
+        f"  - Model: {gemini_tts_model}\n"
         f"  - Voice: {voice}"
     )
 
@@ -476,13 +480,13 @@ def main():
         epilog="""
 사용 예시:
   # 기본 실행 (Zephyr voice)
-  python src/pipelines/audio_gen.py --search-keyword "청자 상감운학문 매병"
+  python src/pipelines/audio_gen.py --output-name "01_celadon"
 
   # 다른 voice 사용
-  python src/pipelines/audio_gen.py --search-keyword "석굴암" --voice Puck
+  python src/pipelines/audio_gen.py --output-name "02_seokguram" --voice Puck
 
   # Flash 모델 사용 (빠르고 저렴)
-  python src/pipelines/audio_gen.py --search-keyword "유물명" --model gemini-2.5-flash-preview-tts
+  python src/pipelines/audio_gen.py --output-name "03_buddha" --gemini-tts-model gemini-2.5-flash-preview-tts
 
   # 지원 음성 (일부):
   Zephyr, Puck, Charon, Kore, Fenrir, Aoede, Leda 등 30+ voices
@@ -490,10 +494,17 @@ def main():
     )
 
     parser.add_argument(
-        "--search-keyword",
+        "--output-name",
         type=str,
         required=True,
-        help="유물 키워드 (파일명 결정에 사용)",
+        help="식별자 (파일명)",
+    )
+
+    parser.add_argument(
+        "--script-file",
+        type=Path,
+        default=None,
+        help="스크립트 파일 경로 (제공 시 --script-dir 무시)",
     )
 
     parser.add_argument(
@@ -518,7 +529,7 @@ def main():
     )
 
     parser.add_argument(
-        "--model",
+        "--gemini-tts-model",
         type=str,
         default="gemini-2.5-flash-tts",
         choices=["gemini-2.5-flash-tts", "gemini-2.5-pro-tts"],
@@ -547,13 +558,6 @@ def main():
     )
 
     parser.add_argument(
-        "--output-name",
-        type=str,
-        default=None,
-        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)",
-    )
-
-    parser.add_argument(
         "--tts-language",
         type=str,
         default="ko-KR",
@@ -561,7 +565,7 @@ def main():
     )
 
     parser.add_argument(
-        "--tts-prompt",
+        "--tts-system-prompt",
         type=str,
         default="당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
         help="Gemini TTS 프롬프트",
@@ -571,17 +575,17 @@ def main():
 
     try:
         output_path = run(
-            search_keyword=args.search_keyword,
+            output_name=args.output_name,
             tts_language=args.tts_language,
-            tts_prompt=args.tts_prompt,
+            tts_system_prompt=args.tts_system_prompt,
+            script_gen_result_file_path=args.script_file,
             script_dir=args.script_dir,
             output_dir=args.output_dir,
             voice=args.voice,
-            model=args.model,
+            gemini_tts_model=args.gemini_tts_model,
             max_retries=args.max_retries,
             initial_wait=args.initial_wait,
             max_wait=args.max_wait,
-            output_name=args.output_name,
         )
 
         print(f"\n🎵 오디오 파일이 생성되었습니다: {output_path}")

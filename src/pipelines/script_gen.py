@@ -5,10 +5,10 @@
 스크립트를 작성하고 outputs/script/에 저장한다.
 
 주요 기능:
-- /outputs/info/[keyword].md 파일 읽기
+- /outputs/info/[output_name].md 파일 읽기
 - 버전별 프롬프트 템플릿 지원 (prompts/script_generation/)
 - OpenAI GPT를 사용한 오디오 가이드 스크립트 생성
-- /outputs/script/[keyword]_script.md에 구조화된 결과 저장
+- /outputs/script/[output_name]_script.md에 구조화된 결과 저장
 """
 
 import os
@@ -21,7 +21,12 @@ from dotenv import load_dotenv
 # 프로젝트 루트를 sys.path에 추가 (utils 모듈 임포트를 위해)
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from src.utils.prompt_loader import load_prompt, list_prompts
+from src.utils.prompt_utils import (
+    load_prompt,
+    list_prompts,
+    format_prompt,
+    get_prompt_value,
+)
 from src.utils.path_sanitizer import info_markdown_path, script_markdown_path
 from src.utils.metadata import create_metadata
 
@@ -36,28 +41,27 @@ DEFAULT_OUTPUT_DIR = Path("outputs/script")
 
 
 def run(
-    search_keyword: str,
-    *,
-    script_prompt_version: str,
-    model: str,
+    output_name: str,
+    script_gen_prompt_template_name: str,
+    script_gen_model: str,
+    info_retrieval_result_file_path: Optional[Path] = None,
     info_dir: Optional[Path] = None,
     output_dir: Optional[Path] = None,
-    custom_prompt: Optional[str] = None,
+    script_gen_user_content_text: Optional[str] = None,
     temperature: float = 0.7,
-    output_name: Optional[str] = None,
 ) -> Path:
     """
     스크립트 생성 파이프라인 실행
 
     Args:
-        search_keyword: 유물/장소 검색 키워드 (예: "청자 상감운학문 매병")
-        script_prompt_version: 스크립트 프롬프트 템플릿 버전
-        model: 사용할 OpenAI 모델명
-        info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info)
+        output_name: 파일명 (식별자로 사용됨)
+        script_gen_prompt_template_name: 스크립트 프롬프트 템플릿 버전
+        script_gen_model: 사용할 모델명 (OpenAI 'gpt-*' 또는 Google 'gemini-*')
+        info_retrieval_result_file_path: 정보 검색 결과 파일 경로 (선택적, 제공시 info_dir/output_name 무시)
+        info_dir: 정보 파일이 위치한 디렉토리 (기본: outputs/info, 파일 경로 미제공 시 사용)
         output_dir: 스크립트를 저장할 디렉토리 (기본: outputs/script)
-        custom_prompt: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
+        script_gen_user_content_text: 사용자 커스텀 프롬프트 (선택적, 기본 프롬프트에 추가됨)
         temperature: LLM temperature 파라미터 (0.0~1.0)
-        output_name: 파일명으로 사용할 이름 (선택적, 미제공 시 search_keyword 사용)
 
     Returns:
         생성된 스크립트 파일의 경로 (Path 객체)
@@ -79,23 +83,34 @@ def run(
     # 출력 디렉토리 생성
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
-    info_file = info_markdown_path(search_keyword, info_dir, output_name)
-    output_file = script_markdown_path(search_keyword, output_dir, output_name)
+    # 입력 파일 경로 결정
+    if info_retrieval_result_file_path:
+        info_file = info_retrieval_result_file_path
+    else:
+        # 파일 경로 생성 (path_sanitizer 헬퍼 사용)
+        info_file = info_markdown_path(output_name, info_dir)
 
-    logger.info(f"스크립트 생성 파이프라인 시작: {search_keyword}")
-    logger.info(f"스크립트 프롬프트 버전: {script_prompt_version}")
-    if custom_prompt:
+    script_gen_result_file_path = script_markdown_path(output_name, output_dir)
+
+    logger.info(f"스크립트 생성 파이프라인 시작: {output_name}")
+    logger.info(f"스크립트 프롬프트 버전: {script_gen_prompt_template_name}")
+    if script_gen_user_content_text:
         logger.info(f"커스텀 프롬프트 추가: 예")
     logger.info(f"입력 파일: {info_file}")
-    logger.info(f"출력 파일: {output_file}")
+    logger.info(f"출력 파일: {script_gen_result_file_path}")
 
     # 프롬프트 템플릿 로드
     try:
-        prompt_template = load_prompt(script_prompt_version)
-        logger.info(f"프롬프트 템플릿 로드 완료: {prompt_template.name}")
-        logger.info(f"프롬프트 설명: {prompt_template.description}")
-        logger.info(f"프롬프트 태그: {', '.join(prompt_template.tags)}")
+        prompt_config = load_prompt(script_gen_prompt_template_name)
+        logger.info(
+            "프롬프트 템플릿 로드 완료: %s",
+            prompt_config.get("name", script_gen_prompt_template_name),
+        )
+        if prompt_config.get("description"):
+            logger.info("프롬프트 설명: %s", prompt_config["description"])
+        tags = prompt_config.get("tags") or []
+        if tags:
+            logger.info("프롬프트 태그: %s", ", ".join(tags))
     except FileNotFoundError as e:
         logger.error(f"프롬프트 템플릿 로드 실패: {e}")
         available = list_prompts()
@@ -111,44 +126,115 @@ def run(
     # 정보 파일 읽기
     logger.info("정보 파일 읽기 중...")
     with open(info_file, "r", encoding="utf-8") as f:
-        info_content = f.read()
+        info_retrieval_result_content_text = f.read()
 
-    logger.info(f"정보 파일 로드 완료 (길이: {len(info_content)} 문자)")
-
-    # API 키 확인
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        error_msg = "OPENAI_API_KEY가 설정되지 않았습니다. .env 파일을 확인해주세요."
-        logger.error(error_msg)
-        raise ValueError(error_msg)
-
-    # 프롬프트 생성
-    # 템플릿에 {script_gen_prompt} 플레이스홀더가 있는지 확인
-    safe_custom_prompt = custom_prompt if custom_prompt else "없음"
-    user_prompt = prompt_template.format_user_prompt(
-        info_content=info_content, script_gen_prompt=safe_custom_prompt
+    logger.info(
+        f"정보 파일 로드 완료 (길이: {len(info_retrieval_result_content_text)} 문자)"
     )
-    logger.info(f"템플릿의 {{script_gen_prompt}}에 커스텀 프롬프트를 적용했습니다.")
 
-    # LLM 호출
+    # API 키 확인 및 LLM 호출
     try:
-        logger.info(f"LLM 호출 시작 (모델: {model}, temperature: {temperature})")
-
-        from openai import OpenAI
-
-        client = OpenAI(api_key=api_key)
-
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": prompt_template.system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=temperature,
+        logger.info(
+            f"LLM 호출 시작 (모델: {script_gen_model}, temperature: {temperature})"
         )
 
-        script_content = response.choices[0].message.content
-        logger.info(f"LLM 응답 수신 완료 (길이: {len(script_content)} 문자)")
+        if script_gen_model.startswith("gpt"):
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                error_msg = (
+                    "OPENAI_API_KEY가 설정되지 않았습니다. .env 파일을 확인해주세요."
+                )
+                logger.error(error_msg)
+                raise ValueError(error_msg)
+
+            from openai import OpenAI
+
+            client = OpenAI(api_key=api_key)
+
+            # 프롬프트 생성
+            safe_custom_prompt = (
+                script_gen_user_content_text if script_gen_user_content_text else "없음"
+            )
+            system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
+            user_prompt_template = get_prompt_value(
+                prompt_config, "user_prompt_template", ""
+            )
+            if not system_prompt or not user_prompt_template:
+                raise ValueError(
+                    f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
+                )
+            user_prompt = format_prompt(
+                user_prompt_template,
+                parameters=prompt_config.get("parameters"),
+                info_retrieval_result_content_text=info_retrieval_result_content_text,
+                script_gen_user_content_text=safe_custom_prompt,
+            )
+
+            response = client.chat.completions.create(
+                model=script_gen_model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=temperature,
+            )
+            script_gen_result_content = response.choices[0].message.content
+
+        elif script_gen_model.startswith("gemini"):
+            # Gemini API 사용 (google-genai)
+            api_key = os.getenv(
+                "GEMINI_API_KEY"
+            )  # Assuming GEMINI_API_KEY is used for google.genai
+            if not api_key:
+                # google-genai might pick up GOOGLE_API_KEY automatically, but explicit check is good.
+                # Usually GOOGLE_API_KEY is standard for AI Studio.
+                api_key = os.getenv("GOOGLE_API_KEY")
+
+            if not api_key:
+                error_msg = "GEMINI_API_KEY 또는 GOOGLE_API_KEY가 설정되지 않았습니다. .env 파일을 확인해주세요."
+                logger.error(error_msg)
+                raise ValueError(error_msg)
+
+            from google import genai
+            from google.genai import types
+
+            client = genai.Client(api_key=api_key)
+
+            # 프롬프트 생성
+            safe_custom_prompt = (
+                script_gen_user_content_text if script_gen_user_content_text else "없음"
+            )
+            system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
+            user_prompt_template = get_prompt_value(
+                prompt_config, "user_prompt_template", ""
+            )
+            if not system_prompt or not user_prompt_template:
+                raise ValueError(
+                    f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
+                )
+            user_prompt = format_prompt(
+                user_prompt_template,
+                parameters=prompt_config.get("parameters"),
+                info_retrieval_result_content_text=info_retrieval_result_content_text,
+                script_gen_user_content_text=safe_custom_prompt,
+            )
+
+            response = client.models.generate_content(
+                model=script_gen_model,
+                contents=user_prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_prompt,
+                    temperature=temperature,
+                ),
+            )
+            script_gen_result_content = response.text
+
+        else:
+            raise ValueError(
+                f"지원하지 않는 모델명입니다: {script_gen_model}. 'gpt-' 또는 'gemini-'로 시작해야 합니다."
+            )
+
+        logger.info(f"LLM 응답 수신 완료 (길이: {len(script_gen_result_content)} 문자)")
 
     except Exception as e:
         error_msg = f"LLM 호출 중 오류 발생: {str(e)}"
@@ -157,9 +243,9 @@ def run(
 
     # 스크립트 저장
     try:
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(script_content)
-        logger.info(f"✅ 스크립트 파일 저장 완료: {output_file}")
+        with open(script_gen_result_file_path, "w", encoding="utf-8") as f:
+            f.write(script_gen_result_content)
+        logger.info(f"✅ 스크립트 파일 저장 완료: {script_gen_result_file_path}")
 
     except Exception as e:
         error_msg = f"스크립트 파일 저장 중 오류 발생: {str(e)}"
@@ -169,16 +255,16 @@ def run(
     # 메타데이터 생성
     try:
         create_metadata(
-            search_keyword=search_keyword,
+            output_name=output_name,
             pipeline="script_gen",
-            output_file_path=output_file,
+            output_file_path=script_gen_result_file_path,
             mode="production",
-            model=model,
+            model=script_gen_model,
         )
     except Exception as e:
         logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
-    return output_file
+    return script_gen_result_file_path
 
 
 def main():
@@ -191,22 +277,29 @@ def main():
         epilog="""
 예시:
   # 기본 사용 (v1 프롬프트)
-  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병"
+  python src/pipelines/script_gen.py --output-name "01_celadon"
 
   # v2 프롬프트로 실제 생성
-  python src/pipelines/script_gen.py --search-keyword "청자 상감운학문 매병" --script-prompt-version v2
+  python src/pipelines/script_gen.py --output-name "01_celadon" --prompt-template-name v2-tts
 
   # 커스텀 프롬프트 추가
-  python src/pipelines/script_gen.py --search-keyword "청자 매병" --custom-prompt "전문적인 톤 사용"
+  python src/pipelines/script_gen.py --output-name "01_celadon" --user-content-text "전문적인 톤 사용"
 
   # 사용 가능한 프롬프트 버전 확인
   python src/pipelines/script_gen.py --list-prompts
         """,
     )
     parser.add_argument(
-        "--search-keyword",
+        "--output-name",
         type=str,
-        help="유물/장소 검색 키워드 (예: '청자 상감운학문 매병')",
+        required=True,
+        help="식별자 (파일명)",
+    )
+    parser.add_argument(
+        "--info-result-file",
+        type=Path,
+        default=None,
+        help="정보 검색 결과 파일 경로 (제공 시 --info-dir 무시)",
     )
     parser.add_argument(
         "--info-dir",
@@ -221,13 +314,13 @@ def main():
         help="출력 디렉토리 (기본: outputs/script)",
     )
     parser.add_argument(
-        "--script-prompt-version",
+        "--prompt-template-name",
         type=str,
         default="v1",
         help="스크립트 프롬프트 템플릿 버전 (기본: v1)",
     )
     parser.add_argument(
-        "--custom-prompt",
+        "--user-content-text",
         type=str,
         default=None,
         help="사용자 커스텀 프롬프트 (기본 프롬프트에 추가됨)",
@@ -239,18 +332,15 @@ def main():
         help="LLM temperature (0.0~1.0, 기본: 0.7)",
     )
     parser.add_argument(
-        "--model", type=str, default="gpt-4.1", help="OpenAI 모델명 (기본: gpt-4.1)"
+        "--script-gen-model",
+        type=str,
+        default="gpt-4o",
+        help="사용할 모델명 (기본: gpt-4o, 예: gpt-4.1, gemini-3-pro-preview)",
     )
     parser.add_argument(
         "--list-prompts",
         action="store_true",
         help="사용 가능한 프롬프트 버전 목록 출력",
-    )
-    parser.add_argument(
-        "--output-name",
-        type=str,
-        default=None,
-        help="파일명으로 사용할 이름 (미제공 시 search_keyword 사용)",
     )
 
     args = parser.parse_args()
@@ -263,46 +353,45 @@ def main():
             try:
                 template = load_prompt(version)
                 print(f"\n📝 {version}:")
-                print(f"    이름: {template.name}")
-                print(f"    설명: {template.description}")
-                print(f"    태그: {', '.join(template.tags)}")
-                if hasattr(template, "parameters"):
-                    print(f"    파라미터: {template.parameters}")
+                print(f"    이름: {template.get('name', '')}")
+                print(f"    설명: {template.get('description', '')}")
+                tags = template.get("tags") or []
+                if tags:
+                    print(f"    태그: {', '.join(tags)}")
+                params = template.get("parameters") or {}
+                if params:
+                    print(f"    파라미터: {params}")
             except Exception as e:
                 print(f"\n❌ {version}: (로드 실패 - {e})")
         print("\n" + "=" * 70)
         print("\n💡 사용 예시:")
         print(
-            '  python src/pipelines/script_gen.py --search-keyword "청자 매병" --script-prompt-version v1'
+            '  python src/pipelines/script_gen.py --output-name "01_celadon" --prompt-template-name v1'
         )
         print(
-            '  python src/pipelines/script_gen.py --search-keyword "석굴암" --script-prompt-version v2-tts'
+            '  python src/pipelines/script_gen.py --output-name "02_seokguram" --prompt-template-name v2-tts'
         )
         print("=" * 70)
         return
 
-    # search_keyword 필수 체크
-    if not args.search_keyword:
-        parser.error("--search-keyword 인자가 필요합니다 (또는 --list-prompts 사용)")
-
     try:
         output_path = run(
-            search_keyword=args.search_keyword,
+            output_name=args.output_name,
+            info_retrieval_result_file_path=args.info_result_file,
             info_dir=args.info_dir,
             output_dir=args.output_dir,
-            script_prompt_version=args.script_prompt_version,
-            custom_prompt=args.custom_prompt,
+            script_gen_prompt_template_name=args.prompt_template_name,
+            script_gen_user_content_text=args.user_content_text,
             temperature=args.temperature,
-            model=args.model,
-            output_name=args.output_name,
+            script_gen_model=args.script_gen_model,
         )
 
         print("\n" + "=" * 60)
         print("✅ 스크립트 생성 완료!")
         print("=" * 60)
-        print(f"검색 키워드: {args.search_keyword}")
-        print(f"스크립트 프롬프트 버전: {args.script_prompt_version}")
-        if args.custom_prompt:
+        print(f"Output Name: {args.output_name}")
+        print(f"스크립트 프롬프트 버전: {args.prompt_template_name}")
+        if args.user_content_text:
             print(f"커스텀 프롬프트: 추가됨")
         print(f"출력 파일: {output_path}")
         print("=" * 60)

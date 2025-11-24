@@ -22,10 +22,10 @@ system_prompt: |
 
 user_prompt_template: |
   [검색 정보 (Source Material)]
-  {info_content}
+  {info_retrieval_result_content_text}
 
   [개별 지시사항 (Director's Note)]
-  {script_gen_prompt}
+  {script_gen_user_content_text}
 
   ---
   위 [검색 정보]를 재료로 삼고, [개별 지시사항]의 연출 의도에 맞춰

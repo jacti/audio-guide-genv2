@@ -127,9 +127,6 @@ def validate_track_config(config: Dict[str, Any]) -> bool:
         if "output_name" not in file_item:
             raise BatchRunnerError(f"files[{idx}]: 필수 필드 누락 - output_name")
 
-        if "search_keyword" not in file_item:
-            raise BatchRunnerError(f"files[{idx}]: 필수 필드 누락 - search_keyword")
-
     logger.info(f"✅ 설정 파일 검증 완료: {len(config['files'])}개 파일")
     return True
 
@@ -194,7 +191,6 @@ def merge_file_config(
 def validate_stage_dependencies(
     stages: List[int],
     output_name: str,
-    search_keyword: str,
     track_dirs: Dict[str, Path],
 ) -> None:
     """
@@ -205,7 +201,6 @@ def validate_stage_dependencies(
     Args:
         stages: 실행할 파이프라인 단계 리스트 (1: info, 2: script, 3: audio)
         output_name: 출력 파일명
-        search_keyword: 검색 키워드
         track_dirs: 트랙 디렉토리 경로 딕셔너리
 
     Raises:
@@ -213,7 +208,7 @@ def validate_stage_dependencies(
     """
     # Stage 2 (script_gen)를 실행하려면 Stage 1 (info)의 출력이 필요
     if 2 in stages and 1 not in stages:
-        info_path = info_markdown_path(search_keyword, track_dirs["info"], output_name)
+        info_path = info_markdown_path(output_name, track_dirs["info"])
         if not info_path.exists():
             raise FileNotFoundError(
                 f"❌ Stage 2 (스크립트 생성)를 실행하려면 info 파일이 필요합니다.\n"
@@ -223,9 +218,7 @@ def validate_stage_dependencies(
 
     # Stage 3 (audio_gen)를 실행하려면 Stage 2 (script)의 출력이 필요
     if 3 in stages and 2 not in stages:
-        script_path = script_markdown_path(
-            search_keyword, track_dirs["script"], output_name
-        )
+        script_path = script_markdown_path(output_name, track_dirs["script"])
         if not script_path.exists():
             raise FileNotFoundError(
                 f"❌ Stage 3 (오디오 생성)을 실행하려면 script 파일이 필요합니다.\n"
@@ -268,11 +261,11 @@ def run_single_file(
         BatchRunnerError: 파이프라인 실행 실패
     """
     output_name = file_config["output_name"]
-    search_keyword = file_config["search_keyword"]
+    # search_keyword 제거됨, 필요시 로깅을 위해 남겨두거나 제거
+    # search_keyword = file_config["search_keyword"]
 
     result = {
         "output_name": output_name,
-        "search_keyword": search_keyword,
         "started_at": datetime.now().isoformat(),
         "status": "pending",
         "stages_run": stages,
@@ -280,26 +273,27 @@ def run_single_file(
 
     logger.info(f"\n{'='*70}")
     logger.info(f"[{file_index}/{total_files}] {output_name}")
-    logger.info(f"검색 키워드: {search_keyword}")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}")
 
     try:
         # 의존성 검증
-        validate_stage_dependencies(stages, output_name, search_keyword, track_dirs)
+        validate_stage_dependencies(stages, output_name, track_dirs)
 
         # Pipeline 1: 정보 검색
         if 1 in stages:
             logger.info("  → [Stage 1] 정보 검색 중...")
             info_path = info_retrieval.run(
-                search_keyword=search_keyword,
-                model=file_config.get("model", "sonar-pro"),
-                prompt_version=file_config.get("info_prompt_version", "default"),
-                info_prompt=file_config.get(
-                    "info_prompt", "한국 문화유산에 대한 상세한 정보를 수집해주세요."
+                output_name=output_name,
+                perplexity_model=file_config.get("perplexity_model", "sonar-pro"),
+                info_retrieval_prompt_template_name=file_config.get(
+                    "info_retrieval_prompt_template_name", "default"
+                ),
+                info_retrieval_user_content_text=file_config.get(
+                    "info_retrieval_user_content_text",
+                    "한국 문화유산에 대한 상세한 정보를 수집해주세요.",
                 ),
                 output_dir=track_dirs["info"],
-                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 1] 정보 검색 완료: {info_path.name}")
         else:
@@ -309,14 +303,17 @@ def run_single_file(
         if 2 in stages:
             logger.info("  → [Stage 2] 스크립트 생성 중...")
             script_path = script_gen.run(
-                search_keyword=search_keyword,
+                output_name=output_name,
+                script_gen_prompt_template_name=file_config[
+                    "script_gen_prompt_template_name"
+                ],
+                script_gen_model=file_config.get("script_gen_model", "gpt-4o"),
                 info_dir=track_dirs["info"],
                 output_dir=track_dirs["script"],
-                script_prompt_version=file_config["script_prompt_version"],
-                model=file_config.get("model", "gpt-4.1"),
-                custom_prompt=file_config.get("script_gen_prompt"),
+                script_gen_user_content_text=file_config.get(
+                    "script_gen_user_content_text"
+                ),
                 temperature=file_config.get("temperature", 0.7),
-                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 2] 스크립트 생성 완료: {script_path.name}")
         else:
@@ -326,18 +323,19 @@ def run_single_file(
         if 3 in stages:
             logger.info("  → [Stage 3] 오디오 생성 중...")
             audio_path = audio_gen.run(
-                search_keyword=search_keyword,
-                script_dir=track_dirs["script"],
-                output_dir=track_dirs["audio"],
+                output_name=output_name,
                 tts_language=file_config.get("tts_language", "ko-KR"),
-                tts_prompt=file_config.get(
-                    "tts_prompt",
+                tts_system_prompt=file_config.get(
+                    "tts_system_prompt",
                     "당신은 박물관/미술관 도슨트입니다. 차분하지만 지루하지 않게, 약간 명랑하고 따뜻한 톤으로, 실제 전시장에서 관람객에게 설명하듯 자연스럽게 말해주세요.",
                 ),
+                script_dir=track_dirs["script"],
+                output_dir=track_dirs["audio"],
                 voice=file_config.get("voice", "Zephyr"),
-                model=file_config.get("tts_model", "gemini-2.5-pro-tts"),
+                gemini_tts_model=file_config.get(
+                    "gemini_tts_model", "gemini-2.5-pro-tts"
+                ),
                 max_retries=file_config.get("max_retries", 8),
-                output_name=output_name,
             )
             logger.info(f"  ✓ [Stage 3] 오디오 생성 완료: {audio_path.name}")
             result["audio_path"] = str(audio_path)
@@ -591,7 +589,6 @@ def run_batch_parallel(
         if error_occurred.is_set():
             return {
                 "output_name": file_item.get("output_name", "unknown"),
-                "search_keyword": file_item.get("search_keyword", "unknown"),
                 "status": "cancelled",
                 "error": "다른 파일 처리 중 에러 발생으로 취소됨",
             }

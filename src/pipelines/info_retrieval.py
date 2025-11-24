@@ -16,14 +16,19 @@ import logging
 import os
 import json
 from pathlib import Path
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, Any
 
 from dotenv import load_dotenv
 import backoff
 
 from src.utils.path_sanitizer import info_markdown_path
 from src.utils.metadata import create_metadata
-from src.utils.prompt_loader import load_prompt, list_prompts
+from src.utils.prompt_utils import (
+    load_prompt,
+    list_prompts,
+    format_prompt,
+    get_prompt_value,
+)
 
 # 환경변수 로드
 load_dotenv()
@@ -31,8 +36,7 @@ load_dotenv()
 # 로거 설정
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 # 기본 설정
@@ -59,26 +63,19 @@ def _validate_api_key() -> str:
     return api_key
 
 
-@backoff.on_exception(
-    backoff.expo,
-    Exception,
-    max_tries=3,
-    max_time=30
-)
+@backoff.on_exception(backoff.expo, Exception, max_tries=3, max_time=30)
 def _chat_with_perplexity(
-    search_keyword: str,
-    info_prompt: str,
-    prompt_template,
-    model: str,
+    info_retrieval_user_content_text: str,
+    prompt_config: Dict[str, Any],
+    perplexity_model: str,
 ) -> Tuple[str, Dict]:
     """
     Perplexity Chat API로 검색 + 마크다운 생성 (단일 호출)
 
     Args:
-        search_keyword: 검색 키워드
-        info_prompt: 추가 맥락 및 요구사항
+        info_retrieval_user_content_text: 추가 맥락 및 요구사항 (텍스트)
         prompt_template: 프롬프트 템플릿 객체
-        model: Perplexity 모델 (sonar, sonar-pro)
+        perplexity_model: Perplexity 모델 (sonar, sonar-pro)
 
     Returns:
         (markdown_content, metadata_dict)
@@ -90,26 +87,41 @@ def _chat_with_perplexity(
 
     client = Perplexity(api_key=api_key)
 
-    logger.info(f"[Perplexity Chat] 검색 시작: {search_keyword}")
+    # 검색 키워드는 이제 user_content_text에 포함된 것으로 간주하거나
+    # 로깅용으로 앞부분만 사용
+    logger.info(
+        f"[Perplexity Chat] 검색 시작: {info_retrieval_user_content_text[:50]}..."
+    )
 
     try:
         # Chat Completions API 호출 (마크다운 직접 생성)
+        # user_prompt_template에서 {search_keyword}가 제거되었으므로
+        # format_user_prompt 호출 시 search_keyword 인자를 제거해야 함
+        system_prompt = get_prompt_value(prompt_config, "system_prompt", "")
+        user_prompt_template = get_prompt_value(
+            prompt_config, "user_prompt_template", ""
+        )
+        if not system_prompt or not user_prompt_template:
+            raise ValueError(
+                f"system_prompt 또는 user_prompt_template이 YAML에 없습니다: {prompt_config.get('path')}"
+            )
+
+        user_content = format_prompt(
+            user_prompt_template,
+            parameters=prompt_config.get("parameters"),
+            info_retrieval_user_content_text=info_retrieval_user_content_text,
+        )
+
         response = client.chat.completions.create(
-            model=model,
+            model=perplexity_model,
             messages=[
-                {
-                    "role": "system",
-                    "content": prompt_template.get_system_prompt()
-                },
+                {"role": "system", "content": system_prompt},
                 {
                     "role": "user",
-                    "content": prompt_template.format_user_prompt(
-                        search_keyword=search_keyword,
-                        info_prompt=info_prompt
-                    )
-                }
+                    "content": user_content,
+                },
             ],
-            temperature=0.3
+            temperature=0.3,
         )
 
         # 마크다운 응답 직접 사용
@@ -118,16 +130,14 @@ def _chat_with_perplexity(
         logger.info(f"[Perplexity Chat] 마크다운 생성 완료 ({len(markdown)} chars)")
 
         # 메타데이터 준비
-        metadata = {
-            "finish_reason": response.choices[0].finish_reason
-        }
+        metadata = {"finish_reason": response.choices[0].finish_reason}
 
         # Usage 정보 추가 (있을 경우)
-        if hasattr(response, 'usage') and response.usage:
+        if hasattr(response, "usage") and response.usage:
             metadata["usage"] = {
-                "prompt_tokens": getattr(response.usage, 'prompt_tokens', None),
-                "completion_tokens": getattr(response.usage, 'completion_tokens', None),
-                "total_tokens": getattr(response.usage, 'total_tokens', None)
+                "prompt_tokens": getattr(response.usage, "prompt_tokens", None),
+                "completion_tokens": getattr(response.usage, "completion_tokens", None),
+                "total_tokens": getattr(response.usage, "total_tokens", None),
             }
 
         return markdown, metadata
@@ -140,10 +150,10 @@ def _chat_with_perplexity(
 def save_metadata(
     output_path: Path,
     pipeline: str,
-    search_keyword: str,
-    model: str,
-    info_prompt: str,
-    **extra_metadata
+    output_name: str,
+    perplexity_model: str,
+    info_retrieval_user_content_text: str,
+    **extra_metadata,
 ) -> None:
     """
     메타데이터를 JSON 파일로 저장
@@ -151,42 +161,40 @@ def save_metadata(
     Args:
         output_path: 출력 파일 경로
         pipeline: 파이프라인 이름
-        search_keyword: 검색 키워드
-        model: 사용한 모델
-        info_prompt: 입력 프롬프트
+        output_name: 파일명 (식별자)
+        perplexity_model: 사용한 모델
+        info_retrieval_user_content_text: 입력 프롬프트
         **extra_metadata: 추가 메타데이터
     """
     metadata_path = create_metadata(
-        search_keyword=search_keyword,
+        output_name=output_name,  # search_keyword 대체
         pipeline=pipeline,
         output_file_path=output_path,
         mode="production",
-        model=model,
-        info_prompt=info_prompt,
-        **extra_metadata
+        model=perplexity_model,
+        info_retrieval_user_content_text=info_retrieval_user_content_text,
+        **extra_metadata,
     )
 
     logger.info(f"메타데이터 저장 완료: {metadata_path}")
 
 
 def run(
-    search_keyword: str,
-    model: str,
-    prompt_version: str,
-    info_prompt: str,
+    output_name: str,
+    perplexity_model: str,
+    info_retrieval_prompt_template_name: str,
+    info_retrieval_user_content_text: str,
     output_dir: Optional[Path] = None,
-    output_name: Optional[str] = None
 ) -> Path:
     """
     Perplexity Chat API로 정보 검색 + 마크다운 생성 (단일 호출)
 
     Args:
-        search_keyword: 검색할 문화유산 키워드
-        model: Perplexity 모델 (sonar, sonar-pro)
-        prompt_version: 프롬프트 버전 (default, ...)
-        info_prompt: 추가 맥락 및 요구사항
+        output_name: 파일명 (식별자로 사용됨)
+        perplexity_model: Perplexity 모델 (sonar, sonar-pro)
+        info_retrieval_prompt_template_name: 프롬프트 버전 (default, ...)
+        info_retrieval_user_content_text: 추가 맥락 및 요구사항 (텍스트)
         output_dir: 출력 디렉토리 (기본: outputs/info/)
-        output_name: 커스텀 파일명 (기본: search_keyword 사용)
 
     Returns:
         Path: 생성된 마크다운 파일 경로
@@ -194,31 +202,36 @@ def run(
     Examples:
         # 기본 사용
         run(
-            search_keyword="신라 금관",
-            model="sonar-pro",
-            prompt_version="default",
-            info_prompt="한국 문화유산에 대한 상세한 정보를 수집해주세요."
+            output_name="01_shilla_crown",
+            perplexity_model="sonar-pro",
+            info_retrieval_prompt_template_name="default",
+            info_retrieval_user_content_text="신라 금관에 대해 조사해주세요."
         )
     """
     logger.info(f"=== 정보 검색 파이프라인 시작 ===")
-    logger.info(f"검색 키워드: {search_keyword}")
-    logger.info(f"모델: {model}")
-    logger.info(f"프롬프트 버전: {prompt_version}")
+    logger.info(f"Output Name: {output_name}")
+    logger.info(f"모델: {perplexity_model}")
+    logger.info(f"프롬프트 버전: {info_retrieval_prompt_template_name}")
 
     # 1. 프롬프트 템플릿 로드
     try:
-        template = load_prompt(prompt_version, pipeline_type="info_retrieval")
-        logger.info(f"프롬프트 로드 완료: {template.name} (v{template.version})")
+        prompt_config = load_prompt(
+            info_retrieval_prompt_template_name, pipeline_type="info_retrieval"
+        )
+        logger.info(
+            "프롬프트 로드 완료: %s (v%s)",
+            prompt_config.get("name", info_retrieval_prompt_template_name),
+            prompt_config.get("version"),
+        )
     except FileNotFoundError as e:
         logger.error(f"프롬프트 로드 실패: {e}")
         raise
 
     # 2. Perplexity Chat API 호출 (검색 + 마크다운 생성)
     content, api_metadata = _chat_with_perplexity(
-        search_keyword=search_keyword,
-        info_prompt=info_prompt,
-        prompt_template=template,
-        model=model,
+        info_retrieval_user_content_text=info_retrieval_user_content_text,
+        prompt_config=prompt_config,
+        perplexity_model=perplexity_model,
     )
 
     logger.info(f"마크다운 생성 완료 ({len(content)} chars)")
@@ -227,9 +240,8 @@ def run(
     if output_dir is None:
         output_dir = DEFAULT_OUTPUT_DIR
 
-    output_path = info_markdown_path(
-        search_keyword, output_dir, output_name
-    )
+    # output_name을 사용하여 파일 경로 생성
+    output_path = info_markdown_path(output_name, output_dir)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(content, encoding="utf-8")
@@ -240,10 +252,10 @@ def run(
     save_metadata(
         output_path,
         pipeline="info_retrieval",
-        search_keyword=search_keyword,
-        model=model,
-        info_prompt=info_prompt,
-        **api_metadata
+        output_name=output_name,
+        perplexity_model=perplexity_model,
+        info_retrieval_user_content_text=info_retrieval_user_content_text,
+        **api_metadata,
     )
 
     logger.info(f"=== 정보 검색 파이프라인 완료 ===\n")
@@ -259,43 +271,33 @@ def main():
         description="Perplexity Chat API 기반 정보 검색 파이프라인"
     )
     parser.add_argument(
-        "--search-keyword",
-        type=str,
-        required=True,
-        help="검색할 문화유산 키워드"
+        "--output-name", type=str, required=True, help="식별자 (파일명)"
     )
     parser.add_argument(
-        "--model",
+        "--perplexity-model",
         type=str,
         default=DEFAULT_MODEL,
-        help=f"Perplexity 모델 (기본: {DEFAULT_MODEL})"
+        help=f"Perplexity 모델 (기본: {DEFAULT_MODEL})",
     )
     parser.add_argument(
-        "--prompt-version",
+        "--prompt-template-name",
         type=str,
         default="default",
-        help="프롬프트 버전 (기본: default)"
+        help="프롬프트 버전 (기본: default)",
     )
     parser.add_argument(
-        "--info-prompt",
+        "--user-content-text",
         type=str,
         default="한국 문화유산에 대한 상세한 정보를 수집해주세요.",
-        help="추가 맥락 및 요구사항"
+        help="추가 맥락 및 요구사항",
     )
     parser.add_argument(
-        "--output-dir",
-        type=Path,
-        help="출력 디렉토리 (기본: outputs/info/)"
-    )
-    parser.add_argument(
-        "--output-name",
-        type=str,
-        help="커스텀 파일명"
+        "--output-dir", type=Path, help="출력 디렉토리 (기본: outputs/info/)"
     )
     parser.add_argument(
         "--list-prompts",
         action="store_true",
-        help="사용 가능한 프롬프트 버전 목록 출력"
+        help="사용 가능한 프롬프트 버전 목록 출력",
     )
 
     args = parser.parse_args()
@@ -311,12 +313,11 @@ def main():
     # 파이프라인 실행
     try:
         output_path = run(
-            search_keyword=args.search_keyword,
-            model=args.model,
-            prompt_version=args.prompt_version,
-            info_prompt=args.info_prompt,
+            output_name=args.output_name,
+            perplexity_model=args.perplexity_model,
+            info_retrieval_prompt_template_name=args.prompt_template_name,
+            info_retrieval_user_content_text=args.user_content_text,
             output_dir=args.output_dir,
-            output_name=args.output_name
         )
         print(f"\n✅ 완료: {output_path}")
 
