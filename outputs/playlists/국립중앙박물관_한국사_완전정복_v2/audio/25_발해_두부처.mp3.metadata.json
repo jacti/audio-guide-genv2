@@ -1,0 +1,9 @@
+{
+  "output_name": "25_발해_두부처",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:56:32.428969",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 723840
+}

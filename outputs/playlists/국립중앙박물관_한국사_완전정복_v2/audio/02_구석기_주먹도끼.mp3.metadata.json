@@ -1,0 +1,9 @@
+{
+  "output_name": "02_구석기_주먹도끼",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:57:27.427195",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 900768
+}

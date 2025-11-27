@@ -1,0 +1,15 @@
+{
+  "output_name": "01_전시관_선사고대관",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:41:01.587912",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 선사·고대관]\n국립중앙박물관 선사·고대관 전시실 구성 및 순서.\n구석기, 신석기, 청동기, 고조선, 삼한, 고구려, 백제, 신라, 가야, 통일신라, 발해의 역사적 흐름.\n인류의 시작부터 고대 국가의 완성까지의 서사.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760&showroomCode=DM0002\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 854,
+    "completion_tokens": 413,
+    "total_tokens": 1267
+  },
+  "file_size": 1329
+}

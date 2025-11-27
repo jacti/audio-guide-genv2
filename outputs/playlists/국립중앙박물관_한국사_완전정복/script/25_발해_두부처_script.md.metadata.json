@@ -1,0 +1,9 @@
+{
+  "output_name": "25_발해_두부처",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:02:56.271691",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 두 부처님이 나란히 앉아 대화를 나누는 듯한 다정한 모습을 묘사하세요.\n2. 흙을 구워 만든 이 소박한 불상에서 고구려를 계승한 발해 사람들의 따뜻한 감성을 찾아내 설명해주세요.\n",
+  "file_size": 2314
+}

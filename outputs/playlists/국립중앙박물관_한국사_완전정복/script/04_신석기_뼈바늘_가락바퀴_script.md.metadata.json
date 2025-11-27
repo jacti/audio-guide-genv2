@@ -1,0 +1,9 @@
+{
+  "output_name": "04_신석기_뼈바늘_가락바퀴",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:44:51.021038",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 아주 작은 유물인 뼈바늘과 가락바퀴에 주목하게 하세요.\n2. 이것이 단순한 도구가 아니라 인류가 '옷'을 지어 입기 시작했다는 '기술 혁명'의 증거임을 강조하세요.\n3. \"이 작은 바늘귀에 실을 꿰던 신석기인의 손길을 상상해보세요\"와 같은 감성적인 멘트를 포함하세요.\n",
+  "file_size": 2158
+}

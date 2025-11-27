@@ -1,0 +1,15 @@
+{
+  "output_name": "41_조선_대동여지도",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:17:26.054157",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 대동여지도]\n고산자 김정호의 대동여지도 목판본.\n휴대와 열람이 편리한 분첩절첩식 구조.\n목판 인쇄를 통한 지도의 보급(대중화) 노력.\n산맥과 물줄기의 과학적 표현.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=700\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 836,
+    "completion_tokens": 1648,
+    "total_tokens": 2484
+  },
+  "file_size": 5299
+}

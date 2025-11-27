@@ -1,0 +1,15 @@
+{
+  "output_name": "40_조선_화성성역의궤",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:16:08.337036",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 화성성역의궤]\n수원 화성 축조 과정을 기록한 화성성역의궤.\n기록의 나라 조선: 못 하나 가격까지 적은 치밀함.\n의궤 덕분에 가능했던 수원 화성의 완벽한 복원.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=12798\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 833,
+    "completion_tokens": 1428,
+    "total_tokens": 2261
+  },
+  "file_size": 4598
+}

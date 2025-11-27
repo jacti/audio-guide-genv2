@@ -1,0 +1,9 @@
+{
+  "output_name": "17_백제_관꾸미개",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:35:16.279508",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 668160
+}

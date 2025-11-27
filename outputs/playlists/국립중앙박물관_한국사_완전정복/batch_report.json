@@ -1,0 +1,454 @@
+{
+  "playlist_name": "국립중앙박물관_한국사_완전정복",
+  "description": "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "history",
+      "korea",
+      "museum",
+      "guide",
+      "audio_tour"
+    ],
+    "created_date": "2025-11-24"
+  },
+  "started_at": "2025-11-24T19:39:54.770584",
+  "completed_at": "2025-11-24T20:19:08.664282",
+  "duration_seconds": 2353.89,
+  "total_files": 43,
+  "successful": 43,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "00_테마소개",
+      "started_at": "2025-11-24T19:39:54.770591",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:40:46.170307"
+    },
+    {
+      "output_name": "01_전시관_선사고대관",
+      "started_at": "2025-11-24T19:40:46.170348",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:41:23.867035"
+    },
+    {
+      "output_name": "02_구석기_주먹도끼",
+      "started_at": "2025-11-24T19:41:23.867091",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:42:30.512950"
+    },
+    {
+      "output_name": "03_구석기_고인류",
+      "started_at": "2025-11-24T19:42:30.512999",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:43:35.313593"
+    },
+    {
+      "output_name": "04_신석기_뼈바늘_가락바퀴",
+      "started_at": "2025-11-24T19:43:35.313639",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:44:51.023145"
+    },
+    {
+      "output_name": "05_신석기_고산리식토기",
+      "started_at": "2025-11-24T19:44:51.023191",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:45:27.090785"
+    },
+    {
+      "output_name": "06_신석기_부산가덕도인골",
+      "started_at": "2025-11-24T19:45:27.090840",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:46:58.621414"
+    },
+    {
+      "output_name": "07_청동기_민무늬토기",
+      "started_at": "2025-11-24T19:46:58.621449",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:48:24.347881"
+    },
+    {
+      "output_name": "08_청동기_농경문청동기",
+      "started_at": "2025-11-24T19:48:24.347933",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:49:15.650595"
+    },
+    {
+      "output_name": "09_고조선_비파형동검",
+      "started_at": "2025-11-24T19:49:15.650650",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:49:55.613168"
+    },
+    {
+      "output_name": "10_고조선_통나무관",
+      "started_at": "2025-11-24T19:49:55.613203",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:50:41.267365"
+    },
+    {
+      "output_name": "11_고구려_금동관",
+      "started_at": "2025-11-24T19:50:41.267403",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:51:35.738769"
+    },
+    {
+      "output_name": "12_고구려_짐승무늬수막새",
+      "started_at": "2025-11-24T19:51:35.738805",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:52:30.951961"
+    },
+    {
+      "output_name": "13_고구려_광개토대왕릉비탁본",
+      "started_at": "2025-11-24T19:52:30.951997",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:53:39.721244"
+    },
+    {
+      "output_name": "14_고구려_비늘갑옷",
+      "started_at": "2025-11-24T19:53:39.721287",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:54:26.517386"
+    },
+    {
+      "output_name": "15_고구려_연가7년불상",
+      "started_at": "2025-11-24T19:54:26.517422",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:55:25.397481"
+    },
+    {
+      "output_name": "16_백제_치미",
+      "started_at": "2025-11-24T19:55:25.397515",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:56:08.600991"
+    },
+    {
+      "output_name": "17_백제_관꾸미개",
+      "started_at": "2025-11-24T19:56:08.601034",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:56:42.746540"
+    },
+    {
+      "output_name": "18_백제_금동대향로",
+      "started_at": "2025-11-24T19:56:42.746589",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:57:29.105573"
+    },
+    {
+      "output_name": "19_가야_미늘쇠",
+      "started_at": "2025-11-24T19:57:29.105614",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:58:26.098371"
+    },
+    {
+      "output_name": "20_가야_투구와판갑옷",
+      "started_at": "2025-11-24T19:58:26.098413",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:59:05.971305"
+    },
+    {
+      "output_name": "21_신라_금관과금허리띠",
+      "started_at": "2025-11-24T19:59:05.971340",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T19:59:54.952211"
+    },
+    {
+      "output_name": "22_신라_봉황머리유리병",
+      "started_at": "2025-11-24T19:59:54.952403",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:00:38.308425"
+    },
+    {
+      "output_name": "23_통일신라_사천왕전",
+      "started_at": "2025-11-24T20:00:38.308461",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:01:26.405997"
+    },
+    {
+      "output_name": "24_통일신라_팔부중",
+      "started_at": "2025-11-24T20:01:26.406036",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:02:13.151519"
+    },
+    {
+      "output_name": "25_발해_두부처",
+      "started_at": "2025-11-24T20:02:13.151559",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:02:56.274537"
+    },
+    {
+      "output_name": "26_전시관_중근세관",
+      "started_at": "2025-11-24T20:02:56.274596",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:04:08.770758"
+    },
+    {
+      "output_name": "27_고려_인종시호",
+      "started_at": "2025-11-24T20:04:08.770796",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:04:59.256560"
+    },
+    {
+      "output_name": "28_고려_청자배모양그릇",
+      "started_at": "2025-11-24T20:04:59.256612",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:05:50.417322"
+    },
+    {
+      "output_name": "29_고려_수령옹주묘지명",
+      "started_at": "2025-11-24T20:05:50.417358",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:07:05.820921"
+    },
+    {
+      "output_name": "30_고려_초조대장경",
+      "started_at": "2025-11-24T20:07:05.820954",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:07:56.201221"
+    },
+    {
+      "output_name": "31_고려_앉아있는보살상",
+      "started_at": "2025-11-24T20:07:56.201254",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:08:42.216982"
+    },
+    {
+      "output_name": "32_고려_정몽주초상",
+      "started_at": "2025-11-24T20:08:42.217036",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:09:40.844892"
+    },
+    {
+      "output_name": "33_조선_태조어진",
+      "started_at": "2025-11-24T20:09:40.844929",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:10:32.993515"
+    },
+    {
+      "output_name": "34_조선_근정전어좌",
+      "started_at": "2025-11-24T20:10:32.993551",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:11:25.790895"
+    },
+    {
+      "output_name": "35_조선_천상열차분야지도",
+      "started_at": "2025-11-24T20:11:25.790994",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:12:06.219570"
+    },
+    {
+      "output_name": "36_조선_용비어천가",
+      "started_at": "2025-11-24T20:12:06.219603",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:12:57.341432"
+    },
+    {
+      "output_name": "37_조선_측우기",
+      "started_at": "2025-11-24T20:12:57.341467",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:13:52.437833"
+    },
+    {
+      "output_name": "38_조선_달항아리",
+      "started_at": "2025-11-24T20:13:52.437869",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:14:57.941147"
+    },
+    {
+      "output_name": "39_조선_동의보감",
+      "started_at": "2025-11-24T20:14:57.941179",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:15:39.095702"
+    },
+    {
+      "output_name": "40_조선_화성성역의궤",
+      "started_at": "2025-11-24T20:15:39.095758",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:16:47.792565"
+    },
+    {
+      "output_name": "41_조선_대동여지도",
+      "started_at": "2025-11-24T20:16:47.792598",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:17:52.855878"
+    },
+    {
+      "output_name": "42_마무리",
+      "started_at": "2025-11-24T20:17:52.855900",
+      "status": "success",
+      "stages_run": [
+        1,
+        2
+      ],
+      "completed_at": "2025-11-24T20:19:08.664253"
+    }
+  ]
+}

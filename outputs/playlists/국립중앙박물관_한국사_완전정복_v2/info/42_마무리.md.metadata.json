@@ -1,0 +1,15 @@
+{
+  "output_name": "42_마무리",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:18:19.097617",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 마무리 멘트]\n국립중앙박물관 관람 마무리 멘트.\n역사 관람의 의의: 과거를 통해 미래를 봄.\n박물관 야외 정원(거울못) 등 휴식 공간 추천.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 791,
+    "completion_tokens": 1289,
+    "total_tokens": 2080
+  },
+  "file_size": 4470
+}

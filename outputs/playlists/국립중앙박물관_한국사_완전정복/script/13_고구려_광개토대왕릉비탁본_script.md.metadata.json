@@ -1,0 +1,9 @@
+{
+  "output_name": "13_고구려_광개토대왕릉비탁본",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:53:39.719373",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 전시실 한쪽 벽을 가득 채운 거대한 탁본 앞에 관람객을 세우세요.\n2. 만주 벌판에 서 있는 실제 비석의 웅장함을 상상하게 하고, 광개토대왕의 업적이 빼곡히 적힌 글자들의 역사적 무게감을 전달하세요.\n",
+  "file_size": 2298
+}

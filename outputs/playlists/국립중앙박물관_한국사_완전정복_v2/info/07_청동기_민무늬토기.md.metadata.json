@@ -1,0 +1,15 @@
+{
+  "output_name": "07_청동기_민무늬토기",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:47:42.103631",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 민무늬토기]\n청동기 시대 민무늬토기 특징 및 종류 (붉은 간 토기 등).\n빗살무늬토기와의 차이점.\n농경 사회 본격화와 잉여 생산물 저장 용도.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29880\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 830,
+    "completion_tokens": 1416,
+    "total_tokens": 2246
+  },
+  "file_size": 4455
+}

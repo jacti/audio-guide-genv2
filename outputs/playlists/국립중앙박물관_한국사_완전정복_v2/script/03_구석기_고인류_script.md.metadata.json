@@ -1,0 +1,9 @@
+{
+  "output_name": "03_구석기_고인류",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:36:41.252238",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 우리 땅에 살았던 아주 오래전 사람들의 흔적을 이야기합니다.\n2. 전시된 뼈나 모형을 보며 당시 사람들의 삶이 지금과 어떻게 달랐을지, 혹은 얼마나 비슷했을지 상상력을 자극하는 질문을 던지세요.\n",
+  "file_size": 3752
+}

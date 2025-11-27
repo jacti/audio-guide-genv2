@@ -1,0 +1,15 @@
+{
+  "output_name": "05_신석기_고산리식토기",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:45:05.668385",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 고산리식 토기]\n제주 고산리식 토기 특징 (우리나라 가장 오래된 토기).\n식물 줄기를 섞어 만든 제작 기법.\n토기의 발명이 식생활에 미친 영향.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29856\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 820,
+    "completion_tokens": 1530,
+    "total_tokens": 2350
+  },
+  "file_size": 4944
+}

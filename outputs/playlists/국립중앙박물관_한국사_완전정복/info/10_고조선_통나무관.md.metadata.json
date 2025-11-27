@@ -1,0 +1,15 @@
+{
+  "output_name": "10_고조선_통나무관",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:50:13.077272",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 통나무관]\n창원 다호리 유적 통나무관 (목관묘).\n참나무를 반으로 갈라 만든 제작 방식.\n함께 묻힌 부장품(붓, 감 등)과 당시 장례 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030400.do?schM=view&showHallId=760&relicId=29934\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1729,
+    "total_tokens": 2552
+  },
+  "file_size": 5514
+}

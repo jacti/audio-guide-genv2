@@ -1,0 +1,9 @@
+{
+  "output_name": "39_조선_동의보감",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:15:39.093017",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 한국인이 가장 존경하는 의서, 동의보감을 소개하세요.\n2. 전란 속에 백성들이 쉽게 약재를 구해 병을 고칠 수 있도록 만들었던 허준의 헌신과, 예방 의학을 강조한 선진적인 면모를 설명하세요.\n",
+  "file_size": 1942
+}

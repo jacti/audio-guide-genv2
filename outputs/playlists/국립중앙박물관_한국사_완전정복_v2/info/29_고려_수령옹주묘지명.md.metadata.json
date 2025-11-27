@@ -1,0 +1,15 @@
+{
+  "output_name": "29_고려_수령옹주묘지명",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:06:16.587928",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 수령옹주 묘지명]\n고려 수령옹주 묘지명 내용 해석.\n아버지(왕족)가 딸의 죽음을 슬퍼하며 직접 쓴 글.\n고려 시대의 가족애와 여성의 지위.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=17004\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 824,
+    "completion_tokens": 1256,
+    "total_tokens": 2080
+  },
+  "file_size": 4092
+}

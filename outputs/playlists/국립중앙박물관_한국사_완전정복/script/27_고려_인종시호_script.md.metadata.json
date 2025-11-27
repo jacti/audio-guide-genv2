@@ -1,0 +1,9 @@
+{
+  "output_name": "27_고려_인종시호",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:04:59.253723",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 왕이 돌아가신 후 그의 업적을 기리며 올린 시호가 적힌 귀한 문서를 소개하세요.\n2. 고려 왕실의 기록 문화와 효 사상을 설명하며, 글자 하나하나에 담긴 정성을 강조하세요.\n",
+  "file_size": 2014
+}

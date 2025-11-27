@@ -1,0 +1,9 @@
+{
+  "output_name": "21_신라_금관과금허리띠",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:45:41.284647",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 1007136
+}

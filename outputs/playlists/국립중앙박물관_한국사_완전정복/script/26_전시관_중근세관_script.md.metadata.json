@@ -1,0 +1,9 @@
+{
+  "output_name": "26_전시관_중근세관",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:04:08.768959",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[역할] 시대의 해설가\n[지시사항]\n1. 이제 1층의 반대편, 중·근세관으로 이동했음을 알리세요.\n2. 고려의 화려한 청자 빛깔에서 조선의 단아한 백자 빛깔로 넘어가는 미의식의 변화를 예고하며 관람객의 호기심을 자극하세요.\n",
+  "file_size": 2104
+}

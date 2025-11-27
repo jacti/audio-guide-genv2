@@ -1,0 +1,9 @@
+{
+  "output_name": "39_조선_동의보감",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:33:13.403992",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 972384
+}

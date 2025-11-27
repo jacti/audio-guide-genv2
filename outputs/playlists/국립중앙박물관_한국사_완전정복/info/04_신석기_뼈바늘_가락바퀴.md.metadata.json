@@ -1,0 +1,15 @@
+{
+  "output_name": "04_신석기_뼈바늘_가락바퀴",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:44:14.157384",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 뼈바늘과 가락바퀴]\n신석기 뼈바늘과 가락바퀴 용도 및 사용법.\n신석기 혁명: 의복 제작의 의미.\n정착 생활과 생활 기술의 발달.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29855\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1389,
+    "total_tokens": 2212
+  },
+  "file_size": 4406
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "26_전시관_중근세관",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:03:13.474229",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 중·근세관]\n국립중앙박물관 중·근세관(고려, 조선, 대한제국) 전시 개요.\n화려한 귀족 문화(고려)에서 유교적 선비 문화(조선)로의 변화.\n인쇄술, 한글 등 기록 유산의 중요성.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759&showroomCode=DM0036\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 838,
+    "completion_tokens": 1594,
+    "total_tokens": 2432
+  },
+  "file_size": 5175
+}

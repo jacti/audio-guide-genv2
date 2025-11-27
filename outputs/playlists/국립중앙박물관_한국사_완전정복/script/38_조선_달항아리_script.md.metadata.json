@@ -1,0 +1,9 @@
+{
+  "output_name": "38_조선_달항아리",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:14:57.939613",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 둥근 보름달을 닮은 넉넉한 백자 항아리의 자태를 감상하게 하세요.\n2. 완벽한 원이 아니라 약간 일그러져서 더 자연스럽고 푸근한 맛, 화려한 무늬 없이 순백색으로 빛나는 조선의 마음(절제미)을 서정적으로 묘사하세요.\n",
+  "file_size": 1992
+}

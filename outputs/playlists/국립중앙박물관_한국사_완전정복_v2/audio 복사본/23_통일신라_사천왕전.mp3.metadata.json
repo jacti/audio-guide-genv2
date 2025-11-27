@@ -1,0 +1,9 @@
+{
+  "output_name": "23_통일신라_사천왕전",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:51:31.306616",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 899616
+}

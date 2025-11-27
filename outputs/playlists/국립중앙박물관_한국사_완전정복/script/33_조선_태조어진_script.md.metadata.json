@@ -1,0 +1,9 @@
+{
+  "output_name": "33_조선_태조어진",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:10:32.991968",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 조선을 건국한 태조 이성계의 초상화 앞에 섰음을 알리세요.\n2. 우리가 흔히 아는 붉은 옷이 아닌 '푸른색 곤룡포'를 입은 이유를 설명하고, 늙었지만 강인해 보이는 무인의 풍모를 묘사하세요.\n",
+  "file_size": 1678
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "21_신라_금관과금허리띠",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:59:27.045963",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 신라 금관]\n신라 금관(황남대총 북분 등) 특징 (나뭇가지, 사슴뿔 모양).\n곡옥(곱은옥)의 의미와 금의 나라 신라.\n무덤 주인공과 당시 장례 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=85\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 830,
+    "completion_tokens": 2021,
+    "total_tokens": 2851
+  },
+  "file_size": 6127
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "08_청동기_농경문청동기",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:12:51.972977",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 792480
+}

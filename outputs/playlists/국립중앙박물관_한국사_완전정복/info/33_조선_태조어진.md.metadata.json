@@ -1,0 +1,15 @@
+{
+  "output_name": "33_조선_태조어진",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:10:08.739944",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 태조 어진]\n국보 태조 이성계 어진(전주 경기전 원본 관련).\n청색 곤룡포의 의미 (조선 건국 초기).\n어진 제작의 목적과 왕의 권위.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040300.do?schM=view&showHallId=759&relicId=16222\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 817,
+    "completion_tokens": 1493,
+    "total_tokens": 2310
+  },
+  "file_size": 4812
+}

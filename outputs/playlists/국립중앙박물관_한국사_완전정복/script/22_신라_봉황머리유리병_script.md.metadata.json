@@ -1,0 +1,9 @@
+{
+  "output_name": "22_신라_봉황머리유리병",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:00:38.306367",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 깨지기 쉬운 유리병이 먼 서역에서부터 신라 무덤까지 오게 된 긴 여정을 상상하게 하세요.\n2. 손잡이의 봉황 모양과 이국적인 형태를 지적하며, 당시 신라가 국제적인 교류가 활발했던 '열린 국가'였음을 강조하세요.\n",
+  "file_size": 1976
+}

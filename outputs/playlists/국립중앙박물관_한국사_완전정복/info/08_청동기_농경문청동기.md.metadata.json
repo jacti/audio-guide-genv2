@@ -1,0 +1,15 @@
+{
+  "output_name": "08_청동기_농경문청동기",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:48:51.818712",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 농경문 청동기]\n대전 괴정동 농경문 청동기 (농경문 청동 의기).\n새겨진 그림 분석: 밭 가는 모습, 항아리에 넣는 모습.\n청동기 시대의 제사 의식과 풍요 기원.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030300.do?schM=view&showHallId=760&relicId=10997\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 830,
+    "completion_tokens": 1407,
+    "total_tokens": 2237
+  },
+  "file_size": 4402
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "32_고려_정몽주초상",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:09:40.843180",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. \"이 몸이 죽고 죽어...\" 단심가를 읊으며 고려의 마지막 충신 정몽주를 소개하세요.\n2. 기울어가는 고려를 끝까지 지키려 했던 그의 굳은 의지가 초상화의 표정에 어떻게 드러나는지 묘사하고, 역사적 평가를 덧붙이세요.\n",
+  "file_size": 2254
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "32_고려_정몽주초상",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:14:36.897480",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 1245696
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "38_조선_달항아리",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:30:00.281424",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 749856
+}

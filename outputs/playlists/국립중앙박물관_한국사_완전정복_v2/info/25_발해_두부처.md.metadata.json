@@ -1,0 +1,15 @@
+{
+  "output_name": "25_발해_두부처",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:02:27.516503",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 이불병좌상]\n발해 이불병좌상(두 부처가 나란히 앉은 상).\n고구려 양식을 계승하면서도 당나라 영향을 받은 특징.\n해동성국 발해의 독자적인 불교 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201031000.do?schM=view&showHallId=760&relicId=747\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1375,
+    "total_tokens": 2198
+  },
+  "file_size": 4479
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "32_고려_정몽주초상",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:09:08.598941",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 정몽주 초상]\n보물 제1110호 정몽주 초상.\n고려 말 충신 정몽주의 생애와 죽음 (선죽교).\n조선 시대에 그려진 고려 충신의 초상이 갖는 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=17014\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 826,
+    "completion_tokens": 1565,
+    "total_tokens": 2391
+  },
+  "file_size": 4845
+}

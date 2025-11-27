@@ -1,0 +1,9 @@
+{
+  "output_name": "24_통일신라_팔부중",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:54:22.652149",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 924288
+}

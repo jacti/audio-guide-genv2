@@ -1,0 +1,9 @@
+{
+  "output_name": "22_신라_봉황머리유리병",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:48:53.643450",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 831840
+}

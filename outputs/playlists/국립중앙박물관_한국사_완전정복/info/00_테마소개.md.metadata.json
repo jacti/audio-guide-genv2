@@ -1,0 +1,15 @@
+{
+  "output_name": "00_테마소개",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:40:15.762033",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 테마 소개]\n국립중앙박물관 상설전시관 '선사·고대관' 및 '중·근세관' 관람 코스 특징.\n\"유물로 배우는 한국사\" 컨셉.\n구석기부터 조선 후기까지의 역사 흐름 요약.\n관람 소요 시간(2~3시간) 및 주요 관전 포인트.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 2085,
+    "total_tokens": 2908
+  },
+  "file_size": 6600
+}

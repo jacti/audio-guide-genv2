@@ -1,0 +1,15 @@
+{
+  "output_name": "31_고려_앉아있는보살상",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:08:16.780667",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 목조 관음보살좌상]\n고려 목조 관음보살좌상 특징.\n화려한 장신구와 유려한 옷주름 (고려 불화 스타일의 입체화).\n이국적인 용모와 자세(유희좌)의 특징.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=29429\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 835,
+    "completion_tokens": 1275,
+    "total_tokens": 2110
+  },
+  "file_size": 3855
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "28_고려_청자배모양그릇",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:05:18.501967",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 청자 배모양 그릇]\n청자 상감 모란무늬 배 모양 그릇 (평저주).\n원래 용도: 요강 (왕실용 변기) 추정 및 근거.\n아름다운 문양과 대비되는 실용적 용도 (반전 매력).\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?schM=view&showHallId=759&relicId=29428\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 837,
+    "completion_tokens": 1212,
+    "total_tokens": 2049
+  },
+  "file_size": 3821
+}

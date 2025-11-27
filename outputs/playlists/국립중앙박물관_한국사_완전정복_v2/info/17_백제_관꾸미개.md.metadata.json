@@ -1,0 +1,15 @@
+{
+  "output_name": "17_백제_관꾸미개",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:56:22.331081",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 무령왕릉 관꾸미개]\n무령왕릉 출토 금제 관꾸미개 (왕비).\n불꽃무늬, 연꽃무늬의 조화.\n백제 금속공예의 정수와 세련미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=26992\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 824,
+    "completion_tokens": 1452,
+    "total_tokens": 2276
+  },
+  "file_size": 4639
+}

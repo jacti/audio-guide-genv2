@@ -1,0 +1,15 @@
+{
+  "output_name": "34_조선_근정전어좌",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:10:51.633098",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 근정전 어좌]\n경복궁 근정전 어좌(용상) 및 일월오봉도.\n왕의 권위와 통치 이념 상징.\n일월오봉도의 해, 달, 산, 물, 소나무의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040300.do?schM=view&showHallId=759&relicId=16224\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1643,
+    "total_tokens": 2466
+  },
+  "file_size": 5051
+}

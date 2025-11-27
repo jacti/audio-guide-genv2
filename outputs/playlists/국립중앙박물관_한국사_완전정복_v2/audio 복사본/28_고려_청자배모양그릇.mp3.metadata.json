@@ -1,0 +1,9 @@
+{
+  "output_name": "28_고려_청자배모양그릇",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:03:58.484387",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 636000
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "42_마무리",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:40:40.312921",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 709440
+}

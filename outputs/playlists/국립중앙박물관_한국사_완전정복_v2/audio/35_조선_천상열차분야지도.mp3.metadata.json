@@ -1,0 +1,9 @@
+{
+  "output_name": "35_조선_천상열차분야지도",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:22:08.810861",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 695520
+}

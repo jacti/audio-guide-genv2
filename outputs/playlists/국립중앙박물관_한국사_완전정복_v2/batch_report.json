@@ -1,0 +1,454 @@
+{
+  "playlist_name": "국립중앙박물관_한국사_완전정복_v2",
+  "description": "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "history",
+      "korea",
+      "museum",
+      "guide",
+      "audio_tour"
+    ],
+    "created_date": "2025-11-24"
+  },
+  "started_at": "2025-11-24T21:50:33.689045",
+  "completed_at": "2025-11-24T23:40:40.313803",
+  "duration_seconds": 6606.62,
+  "total_files": 43,
+  "successful": 43,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "00_테마소개",
+      "started_at": "2025-11-24T21:50:33.689050",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/00_테마소개.mp3",
+      "completed_at": "2025-11-24T21:52:53.847714"
+    },
+    {
+      "output_name": "01_전시관_선사고대관",
+      "started_at": "2025-11-24T21:52:53.847796",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/01_전시관_선사고대관.mp3",
+      "completed_at": "2025-11-24T21:54:47.357018"
+    },
+    {
+      "output_name": "02_구석기_주먹도끼",
+      "started_at": "2025-11-24T21:54:47.357088",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/02_구석기_주먹도끼.mp3",
+      "completed_at": "2025-11-24T21:57:27.427894"
+    },
+    {
+      "output_name": "03_구석기_고인류",
+      "started_at": "2025-11-24T21:57:27.427933",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/03_구석기_고인류.mp3",
+      "completed_at": "2025-11-24T22:00:30.118573"
+    },
+    {
+      "output_name": "04_신석기_뼈바늘_가락바퀴",
+      "started_at": "2025-11-24T22:00:30.118629",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/04_신석기_뼈바늘_가락바퀴.mp3",
+      "completed_at": "2025-11-24T22:02:58.488583"
+    },
+    {
+      "output_name": "05_신석기_고산리식토기",
+      "started_at": "2025-11-24T22:02:58.488620",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/05_신석기_고산리식토기.mp3",
+      "completed_at": "2025-11-24T22:05:16.885096"
+    },
+    {
+      "output_name": "06_신석기_부산가덕도인골",
+      "started_at": "2025-11-24T22:05:16.885143",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/06_신석기_부산가덕도인골.mp3",
+      "completed_at": "2025-11-24T22:08:07.548160"
+    },
+    {
+      "output_name": "07_청동기_민무늬토기",
+      "started_at": "2025-11-24T22:08:07.548204",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/07_청동기_민무늬토기.mp3",
+      "completed_at": "2025-11-24T22:10:13.486939"
+    },
+    {
+      "output_name": "08_청동기_농경문청동기",
+      "started_at": "2025-11-24T22:10:13.487022",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/08_청동기_농경문청동기.mp3",
+      "completed_at": "2025-11-24T22:12:51.973234"
+    },
+    {
+      "output_name": "09_고조선_비파형동검",
+      "started_at": "2025-11-24T22:12:51.973249",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/09_고조선_비파형동검.mp3",
+      "completed_at": "2025-11-24T22:15:01.231918"
+    },
+    {
+      "output_name": "10_고조선_통나무관",
+      "started_at": "2025-11-24T22:15:01.231968",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/10_고조선_통나무관.mp3",
+      "completed_at": "2025-11-24T22:17:21.781192"
+    },
+    {
+      "output_name": "11_고구려_금동관",
+      "started_at": "2025-11-24T22:17:21.781229",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/11_고구려_금동관.mp3",
+      "completed_at": "2025-11-24T22:21:15.922835"
+    },
+    {
+      "output_name": "12_고구려_짐승무늬수막새",
+      "started_at": "2025-11-24T22:21:15.922886",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/12_고구려_짐승무늬수막새.mp3",
+      "completed_at": "2025-11-24T22:23:05.582180"
+    },
+    {
+      "output_name": "13_고구려_광개토대왕릉비탁본",
+      "started_at": "2025-11-24T22:23:05.582222",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/13_고구려_광개토대왕릉비탁본.mp3",
+      "completed_at": "2025-11-24T22:25:28.738225"
+    },
+    {
+      "output_name": "14_고구려_비늘갑옷",
+      "started_at": "2025-11-24T22:25:28.738275",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/14_고구려_비늘갑옷.mp3",
+      "completed_at": "2025-11-24T22:27:40.366440"
+    },
+    {
+      "output_name": "15_고구려_연가7년불상",
+      "started_at": "2025-11-24T22:27:40.366500",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/15_고구려_연가7년불상.mp3",
+      "completed_at": "2025-11-24T22:31:12.042468"
+    },
+    {
+      "output_name": "16_백제_치미",
+      "started_at": "2025-11-24T22:31:12.042532",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/16_백제_치미.mp3",
+      "completed_at": "2025-11-24T22:33:24.563227"
+    },
+    {
+      "output_name": "17_백제_관꾸미개",
+      "started_at": "2025-11-24T22:33:24.563269",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/17_백제_관꾸미개.mp3",
+      "completed_at": "2025-11-24T22:35:16.281415"
+    },
+    {
+      "output_name": "18_백제_금동대향로",
+      "started_at": "2025-11-24T22:35:16.281488",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/18_백제_금동대향로.mp3",
+      "completed_at": "2025-11-24T22:38:29.355680"
+    },
+    {
+      "output_name": "19_가야_미늘쇠",
+      "started_at": "2025-11-24T22:38:29.355719",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/19_가야_미늘쇠.mp3",
+      "completed_at": "2025-11-24T22:40:24.983331"
+    },
+    {
+      "output_name": "20_가야_투구와판갑옷",
+      "started_at": "2025-11-24T22:40:24.983381",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/20_가야_투구와판갑옷.mp3",
+      "completed_at": "2025-11-24T22:42:42.586768"
+    },
+    {
+      "output_name": "21_신라_금관과금허리띠",
+      "started_at": "2025-11-24T22:42:42.586815",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/21_신라_금관과금허리띠.mp3",
+      "completed_at": "2025-11-24T22:45:41.285500"
+    },
+    {
+      "output_name": "22_신라_봉황머리유리병",
+      "started_at": "2025-11-24T22:45:41.285549",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/22_신라_봉황머리유리병.mp3",
+      "completed_at": "2025-11-24T22:48:53.644676"
+    },
+    {
+      "output_name": "23_통일신라_사천왕전",
+      "started_at": "2025-11-24T22:48:53.644724",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/23_통일신라_사천왕전.mp3",
+      "completed_at": "2025-11-24T22:51:31.307678"
+    },
+    {
+      "output_name": "24_통일신라_팔부중",
+      "started_at": "2025-11-24T22:51:31.307727",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/24_통일신라_팔부중.mp3",
+      "completed_at": "2025-11-24T22:54:22.652903"
+    },
+    {
+      "output_name": "25_발해_두부처",
+      "started_at": "2025-11-24T22:54:22.652950",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/25_발해_두부처.mp3",
+      "completed_at": "2025-11-24T22:56:32.430147"
+    },
+    {
+      "output_name": "26_전시관_중근세관",
+      "started_at": "2025-11-24T22:56:32.430207",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/26_전시관_중근세관.mp3",
+      "completed_at": "2025-11-24T22:58:46.858522"
+    },
+    {
+      "output_name": "27_고려_인종시호",
+      "started_at": "2025-11-24T22:58:46.858603",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/27_고려_인종시호.mp3",
+      "completed_at": "2025-11-24T23:01:54.645350"
+    },
+    {
+      "output_name": "28_고려_청자배모양그릇",
+      "started_at": "2025-11-24T23:01:54.645391",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/28_고려_청자배모양그릇.mp3",
+      "completed_at": "2025-11-24T23:03:58.485312"
+    },
+    {
+      "output_name": "29_고려_수령옹주묘지명",
+      "started_at": "2025-11-24T23:03:58.485362",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/29_고려_수령옹주묘지명.mp3",
+      "completed_at": "2025-11-24T23:06:12.425369"
+    },
+    {
+      "output_name": "30_고려_초조대장경",
+      "started_at": "2025-11-24T23:06:12.425422",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/30_고려_초조대장경.mp3",
+      "completed_at": "2025-11-24T23:08:33.819280"
+    },
+    {
+      "output_name": "31_고려_앉아있는보살상",
+      "started_at": "2025-11-24T23:08:33.819331",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/31_고려_앉아있는보살상.mp3",
+      "completed_at": "2025-11-24T23:10:43.945036"
+    },
+    {
+      "output_name": "32_고려_정몽주초상",
+      "started_at": "2025-11-24T23:10:43.945085",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/32_고려_정몽주초상.mp3",
+      "completed_at": "2025-11-24T23:14:36.898281"
+    },
+    {
+      "output_name": "33_조선_태조어진",
+      "started_at": "2025-11-24T23:14:36.898326",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/33_조선_태조어진.mp3",
+      "completed_at": "2025-11-24T23:17:15.628934"
+    },
+    {
+      "output_name": "34_조선_근정전어좌",
+      "started_at": "2025-11-24T23:17:15.628981",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/34_조선_근정전어좌.mp3",
+      "completed_at": "2025-11-24T23:19:40.724385"
+    },
+    {
+      "output_name": "35_조선_천상열차분야지도",
+      "started_at": "2025-11-24T23:19:40.724430",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/35_조선_천상열차분야지도.mp3",
+      "completed_at": "2025-11-24T23:22:08.811734"
+    },
+    {
+      "output_name": "36_조선_용비어천가",
+      "started_at": "2025-11-24T23:22:08.811779",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/36_조선_용비어천가.mp3",
+      "completed_at": "2025-11-24T23:24:55.818233"
+    },
+    {
+      "output_name": "37_조선_측우기",
+      "started_at": "2025-11-24T23:24:55.818268",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/37_조선_측우기.mp3",
+      "completed_at": "2025-11-24T23:27:33.003848"
+    },
+    {
+      "output_name": "38_조선_달항아리",
+      "started_at": "2025-11-24T23:27:33.003892",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/38_조선_달항아리.mp3",
+      "completed_at": "2025-11-24T23:30:00.282094"
+    },
+    {
+      "output_name": "39_조선_동의보감",
+      "started_at": "2025-11-24T23:30:00.282131",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/39_조선_동의보감.mp3",
+      "completed_at": "2025-11-24T23:33:13.404840"
+    },
+    {
+      "output_name": "40_조선_화성성역의궤",
+      "started_at": "2025-11-24T23:33:13.404877",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/40_조선_화성성역의궤.mp3",
+      "completed_at": "2025-11-24T23:35:53.087069"
+    },
+    {
+      "output_name": "41_조선_대동여지도",
+      "started_at": "2025-11-24T23:35:53.087106",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/41_조선_대동여지도.mp3",
+      "completed_at": "2025-11-24T23:38:19.132567"
+    },
+    {
+      "output_name": "42_마무리",
+      "started_at": "2025-11-24T23:38:19.132602",
+      "status": "success",
+      "stages_run": [
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/국립중앙박물관_한국사_완전정복_v2/audio/42_마무리.mp3",
+      "completed_at": "2025-11-24T23:40:40.313768"
+    }
+  ]
+}

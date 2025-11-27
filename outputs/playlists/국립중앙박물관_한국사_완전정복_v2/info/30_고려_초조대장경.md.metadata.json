@@ -1,0 +1,15 @@
+{
+  "output_name": "30_고려_초조대장경",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:07:22.481644",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 초조대장경]\n고려 초조대장경(거란 침입 퇴치 염원).\n해인사 팔만대장경과의 차이점.\n고려의 인쇄술과 불심.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=29645\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 817,
+    "completion_tokens": 1311,
+    "total_tokens": 2128
+  },
+  "file_size": 4278
+}

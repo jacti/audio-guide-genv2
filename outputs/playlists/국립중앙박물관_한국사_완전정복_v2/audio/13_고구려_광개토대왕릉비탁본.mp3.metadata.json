@@ -1,0 +1,9 @@
+{
+  "output_name": "13_고구려_광개토대왕릉비탁본",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:25:28.737302",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 830688
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "12_고구려_짐승무늬수막새",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:52:02.279645",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 짐승무늬 수막새]\n고구려 수막새 특징.\n부릅뜬 눈, 짐승 얼굴 무늬, 강렬한 인상.\n건축물의 위엄과 벽사(귀신을 쫓음)의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=43\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 827,
+    "completion_tokens": 1572,
+    "total_tokens": 2399
+  },
+  "file_size": 4778
+}

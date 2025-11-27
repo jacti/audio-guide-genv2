@@ -1,0 +1,9 @@
+{
+  "output_name": "07_청동기_민무늬토기",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:10:13.486281",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 801696
+}

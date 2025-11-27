@@ -1,0 +1,9 @@
+{
+  "output_name": "00_테마소개",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:52:53.845917",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 795648
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "37_조선_측우기",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:13:22.348146",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 측우기]\n보물 충청감영 측우기.\n세계 최초의 강우량 측정 기구.\n농본주의 국가 조선의 과학 기술과 애민 정신.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=757\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 808,
+    "completion_tokens": 1664,
+    "total_tokens": 2472
+  },
+  "file_size": 4633
+}

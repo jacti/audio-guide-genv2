@@ -1,0 +1,9 @@
+{
+  "output_name": "15_고구려_연가7년불상",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:31:12.041390",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 1052064
+}

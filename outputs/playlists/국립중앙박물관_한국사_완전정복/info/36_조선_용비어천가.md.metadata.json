@@ -1,0 +1,15 @@
+{
+  "output_name": "36_조선_용비어천가",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:12:30.171726",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 용비어천가]\n훈민정음으로 쓰인 최초의 문학 작품 용비어천가.\n\"뿌리 깊은 나무는...\" 내용의 의미.\n한글 창제 직후의 사용례와 역사적 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=750\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 822,
+    "completion_tokens": 1515,
+    "total_tokens": 2337
+  },
+  "file_size": 4616
+}

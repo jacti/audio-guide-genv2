@@ -1,0 +1,15 @@
+{
+  "output_name": "39_조선_동의보감",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:15:12.066024",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 동의보감]\n유네스코 세계기록유산 동의보감.\n허준의 집필 배경 (전쟁 후 질병, 예방 의학).\n동아시아 의학에 미친 영향 및 오늘날의 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=16216\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 821,
+    "completion_tokens": 1334,
+    "total_tokens": 2155
+  },
+  "file_size": 4527
+}

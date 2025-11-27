@@ -1,0 +1,15 @@
+{
+  "output_name": "18_백제_금동대향로",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:57:02.486842",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백제 금동대향로]\n백제 금동대향로 구조 분석 (용, 봉황, 신선, 악사).\n불교와 도교 사상의 조화.\n백제 금속 공예 최고의 걸작으로서의 예술성.\n부여 능산리 절터 발굴 스토리.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=27092\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 839,
+    "completion_tokens": 1767,
+    "total_tokens": 2606
+  },
+  "file_size": 5688
+}

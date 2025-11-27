@@ -1,0 +1,15 @@
+{
+  "output_name": "13_고구려_광개토대왕릉비탁본",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:53:10.703014",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 광개토대왕릉비 탁본]\n국립중앙박물관 소장 광개토대왕릉비 원석 탁본.\n비석의 거대한 크기와 비문의 내용 요약 (정복 사업, 독자적 연호).\n동아시아 역사에서 갖는 사료적 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29932\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 838,
+    "completion_tokens": 1682,
+    "total_tokens": 2520
+  },
+  "file_size": 5426
+}

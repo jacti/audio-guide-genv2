@@ -1,0 +1,9 @@
+{
+  "output_name": "37_조선_측우기",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:27:33.002633",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 938976
+}

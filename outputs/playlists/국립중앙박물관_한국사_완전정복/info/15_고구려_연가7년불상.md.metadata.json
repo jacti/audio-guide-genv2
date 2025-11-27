@@ -1,0 +1,15 @@
+{
+  "output_name": "15_고구려_연가7년불상",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:55:03.072984",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 연가 7년명 금동여래입상]\n연가 7년명 금동여래입상.\n광배 뒷면에 새겨진 명문의 내용(제작 연도, 제작자).\n고구려 불상의 투박하지만 따뜻한 미소와 옷주름 특징.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29926\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 836,
+    "completion_tokens": 1948,
+    "total_tokens": 2784
+  },
+  "file_size": 5986
+}

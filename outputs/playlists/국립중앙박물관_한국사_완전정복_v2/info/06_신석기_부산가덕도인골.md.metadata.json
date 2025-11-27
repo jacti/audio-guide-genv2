@@ -1,0 +1,15 @@
+{
+  "output_name": "06_신석기_부산가덕도인골",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:46:15.791161",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 가덕도 인골]\n부산 가덕도 신석기 인골(굴장) 발굴 의미.\n신석기 시대 장례 풍습 및 DNA 분석 결과.\n당시 사람들의 체격과 생활상.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29880\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 816,
+    "completion_tokens": 1708,
+    "total_tokens": 2524
+  },
+  "file_size": 5447
+}

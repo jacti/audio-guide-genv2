@@ -1,0 +1,9 @@
+{
+  "output_name": "01_전시관_선사고대관",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:54:47.356061",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 546048
+}

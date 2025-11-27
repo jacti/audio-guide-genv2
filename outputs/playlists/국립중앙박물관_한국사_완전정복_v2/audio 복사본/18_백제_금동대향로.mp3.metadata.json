@@ -1,0 +1,9 @@
+{
+  "output_name": "18_백제_금동대향로",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:38:29.354997",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 924864
+}

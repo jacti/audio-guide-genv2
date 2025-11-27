@@ -1,0 +1,9 @@
+{
+  "output_name": "06_신석기_부산가덕도인골",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:46:58.619469",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 신석기 시대 사람을 직접 마주하는 듯한 느낌으로 인골 전시를 소개하세요.\n2. 팔다리를 구부려 묻는 '굴장' 풍습과, 가덕도 유적에서 밝혀진 당시 사람들의 삶(유럽계 유전자 등 미스터리 포함 가능)을 흥미롭게 풀어주세요.\n",
+  "file_size": 2532
+}

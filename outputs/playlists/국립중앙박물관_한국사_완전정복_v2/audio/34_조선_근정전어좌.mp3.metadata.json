@@ -1,0 +1,9 @@
+{
+  "output_name": "34_조선_근정전어좌",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:19:40.723627",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 724320
+}

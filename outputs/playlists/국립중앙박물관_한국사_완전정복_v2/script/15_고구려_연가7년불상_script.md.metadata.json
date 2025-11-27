@@ -1,0 +1,9 @@
+{
+  "output_name": "15_고구려_연가7년불상",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:40:56.614921",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 우리나라에서 제작 연대가 확실한 가장 오래된 불상 중 하나임을 밝히세요.\n2. 화려하기보다 소박하고 강인해 보이는 불상의 미소와, 광배 뒤에 새겨진 글씨가 들려주는 천 년 전 이야기를 전달하세요.\n",
+  "file_size": 4180
+}

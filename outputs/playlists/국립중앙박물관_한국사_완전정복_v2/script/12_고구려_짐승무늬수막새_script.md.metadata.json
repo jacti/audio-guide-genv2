@@ -1,0 +1,9 @@
+{
+  "output_name": "12_고구려_짐승무늬수막새",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T21:39:31.588735",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 기와 끝을 장식하던 수막새에 새겨진 부릅뜬 짐승의 얼굴을 보라고 하세요.\n2. 나쁜 기운을 쫓아내려는 고구려인들의 염원과, 건축물 하나에도 강렬함을 담았던 그들의 스타일을 설명하세요.\n",
+  "file_size": 3157
+}

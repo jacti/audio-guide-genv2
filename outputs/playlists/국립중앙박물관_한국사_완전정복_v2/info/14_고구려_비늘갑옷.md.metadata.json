@@ -1,0 +1,15 @@
+{
+  "output_name": "14_고구려_비늘갑옷",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:53:57.562483",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 비늘갑옷]\n고구려 철갑옷 (찰갑) 구조 및 특징.\n작은 철판을 엮어 만든 이유 (활동성).\n고구려 개마무사의 위력과 철 제련 기술.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29925\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 822,
+    "completion_tokens": 1736,
+    "total_tokens": 2558
+  },
+  "file_size": 5474
+}

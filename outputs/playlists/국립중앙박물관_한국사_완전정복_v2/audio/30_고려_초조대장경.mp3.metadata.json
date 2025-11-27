@@ -1,0 +1,9 @@
+{
+  "output_name": "30_고려_초조대장경",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:08:33.818421",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 849600
+}

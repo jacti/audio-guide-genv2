@@ -1,0 +1,9 @@
+{
+  "output_name": "40_조선_화성성역의궤",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:16:47.790769",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. \"건물을 짓는 데 사용된 못의 개수와 가격까지 적었다면 믿으시겠습니까?\"라는 질문으로 조선의 기록 정신을 강조하세요.\n2. 이 치밀한 기록 덕분에 무너진 수원 화성을 원형 그대로 다시 세울 수 있었던 사연을 통해 기록 유산의 위대함을 일깨워주세요.\n",
+  "file_size": 2193
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "22_신라_봉황머리유리병",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:00:08.492049",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 봉황머리 유리병]\n경주 황남대총 출토 봉황모양 유리병.\n서역(로마/페르시아) 유래 유리 제품.\n실크로드를 통한 신라의 국제 교류.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=88\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 822,
+    "completion_tokens": 1468,
+    "total_tokens": 2290
+  },
+  "file_size": 4525
+}

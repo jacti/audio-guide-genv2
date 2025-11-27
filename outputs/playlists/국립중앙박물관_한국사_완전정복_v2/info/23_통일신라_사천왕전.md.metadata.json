@@ -1,0 +1,15 @@
+{
+  "output_name": "23_통일신라_사천왕전",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:01:00.028856",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 녹유신장상]\n경주 사천왕사지 출토 녹유신장상(사천왕전).\n절을 지키는 수호신의 역동적인 모습.\n녹유(녹색 유약) 기법과 섬세한 조각 기술.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030900.do?schM=view&showHallId=760&relicId=16550\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 827,
+    "completion_tokens": 1719,
+    "total_tokens": 2546
+  },
+  "file_size": 5397
+}

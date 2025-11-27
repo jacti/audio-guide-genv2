@@ -1,0 +1,9 @@
+{
+  "output_name": "16_백제_치미",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:56:08.599033",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 거대한 크기의 '치미'를 보며 백제 왕실 건축물이 얼마나 웅장했을지 상상해보도록 유도하세요.\n2. 지붕 꼭대기에서 하늘로 날아오를 듯한 곡선미를 묘사하며 '검소하지만 누추하지 않고, 화려하지만 사치스럽지 않다(검이불루 화이불치)'는 백제의 미학을 언급하세요.\n",
+  "file_size": 1714
+}

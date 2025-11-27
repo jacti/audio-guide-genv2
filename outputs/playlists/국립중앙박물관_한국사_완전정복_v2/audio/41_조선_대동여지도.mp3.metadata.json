@@ -1,0 +1,9 @@
+{
+  "output_name": "41_조선_대동여지도",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:38:19.131849",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 777888
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "35_조선_천상열차분야지도",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:12:06.217953",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 검은 돌판에 촘촘히 새겨진 1,467개의 별자리를 보라고 하세요.\n2. 조선 건국의 정당성을 하늘로부터 인정받고자 했던 태조의 의지와, 고구려의 천문 과학을 계승한 조선의 과학 기술 수준을 높이 평가하세요.\n",
+  "file_size": 2022
+}

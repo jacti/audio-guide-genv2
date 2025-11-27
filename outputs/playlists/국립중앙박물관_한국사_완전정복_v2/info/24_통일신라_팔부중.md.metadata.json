@@ -1,0 +1,15 @@
+{
+  "output_name": "24_통일신라_팔부중",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:01:47.039495",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 팔부중]\n석탑 기단부 등에 조각된 팔부중(불법 수호신).\n아수라, 건달바 등 다양한 신들의 모습.\n통일신라 불교 대중화와 미술의 발달.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030900.do?schM=view&showHallId=760&relicId=15983\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 822,
+    "completion_tokens": 1543,
+    "total_tokens": 2365
+  },
+  "file_size": 4985
+}

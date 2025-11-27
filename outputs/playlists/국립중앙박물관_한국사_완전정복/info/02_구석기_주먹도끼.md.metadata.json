@@ -1,0 +1,15 @@
+{
+  "output_name": "02_구석기_주먹도끼",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:42:00.780597",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 주먹도끼]\n연천 전곡리 주먹도끼 특징 및 용도 (맥가이버 칼).\n아슐리안형 주먹도끼 발견의 세계사적 의의 (모비우스 학설 뒤집기).\n그렉 보웬(미군 병사) 발견 일화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836\nhttps://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=166331&sc=&relicRecommendCategory=&pageSize=10&sv=\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 880,
+    "completion_tokens": 1576,
+    "total_tokens": 2456
+  },
+  "file_size": 5150
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "38_조선_달항아리",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:14:09.041612",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백자 달항아리]\n조선 백자 달항아리(백자대호) 특징.\n비대칭의 미학 (일그러진 원의 아름다움).\n조선 선비의 청렴함과 검소함을 담은 미의식.\n현대 미술가(김환기 등)들이 사랑한 이유.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=27894\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 844,
+    "completion_tokens": 1465,
+    "total_tokens": 2309
+  },
+  "file_size": 4861
+}

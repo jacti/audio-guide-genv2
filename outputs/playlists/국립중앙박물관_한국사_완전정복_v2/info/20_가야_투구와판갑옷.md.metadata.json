@@ -1,0 +1,15 @@
+{
+  "output_name": "20_가야_투구와판갑옷",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:58:40.156991",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 가야 판갑옷]\n가야 판갑옷 특징 (철판을 이어 붙임, 리벳 이음).\n가야 전사의 무장 형태.\n일본(왜) 갑옷과의 교류 및 영향 관계.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030700.do?schM=view&showHallId=760&relicId=27007\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1408,
+    "total_tokens": 2231
+  },
+  "file_size": 4570
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "06_신석기_부산가덕도인골",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:08:07.547325",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 968736
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "29_고려_수령옹주묘지명",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T23:06:12.424285",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 771168
+}

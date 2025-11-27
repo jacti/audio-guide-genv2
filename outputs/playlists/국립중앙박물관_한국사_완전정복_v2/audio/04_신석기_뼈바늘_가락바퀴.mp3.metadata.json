@@ -1,0 +1,9 @@
+{
+  "output_name": "04_신석기_뼈바늘_가락바퀴",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:02:58.487862",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 794688
+}

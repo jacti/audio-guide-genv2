@@ -1,0 +1,9 @@
+{
+  "output_name": "09_고조선_비파형동검",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:15:01.230944",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 770496
+}

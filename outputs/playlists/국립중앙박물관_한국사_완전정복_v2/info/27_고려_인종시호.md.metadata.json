@@ -1,0 +1,15 @@
+{
+  "output_name": "27_고려_인종시호",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:04:39.133636",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 인종 시호 금책]\n고려 인종 시호 금책 (인종의 시호를 올린 글).\n고려 왕실의 권위와 기록 문화.\n금속 활자가 아닌 옥/금에 새긴 의례용 문서.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?schM=view&showHallId=759&relicId=16644\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 821,
+    "completion_tokens": 1706,
+    "total_tokens": 2527
+  },
+  "file_size": 5753
+}

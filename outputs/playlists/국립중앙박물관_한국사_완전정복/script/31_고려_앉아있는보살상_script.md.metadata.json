@@ -1,0 +1,9 @@
+{
+  "output_name": "31_고려_앉아있는보살상",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:08:42.214670",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 한쪽 다리를 세우고 편안하게 앉아 있는 보살상의 독특한 자세(유희좌)에 주목하게 하세요.\n2. 고려 불화에서 튀어나온 듯한 화려하고 우아한 자태를 묘사하며, 귀족적인 고려 불교 미술의 특징을 설명하세요.\n",
+  "file_size": 2254
+}

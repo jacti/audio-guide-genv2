@@ -1,0 +1,9 @@
+{
+  "output_name": "24_통일신라_팔부중",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:02:13.149263",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 불교를 지키는 여덟 수호신, 팔부중의 다양한 모습을 살펴보자고 제안하세요.\n2. 무서운 얼굴을 하고 있지만 불교 세계를 지킨다는 든든한 의미를 전달하며, 당시 사람들의 신앙심을 읽어주세요.\n",
+  "file_size": 1959
+}

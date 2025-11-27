@@ -1,0 +1,9 @@
+{
+  "output_name": "37_조선_측우기",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:13:52.436169",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 서양보다 200년이나 앞선 세계 최초의 빗물 측정기 '측우기'를 자랑스럽게 소개하세요.\n2. 단순히 비의 양을 재는 도구가 아니라, 농사를 짓는 백성들의 고충을 덜어주고자 했던 왕의 마음이 담긴 '애민 과학'의 산물임을 강조하세요.\n",
+  "file_size": 2460
+}

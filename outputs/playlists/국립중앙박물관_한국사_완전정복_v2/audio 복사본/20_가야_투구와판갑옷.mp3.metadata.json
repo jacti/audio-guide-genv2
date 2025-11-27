@@ -1,0 +1,9 @@
+{
+  "output_name": "20_가야_투구와판갑옷",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T22:42:42.586010",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 891840
+}

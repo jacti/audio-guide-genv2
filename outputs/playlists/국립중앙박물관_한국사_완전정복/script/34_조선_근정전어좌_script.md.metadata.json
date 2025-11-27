@@ -1,0 +1,9 @@
+{
+  "output_name": "34_조선_근정전어좌",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-24T20:11:25.789203",
+  "model": "gemini-3-pro-preview",
+  "script_gen_user_content_text": "[지시사항]\n1. 왕이 앉던 자리, 어좌와 그 뒤의 병풍 '일월오봉도'를 함께 소개하세요.\n2. 왕이 이 자리에 앉음으로써 그림이 비로소 완성된다는 뜻을 설명하고, 항상 백성을 생각하며 정사를 돌봐야 했던 왕의 무게감을 이야기하세요.\n",
+  "file_size": 2313
+}

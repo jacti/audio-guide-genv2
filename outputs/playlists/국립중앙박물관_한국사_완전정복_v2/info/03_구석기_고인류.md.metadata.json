@@ -1,0 +1,15 @@
+{
+  "output_name": "03_구석기_고인류",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:42:50.899332",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 구석기 고인류]\n한반도 출토 구석기 시대 인골/화석.\n국립중앙박물관 전시실 내 인류 진화 모형.\n흥수아이 등 대표적인 고인류 화석의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1676,
+    "total_tokens": 2499
+  },
+  "file_size": 5402
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "16_백제_치미",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:55:40.657554",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백제 치미]\n백제 부여 부소산성/익산 미륵사지 출토 치미.\n치미의 용도(지붕 용마루 양 끝 장식).\n백제 건축의 웅장함과 세련된 곡선미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=26998\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 828,
+    "completion_tokens": 1469,
+    "total_tokens": 2297
+  },
+  "file_size": 4811
+}

@@ -1,0 +1,15 @@
+{
+  "output_name": "19_가야_미늘쇠",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:58:00.772579",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 미늘쇠]\n가야 고분 출토 미늘쇠 (유자이기).\n가시가 달린 철기, 용도(의전용, 위세품).\n철의 왕국 가야의 제철 기술과 독창성.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030700.do?schM=view&showHallId=760&relicId=27008\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 1732,
+    "total_tokens": 2555
+  },
+  "file_size": 5305
+}

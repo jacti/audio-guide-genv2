@@ -1,0 +1,15 @@
+{
+  "output_name": "09_고조선_비파형동검",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-24T19:49:28.373403",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 비파형 동검]\n비파형 동검(요령식 동검)의 형태적 특징 (악기 비파 모양).\n고조선의 세력 범위와 일치하는 출토 지역.\n실제 무기보다는 권력자의 상징물로서의 성격.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030400.do?schM=view&showHallId=760&relicId=29833\n",
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 832,
+    "completion_tokens": 1304,
+    "total_tokens": 2136
+  },
+  "file_size": 4125
+}
