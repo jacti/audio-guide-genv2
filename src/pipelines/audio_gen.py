@@ -15,15 +15,19 @@ import os
 import time
 import mimetypes
 import struct
+from io import BytesIO
 from pathlib import Path
 from typing import Optional
 import argparse
+
+from pydub import AudioSegment
 
 from google.cloud import texttospeech
 from dotenv import load_dotenv
 
 from src.utils.path_sanitizer import audio_output_path
 from src.utils.metadata import create_metadata
+from utils.mp3_duration import save_mp3_durations
 
 # 환경변수 로드
 load_dotenv()
@@ -314,18 +318,28 @@ def _generate_audio_gemini(
 
             logger.info(f"✅ 청크 {i}/{total_chunks} 완료")
 
-        # 모든 오디오 청크 결합
-        if len(audio_chunks) > 1:
-            logger.info(f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중...")
+        # 모든 오디오 청크 결합 (각 청크 앞에 1초 무음 추가)
+        logger.info(f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중 (각 청크 앞 1초 무음 추가)...")
 
-        combined_audio = b"".join(audio_chunks)
+        # 1초 무음 생성
+        silence = AudioSegment.silent(duration=1000)  # 1000ms = 1초
+
+        # 청크들을 AudioSegment로 변환 후 결합
+        combined = AudioSegment.empty()
+        for audio_data in audio_chunks:
+            chunk_segment = AudioSegment.from_mp3(BytesIO(audio_data))
+            combined += silence + chunk_segment
+
+        # MP3 바이트로 export
+        output_buffer = BytesIO()
+        combined.export(output_buffer, format="mp3")
+        combined_audio = output_buffer.getvalue()
 
         # 최종 파일 저장
         with open(output_path, "wb") as out:
             out.write(combined_audio)
 
-        if len(audio_chunks) > 1:
-            logger.info(f"✅ 오디오 결합 완료")
+        logger.info(f"✅ 오디오 결합 완료")
         logger.info(f"✅ 음성 생성 완료: {output_path}")
 
     except Exception as e:
@@ -410,6 +424,9 @@ def run(
         )
     except Exception as e:
         logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
+
+    # 오디오 길이 계산
+    save_mp3_durations(output_path)
 
     logger.info(
         f"=== 오디오 생성 파이프라인 완료 ===\n"

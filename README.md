@@ -13,7 +13,7 @@
   GEMINI_API_KEY=...
   GOOGLE_APPLICATION_CREDENTIALS=...
   ```
-- 오디오 생성을 위해 `gemini_tts_model: "gemini-2.5-pro-tts"` 모델 사용, API KEY는 `.env`와 별도로`./listentrip-55d51165ef78.json`로 관리
+- 오디오 생성을 위해 `gemini_tts_model: "gemini-2.5-pro-tts"` 모델 사용, API KEY는 `.env`와 별도로`./listentrip-55d51165ef78.json`로 관리꼼꼼
 
 ## 실행
 

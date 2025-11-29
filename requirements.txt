@@ -23,6 +23,7 @@ jsonpointer==3.0.0
 langchain-core==1.1.0
 langchain-openai==1.0.3
 langsmith==0.4.46
+mutagen==1.47.0
 openai==2.8.1
 orjson==3.11.4
 packaging==25.0
@@ -33,6 +34,7 @@ pyasn1==0.6.1
 pyasn1_modules==0.4.2
 pydantic==2.12.4
 pydantic_core==2.41.5
+pydub==0.25.1
 python-dotenv==1.2.1
 PyYAML==6.0.3
 regex==2025.11.3

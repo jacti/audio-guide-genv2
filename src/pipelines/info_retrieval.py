@@ -121,6 +121,12 @@ def _chat_with_perplexity(
         # 메타데이터 준비
         metadata = {"finish_reason": response.choices[0].finish_reason}
 
+        # search_results 정보 추가 (있을 경우)
+        if hasattr(response, "search_results") and response.search_results:
+            metadata["search_results"] = [
+                sr.model_dump() for sr in response.search_results
+            ]
+
         # Usage 정보 추가 (있을 경우)
         if hasattr(response, "usage") and response.usage:
             metadata["usage"] = {

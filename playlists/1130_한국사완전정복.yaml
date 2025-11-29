@@ -1,19 +1,19 @@
-playlist_name: "국립중앙박물관_한국사_완전정복_v2"
+playlist_name: "1130_한국사완전정복"
 description: "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드"
 
 metadata:
   author: "국립중앙박물관"
   version: "1.1"
   tags: ["history", "korea", "museum", "guide", "audio_tour"]
-  created_date: "2025-11-24"
+  created_date: "2025-11-29"
 
 defaults:
-  perplexity_model: "sonar-pro" # 최신 모델 권장
+  perplexity_model: "sonar-pro"
   info_retrieval_prompt_template_name: "universal_retrieval.yaml"
   script_gen_prompt_template_name: "unniversal_script_gen.yaml"
   voice: "Laomedeia"
   gemini_tts_model: "gemini-2.5-pro-tts"
-  script_gen_model: "gpt-5.1" # "gpt-4.1" #
+  script_gen_model: "gpt-5.1"
   tts_language: "ko-KR"
   temperature: 0.7
 
@@ -21,7 +21,7 @@ files:
   # =======================
   # 0. 테마 소개
   # =======================
-  - output_name: "00_테마소개"
+  - output_name: "00_intro"
     info_retrieval_user_content_text: |
       [조사 주제: 국립중앙박물관 테마 소개]
       국립중앙박물관 상설전시관 '선사·고대관' 및 '중·근세관' 관람 코스 특징.
@@ -39,7 +39,7 @@ files:
   # =======================
   # 1. 전시관 소개 — 선사·고대관
   # =======================
-  - output_name: "01_전시관_선사고대관"
+  - output_name: "01_prehistory_ancient_hall"
     info_retrieval_user_content_text: |
       [조사 주제: 선사·고대관]
       국립중앙박물관 선사·고대관 전시실 구성 및 순서.
@@ -55,7 +55,7 @@ files:
   # =======================
   # 2. 구석기
   # =======================
-  - output_name: "02_구석기_주먹도끼"
+  - output_name: "02_paleolithic_handaxe"
     info_retrieval_user_content_text: |
       [조사 주제: 주먹도끼]
       연천 전곡리 주먹도끼 특징 및 용도 (맥가이버 칼).
@@ -70,7 +70,7 @@ files:
       2. 특히 이 돌멩이 하나가 세계 고고학의 역사를 어떻게 뒤집었는지(모비우스 학설 반박) 흥미진진하게 서술하세요.
       3. 미군 병사가 데이트 도중 발견했다는 비하인드 스토리를 짧게 곁들여 재미를 더하세요.
 
-  - output_name: "03_구석기_고인류"
+  - output_name: "03_paleolithic_hominid"
     info_retrieval_user_content_text: |
       [조사 주제: 구석기 고인류]
       한반도 출토 구석기 시대 인골/화석.
@@ -85,7 +85,7 @@ files:
   # =======================
   # 3. 신석기
   # =======================
-  - output_name: "04_신석기_뼈바늘_가락바퀴"
+  - output_name: "04_neolithic_needle_spindle"
     info_retrieval_user_content_text: |
       [조사 주제: 뼈바늘과 가락바퀴]
       신석기 뼈바늘과 가락바퀴 용도 및 사용법.
@@ -98,7 +98,7 @@ files:
       2. 이것이 단순한 도구가 아니라 인류가 '옷'을 지어 입기 시작했다는 '기술 혁명'의 증거임을 강조하세요.
       3. "이 작은 바늘귀에 실을 꿰던 신석기인의 손길을 상상해보세요"와 같은 감성적인 멘트를 포함하세요.
 
-  - output_name: "05_신석기_고산리식토기"
+  - output_name: "05_neolithic_gosanri_pottery"
     info_retrieval_user_content_text: |
       [조사 주제: 고산리식 토기]
       제주 고산리식 토기 특징 (우리나라 가장 오래된 토기).
@@ -110,7 +110,7 @@ files:
       1. 빗살무늬토기 이전에 있었던, 우리나라에서 가장 오래된 토기인 '고산리식 토기'를 소개하세요.
       2. 흙에 식물 줄기를 섞어 만들었던 독특한 질감을 묘사하고, 토기가 생기면서 인류가 음식을 조리해 먹을 수 있게 된 변화를 설명해주세요.
 
-  - output_name: "06_신석기_부산가덕도인골"
+  - output_name: "06_neolithic_gadeokdo_bones"
     info_retrieval_user_content_text: |
       [조사 주제: 가덕도 인골]
       부산 가덕도 신석기 인골(굴장) 발굴 의미.
@@ -125,7 +125,7 @@ files:
   # =======================
   # 4. 청동기
   # =======================
-  - output_name: "07_청동기_민무늬토기"
+  - output_name: "07_bronze_plain_pottery"
     info_retrieval_user_content_text: |
       [조사 주제: 민무늬토기]
       청동기 시대 민무늬토기 특징 및 종류 (붉은 간 토기 등).
@@ -137,7 +137,7 @@ files:
       1. 화려한 무늬가 사라지고 실용성이 강조된 '민무늬토기'의 변화를 설명하세요.
       2. 이것이 단순한 디자인 변화가 아니라, 농사를 짓고 곡식을 저장해야 했던 사회의 변화를 반영함을 연결해 설명해주세요.
 
-  - output_name: "08_청동기_농경문청동기"
+  - output_name: "08_bronze_farming_tool"
     info_retrieval_user_content_text: |
       [조사 주제: 농경문 청동기]
       대전 괴정동 농경문 청동기 (농경문 청동 의기).
@@ -152,7 +152,7 @@ files:
   # =======================
   # 5. 고조선·부여·삼한
   # =======================
-  - output_name: "09_고조선_비파형동검"
+  - output_name: "09_gojoseon_bronze_dagger"
     info_retrieval_user_content_text: |
       [조사 주제: 비파형 동검]
       비파형 동검(요령식 동검)의 형태적 특징 (악기 비파 모양).
@@ -164,7 +164,7 @@ files:
       1. 악기 '비파'를 닮은 우아한 곡선을 가진 이 검이 고조선 지배자의 권력을 상징함을 설명하세요.
       2. 날카로운 무기라기보다는 제사장이나 부족장의 위엄을 보여주는 '명품'이었음을 현대적 비유를 섞어 설명해주세요.
 
-  - output_name: "10_고조선_통나무관"
+  - output_name: "10_gojoseon_wooden_coffin"
     info_retrieval_user_content_text: |
       [조사 주제: 통나무관]
       창원 다호리 유적 통나무관 (목관묘).
@@ -179,7 +179,7 @@ files:
   # =======================
   # 6. 고구려
   # =======================
-  - output_name: "11_고구려_금동관"
+  - output_name: "11_goguryeo_gilt_bronze_crown"
     info_retrieval_user_content_text: |
       [조사 주제: 고구려 금동관]
       고구려 금동관 특징 (불꽃 무늬 투조).
@@ -191,7 +191,7 @@ files:
       1. 타오르는 불꽃 같은 무늬가 새겨진 금동관을 통해 고구려인의 힘찬 기상을 묘사하세요.
       2. 화려함보다는 강인함이 느껴지는 고구려 특유의 미감을 관람객이 느낄 수 있도록 유도하세요.
 
-  - output_name: "12_고구려_짐승무늬수막새"
+  - output_name: "12_goguryeo_roof_tile"
     info_retrieval_user_content_text: |
       [조사 주제: 짐승무늬 수막새]
       고구려 수막새 특징.
@@ -203,7 +203,7 @@ files:
       1. 기와 끝을 장식하던 수막새에 새겨진 부릅뜬 짐승의 얼굴을 보라고 하세요.
       2. 나쁜 기운을 쫓아내려는 고구려인들의 염원과, 건축물 하나에도 강렬함을 담았던 그들의 스타일을 설명하세요.
 
-  - output_name: "13_고구려_광개토대왕릉비탁본"
+  - output_name: "13_goguryeo_gwanggaeto_stele"
     info_retrieval_user_content_text: |
       [조사 주제: 광개토대왕릉비 탁본]
       국립중앙박물관 소장 광개토대왕릉비 원석 탁본.
@@ -215,7 +215,7 @@ files:
       1. 전시실 한쪽 벽을 가득 채운 거대한 탁본 앞에 관람객을 세우세요.
       2. 만주 벌판에 서 있는 실제 비석의 웅장함을 상상하게 하고, 광개토대왕의 업적이 빼곡히 적힌 글자들의 역사적 무게감을 전달하세요.
 
-  - output_name: "14_고구려_비늘갑옷"
+  - output_name: "14_goguryeo_scale_armor"
     info_retrieval_user_content_text: |
       [조사 주제: 비늘갑옷]
       고구려 철갑옷 (찰갑) 구조 및 특징.
@@ -227,7 +227,7 @@ files:
       1. 수천 개의 작은 철 조각을 이어 붙인 비늘 갑옷(찰갑)의 정교함을 칭찬하세요.
       2. 말을 타고 달리며 활을 쏘았던 고구려 무사들에게 이 갑옷이 왜 최적이었는지(활동성, 방어력) 설명하며 '개마무사'의 위용을 떠올리게 하세요.
 
-  - output_name: "15_고구려_연가7년불상"
+  - output_name: "15_goguryeo_buddha_statue"
     info_retrieval_user_content_text: |
       [조사 주제: 연가 7년명 금동여래입상]
       연가 7년명 금동여래입상.
@@ -242,7 +242,7 @@ files:
   # =======================
   # 7. 백제
   # =======================
-  - output_name: "16_백제_치미"
+  - output_name: "16_baekje_chimi"
     info_retrieval_user_content_text: |
       [조사 주제: 백제 치미]
       백제 부여 부소산성/익산 미륵사지 출토 치미.
@@ -254,7 +254,7 @@ files:
       1. 거대한 크기의 '치미'를 보며 백제 왕실 건축물이 얼마나 웅장했을지 상상해보도록 유도하세요.
       2. 지붕 꼭대기에서 하늘로 날아오를 듯한 곡선미를 묘사하며 '검소하지만 누추하지 않고, 화려하지만 사치스럽지 않다(검이불루 화이불치)'는 백제의 미학을 언급하세요.
 
-  - output_name: "17_백제_관꾸미개"
+  - output_name: "17_baekje_crown_ornament"
     info_retrieval_user_content_text: |
       [조사 주제: 무령왕릉 관꾸미개]
       무령왕릉 출토 금제 관꾸미개 (왕비).
@@ -266,7 +266,7 @@ files:
       1. 얇은 금판을 오려 만든 관꾸미개의 섬세함에 감탄하는 어조로 시작하세요.
       2. 왕비의 관 장식으로 추정되는 이 유물이 보여주는 백제의 우아하고 세련된 미감을 묘사해주세요.
 
-  - output_name: "18_백제_금동대향로"
+  - output_name: "18_baekje_incense_burner"
     info_retrieval_user_content_text: |
       [조사 주제: 백제 금동대향로]
       백제 금동대향로 구조 분석 (용, 봉황, 신선, 악사).
@@ -283,7 +283,7 @@ files:
   # =======================
   # 8. 가야
   # =======================
-  - output_name: "19_가야_미늘쇠"
+  - output_name: "19_gaya_iron_ingot"
     info_retrieval_user_content_text: |
       [조사 주제: 미늘쇠]
       가야 고분 출토 미늘쇠 (유자이기).
@@ -295,7 +295,7 @@ files:
       1. 마치 선인장이나 가시덤불처럼 생긴 독특한 철기 '미늘쇠'의 생김새를 묘사하세요.
       2. 무기가 아니라 권위를 나타내는 의식용 도구였음을 설명하고, 철을 자유자재로 다루던 '철의 왕국' 가야의 기술력을 칭찬하세요.
 
-  - output_name: "20_가야_투구와판갑옷"
+  - output_name: "20_gaya_armor_helm"
     info_retrieval_user_content_text: |
       [조사 주제: 가야 판갑옷]
       가야 판갑옷 특징 (철판을 이어 붙임, 리벳 이음).
@@ -310,7 +310,7 @@ files:
   # =======================
   # 9. 신라
   # =======================
-  - output_name: "21_신라_금관과금허리띠"
+  - output_name: "21_silla_gold_crown_belt"
     info_retrieval_user_content_text: |
       [조사 주제: 신라 금관]
       신라 금관(황남대총 북분 등) 특징 (나뭇가지, 사슴뿔 모양).
@@ -323,7 +323,7 @@ files:
       2. 나뭇가지와 사슴뿔 모양의 장식이 상징하는 의미(샤머니즘, 하늘과의 연결)를 설명하세요.
       3. 바람이 불면 달린 옥들이 영롱한 소리를 냈을 것이라는 감각적인 묘사를 더해주세요.
 
-  - output_name: "22_신라_봉황머리유리병"
+  - output_name: "22_silla_glass_bottle"
     info_retrieval_user_content_text: |
       [조사 주제: 봉황머리 유리병]
       경주 황남대총 출토 봉황모양 유리병.
@@ -338,7 +338,7 @@ files:
   # =======================
   # 10. 통일신라
   # =======================
-  - output_name: "23_통일신라_사천왕전"
+  - output_name: "23_unified_silla_heavenly_kings"
     info_retrieval_user_content_text: |
       [조사 주제: 녹유신장상]
       경주 사천왕사지 출토 녹유신장상(사천왕전).
@@ -350,7 +350,7 @@ files:
       1. 악귀를 밟고 있는 근육질 수호신의 생동감 넘치는 표정과 자세를 묘사하세요.
       2. 깨진 조각들을 모아 복원했지만 여전히 느껴지는 통일신라 조각 예술의 정점(사실성)을 설명해주세요.
 
-  - output_name: "24_통일신라_팔부중"
+  - output_name: "24_unified_silla_eight_guardians"
     info_retrieval_user_content_text: |
       [조사 주제: 팔부중]
       석탑 기단부 등에 조각된 팔부중(불법 수호신).
@@ -365,7 +365,7 @@ files:
   # =======================
   # 11. 발해
   # =======================
-  - output_name: "25_발해_두부처"
+  - output_name: "25_balhae_two_buddhas"
     info_retrieval_user_content_text: |
       [조사 주제: 이불병좌상]
       발해 이불병좌상(두 부처가 나란히 앉은 상).
@@ -380,7 +380,7 @@ files:
   # =======================
   # 12. 전시관 소개 — 중·근세관
   # =======================
-  - output_name: "26_전시관_중근세관"
+  - output_name: "26_medieval_modern_hall"
     info_retrieval_user_content_text: |
       [조사 주제: 중·근세관]
       국립중앙박물관 중·근세관(고려, 조선, 대한제국) 전시 개요.
@@ -396,7 +396,7 @@ files:
   # =======================
   # 13. 고려
   # =======================
-  - output_name: "27_고려_인종시호"
+  - output_name: "27_goryeo_injong_title"
     info_retrieval_user_content_text: |
       [조사 주제: 인종 시호 금책]
       고려 인종 시호 금책 (인종의 시호를 올린 글).
@@ -408,7 +408,7 @@ files:
       1. 왕이 돌아가신 후 그의 업적을 기리며 올린 시호가 적힌 귀한 문서를 소개하세요.
       2. 고려 왕실의 기록 문화와 효 사상을 설명하며, 글자 하나하나에 담긴 정성을 강조하세요.
 
-  - output_name: "28_고려_청자배모양그릇"
+  - output_name: "28_goryeo_celadon_boat"
     info_retrieval_user_content_text: |
       [조사 주제: 청자 배모양 그릇]
       청자 상감 모란무늬 배 모양 그릇 (평저주).
@@ -420,7 +420,7 @@ files:
       1. [퀴즈] 관람객에게 "이 아름다운 배 모양 그릇의 용도가 무엇일까요?"라고 질문을 던지며 시작하세요.
       2. 정답(요강)을 밝히며 주는 반전의 재미를 살리고, 변기조차 예술품으로 승화시킨 고려 청자의 높은 수준을 유머러스하게 칭찬하세요.
 
-  - output_name: "29_고려_수령옹주묘지명"
+  - output_name: "29_goryeo_princess_epitaph"
     info_retrieval_user_content_text: |
       [조사 주제: 수령옹주 묘지명]
       고려 수령옹주 묘지명 내용 해석.
@@ -432,7 +432,7 @@ files:
       1. 돌판에 새겨진 글씨 속에 담긴 절절한 슬픔(자식을 먼저 보낸 아버지의 마음)을 전달하세요.
       2. 화려한 역사 뒤에 숨겨진 개인의 아픔과, 고려 시대 사람들의 인간적인 면모를 부각해 감동을 주세요.
 
-  - output_name: "30_고려_초조대장경"
+  - output_name: "30_goryeo_tripitaka"
     info_retrieval_user_content_text: |
       [조사 주제: 초조대장경]
       고려 초조대장경(거란 침입 퇴치 염원).
@@ -444,7 +444,7 @@ files:
       1. 외적의 침입을 부처님의 힘으로 막고자 했던 고려인들의 간절함이 담긴 대장경을 소개하세요.
       2. 나무판 하나하나를 깎으며 나라의 평화를 빌었던 그들의 마음을 헤아려보고, 세계 최고의 인쇄 기술을 보유했던 고려의 자부심을 이야기하세요.
 
-  - output_name: "31_고려_앉아있는보살상"
+  - output_name: "31_goryeo_seated_bodhisattva"
     info_retrieval_user_content_text: |
       [조사 주제: 목조 관음보살좌상]
       고려 목조 관음보살좌상 특징.
@@ -456,7 +456,7 @@ files:
       1. 한쪽 다리를 세우고 편안하게 앉아 있는 보살상의 독특한 자세(유희좌)에 주목하게 하세요.
       2. 고려 불화에서 튀어나온 듯한 화려하고 우아한 자태를 묘사하며, 귀족적인 고려 불교 미술의 특징을 설명하세요.
 
-  - output_name: "32_고려_정몽주초상"
+  - output_name: "32_goryeo_jeongmongju_portrait"
     info_retrieval_user_content_text: |
       [조사 주제: 정몽주 초상]
       보물 제1110호 정몽주 초상.
@@ -471,7 +471,7 @@ files:
   # =======================
   # 14. 조선
   # =======================
-  - output_name: "33_조선_태조어진"
+  - output_name: "33_joseon_taejo_portrait"
     info_retrieval_user_content_text: |
       [조사 주제: 태조 어진]
       국보 태조 이성계 어진(전주 경기전 원본 관련).
@@ -483,7 +483,7 @@ files:
       1. 조선을 건국한 태조 이성계의 초상화 앞에 섰음을 알리세요.
       2. 우리가 흔히 아는 붉은 옷이 아닌 '푸른색 곤룡포'를 입은 이유를 설명하고, 늙었지만 강인해 보이는 무인의 풍모를 묘사하세요.
 
-  - output_name: "34_조선_근정전어좌"
+  - output_name: "34_joseon_king_chair"
     info_retrieval_user_content_text: |
       [조사 주제: 근정전 어좌]
       경복궁 근정전 어좌(용상) 및 일월오봉도.
@@ -495,7 +495,7 @@ files:
       1. 왕이 앉던 자리, 어좌와 그 뒤의 병풍 '일월오봉도'를 함께 소개하세요.
       2. 왕이 이 자리에 앉음으로써 그림이 비로소 완성된다는 뜻을 설명하고, 항상 백성을 생각하며 정사를 돌봐야 했던 왕의 무게감을 이야기하세요.
 
-  - output_name: "35_조선_천상열차분야지도"
+  - output_name: "35_joseon_star_map"
     info_retrieval_user_content_text: |
       [조사 주제: 천상열차분야지도]
       국보 천상열차분야지도 각석.
@@ -508,7 +508,7 @@ files:
       1. 검은 돌판에 촘촘히 새겨진 1,467개의 별자리를 보라고 하세요.
       2. 조선 건국의 정당성을 하늘로부터 인정받고자 했던 태조의 의지와, 고구려의 천문 과학을 계승한 조선의 과학 기술 수준을 높이 평가하세요.
 
-  - output_name: "36_조선_용비어천가"
+  - output_name: "36_joseon_yongbieocheonga"
     info_retrieval_user_content_text: |
       [조사 주제: 용비어천가]
       훈민정음으로 쓰인 최초의 문학 작품 용비어천가.
@@ -520,7 +520,7 @@ files:
       1. 교과서에서 배웠던 "뿌리 깊은 나무는 바람에 아니 묄세..." 구절을 낭송하며 시작하세요.
       2. 세종대왕이 만든 한글로 쓴 최초의 노래인 이 책이 갖는 상징성과, 조선 왕조의 번영을 기원하는 내용을 쉽게 풀어서 설명하세요.
 
-  - output_name: "37_조선_측우기"
+  - output_name: "37_joseon_rain_gauge"
     info_retrieval_user_content_text: |
       [조사 주제: 측우기]
       보물 충청감영 측우기.
@@ -532,7 +532,7 @@ files:
       1. 서양보다 200년이나 앞선 세계 최초의 빗물 측정기 '측우기'를 자랑스럽게 소개하세요.
       2. 단순히 비의 양을 재는 도구가 아니라, 농사를 짓는 백성들의 고충을 덜어주고자 했던 왕의 마음이 담긴 '애민 과학'의 산물임을 강조하세요.
 
-  - output_name: "38_조선_달항아리"
+  - output_name: "38_joseon_moon_jar"
     info_retrieval_user_content_text: |
       [조사 주제: 백자 달항아리]
       조선 백자 달항아리(백자대호) 특징.
@@ -545,7 +545,7 @@ files:
       1. 둥근 보름달을 닮은 넉넉한 백자 항아리의 자태를 감상하게 하세요.
       2. 완벽한 원이 아니라 약간 일그러져서 더 자연스럽고 푸근한 맛, 화려한 무늬 없이 순백색으로 빛나는 조선의 마음(절제미)을 서정적으로 묘사하세요.
 
-  - output_name: "39_조선_동의보감"
+  - output_name: "39_joseon_donguibogam"
     info_retrieval_user_content_text: |
       [조사 주제: 동의보감]
       유네스코 세계기록유산 동의보감.
@@ -557,7 +557,7 @@ files:
       1. 한국인이 가장 존경하는 의서, 동의보감을 소개하세요.
       2. 전란 속에 백성들이 쉽게 약재를 구해 병을 고칠 수 있도록 만들었던 허준의 헌신과, 예방 의학을 강조한 선진적인 면모를 설명하세요.
 
-  - output_name: "40_조선_화성성역의궤"
+  - output_name: "40_joseon_hwaseong_records"
     info_retrieval_user_content_text: |
       [조사 주제: 화성성역의궤]
       수원 화성 축조 과정을 기록한 화성성역의궤.
@@ -569,7 +569,7 @@ files:
       1. "건물을 짓는 데 사용된 못의 개수와 가격까지 적었다면 믿으시겠습니까?"라는 질문으로 조선의 기록 정신을 강조하세요.
       2. 이 치밀한 기록 덕분에 무너진 수원 화성을 원형 그대로 다시 세울 수 있었던 사연을 통해 기록 유산의 위대함을 일깨워주세요.
 
-  - output_name: "41_조선_대동여지도"
+  - output_name: "41_joseon_daedongyeojido"
     info_retrieval_user_content_text: |
       [조사 주제: 대동여지도]
       고산자 김정호의 대동여지도 목판본.
@@ -583,9 +583,36 @@ files:
       2. 김정호가 평생을 바쳐 만든 이 지도가 얼마나 정확한지, 그리고 많은 사람이 이용할 수 있도록 목판으로 찍어낸 그의 뜻(정보의 공유)을 높이 평가하세요.
 
   # =======================
-  # 15. 마무리
+  # 15. 대한제국
   # =======================
-  - output_name: "42_마무리"
+  - output_name: "42_gojong_portrait"
+    info_retrieval_user_content_text: |
+      [조사 주제: 고종황제 어진]
+      대한제국 황제 고종의 초상화 (황룡포 착용).
+      조선 왕의 홍룡포와 대비되는 황제국의 위상 선포.
+      근대화 노력과 대한제국 선포의 의미.
+      https://www.museum.go.kr/MUSEUM/contents/M0201040600.do?schM=view&showHallId=759&relicId=737
+    script_gen_user_content_text: |
+      [지시사항]
+      1. 붉은 옷이 아닌 황금빛 '황룡포'를 입은 고종 황제의 모습을 주목하게 하세요.
+      2. 왕에서 황제로, 조선에서 대한제국으로 국호를 바꾸며 자주 독립국임을 세계에 알리려 했던 고종의 의지와 근대화의 노력을 설명해주세요.
+
+  - output_name: "43_korea_and_neighbors"
+    info_retrieval_user_content_text: |
+      [조사 주제: 한국과 그 이웃나라들]
+      영국인 여행가 이사벨라 비숍이 쓴 여행기.
+      19세기 말 외국인의 시선으로 본 한국 사회의 모습.
+      객관적인 기록으로서의 역사적 가치와 당시 생활상.
+      https://www.museum.go.kr/MUSEUM/contents/M0201040600.do?schM=view&showHallId=759&relicId=16217
+    script_gen_user_content_text: |
+      [지시사항]
+      1. 파란 눈의 이방인 이사벨라 비숍이 남긴 기록을 소개하세요.
+      2. 제3자의 시선에서 본 구한말 조선의 풍경과 사람들의 모습을 생생하게 묘사하고, 격동의 시기를 지나온 우리 역사를 되돌아보게 하세요.
+
+  # =======================
+  # 16. 마무리
+  # =======================
+  - output_name: "44_closing"
     info_retrieval_user_content_text: |
       [조사 주제: 마무리 멘트]
       국립중앙박물관 관람 마무리 멘트.
