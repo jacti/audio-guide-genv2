@@ -1,0 +1,89 @@
+{
+  "output_name": "02_visit_tips",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:18:23.562193",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 방문 및 운영 정보]\n국립중앙박물관 운영시간, 휴관일, 야간개장 정보(수/토 21:00까지), 방문하기 좋은 시간대.\n대중교통(이촌역 연결), 주차 정보, 혼잡시간 회피 팁.\nhttps://www.museum.go.kr/site/main/content/open_time\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 휴관 헛걸음 방지!",
+      "url": "https://floraontrip.com/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%ED%9C%B4%EA%B4%80-%ED%97%9B%EA%B1%B8%EC%9D%8C-%EB%B0%A9%EC%A7%80/",
+      "date": "2025-11-06",
+      "last_updated": "2025-11-16",
+      "snippet": "예약 오픈: 관람일 14일 전 00시 (밤 12시) ; 예약 수량: 1인당 1일 1회, 최대 5매 ; 운영: 하루 5회차 (10:00 ~ 17:50), 회차당 약 200명 ; 페널티 주의: ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 관람 가이드 (전시, 이용시간, 관람 꿀팁)",
+      "url": "https://twinkle-cho.tistory.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%EA%B4%80%EB%9E%8C-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%A0%84%EC%8B%9C-%EC%9D%B4%EC%9A%A9%EC%8B%9C%EA%B0%84-%EA%B4%80%EB%9E%8C-%EA%BF%80%ED%8C%81",
+      "date": "2025-08-22",
+      "last_updated": "2025-09-03",
+      "snippet": "관람 시간 - 월·화·목·금요일: 10:00 ~ 18:00 - 수·토요일: 10:00 ~ 21:00 (야간개장) - 일요일·공휴일: 10:00 ~ 19:00 - 휴관일: 1월 1일, 설날, 추석",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 관람시간·주차요금·가는길 총정리 (2025 최신 ...",
+      "url": "https://specialdaytrips.yeoseed.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%EA%B4%80%EB%9E%8C%EC%8B%9C%EA%B0%84%C2%B7%EC%A3%BC%EC%B0%A8%EC%9A%94%EA%B8%88%C2%B7%EA%B0%80%EB%8A%94%EA%B8%B8-%EC%B4%9D%EC%A0%95%EB%A6%AC-2025-%EC%B5%9C%EC%8B%A0%EC%A0%95%EB%B3%B4",
+      "date": "2025-11-06",
+      "last_updated": "2025-11-24",
+      "snippet": "야간 개장 운영. 휴관일, 설날, 추석, 1월 1일, 나들길 미개방. 꿀팁: 수요일과 토요일에 방문하면 야간 개장으로 더 여유롭게 관람할 수 있습니다.",
+      "source": "web"
+    },
+    {
+      "title": "야간개장 셔틀버스 예약",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0104080000.do",
+      "date": null,
+      "last_updated": "2025-10-07",
+      "snippet": "운영일시. 매주 수요일(출발시간은 담당자와 협의 후 진행) · 운행횟수. 1회 / 대형버스(45인승) 1대 · 운행구간. 야간개장 관람 신청직장 ⇒ 국립중앙박물관(편도) · 이용대상.",
+      "source": "web"
+    },
+    {
+      "title": "주요 시설",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103030000.do",
+      "date": null,
+      "last_updated": "2025-11-15",
+      "snippet": "전화번호. 02-2077-9773 · 운영시간. 월~금 10:00 ~ 18:00 토,일요일,공휴일 10:00 ~ 19:00 (야간개장) 매월 마지막 수요일 10:00 ~ 21:00 · 휴점일. 새해 첫날 (1월1일), ...",
+      "source": "web"
+    },
+    {
+      "title": "관람 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0101000000.do",
+      "date": "2021-08-30",
+      "last_updated": "2025-11-29",
+      "snippet": "관람시간 · 월, 화, 목, 금, 일요일: 10:00 ~ 18:00 (입장 마감: 17:30). 수, 토요일: 10:00 ~ 21:00 (입장 마감: 20:30). 옥외 전시장(정원)은 오전 7시부터 오후 10시까지 ...",
+      "source": "web"
+    },
+    {
+      "title": "매주 수, 토요일 밤 9시까지 야간개장 - 박물관신문",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=7650",
+      "date": null,
+      "last_updated": null,
+      "snippet": "야간개장 시에는 상설전시관과 기획전시 실은 물론 문화상품점, 식당 등 각종 편의시설도 9시까지 연장 운영되며, 매월 마지막 주 수요일에는 어린이박물관도 9시까지 운영 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관",
+      "url": "https://www.museum.go.kr",
+      "date": "2025-11-14",
+      "last_updated": "2025-11-20",
+      "snippet": "야간개장 셔틀버스 예약 · 관람·편의시설 · 박물관 전체 안내 · 전시 공간 · 주요 시설 ... 관람시간. 월/화/목/금/일 10:00 ~ 18:00; 수/토 10:00 ~ 21:00; * 입장 마감은 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립박물관 전시품 관람규칙",
+      "url": "https://law.go.kr/LSW/lsInfoP.do?lsiSeq=96837",
+      "date": "2019-08-17",
+      "last_updated": "2025-07-27",
+      "snippet": "제3조(관람시간) ① 박물관의 관람시간은 오전 9시부터 오후 6시까지로 한다. ② 박물관장은 제1항에도 불구하고 박물관 운영상 필요할 때에는 야간에 개장하는 등 관람시간 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 899,
+    "completion_tokens": 1194,
+    "total_tokens": 2093
+  },
+  "file_size": 4023
+}

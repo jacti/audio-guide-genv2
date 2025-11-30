@@ -1,0 +1,9 @@
+{
+  "output_name": "03_exhibition_hall_overview",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:23:41.378872",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 833036
+}

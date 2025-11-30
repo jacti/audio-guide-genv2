@@ -848,6 +848,13 @@ def main():
         help="병렬 처리 시 최대 워커 수 (기본값: 3, Gemini TTS API 제약)",
     )
 
+    parser.add_argument(
+        "--single",
+        type=str,
+        default=None,
+        help="단일 항목만 실행 (output_name 지정). 예: --single 02_visit_tips",
+    )
+
     args = parser.parse_args()
 
     # 환경변수 로드
@@ -863,6 +870,28 @@ def main():
 
         # 3. 설정 검증
         validate_playlist_config(playlist_config)
+
+        # 3.5. 단일 항목 필터링 (--single 옵션)
+        if args.single:
+            target_output_name = args.single
+            matching_files = [
+                f
+                for f in playlist_config["files"]
+                if f.get("output_name") == target_output_name
+            ]
+
+            if not matching_files:
+                available_names = [
+                    f.get("output_name") for f in playlist_config["files"]
+                ]
+                raise BatchRunnerError(
+                    f"output_name '{target_output_name}'을(를) 찾을 수 없습니다.\n"
+                    f"   사용 가능한 output_name 목록:\n"
+                    f"   {', '.join(available_names)}"
+                )
+
+            playlist_config["files"] = matching_files
+            logger.info(f"🎯 단일 항목 모드: {target_output_name}")
 
         # 4. 배치 실행 (병렬 또는 순차)
         if args.parallel:

@@ -111,6 +111,7 @@ def _chat_with_perplexity(
                 },
             ],
             temperature=0.3,
+            search_domain_filter=["-tistory.com", "-phoenix1024.com"],
         )
 
         # 마크다운 응답 직접 사용

@@ -1,0 +1,9 @@
+{
+  "output_name": "03_exhibition_hall_overview",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:21:33.925047",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 박물관의 전체적인 전시관 구조와 각 전시 공간의 성격을 개괄적으로 소개하세요.\n2. 선사·고대관부터 사유의 방, 야외 전시까지 다채로운 볼거리가 있음을 알려주세요.\n3. (주의) 역사나 설립 배경, 운영 정보는 제외하고 공간 구성에만 집중하세요.\n",
+  "file_size": 3345
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "05_goods_shop_muds",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T13:14:38.580070",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 관람의 마무리를 장식할 굿즈샵 '뮷즈'를 소개하세요.\n2. 인기 아이템들을 추천하며 방문을 유도하세요.\n",
+  "file_size": 2996
+}

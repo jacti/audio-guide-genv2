@@ -1,0 +1,73 @@
+{
+  "output_name": "04_facilities",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T13:18:48.124648",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 편의시설 안내]\n국립중앙박물관 편의시설 위치 및 이용법.\n물품보관함, 편의점, 카페, 푸드코트, 유아차 대여.\nhttps://www.museum.go.kr/site/main/content/facility\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관",
+      "url": "https://www.seouldanurim.net/facilities/D/TOURINFOTYPE5/43034",
+      "date": "2024-10-29",
+      "last_updated": "2025-09-14",
+      "snippet": "주출입구는 여닫이문이나 앞에 휠체어가 위치할 공간이 충분하며, 경사나 단차가 없어 휠체어 이용에 편리하다. 안내 데스크는 휠체어로도 이용 가능하다.",
+      "source": "web"
+    },
+    {
+      "title": "편의시설>식당, 편의시설>카페/기타",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103050300.do",
+      "date": null,
+      "last_updated": "2025-11-29",
+      "snippet": "박물관 관람 중 긴급히 필요한 생활물품을 구입하실 수 있습니다. 이용시간. 08:00~21:00(매일). 메뉴. 음료, 간식, 상비약 등.",
+      "source": "web"
+    },
+    {
+      "title": "편의시설>식당, 편의시설>휴게공간",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103050100.do",
+      "date": null,
+      "last_updated": "2025-10-30",
+      "snippet": "다목적실(교육관 1층). 초•중•고 학생 단체 및 유치원•어린이집 단체 관람객 도시락 식사 가능(60명 이내). 개방시간. 월~금 11:00~14:00(공휴일, 휴관일 제외).",
+      "source": "web"
+    },
+    {
+      "title": "편의시설 연락처",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103060000.do",
+      "date": null,
+      "last_updated": "2025-11-16",
+      "snippet": "편의시설 연락처 · 대표번호 1544-5955. 1544-5955 · 극장 용. 고객만족센터 1544-5955 · 박물관 상품관. 상품관1(서관 1층) 02-2077-9769. 상품관2(동관 전시실 1층) 02-2077 ...",
+      "source": "web"
+    },
+    {
+      "title": "식당, 편의시설",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103050200.do",
+      "date": null,
+      "last_updated": "2025-11-30",
+      "snippet": "주요 시설 · 야외 시설 · 식당, 편의시설 · 편의시설 연락처 · 층별 안내 · 휴게공간 · 식당 · 카페/기타. 식당지도이미지 모바일 레스토랑이미지. 교육관가는길; 주차안내.",
+      "source": "web"
+    },
+    {
+      "title": "편의시설>층별 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103070000.do",
+      "date": null,
+      "last_updated": "2025-11-29",
+      "snippet": "안내도(PDF)내려받기 · 피난안내도(PDF)내려받기. 안내. 응급대기실. 물품보관소. 수유실. 화장실. 카페. 식당. 엘레베이터. 구난용 엘레베이터. 에스컬레이터.",
+      "source": "web"
+    },
+    {
+      "title": "주요 시설",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103030000.do",
+      "date": null,
+      "last_updated": "2025-11-15",
+      "snippet": "주요 시설. 전체 안내 · 전시 공간 · 주요 시설 · 야외 시설 · 식당, 편의시설 · 편의시설 연락처 · 층별 안내. 국립중앙박물관 주요시설 지도 이미지로 극장'용', 상품관1 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 884,
+    "completion_tokens": 1461,
+    "total_tokens": 2345
+  },
+  "file_size": 5117
+}

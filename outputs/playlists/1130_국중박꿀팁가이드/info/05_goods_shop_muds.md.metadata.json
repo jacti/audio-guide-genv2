@@ -1,0 +1,41 @@
+{
+  "output_name": "05_goods_shop_muds",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T13:14:21.062959",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 굿즈샵 뮷즈]\n국립중앙박물관 1층 굿즈샵 ‘뮷즈(MU:DS, muds)’ 소개.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201110100.do\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 이용 방법, 굿즈 샵 소개",
+      "url": "https://phoenix1024.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%EC%9D%B4%EC%9A%A9-%EB%B0%A9%EB%B2%95-%EA%B5%BF%EC%A6%88-%EC%83%B5-%EC%86%8C%EA%B0%9C",
+      "date": "2025-08-03",
+      "last_updated": "2025-09-22",
+      "snippet": "뮤지엄샵 위치와 운영시간 ... 국립중앙박물관 굿즈샵은 본관 1층 로비에 위치한 뮤지엄샵과 어린이박물관 내 키즈샵 두 곳이 있습니다. 메인 뮤지엄샵은 ...",
+      "source": "web"
+    },
+    {
+      "title": "2025 국립중앙박물관 굿즈 총정리! 품절 굿즈, 구매 위치, ...",
+      "url": "https://pouranything.tistory.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%EA%B5%BF%EC%A6%88",
+      "date": "2025-07-24",
+      "last_updated": "2025-11-24",
+      "snippet": "박물관 내 오프라인 샵 안내 ; 위치: 서관 1층 메인숍, 상설전시관 1층/3층 등 총 3곳 ; 운영 시간: 월·화·목·금·일 10:00–18:00, 수·토는 21:00까지.",
+      "source": "web"
+    },
+    {
+      "title": "주요 시설",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0103030000.do",
+      "date": null,
+      "last_updated": "2025-11-15",
+      "snippet": "온라인 뮤지엄 샵. 인터넷을 통해 더 쉽게 박물관 상품들을 구매하실 수 ... 뮷즈 브랜드 홍보관. 상설전시관 3층 중앙. 운영시간. 10:00 ~ 18:00 (휴점시간 : 12 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 882,
+    "completion_tokens": 1184,
+    "total_tokens": 2066
+  },
+  "file_size": 4055
+}

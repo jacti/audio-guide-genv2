@@ -1,0 +1,81 @@
+{
+  "output_name": "03_exhibition_hall_overview",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:21:12.929884",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 전시관 전체 구성]\n국립중앙박물관 전시관 전체 구성 설명.\n주요 전시관과 관련 공식 링크:\n- 선사·고대관: https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760\n- 중·근세관: https://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759\n- 서화관: https://www.museum.go.kr/MUSEUM/contents/M0201050100.do?showHallId=758\n- 기증관: https://www.museum.go.kr/MUSEUM/contents/M0201060100.do?showHallId=755\n- 사유의 방: https://www.museum.go.kr/MUSEUM/contents/M0201070100.do?showHallId=631120\n- 조각·공예관, 세계문화관, 역사의 길, 야외 전시 등.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 | 서울 공식 관광정보 웹사이트",
+      "url": "https://korean.visitseoul.net/attractions/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80_/433",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국립중앙박물관은 총 6개의 상설전시관에 전시 유물만 1만 3000여 점에 이른다. 박물관 관람은 테마별로 12가지 코스가 있다.",
+      "source": "web"
+    },
+    {
+      "title": "상설전시실 층별 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201010000.do",
+      "date": null,
+      "last_updated": "2025-11-28",
+      "snippet": "국립중앙박물관의 상설전시장은 총 7개의 관과 39개의 실로 구성되어 9,884점의 유물 을 전시하여 제공하고 있으며 전시물은외부전시일정 및 유물의 보존 상태를 위하여 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>박물관 소개>인사말",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0801000000.do",
+      "date": "2005-01-01",
+      "last_updated": "2025-11-29",
+      "snippet": "시대와 주제별로 구성된 7개의 상설전시관, 다양한 내용을 선보이는 특별전시관, 관람의 이해를 돕는 전시해설 프로그램, 오감으로 즐기고 배우는 어린이박물관, 다채로운 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관",
+      "url": "https://namu.wiki/w/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80",
+      "date": "2025-11-28",
+      "last_updated": "2025-11-29",
+      "snippet": "언제든 유물의 소재를 옮길 수 있는 국립박물관의 특징상 중앙박물관과 소속 박물관의 유물 전체를 기록한다. 기간에 따라 유물이 옮겨다닐 수 있다. 지정구분. 호(號).",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>박물관 소개>시설 소개>건축 개요",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0804010000.do",
+      "date": null,
+      "last_updated": "2025-11-12",
+      "snippet": "건축 개요 · 대지면적. 285,990.70㎡ · 층수. 지하1층, 지상6층 · 건축면적. 48,742.64㎡ · 최고높이. 43.08m · 연면적. 137,569.23㎡ · 설계자. 정림건축 · 구조. 철골·철근콘크리트 ...",
+      "source": "web"
+    },
+    {
+      "title": "감각전시실 공간_사이 - 조각·공예관",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201080500.do?showHallId=757&showroomCode=DM0083",
+      "date": null,
+      "last_updated": "2025-10-13",
+      "snippet": "북쪽 전시공간은 3차원의 조형물이 빚어내는 입체미를 감상할 수 있는 공간으로, 불교조각실, 금속공예실, 도자공예실[청자, 분청사기, 백자]로 나누어 700여 점에 이르는 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관",
+      "url": "https://www.museum.go.kr",
+      "date": "2025-11-14",
+      "last_updated": "2025-11-20",
+      "snippet": "관람시간. 월/화/목/금/일 10:00 ~ 18:00; 수/토 10:00 ~ 21:00; * 입장 마감은 폐관30분 전까지 · 관람료. 무료 특별전시는 유료.",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 백배 즐기기> 여행기사",
+      "url": "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=c2fe778b-6d26-4e19-8e81-e1b9586aeb1b",
+      "date": "2021-11-17",
+      "last_updated": "2025-10-27",
+      "snippet": "상설전시관 1층 남쪽 전시관은 선사·고대관으로 구석기 시대부터 발해까지의 10개 전시실이 있으며, 북쪽 전시관은 중·근세관으로 고려시대부터 조선시대까지의 9개 전시실 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1033,
+    "completion_tokens": 2184,
+    "total_tokens": 3217
+  },
+  "file_size": 7579
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "05_goods_shop_muds",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T13:59:14.579098",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 608876
+}

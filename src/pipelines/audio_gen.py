@@ -27,7 +27,7 @@ from dotenv import load_dotenv
 
 from src.utils.path_sanitizer import audio_output_path
 from src.utils.metadata import create_metadata
-from utils.mp3_duration import save_mp3_durations
+from src.utils.mp3_duration import save_mp3_durations
 
 # 환경변수 로드
 load_dotenv()
@@ -319,7 +319,9 @@ def _generate_audio_gemini(
             logger.info(f"✅ 청크 {i}/{total_chunks} 완료")
 
         # 모든 오디오 청크 결합 (각 청크 앞에 1초 무음 추가)
-        logger.info(f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중 (각 청크 앞 1초 무음 추가)...")
+        logger.info(
+            f"🔗 {len(audio_chunks)}개 오디오 청크 결합 중 (각 청크 앞 1초 무음 추가)..."
+        )
 
         # 1초 무음 생성
         silence = AudioSegment.silent(duration=1000)  # 1000ms = 1초
@@ -426,7 +428,7 @@ def run(
         logger.warning(f"메타데이터 저장 실패 (파이프라인은 계속 진행): {e}")
 
     # 오디오 길이 계산
-    save_mp3_durations(output_path)
+    save_mp3_durations(output_path.parent)
 
     logger.info(
         f"=== 오디오 생성 파이프라인 완료 ===\n"

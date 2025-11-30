@@ -1,0 +1,9 @@
+{
+  "output_name": "02_visit_tips",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:18:38.229408",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 언제 방문하면 가장 좋은지 운영 시간과 야간 개장 정보를 알려주세요.\n2. 대중교통 이용 팁(이촌역 무빙워크 등)과 주차, 혼잡 시간을 피하는 요령을 안내하세요.\n3. 시설 상세 안내는 제외하고, 시간과 이동 정보에 집중하세요.\n",
+  "file_size": 3000
+}

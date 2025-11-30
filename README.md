@@ -25,3 +25,14 @@ python -m src.batch_runner --playlist-file playlists/test.yaml # 정보추출, �
 python -m src.batch_runner --playlist-file playlists/test.yaml --stages 2 # 스크랩트 생성만
 python -m src.batch_runner --playlist-file playlists/test.yaml --stages 2,3 # 스크랩트 생성, 오디오생성 만
 ```
+
+```sh
+# 단일항목
+# 전체 실행 (기존과 동일)
+python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이드.yaml
+python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이드.yaml --single 02_visit_tips
+python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이드.yaml --single 02_visit_tips --stages 3
+
+# 단일 항목 + 병렬 모드 (필요 시)
+python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이드.yaml --single 05_goods_shop_muse --parallel
+```

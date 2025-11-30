@@ -1,0 +1,9 @@
+{
+  "output_name": "04_facilities",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T13:43:53.014626",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 517196
+}

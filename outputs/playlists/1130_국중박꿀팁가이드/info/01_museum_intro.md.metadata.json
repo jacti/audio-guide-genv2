@@ -1,0 +1,97 @@
+{
+  "output_name": "01_museum_intro",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:15:26.960078",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 소개]\n국립중앙박물관의 역사, 설립 배경, 이전 과정(2005년 용산 이전).\n위치(서울 용산구 서빙고로 137), 규모, 국가중앙박물관으로서의 역할.\nhttps://www.museum.go.kr\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80",
+      "date": "2005-10-22",
+      "last_updated": "2025-11-28",
+      "snippet": "1909년 대한제국 시절 개관한 창경궁의 제실박물관을 모태로 하고 있으며, 일제강점기 조선총독부 박물관 시절을 거쳐 1945년 8·15 광복 직후 설립된 '국립박물관'이 조선 ...",
+      "source": "web"
+    },
+    {
+      "title": "기록으로 만나는 대한민국 > 문화·예술 > 국립중앙박물관",
+      "url": "https://theme.archives.go.kr/next/koreaOfRecord/centerMuseum.do",
+      "date": "2018-01-01",
+      "last_updated": "2025-08-29",
+      "snippet": "1945년 광복이 되면서 경복궁 내 조선총독부 박물관을 인수·개편하여 국립박물관이 발족하였다. 광복의 환희 속에서 국립박물관은 기존의 경주와 부여 외에 공주와 개성에 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관의 역사,구조,특징 - TravelLife7",
+      "url": "https://travel-withpassion.tistory.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80%EC%9D%98-%EC%97%AD%EC%82%AC%EA%B5%AC%EC%A1%B0%ED%8A%B9%EC%A7%95",
+      "date": "2024-01-09",
+      "last_updated": "2025-09-12",
+      "snippet": "대한제국 시대인 1909년, 왕실 유물을 보호하기 위해 궁내박물관이 건립되었다. 이는 한국의 문화유산을 보존하기 위한 첫걸음이었다. 그러나 일제 강점기 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관은 언제부터 그 자리에? 수난의 역사 속으로",
+      "url": "https://mediahub.seoul.go.kr/archives/2013213",
+      "date": "2025-01-15",
+      "last_updated": "2025-11-28",
+      "snippet": "제실박물관과 조선총독부박물관. 국립중앙박물관은 1909년 대한제국 시기 순종 황제가 지은 제실박물관(帝室博物館)을 그 시작을 보고 있다. 제실박물관 ...",
+      "source": "web"
+    },
+    {
+      "title": "7번이나 이사해야 했던 국립중앙박물관 수난의 역사",
+      "url": "https://www.hani.co.kr/arti/culture/culture_general/841231.html",
+      "date": "2018-04-19",
+      "last_updated": "2025-11-21",
+      "snippet": "... 역사. 한국에서 가장 먼저 설립된 박물관은 1909년 11월 대한제국 황실이 창경궁에 문을 연 제실 박물관이다. 황실은 1908년 당시 보유하고 있는 미술품 등 황실 고가품 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관(國立中央博物館) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0006249",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "국립중앙박물관은 1908년 9월에 발족한 창경궁 내의 이왕가박물관(李王家博物館)에서 출발하였다. 이왕가박물관은 왕실의 재정적 뒷받침으로 미술품을 수집하기 시작하여 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관",
+      "url": "https://namu.wiki/w/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80",
+      "date": "2025-11-28",
+      "last_updated": "2025-11-29",
+      "snippet": "1992년에 국립민속박물관을 독립시키고 1995년 광복절에 문민정부의 '역사 바로 세우기' 정책으로 조선총독부 청사를 철거하면서 소장품들이 임시로 근처 벙커에 들어가 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>박물관 소개>발자취>1945~",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0805010000.do",
+      "date": "2005-01-01",
+      "last_updated": "2025-10-30",
+      "snippet": "국립박물관은 1945년 8월 15일 이후 조선총독부박물관(1915년 12월 1일 경복궁 안에서 개관)을 인수하여 동년 12월 3일 개관하였다. 우리나라에서 가장 먼저 설립된 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 60년 발간",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=7785",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이 책은 국립중앙박물관이 그동안 크게 6차례에 걸쳐 이전하였다는 이력을 따라 본문의 큰 목차를 경복궁 1기(옛 조선총독부박물관 건물), 서울 남산 시기(옛 국립민족 ...",
+      "source": "web"
+    },
+    {
+      "title": "신문을 통해 살펴본 국립박물관의 역사 - 박물관신문",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=7017",
+      "date": null,
+      "last_updated": null,
+      "snippet": "그동안 국립중앙박물관은 현대사의 변천만큼이나 격변의 한 갑자를 보내었다. 1945년 12월 3일 경복궁에서 처음 개관한 이래 6.25 와중인 51년 1.4후퇴에 의해 부산 광복동 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 895,
+    "completion_tokens": 1941,
+    "total_tokens": 2836
+  },
+  "file_size": 6682
+}

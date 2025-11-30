@@ -1,0 +1,9 @@
+{
+  "output_name": "01_museum_intro",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T01:15:39.336132",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[역할] 친절한 가이드\n[지시사항]\n1. 국립중앙박물관의 역사와 설립 배경, 그리고 용산으로의 이전 과정을 간략히 설명하세요.\n2. 대한민국을 대표하는 국가중앙박물관으로서의 위상과 역할을 강조하세요.\n3. (주의) 전시관 구성이나 관람 동선은 다음 트랙에서 다루므로 언급하지 마세요.\n",
+  "file_size": 3176
+}
