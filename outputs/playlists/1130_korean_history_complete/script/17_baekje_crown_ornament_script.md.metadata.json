@@ -1,0 +1,9 @@
+{
+  "output_name": "17_baekje_crown_ornament",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:21:05.879070",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 얇은 금판을 오려 만든 관꾸미개의 섬세함에 감탄하는 어조로 시작하세요.\n2. 왕비의 관 장식으로 추정되는 이 유물이 보여주는 백제의 우아하고 세련된 미감을 묘사해주세요.\n",
+  "file_size": 2628
+}

@@ -1,0 +1,65 @@
+{
+  "output_name": "26_medieval_modern_hall",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:31:00.903931",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 중·근세관]\n국립중앙박물관 중·근세관(고려, 조선, 대한제국) 전시 개요.\n화려한 귀족 문화(고려)에서 유교적 선비 문화(조선)로의 변화.\n인쇄술, 한글 등 기록 유산의 중요성.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759&showroomCode=DM0036\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 처음 가는 사람들이 종종 하는 실수",
+      "url": "https://m.cafe.daum.net/subdued20club/ReHf/5009101?listURI=%2Fsubdued20club%2FReHf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "1층. 선사고대관 - 구석기 시대부터 통일신라와 발해까지. 중근세관 - 고려, 조선, 대한제국. 2층. 3층. 둘러보기 전에 경로를 정하거나. 또는 집중적으로 볼 곳을 정하고 ...",
+      "source": "web"
+    },
+    {
+      "title": ">국립중앙박물관>전시>상설 전시>추천 동선>명품30선",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do",
+      "date": "2020-08-05",
+      "last_updated": "2025-11-30",
+      "snippet": "1 주먹도끼 이미지. 세계의 구석기 문화사를 바꾼 '주먹도끼' · 2 빗살무늬토기 이미지. 신석기시대 새로운 발명품 '빗살무늬 토기' · 3 농경문 청동기 이미지 · 4 한국식 ...",
+      "source": "web"
+    },
+    {
+      "title": "현재 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0202010000.do?menuId=current&schM=view&exhiSpThemId=562558&listType=list",
+      "date": null,
+      "last_updated": null,
+      "snippet": "현재 전시 · 전시명. 한글로 풀어 쓴 역사이야기 · 전시장소. 중근세관 조선2실 · 전시기간. 2020-10-07~2021-03-31 · 담당부서. 고고역사부 김진실 (02-2077-9463) · 공유하기.",
+      "source": "web"
+    },
+    {
+      "title": "출판>학술행사>상세",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0601000000.do?schM=view&catCustomType=united&catId=128&arcId=8975&arcDataType=&cp=343&unitedUse=MUSEUM&sv=",
+      "date": null,
+      "last_updated": null,
+      "snippet": "ㅇ 전시작품 : <함흥에서 열린 과거 급제 의식>(북새선은도권), <북도각릉전도형>, <함흥내외십경도> 함흥의 역사와 문화를 보여주는 작품 30여 점.",
+      "source": "web"
+    },
+    {
+      "title": "한국 문화의 독창성 24선 - 상설 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do?schM=list&relicRecommendPk=PS01001001_64",
+      "date": "2020-08-05",
+      "last_updated": "2025-10-17",
+      "snippet": "1 주먹도끼 이미지. 세계의 구석기 문화사를 바꾼 '주먹도끼' ; 2 빗살무늬토기 이미지. 신석기시대 새로운 발명품 '빗살무늬 토기' ; 3 한국식 동검 조각 이미지. 한국식 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 중근세관 테마전 개최",
+      "url": "https://www.newswire.co.kr/newsRead.php?no=511216",
+      "date": null,
+      "last_updated": null,
+      "snippet": "테마전 “조선을 일으킨 땅, 함흥”은 이처럼 조선시대 역사의 흐름에 따라 풍패지향 함흥의 위상이 조금씩 달라지는 양상을 조명한다. 관람객들은 전시되는 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 930,
+    "completion_tokens": 1386,
+    "total_tokens": 2316
+  },
+  "file_size": 5018
+}

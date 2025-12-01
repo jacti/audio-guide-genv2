@@ -1,0 +1,65 @@
+{
+  "output_name": "15_goguryeo_buddha_statue",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:22:09.924719",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 연가 7년명 금동여래입상]\n연가 7년명 금동여래입상.\n광배 뒷면에 새겨진 명문의 내용(제작 연도, 제작자).\n고구려 불상의 투박하지만 따뜻한 미소와 옷주름 특징.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29926\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "서울아트가이드 Seoul Art Guide",
+      "url": "http://daljin.com/column/5711",
+      "date": null,
+      "last_updated": null,
+      "snippet": "역동적인 광배의 불꽃··· 활달한 고구려의 氣像 넘쳐 연가7년명 금동여래입상은 우리나라에서 제작연대가 확실한 가장 오래된 불상이다.",
+      "source": "web"
+    },
+    {
+      "title": "불교조각실(佛敎彫刻室) - 박물관신문",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=2725",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이 가운데 1493년에 조성된 「금동석가여래좌상(金銅釋迦如來坐像)」은 고려 후기의 양식을 계승하는 한편, 좁아진 무릎 폭과 고개 숙인 모습 등 조선적인 특징이 함께 ...",
+      "source": "web"
+    },
+    {
+      "title": "미륵사",
+      "url": "https://namu.wiki/w/%EB%AF%B8%EB%A5%B5%EC%82%AC",
+      "date": "2025-10-26",
+      "last_updated": "2025-11-05",
+      "snippet": "금동미륵보살반가사유상(1964) · 금동연가7년명여래입상 · 용주사 동종 · 안동 하회탈 및 병산탈 · 양양 진전사지 삼층석탑 · 익산 왕궁리 오층석탑 사리장엄구 · 강릉 ...",
+      "source": "web"
+    },
+    {
+      "title": "'국보' 검색 - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/Search/%EA%B5%AD%EB%B3%B4?p=24&field=&type=&alias=false&body=false&containdesc=false",
+      "date": null,
+      "last_updated": null,
+      "snippet": "작은 접시 위에는 이층으로 표현된 연꽃 받침이 놓여 있는데, 주변을 각 잎마다 12개의 수정이 감입된 연꽃잎으로 둘렀다. 화려한 장식과 함께 세련된 조형감을 엿볼 수 ...",
+      "source": "web"
+    },
+    {
+      "title": "삼국시대의 불상 - 곽동석(국립중앙박물관 미술부장)",
+      "url": "https://museum.lh.or.kr/file/fileDownload.do?file_physical=2023353491414.pdf",
+      "date": null,
+      "last_updated": "2025-09-21",
+      "snippet": "그 대표적인 예가 우리나라 불교조각의 첫 페이지를 장식하는 연가7년명(延嘉七. 年銘)금동여래입상이다. 이 금동불은 서기 539년에 고구려의 동사(東寺)라는 절에서.",
+      "source": "web"
+    },
+    {
+      "title": "범종",
+      "url": "https://www.fnmk.org/page/data/file/news_magazine_en/168483581_e7Tv3KIl_9ec3cf13c0dd91a24964b639f02b596867f45933.pdf",
+      "date": null,
+      "last_updated": "2025-11-28",
+      "snippet": "고구려 스님에 의해 신라에 전래된 연가7년명 금동여래입상은 고구려인의 기상을 고스란히 전해준. 다, 한국적인 정서와 미감의 응결체나 다름없다, ( ). Page 20. 20 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 928,
+    "completion_tokens": 844,
+    "total_tokens": 1772
+  },
+  "file_size": 3030
+}

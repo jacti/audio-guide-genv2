@@ -1,0 +1,180 @@
+{
+  "playlist_name": "1130_국중박포토스팟",
+  "description": "국중박에서 꼭 들러야 하는 필수 스팟만 모은 핵심 투어 가이드 (사진 명소 + 국보/보물 포함)",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "guide",
+      "museum",
+      "photo_spot",
+      "seoul",
+      "treasure"
+    ],
+    "created_date": "2025-11-29"
+  },
+  "started_at": "2025-11-30T14:25:21.781412",
+  "completed_at": "2025-11-30T15:01:58.271638",
+  "duration_seconds": 2196.49,
+  "total_files": 13,
+  "successful": 13,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "00_intro",
+      "started_at": "2025-11-30T14:25:21.781418",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/00_intro.mp3",
+      "completed_at": "2025-11-30T14:27:45.188466"
+    },
+    {
+      "output_name": "01_namsan_tower_view",
+      "started_at": "2025-11-30T14:27:45.188503",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/01_namsan_tower_view.mp3",
+      "completed_at": "2025-11-30T14:30:22.756120"
+    },
+    {
+      "output_name": "02_gangseodaemyo_mural",
+      "started_at": "2025-11-30T14:30:22.756153",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/02_gangseodaemyo_mural.mp3",
+      "completed_at": "2025-11-30T14:33:49.518956"
+    },
+    {
+      "output_name": "03_silla_gold_crown",
+      "started_at": "2025-11-30T14:33:49.518987",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/03_silla_gold_crown.mp3",
+      "completed_at": "2025-11-30T14:37:28.100722"
+    },
+    {
+      "output_name": "04_silla_jinheungwang_monument",
+      "started_at": "2025-11-30T14:37:28.100755",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/04_silla_jinheungwang_monument.mp3",
+      "completed_at": "2025-11-30T14:39:52.626885"
+    },
+    {
+      "output_name": "05_gyeongcheonsa_pagoda",
+      "started_at": "2025-11-30T14:39:52.626931",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/05_gyeongcheonsa_pagoda.mp3",
+      "completed_at": "2025-11-30T14:42:25.147267"
+    },
+    {
+      "output_name": "06_unified_silla_iron_buddha",
+      "started_at": "2025-11-30T14:42:25.147296",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/06_unified_silla_iron_buddha.mp3",
+      "completed_at": "2025-11-30T14:46:19.206807"
+    },
+    {
+      "output_name": "07_room_of_quiet_contemplation",
+      "started_at": "2025-11-30T14:46:19.206841",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/07_room_of_quiet_contemplation.mp3",
+      "completed_at": "2025-11-30T14:49:09.914987"
+    },
+    {
+      "output_name": "08_uigwe",
+      "started_at": "2025-11-30T14:49:09.915020",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/08_uigwe.mp3",
+      "completed_at": "2025-11-30T14:51:22.943257"
+    },
+    {
+      "output_name": "09_ceramics_gallery",
+      "started_at": "2025-11-30T14:51:22.943294",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/09_ceramics_gallery.mp3",
+      "completed_at": "2025-11-30T14:54:11.936814"
+    },
+    {
+      "output_name": "10_muse_shop",
+      "started_at": "2025-11-30T14:54:11.936847",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/10_muse_shop.mp3",
+      "completed_at": "2025-11-30T14:56:55.793762"
+    },
+    {
+      "output_name": "11_bosingak_bell",
+      "started_at": "2025-11-30T14:56:55.793790",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/11_bosingak_bell.mp3",
+      "completed_at": "2025-11-30T14:59:56.812222"
+    },
+    {
+      "output_name": "12_closing",
+      "started_at": "2025-11-30T14:59:56.812254",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_국중박포토스팟/audio/12_closing.mp3",
+      "completed_at": "2025-11-30T15:01:58.271613"
+    }
+  ]
+}

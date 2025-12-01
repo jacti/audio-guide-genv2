@@ -1,0 +1,9 @@
+{
+  "output_name": "05_neolithic_gosanri_pottery",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:54:16.439324",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 745868
+}

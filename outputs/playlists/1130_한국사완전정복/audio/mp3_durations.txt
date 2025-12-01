@@ -1,0 +1,22 @@
+00_intro.mp3: 108.48초
+01_prehistory_ancient_hall.mp3: 180.70초
+02_paleolithic_handaxe.mp3: 172.97초
+03_paleolithic_hominid.mp3: 226.37초
+04_neolithic_needle_spindle.mp3: 145.25초
+05_neolithic_gosanri_pottery.mp3: 186.41초
+06_neolithic_gadeokdo_bones.mp3: 185.74초
+07_bronze_plain_pottery.mp3: 173.40초
+08_bronze_farming_tool.mp3: 194.14초
+09_gojoseon_bronze_dagger.mp3: 210.29초
+10_gojoseon_wooden_coffin.mp3: 198.94초
+11_goguryeo_gilt_bronze_crown.mp3: 177.82초
+12_goguryeo_roof_tile.mp3: 147.60초
+13_goguryeo_gwanggaeto_stele.mp3: 181.44초
+14_goguryeo_scale_armor.mp3: 195.96초
+15_goguryeo_buddha_statue.mp3: 191.09초
+16_baekje_chimi.mp3: 196.44초
+17_baekje_crown_ornament.mp3: 127.97초
+18_baekje_incense_burner.mp3: 246.58초
+19_gaya_iron_ingot.mp3: 143.26초
+
+총 길이: 3590.81초 (59.85분)

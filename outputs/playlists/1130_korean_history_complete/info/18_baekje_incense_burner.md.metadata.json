@@ -1,0 +1,65 @@
+{
+  "output_name": "18_baekje_incense_burner",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:23:46.372465",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백제 금동대향로]\n백제 금동대향로 구조 분석 (용, 봉황, 신선, 악사).\n불교와 도교 사상의 조화.\n백제 금속 공예 최고의 걸작으로서의 예술성.\n부여 능산리 절터 발굴 스토리.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=27092\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국보 제287호 백제금동대향로 특별보급 안내 말씀 ...",
+      "url": "http://kntga.or.kr/bbs/board.php?bo_table=notice&wr_id=387",
+      "date": null,
+      "last_updated": null,
+      "snippet": "여기에서 우리는 백제인들의 정신 속에서 불교의 이상세계와 도교의 이상세계가 하나로 일체화된 모습을 볼 수 있다. 백제금동향로는 실로 인도의 불교와 ...",
+      "source": "web"
+    },
+    {
+      "title": "[노중국 교수의 소프트파워 강국 백제의 비밀]백제금동대향로",
+      "url": "https://www.donga.com/news/Culture/article/all/20150223/69745339/1",
+      "date": "2015-02-23",
+      "last_updated": "2025-07-14",
+      "snippet": "이런 성왕을 기린 백제금동대향로인 만큼 유·불·도가 각기 특색을 드러내면서도 서로 조화를 이룬 모습이 예술적으로 잘 표현돼 있다. 힘차게 고개를 쳐든 ...",
+      "source": "web"
+    },
+    {
+      "title": "백제금동대향로(百濟金銅大香爐) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0024394",
+      "date": "2022-12-22",
+      "last_updated": "2025-10-24",
+      "snippet": "백제금동대향로(百濟金銅大香爐)는 충청남도 부여군 능산리 절터에서 출토된 백제의 향로이다. 7세기 전반에 제작된 것이다. 동체를 연꽃봉오리로, 뚜껑은 산 모양으로 ...",
+      "source": "web"
+    },
+    {
+      "title": "백제금동대향로, 세계에는 누가 살고 있을까? | 탐구해요 | 모두",
+      "url": "https://modu.museum.go.kr/explore/video/20064",
+      "date": "2022-04-29",
+      "last_updated": "2025-10-27",
+      "snippet": "백제금동대향로는 용 모양의 향로 받침, 연꽃이 새겨진 향로의 몸체, 산악모양으로 솟은 향로 뚜껑, 뚜껑 위의 봉황 장식, 이렇게 네 부분으로 나뉘어 있는데요. 향로의 ...",
+      "source": "web"
+    },
+    {
+      "title": "백제금동대향로에 나타난 문양의 기호학적 연구 - 백제역사유적지구 ...",
+      "url": "http://archive.baekje-heritage.or.kr/site/kr/html/sub2/020101.html?mode=V&card_id=3372",
+      "date": null,
+      "last_updated": null,
+      "snippet": "백제금동대향로에 나타난 문양의 기호학적 연구 ; 분류 기타 > ; 권호수 제8권 제4호 ; 저자 이유진, 김태균 ; 발행일 2008년 10월 ; 게재지 디지털디자인학연구 ...",
+      "source": "web"
+    },
+    {
+      "title": "백제문화의 도교적 요소 - 한국고대사연구 : 논문",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE01778132",
+      "date": null,
+      "last_updated": "2025-01-07",
+      "snippet": "백제의 유물 및 유적, 문헌 자료를 분석하여 도교적 요소와 관련된 다양한 자료를 재조명하고, 고고학적 발굴 결과를 포함한 실증적 접근 방식을 채택하였다. 연구 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 931,
+    "completion_tokens": 2772,
+    "total_tokens": 3703
+  },
+  "file_size": 9706
+}

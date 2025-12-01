@@ -1,0 +1,73 @@
+{
+  "output_name": "34_joseon_king_chair",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:54:32.909919",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 근정전 어좌]\n경복궁 근정전 어좌(용상) 및 일월오봉도.\n왕의 권위와 통치 이념 상징.\n일월오봉도의 해, 달, 산, 물, 소나무의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040300.do?schM=view&showHallId=759&relicId=16224\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "경복궁 근정전",
+      "url": "https://namu.wiki/w/%EA%B2%BD%EB%B3%B5%EA%B6%81%20%EA%B7%BC%EC%A0%95%EC%A0%84",
+      "date": "2025-11-01",
+      "last_updated": "2025-11-09",
+      "snippet": "2단 짜리 석축기단 위에 정면 5칸, 측면 5칸의 2층 전각이다. 지붕은 팔작지붕, 처마는 겹처마, 공포는 다포 양식이며 기둥은 원형이다. 용마루와 내림 ...",
+      "source": "web"
+    },
+    {
+      "title": "경복궁 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B2%BD%EB%B3%B5%EA%B6%81",
+      "date": "2004-09-17",
+      "last_updated": "2025-11-28",
+      "snippet": "근정문은 정전인 근정전의 정문으로 정면 3칸, 좌우로 각각 1칸씩의 옆문을 배치한 중층 구조로 되어 있다. 보물 제812호로 지정되어 있다. 근정문과 행각은 고종 4년( ...",
+      "source": "web"
+    },
+    {
+      "title": "국가유산별 < 원형 데이터 < 국가유산 디지털 서비스",
+      "url": "https://digital.khs.go.kr/heri/heriDetail.do?ctptUid=13898859672764200589&ctptNo=1121117590000",
+      "date": "2012-03-02",
+      "last_updated": "2025-08-29",
+      "snippet": "바닥은 우물마루에 내부칸막이 시설 없이 하나의 공간이지만 중앙에 어좌를 설치하기 위한 2개 고주를 세워 상부에 벽화가 있는 벽체가 구성되어 있다. 사정전은 왕이 평소 ...",
+      "source": "web"
+    },
+    {
+      "title": "19화 경복궁의 변천사",
+      "url": "https://brunch.co.kr/@58164f28c2d943d/57",
+      "date": "2025-05-22",
+      "last_updated": "2025-08-22",
+      "snippet": "내부 바닥은 전돌을 깔았고, 북쪽 가운데에 왕의 자리인 어좌를 설치하였다. 근정전 계단에 만들어진 각종 동물상. 어좌 뒤에는 왕권을 상징하는 해와 ...",
+      "source": "web"
+    },
+    {
+      "title": "『조선고적도보』로 보는 경복궁(景福宮)의 옛 모습 - Daum 카페",
+      "url": "https://cafe.daum.net/64woori/9rr2/1077",
+      "date": null,
+      "last_updated": null,
+      "snippet": "근정문은 궁궐의 법전(정전) 정문 가운데 유일하게 중층으로 된 건물이다. 정면 3간 측면 2간의 겹처마 다포계 양식에 우진각 지붕이다. 근정전과 ...",
+      "source": "web"
+    },
+    {
+      "title": "국보 경복궁 근정전 (景福宮 勤政殿)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111102230000",
+      "date": "2019-09-24",
+      "last_updated": "2025-09-30",
+      "snippet": "지붕 처마를 받치기 위해 장식하여 짜여진 구조가 기둥 위뿐만 아니라 기둥 사이에도 있는 다포식 건물이며 그 형태가 화려한 모습을 띠고 있다. 건물의 기단인 월대의 ...",
+      "source": "web"
+    },
+    {
+      "title": "닫집",
+      "url": "http://webzine.idaesoon.or.kr/board/readcnt.asp?bno=8902&win=new",
+      "date": "2019-05-02",
+      "last_updated": "2025-09-10",
+      "snippet": "△ 어좌(용상). 당가의 구조는 기단인 좌탑과 지붕에 해당하는 천개로 구성된다. 당가의 기단인 좌탑에는 임금이 앉아 정무를 보던 용상, 용상의 등받이인 등널, 등널의 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1375,
+    "total_tokens": 2290
+  },
+  "file_size": 4926
+}

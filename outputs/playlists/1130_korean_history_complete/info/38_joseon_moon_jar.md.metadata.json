@@ -1,0 +1,81 @@
+{
+  "output_name": "38_joseon_moon_jar",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:05:45.089952",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백자 달항아리]\n조선 백자 달항아리(백자대호) 특징.\n비대칭의 미학 (일그러진 원의 아름다움).\n조선 선비의 청렴함과 검소함을 담은 미의식.\n현대 미술가(김환기 등)들이 사랑한 이유.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=27894\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "백자 달항아리(白瓷 달缸아리) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069125",
+      "date": "2007-01-01",
+      "last_updated": "2025-09-12",
+      "snippet": "유백색 주1의 유조에 높이 44㎝, 몸통 지름이 42㎝에 달하는 대형의 항아리로 몸통의 둥근 곡선과 풍만한 형태가 마치 둥근 달과 같아 달항아리라고 부른다.",
+      "source": "web"
+    },
+    {
+      "title": "백자 달항아리(白瓷 달缸아리) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069104",
+      "date": "2005-01-01",
+      "last_updated": "2025-09-01",
+      "snippet": "사선 각도로 벌어진 구연과 단정하고 부드러운 둥근 형태를 가진 이 항아리는 17세기 후반부터 18세기 전반에 경기도 광주의 분원관요(分院官窯)에서 만든 것으로 추정된 ...",
+      "source": "web"
+    },
+    {
+      "title": "'달항아리'에 대해서",
+      "url": "https://brunch.co.kr/@ratm820309n85i/332",
+      "date": "2022-11-28",
+      "last_updated": "2025-10-24",
+      "snippet": "커다란 백자 항아리 양식으로, 조선 시대 백자의 특징인 온화한 백색과 유려한 곡선, 넉넉하고 꾸밈없는 형태를 고루 갖추어진 항아리로 인정받는다.",
+      "source": "web"
+    },
+    {
+      "title": "백자 달항아리 (r29 판)",
+      "url": "https://namu.wiki/w/%EB%B0%B1%EC%9E%90%20%EB%8B%AC%ED%95%AD%EC%95%84%EB%A6%AC?rev=29",
+      "date": null,
+      "last_updated": null,
+      "snippet": "조선시대 백자의 특징인 온화한 백색과 유려한 곡선, 넉넉하고 꾸밈없는 형태를 고루 갖추어진 항아리로 백자호(국보 제261호)와 비교되는 대표적인 백자 항아리이다.",
+      "source": "web"
+    },
+    {
+      "title": "[도재기의 천년향기](3) 보름달 품은 달항아리(하)",
+      "url": "https://www.khan.co.kr/article/201802231701005",
+      "date": "2018-02-23",
+      "last_updated": "2025-09-11",
+      "snippet": "... '백자 달항아리'는 조선 후기에 등장, 수십년 만에 홀연히 자취를 감췄다 ... 달항아리의 특징 중 하나다. 성형은 완성품보다 10~20% 크게 ...",
+      "source": "web"
+    },
+    {
+      "title": "우리의 山河와 心性같은 백자달항아리",
+      "url": "http://hanja-edu.com/9909_month/43.htm",
+      "date": null,
+      "last_updated": null,
+      "snippet": "朝鮮 後期(조선 후기)의 항아리는 큰 것은 입이 조금 높게 만들어졌으며 그 형태는 타원형이 많으며, 작은 항아리는 몸체가 둥글고 색택은 푸르름이 감돈다. 내가 특히 ...",
+      "source": "web"
+    },
+    {
+      "title": "우리가 갖고 싶은 달항아리, 그것은 어쩌면 새로운 항아리",
+      "url": "https://www.arte.co.kr/art/theme/5254",
+      "date": "2024-06-18",
+      "last_updated": "2025-09-17",
+      "snippet": "지난 리움미술관이 열었던 <조선의 백자, 군자지향>도 성황을 이뤘다. 달항아리가 '재복(財福)을 불러오는 아이템'이라는 속설이 항간에 퍼지면서 달 ...",
+      "source": "web"
+    },
+    {
+      "title": "국보 백자 유개항아리 (白磁 有蓋壺)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?VdkVgwKey=11%2C02610000%2C11&pageNo=5_1_1_0",
+      "date": null,
+      "last_updated": null,
+      "snippet": "조선시대 만들어진 백자 항아리로 큰 항아리와 작은 항아리 두개가 있다. 큰 ... 백자 달항아리(1991). 목록. 만족도조사. 유용한 정보가 되셨나요? 만족도조사선택.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 936,
+    "completion_tokens": 1634,
+    "total_tokens": 2570
+  },
+  "file_size": 5934
+}

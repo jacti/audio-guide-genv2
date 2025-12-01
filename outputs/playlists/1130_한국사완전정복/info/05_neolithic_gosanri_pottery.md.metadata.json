@@ -1,0 +1,65 @@
+{
+  "output_name": "05_neolithic_gosanri_pottery",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:51:39.655718",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 고산리식 토기]\n제주 고산리식 토기 특징 (우리나라 가장 오래된 토기).\n식물 줄기를 섞어 만든 제작 기법.\n토기의 발명이 식생활에 미친 영향.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29856\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "토기의 발전과 선사시대 제주 농업",
+      "url": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=366085",
+      "date": null,
+      "last_updated": "2025-03-26",
+      "snippet": "1987년 발굴된 고산리식 토기는 우리나라에서 고산리 유적에서만 출토되는 특징적인 토기이기 때문에 고산리식 토기(원시 무문 토기)로 불려진다. 이 ...",
+      "source": "web"
+    },
+    {
+      "title": "고산리식 토기",
+      "url": "http://gosanriyujeok.co.kr/earthenware",
+      "date": "2018-11-07",
+      "last_updated": "2025-09-08",
+      "snippet": "토기의 특징은 평저이고 태토에 식물성 섬유질이 포함되어 있으며 내․외면 융기문이 시문된 것을 특징으로 하는 문양계통이나 원공문토기, 회전압날문, 압형무늬 기법도 ...",
+      "source": "web"
+    },
+    {
+      "title": "제주옹기 > 제주옹기란 > 역사",
+      "url": "http://jejuonggi.com/history1",
+      "date": "2021-09-23",
+      "last_updated": "2024-10-22",
+      "snippet": "고산리출토 원시무문토기는 한반도 최고의 토기로 지금까지 우리나라 신석기 유적에서는 발견된 바 없다. 북촌리 유적에서는 구연부에 1열 ~ 4열의 삼각형 또는 원형 점렬 ...",
+      "source": "web"
+    },
+    {
+      "title": "토기의 제작 - 제주의 역사",
+      "url": "http://www.ormstory.kr/index.php?mid=jeju_his&document_srl=1577",
+      "date": null,
+      "last_updated": null,
+      "snippet": "제주도에서 최초로 출현하는 토기는 고산리유적에서 출토된 소위 고산리식 원시무문토기와 융기문토기가 있다. 고산리식 원시무문토기는 태토에 가는 풀잎 ...",
+      "source": "web"
+    },
+    {
+      "title": "[문화재의 뒤안길] '고산리식 토기' 국내 最古 신석기 ...",
+      "url": "https://www.sedaily.com/NewsView/1YYUUZA0EU",
+      "date": null,
+      "last_updated": null,
+      "snippet": "제주시 한경면 수월봉 앞 해안단구 대지에 넓게 형성된 사적 제412호 제주 고산리 유적에서 처음 발견돼 출토지의 이름이 붙은 토기 형식이다. 후기 ...",
+      "source": "web"
+    },
+    {
+      "title": "신석기시대(新石器時代) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0033063",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "... 제주 고산리 유적의 유기질혼입토기[고산리식토기]이다. 한반도를 제외한 동아시아 지역에 서기전 15000년~서기전 10000년의 연대를 갖는 고식 토기가 분포하는 점을 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 912,
+    "completion_tokens": 1608,
+    "total_tokens": 2520
+  },
+  "file_size": 5501
+}

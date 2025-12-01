@@ -1,0 +1,9 @@
+{
+  "output_name": "31_goryeo_seated_bodhisattva",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:45:59.208601",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 한쪽 다리를 세우고 편안하게 앉아 있는 보살상의 독특한 자세(유희좌)에 주목하게 하세요.\n2. 고려 불화에서 튀어나온 듯한 화려하고 우아한 자태를 묘사하며, 귀족적인 고려 불교 미술의 특징을 설명하세요.\n",
+  "file_size": 3396
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "20_gaya_armor_helm",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:36:00.859860",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 고구려의 비늘 갑옷과 달리 큼직한 철판을 못으로 박아 만든 가야 판갑옷의 차별점을 설명하세요.\n2. 세련된 디자인의 투구와 갑옷 세트를 보며 가야 전사들의 모습을 시각화해 주세요.\n",
+  "file_size": 3874
+}

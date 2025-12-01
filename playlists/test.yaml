@@ -4,8 +4,9 @@
 # 사용법:
 #   python -m src.batch_runner --playlist-file playlists/test.yaml
 
-playlist_name: "test_sample_playlist"
+playlist_title: "테스트 샘플 플레이리스트"
 description: "단일 파일 테스트용 플레이리스트"
+playlist_output_dir_name: "test_sample_playlist"
 
 # 공통 설정
 defaults:

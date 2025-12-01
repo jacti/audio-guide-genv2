@@ -1,0 +1,65 @@
+{
+  "output_name": "01_namsan_tower_view",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:28:03.453508",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 남산타워 전망]\n국립중앙박물관 입구에서 남산타워가 잘 보이는 전망 포인트.\n사진 명소로 유명함.\n어느 시간대가 아름다운지 검색(특히 노을).\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[QUIZ] 현대건설 랜드마크 실루엣을 맞춰라!",
+      "url": "https://www.hdec.kr/kr/newsroom/news_view.aspx?NewsSeq=1339&NewsType=JOURNAL&NewsListType=news_list",
+      "date": null,
+      "last_updated": null,
+      "snippet": "일반적으로 타워 구조물은 중간 탑이 길고 철탑이 짧은 형태가 많지만, N서울타워는 전망대와 철탑 구조가 101m에 달해 전체 높이의 약 절반을 차지합니다 ...",
+      "source": "web"
+    },
+    {
+      "title": "남산서울타워",
+      "url": "https://namu.wiki/w/%EB%82%A8%EC%82%B0%EC%84%9C%EC%9A%B8%ED%83%80%EC%9B%8C",
+      "date": "2025-10-30",
+      "last_updated": "2025-10-31",
+      "snippet": "서울특별시 용산구 남산에 있는 송신탑이자 서울을 대표하는 랜드마크로서 세계타워연맹(WFGT)에 가입되어 있다. ... 탑 자체의 높이는 236.7m로, 일반적인 랜드마크 구조물 ...",
+      "source": "web"
+    },
+    {
+      "title": "현대 하이테크 건축의 선두주자, 노먼 포스터",
+      "url": "https://www.midascad.com/cad_archive/architect-norman-foster",
+      "date": "2022-11-01",
+      "last_updated": "2025-09-29",
+      "snippet": "4개 층에 걸쳐 반복된 삼각형의 구조는 건축물의 안쪽과 바깥쪽으로 경사져 있는데 그 경사를 통해 들어오는 자연광은 노먼 포스터 건축물의 특징으로 ...",
+      "source": "web"
+    },
+    {
+      "title": "롯데월드타워 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%ED%83%80%EC%9B%8C",
+      "date": "2011-06-26",
+      "last_updated": "2025-11-29",
+      "snippet": "최상층 높이: 497.65m이다. 건축물 높이: 555.65m이다. 최고층 전망대 높이: 497.65m이다. 지상 123층에 위치한 서울스카이의 높이다.",
+      "source": "web"
+    },
+    {
+      "title": "G타워 | 건축상",
+      "url": "https://www.aurum.re.kr/Bits/BuildingDoc.aspx?mm=4&ss=1&num=5128",
+      "date": "2021-09-16",
+      "last_updated": "2024-12-19",
+      "snippet": "서울특별시건축상 · 부산다운 ... 디자인되었다. 6개 층에 달하는 4개의 아트리움과 25M 깊이 역경사의 하늘정원은 과감하고 독창적인 요소로 건물의 특징을 좌우한다.",
+      "source": "web"
+    },
+    {
+      "title": "전면 광고",
+      "url": "http://peoples-architecture.cn/storage/app/uploads/public/5ad/d4a/d9a/5add4ad9a1492796006043.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "세계 5위의 초고층 빌딩인데타의 마무리되어 본격적인 시장에 들어갔다. 그 규모는 지하 6층, 지상 123 구도에 355m 123층위를 포함해 연면적 30만5,872.45㎡에 총 5개 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 878,
+    "completion_tokens": 1108,
+    "total_tokens": 1986
+  },
+  "file_size": 3890
+}

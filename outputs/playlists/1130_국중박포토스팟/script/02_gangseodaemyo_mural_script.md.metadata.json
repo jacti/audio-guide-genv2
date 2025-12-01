@@ -1,0 +1,9 @@
+{
+  "output_name": "02_gangseodaemyo_mural",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:31:16.499318",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 사진 명소 특성을 강조해 생생한 시각적 묘사 중심으로 설명해주세요.\n2. 네 사신을 시각적으로 떠올릴 수 있게 묘사하고, 고구려 벽화의 역동성을 전달해주세요.\n",
+  "file_size": 4080
+}

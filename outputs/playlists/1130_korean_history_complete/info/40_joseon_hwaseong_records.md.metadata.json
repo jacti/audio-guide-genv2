@@ -1,0 +1,81 @@
+{
+  "output_name": "40_joseon_hwaseong_records",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:11:39.425156",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 화성성역의궤]\n수원 화성 축조 과정을 기록한 화성성역의궤.\n기록의 나라 조선: 못 하나 가격까지 적은 치밀함.\n의궤 덕분에 가능했던 수원 화성의 완벽한 복원.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=12798\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[한국문화100]고구려 고분벽화를 통해 본 고구려인의 삶",
+      "url": "https://culture.go.kr/culturetv/culture100List.do?cPage=5&sWord=%EA%B0%A4%EB%9F%AC%EB%A6%AC&service_Wordid=&idx=3313",
+      "date": null,
+      "last_updated": null,
+      "snippet": "그 이유는 바로 조선시대 수원화성의 축조를 기록한 화성성역의궤의 기술적 정밀함 때문이다. ... 재질, 연주법과 같은 것들이 매우 독특하고 독창적이고 우리나라만 ...",
+      "source": "web"
+    },
+    {
+      "title": "저작자표시-비영리-변경금지 - dCollection",
+      "url": "https://dcollection.korea.ac.kr/common/orgView/000000279777",
+      "date": null,
+      "last_updated": null,
+      "snippet": "명유에 투입되는 재료의 양은 의궤에 따라 다양한 편차를 보이고 있지만. 17 ... 『화성성역의궤 건축 용어집』. 2007. 국립문화재연구소.『칠장 중요무형문화재 ...",
+      "source": "web"
+    },
+    {
+      "title": "수원화성 수리백서. 2000-2013",
+      "url": "https://memory.library.kr/files/original/6804c3117408a79bde0591ae34bd5e89.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "수원화성의 성곽은 성벽과 여장으로 되어 있고, 목조건축물과 성곽이 조화를. 이뤄 건축적인 아름다움까지 갖추고 있습나다. 하지만 목조건축의 부재와 성벽. 여장부분의 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국 전통 건축물 보존에서 발견된 옛 건축 도면 해석과 복원 활용",
+      "url": "https://blueberrycomposer.com/72",
+      "date": null,
+      "last_updated": null,
+      "snippet": "대표적인 예로 조선 후기의 '수원 화성 성역 의궤(華城城役儀軌)'에는 화성 축성 당시의 각종 도면, 재료 내용, 인력 구성, 공정 순서까지 상세히 기록되어 있습니다.",
+      "source": "web"
+    },
+    {
+      "title": "기사진표리진찬의궤 영상 미디어 개발 및 사용성 평가에 관한 ...",
+      "url": "http://journal.dcs.or.kr/_PR/view/?aidx=24177&bidx=1985",
+      "date": "2020-01-01",
+      "last_updated": "2025-04-18",
+      "snippet": "천연 염료와 지류를 사용한 이 의궤는 보존을 목적으로 빛으로부터 차단되어 수장고에서 보관됨에 따라, 대중의 이용접근성과 연구 목적의 활용이 제약되었다. 국립국악원 ...",
+      "source": "web"
+    },
+    {
+      "title": "가야인의 技術",
+      "url": "https://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00444.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "『화성성역의궤』는 1801년에 간행된 수원 화성 축성의 전 과정을 기. 록한 책이다 ... 잘 알려진 것처럼 두 가마의 구조 차이는 소성되는 토기의 재질과. 직접적 ...",
+      "source": "web"
+    },
+    {
+      "title": "00",
+      "url": "https://khs.go.kr/cmm/fms/BoardFileDown.do;jsessionid=pA1ZgeragmhzInWV78d5DnFPgU0xZ1oCSUlyNuBqXQUrRUvDl9DK5uRRsg1vrUVA.cha-was01_servlet_engine1?atchFileId=FILE_000000000001229&fileSn=1&dwldHistYn=N&bbsId=BBSMSTR_1019",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 화성」내 방화수류정에 대한 국가지정문화재(보물) 지정 신청 사항을 부의하오니 ... 재질 : 목조 와가 ㅇ 수량 : 1동 ㅇ 형식 : 팔작지붕 ㅇ 지정구역 : 1필지 ...",
+      "source": "web"
+    },
+    {
+      "title": "「조선왕조의궤」유네스코 세계기록유산 등재 기념 「 ...",
+      "url": "https://m.korea.kr/expertWeb/resources/files/data/document_file/2007/%EC%A1%B0%EC%84%A0%EC%99%95%EC%A1%B0%EA%B8%B0%EB%A1%9D%EB%AC%B8%ED%99%94%EC%9D%98%EA%BD%83%EC%9D%98%EA%B6%A4.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "경기문화재단, 2007, 『화성성역의궤 건축용어집』. Page 129. 발행일. | 2007년 10월. 기획∙발간 | 문화재청 동산문화재과. 제작∙디자인 | 리드릭(02-2269-1919). 題字 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 925,
+    "completion_tokens": 884,
+    "total_tokens": 1809
+  },
+  "file_size": 3221
+}

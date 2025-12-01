@@ -1,0 +1,9 @@
+{
+  "output_name": "02_paleolithic_handaxe",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:45:45.486475",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 692108
+}

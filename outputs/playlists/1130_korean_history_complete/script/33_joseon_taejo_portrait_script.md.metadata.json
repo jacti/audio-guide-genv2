@@ -1,0 +1,9 @@
+{
+  "output_name": "33_joseon_taejo_portrait",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:52:05.281692",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 조선을 건국한 태조 이성계의 초상화 앞에 섰음을 알리세요.\n2. 우리가 흔히 아는 붉은 옷이 아닌 '푸른색 곤룡포'를 입은 이유를 설명하고, 늙었지만 강인해 보이는 무인의 풍모를 묘사하세요.\n",
+  "file_size": 3096
+}

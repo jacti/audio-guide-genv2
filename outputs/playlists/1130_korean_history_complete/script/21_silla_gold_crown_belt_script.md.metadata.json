@@ -1,0 +1,9 @@
+{
+  "output_name": "21_silla_gold_crown_belt",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:15:37.818357",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 눈부시게 빛나는 '황금의 나라' 신라실의 하이라이트, 금관을 소개하세요.\n2. 나뭇가지와 사슴뿔 모양의 장식이 상징하는 의미(샤머니즘, 하늘과의 연결)를 설명하세요.\n3. 바람이 불면 달린 옥들이 영롱한 소리를 냈을 것이라는 감각적인 묘사를 더해주세요.\n",
+  "file_size": 4174
+}

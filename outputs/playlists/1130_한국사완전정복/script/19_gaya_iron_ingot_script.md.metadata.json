@@ -1,0 +1,9 @@
+{
+  "output_name": "19_gaya_iron_ingot",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:33:55.880796",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 마치 선인장이나 가시덤불처럼 생긴 독특한 철기 '미늘쇠'의 생김새를 묘사하세요.\n2. 무기가 아니라 권위를 나타내는 의식용 도구였음을 설명하고, 철을 자유자재로 다루던 '철의 왕국' 가야의 기술력을 칭찬하세요.\n",
+  "file_size": 2762
+}

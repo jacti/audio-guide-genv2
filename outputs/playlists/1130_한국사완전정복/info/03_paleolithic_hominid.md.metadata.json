@@ -1,0 +1,57 @@
+{
+  "output_name": "03_paleolithic_hominid",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:46:06.900361",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 구석기 고인류]\n한반도 출토 구석기 시대 인골/화석.\n국립중앙박물관 전시실 내 인류 진화 모형.\n흥수아이 등 대표적인 고인류 화석의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "땅딸막한 인류에서 오늘까지 진화 한눈에…'호모 사피엔스'전",
+      "url": "https://www.hani.co.kr/arti/culture/music/998687.html",
+      "date": "2021-06-09",
+      "last_updated": "2025-10-29",
+      "snippet": "인류 옛 조상의 용모와 덩치를 모두 망라해 보여주는 28종의 원시인류 인골 화석들이 서울 용산 국립중앙박물관 기획전시실에 들어찼다. 지난달 중순 ...",
+      "source": "web"
+    },
+    {
+      "title": "21세기 박물관이 그려낸 500만 년의 인류 진화",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=14605",
+      "date": null,
+      "last_updated": null,
+      "snippet": "시간과 공간을 뛰어넘은 상상력을 가진 고인류의 자손이 바로 우리다. 인류의 진화를 21세기의 메시지로 그려낸 국립중앙박물관에 박수를 보낸다. 전시 유리장 안 손 닿을 ...",
+      "source": "web"
+    },
+    {
+      "title": "인류 진화 700만년, 생존의 비밀 품은 동굴 속으로…",
+      "url": "https://www1.seoul.co.kr/news/life/exhibition/2021/06/24/20210624025004",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국립중앙박물관 기획전 '호모사피엔스: 진화∞ 관계& 미래?'는 동굴처럼 꾸민 공간에서 동굴벽화를 영상으로 재현하는 등 다양한 전시 기법을 활용해 ...",
+      "source": "web"
+    },
+    {
+      "title": "인류는 어떻게 진화해 지금에 이르렀을까? - 에코저널",
+      "url": "https://ecojournal.co.kr/m/view.php?idx=132053",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이번 전시품은 매머드 삼차원 프린팅, 삼차원 모션 캡처 영상물 등을 포함해 우리나라에서 최초로 공개하는 '호모 날레디(남아프리카공화국에서 발견된 약 250~300만년 ...",
+      "source": "web"
+    },
+    {
+      "title": "전곡선사박물관, 한 여름의 휴식같은 기획전시 2종 동시 개막 ...",
+      "url": "https://www.ggcf.kr/boards/press%20reports/articles/16239",
+      "date": null,
+      "last_updated": null,
+      "snippet": "먼저 만나볼 수 있는 '인류 진화사의 중요 사건들'은 직립보행, 도구와 언어, 예술 등 인류의 주요한 9가지 주제를 몰입도 높은 영상으로 소개한다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1240,
+    "total_tokens": 2155
+  },
+  "file_size": 4488
+}

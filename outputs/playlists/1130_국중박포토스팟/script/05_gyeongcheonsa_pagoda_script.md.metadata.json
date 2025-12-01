@@ -1,0 +1,9 @@
+{
+  "output_name": "05_gyeongcheonsa_pagoda",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:40:27.434481",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[톤] 웅장·압도적.\n[지시사항]\n1. 사진 명소 특성을 강조해 1층 중앙홀에 들어섰을 때 시야를 가득 채우는 ‘압도감’을 중심으로 설명해주세요.\n2. 층층이 쌓인 조각 디테일을 따라 위로 올려다보는 경험을 묘사해주세요.\n3. 사진 촬영 시 추천 거리·각도를 제시해주세요.\n",
+  "file_size": 2837
+}

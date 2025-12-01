@@ -1,0 +1,73 @@
+{
+  "output_name": "22_silla_glass_bottle",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:18:46.655872",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 봉황머리 유리병]\n경주 황남대총 출토 봉황모양 유리병.\n서역(로마/페르시아) 유래 유리 제품.\n실크로드를 통한 신라의 국제 교류.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=88\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "경주 대릉원(사적) 황남대총, 화려한 유물들이 발굴된 무덤",
+      "url": "https://dapsa.kr/blog/?p=61069",
+      "date": "2024-03-17",
+      "last_updated": "2024-09-18",
+      "snippet": "황남대총 북분 유리잔(보물)은 높이 7 cm, 윗부분 지름 10.5 cm 크기이다. 받침에 약간 손상이 있기는 하지만 완전한 형태로 보존되어 있다. 외형이나 유리의 무늬는 한국 ...",
+      "source": "web"
+    },
+    {
+      "title": "[중앙박물관 선사.고대관] 신라, 마립간 시기",
+      "url": "https://dapsa.kr/blog/?p=130635",
+      "date": "2024-03-17",
+      "last_updated": "2024-10-03",
+      "snippet": "진남색의 유리알갱이를 위 아래로 녹여 붙여 반점무늬를 만들었다. 유리의 옅은 녹색과 짙은 코발트색의 조화가 오늘날의 미적 감각과 비교하여도 손색이 없다.형태나 장식 ...",
+      "source": "web"
+    },
+    {
+      "title": "황남대총(皇南大塚) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0065102",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-03",
+      "snippet": "그 밑에는 각종 금속용기, 칠기(漆器), 봉황머리모양병[鳳首形甁]등의 유리용기 등이 담겨 있었다. 바닥부분에는 쇠솥과 각종 토기들이 놓여 있었다. 껴묻거리 수장부 ...",
+      "source": "web"
+    },
+    {
+      "title": "究 18 國 公 館 - 국립공주박물관",
+      "url": "https://gongju.museum.go.kr/thumbnail/TRAN/040201/20230110153220_01amu9pu14xo14eikym7ttsqtg2m6f.pdf;jsessionid",
+      "date": null,
+      "last_updated": null,
+      "snippet": "경주 황남대총 출토. 전체 높이 10.4cm 국립경주박물관 소장. 시문방식 ... 병의 동체 저부가 좁아지는 특징 또한 남조시대 제작 특징. 의 하나라는 것이다.14 ...",
+      "source": "web"
+    },
+    {
+      "title": "천마총 발굴 50년, 신라고분과 경주도시의 변화 - 1편 논저",
+      "url": "https://fliphtml5.com/gyjfg/ryjq/%EC%B2%9C%EB%A7%88%EC%B4%9D_%EB%B0%9C%EA%B5%B4_50%EB%85%84,_%EC%8B%A0%EB%9D%BC%EA%B3%A0%EB%B6%84%EA%B3%BC_%EA%B2%BD%EC%A3%BC%EB%8F%84%EC%8B%9C%EC%9D%98_%EB%B3%80%ED%99%94_-_1%ED%8E%B8_%EB%85%BC%EC%A0%80/",
+      "date": "2024-02-06",
+      "last_updated": "2025-10-25",
+      "snippet": "결과를 가지고 외형이 초대형 표형쌍분인 황남대총(98호 길이 120m, 높이 22.5m)을 발굴 조사하여 내. 부구조를 비롯해 학술자료를 얻은 후, 전시공간 ...",
+      "source": "web"
+    },
+    {
+      "title": "［한국사 미스테리］(1)안압지 출토 목제男根",
+      "url": "http://www.prehistory.co.kr/data_store/hanhistory_mystery.htm",
+      "date": "2003-09-22",
+      "last_updated": "2025-11-14",
+      "snippet": "이 가운데 경주 황남대총 북분에서 발굴된 나뭇결 무늬 유리잔은 로만글라스 계통으로 실크로드를 통한 교역관계를 증명해주고 있는 훌륭한 자료로 평가되고 있다 ...",
+      "source": "web"
+    },
+    {
+      "title": "흙 속에서 - 찾은 역사",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00303.pdf",
+      "date": null,
+      "last_updated": "2024-03-07",
+      "snippet": "시대의 경우에는 공주 무령왕릉이나 경주 황남대총에서도 중국제 청동 거울이 중요 ... 주인공의 머리에 놓인 금관은 화려한 외형과 달리 매우 약하게 만들어져 있고.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 914,
+    "completion_tokens": 1036,
+    "total_tokens": 1950
+  },
+  "file_size": 3581
+}

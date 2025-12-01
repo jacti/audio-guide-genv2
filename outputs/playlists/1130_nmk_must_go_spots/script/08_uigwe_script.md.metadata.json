@@ -1,0 +1,9 @@
+{
+  "output_name": "08_uigwe",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:49:45.981580",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[톤] 세련된 톤.\n[지시사항]\n1. 사진 명소 특성을 강조해 오르세 시계처럼 인증샷 명소임을 설명해주세요.\n2. 사진 촬영 팁을 제공하고, 의궤의 ‘기록문화재’ 의미를 아주 짧게만 전달해주세요.\n",
+  "file_size": 2242
+}

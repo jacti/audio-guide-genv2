@@ -1,0 +1,57 @@
+{
+  "output_name": "03_paleolithic_hominid",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:38:37.696225",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 구석기 고인류]\n한반도 출토 구석기 시대 인골/화석.\n국립중앙박물관 전시실 내 인류 진화 모형.\n흥수아이 등 대표적인 고인류 화석의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "인류 진화 700만년, 생존의 비밀 품은 동굴 속으로…",
+      "url": "https://www1.seoul.co.kr/news/life/exhibition/2021/06/24/20210624025004",
+      "date": "2021-06-24",
+      "last_updated": "2025-11-30",
+      "snippet": "국립중앙박물관 기획전 '호모사피엔스: 진화∞ 관계& 미래?'는 동굴처럼 꾸민 공간에서 동굴벽화를 영상으로 재현하는 등 다양한 전시 기법을 활용해 ...",
+      "source": "web"
+    },
+    {
+      "title": "땅딸막한 인류에서 오늘까지 진화 한눈에…'호모 사피엔스'전",
+      "url": "https://www.hani.co.kr/arti/culture/music/998687.html",
+      "date": "2021-06-09",
+      "last_updated": "2025-10-29",
+      "snippet": "땅딸막한 인류에서 오늘까지 진화 한눈에…'호모 사피엔스'전. 세계 학계서 발굴한 용모 망라 28종 원시인류 인골 화석 전시 서울 국립중앙박물관 9월까지.",
+      "source": "web"
+    },
+    {
+      "title": "인류는 어떻게 진화해 지금에 이르렀을까? - 에코저널",
+      "url": "https://ecojournal.co.kr/m/view.php?idx=132053",
+      "date": null,
+      "last_updated": null,
+      "snippet": "【에코저널=대전】국립중앙과학관은 700만년 동안의 인류의 진화과정과 다른 생명종과의 공존 등을 살펴볼 수 있는 '호모 사피엔스 : 진화∞관계&미래?",
+      "source": "web"
+    },
+    {
+      "title": "전곡선사박물관, 한 여름의 휴식같은 기획전시 2종 동시 개막 ...",
+      "url": "https://www.ggcf.kr/boards/press%20reports/articles/16239",
+      "date": null,
+      "last_updated": null,
+      "snippet": "먼저 1층의 '고인류 체험존'에는 29종의 고인류 두개골 모형이 관람객을 맞이한다. 관람객은 사헬란트로푸스 차덴시스부터 호모 사피엔스까지 진화 ...",
+      "source": "web"
+    },
+    {
+      "title": "21세기 박물관이 그려낸 500만 년의 인류 진화",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=14605",
+      "date": null,
+      "last_updated": null,
+      "snippet": "시간과 공간을 뛰어넘은 상상력을 가진 고인류의 자손이 바로 우리다. 인류의 진화를 21세기의 메시지로 그려낸 국립중앙박물관에 박수를 보낸다. 전시 유리장 안 손 닿을 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 2199,
+    "total_tokens": 3114
+  },
+  "file_size": 7948
+}

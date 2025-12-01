@@ -36,3 +36,18 @@ python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이�
 # 단일 항목 + 병렬 모드 (필요 시)
 python -m src.batch_runner --playlist-file playlists/1130_국중박꿀팁가이드.yaml --single 05_goods_shop_muse --parallel
 ```
+
+```sh
+# start-from, end, resume
+# 22번부터 끝까지 실행
+python -m src.batch_runner --playlist-file playlists/1130_한국사완전정복.yaml --start-from 22
+
+# 마지막 성공 지점 다음부터 자동 재시작
+python -m src.batch_runner --playlist-file playlists/1130_한국사완전정복.yaml --resume
+
+# 22번부터 30번까지만 실행
+python -m src.batch_runner --playlist-file playlists/1130_한국사완전정복.yaml --start-from 22 --end 30
+
+# 재시작 + 병렬 처리 조합
+python -m src.batch_runner --playlist-file playlists/1130_한국사완전정복.yaml --resume --parallel
+```

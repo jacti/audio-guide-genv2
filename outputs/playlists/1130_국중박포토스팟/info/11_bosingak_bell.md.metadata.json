@@ -1,0 +1,81 @@
+{
+  "output_name": "11_bosingak_bell",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:57:22.697987",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 옛 보신각 동종]\n국립중앙박물관에 있는 보물 ‘옛 보신각 동종’.\n종로 보신각 터에 설치된 종은 복제품이며, 실제 예전 종로 보신각에서 사용되던 진짜 동종은 국립중앙박물관에 전시됨.\n종 표면에는 문양과 글자가 새겨져 있고, 금속 표면의 녹청과 마모가 세월의 흔적을 보여줌.\nhttps://www.heritage.go.kr/heri/cul/culSelectDetail.do?pageNo=1_1_2_0&ccbaCpno=1121100020000\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "옛 보신각 동종",
+      "url": "https://namu.wiki/w/%EC%98%9B%20%EB%B3%B4%EC%8B%A0%EA%B0%81%20%EB%8F%99%EC%A2%85",
+      "date": "2025-06-16",
+      "last_updated": "2025-10-22",
+      "snippet": "조선 세조 14년(1468)에 만든 보신각의 초대 종. 현재 국립중앙박물관에 소장 중으로 대한민국의 보물 제2호이다.",
+      "source": "web"
+    },
+    {
+      "title": "옛 보신각 동종 | 어문 - 공유마당",
+      "url": "https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=11925249&menuNo=200019",
+      "date": "2015-01-20",
+      "last_updated": "2024-12-31",
+      "snippet": "옛 보신각 동종은 1468년(세조 14)에 현재 탑골공원 자리에 있던 원각사 종으로 처음 만들어졌다. 그 후 절이 없어지게 되자 이 종은 남대문에 옮겨지고 다시 1597년(선조 ...",
+      "source": "web"
+    },
+    {
+      "title": "박물관신문 | 국립중앙박물관",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=16315",
+      "date": null,
+      "last_updated": null,
+      "snippet": "1468년(세조 14) 만들어진 옛 보신각 동종은 원각사에 걸려있다가 1619년 종로 보신각으로 옮겨져 시간을 알려주는 용도로 쓰였다. 그러나 동종의 안전을 위하여 1985년 ...",
+      "source": "web"
+    },
+    {
+      "title": "옛 보신각 동종 - Free Audio Guide",
+      "url": "https://voxtour.ai/poi?poiName=%EC%98%9B+%EB%B3%B4%EC%8B%A0%EA%B0%81+%EB%8F%99%EC%A2%85&poiId=3e3e3ef7-2623-44ae-ab27-5a3a148e321d&lang=ko-KR",
+      "date": null,
+      "last_updated": null,
+      "snippet": "옛 보신각 동종은 대한민국의 보물 제2호로 지정된 중요한 역사적 유물로, 1468년에 조선시대에 제작되었습니다. 원래는 성문을 열고 닫는 시각을 알리는 데 사용 ...",
+      "source": "web"
+    },
+    {
+      "title": "FEATURES",
+      "url": "https://m.isamtoh.com/board/view.php?bdId=features&sno=2107",
+      "date": null,
+      "last_updated": null,
+      "snippet": "보물 2호인 옛 보신각 동종은 현재 국립중앙박물관으로 옮겨져 경내에 전시되어 있다. 글 김윤미 에디터. #샘터; #월간샘터; #문화; #전시; #보신각. 비밀번호 인증. 글 ...",
+      "source": "web"
+    },
+    {
+      "title": "야외 전시",
+      "url": "https://www.museum.go.kr/site/eng/showroom/view/outdoorRelic?outdoorId=870",
+      "date": null,
+      "last_updated": null,
+      "snippet": "보신각 종. 다른명칭. 보물 옛 보신각 동종(1963), 舊普信閣 銅鍾, 普信閣鍾. 한자명칭. 舊普信閣銅鍾. 국적/시대. 한국 - 조선. 재질. 금속 - 동합금.",
+      "source": "web"
+    },
+    {
+      "title": "박물관신문 | 국립중앙박물관",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=12975",
+      "date": null,
+      "last_updated": null,
+      "snippet": "옛 보신각 동종은 무게 23t, 높이 3.4m의 가장 무거운 단위 문화재였다. 물론 '경천사지 십층 석탑'처럼 총 중량이 100t 넘는 것도 있었지만, 해체했을 경우 해체된 단위 ...",
+      "source": "web"
+    },
+    {
+      "title": "보신각동종",
+      "url": "https://m.boy2.co.kr/product/detail.html?product_no=11342&cate_no=107&display_group=1",
+      "date": null,
+      "last_updated": null,
+      "snippet": "보신각에서 기타 조선시대 보물 위해 보신각에서 아닐테고 국립중앙박물관에 새로 서울 복제품[replica]이다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 971,
+    "completion_tokens": 1695,
+    "total_tokens": 2666
+  },
+  "file_size": 5731
+}

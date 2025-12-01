@@ -1,5 +1,6 @@
-playlist_name: "국립중앙박물관_한국사_완전정복_v2"
+playlist_title: "국립중앙박물관 한국사 완전정복 v2"
 description: "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드"
+playlist_output_dir_name: "national_museum_korean_history_v2"
 
 metadata:
   author: "국립중앙박물관"

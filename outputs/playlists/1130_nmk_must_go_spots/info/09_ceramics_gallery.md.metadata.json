@@ -1,0 +1,73 @@
+{
+  "output_name": "09_ceramics_gallery",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:51:44.985400",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 도자공예실]\n국립중앙박물관 2층 도자공예실.\n분청사기·백자 등 다양한 도자 전시.\n부드러운 조명과 색감 덕분에 촬영 명소.\n카메라 휴대폰 촬영 팁.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[사유의 방] - 국립중앙박물관 2층 - 개인 소풍 앨범",
+      "url": "https://cafe.daum.net/withandfree/D1QH/2610?q=%ED%95%9C+%EC%BD%94+%EC%9D%BC+%EB%B8%94%EB%A1%9C%ED%8D%BC+3%EC%83%89+%EC%97%AC%EC%84%B1%EC%9A%A9",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 디지털 실감영상관1] 위치도. 서울 국립중앙박물관 2층 사유의 방 위치도. 서울 국립중앙박물관 3층 도자공예실(분청사기&백자&청자) 위치도. 다음검색.",
+      "source": "web"
+    },
+    {
+      "title": "분청사기-백자실 - 공예관>도자공예",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201080100.do?showHallId=757&showroomCode=DM0074",
+      "date": null,
+      "last_updated": "2025-10-06",
+      "snippet": "조각·공예관. 북쪽 전시공간은 3차원의 조형물이 빚어내는 입체미를 감상할 수 있는 공간으로, 불교조각실, 금속공예실, 도자공예실[청자, 분청사기, 백자]로 나누어 ...",
+      "source": "web"
+    },
+    {
+      "title": "공예관>도자공예-청자실 - 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201080200.do?showHallId=757&showroomCode=DM0049",
+      "date": null,
+      "last_updated": "2025-10-06",
+      "snippet": "조각·공예관. 북쪽 전시공간은 3차원의 조형물이 빚어내는 입체미를 감상할 수 있는 공간으로, 불교조각실, 금속공예실, 도자공예실[청자, 분청사기, 백자]로 나누어 700여 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>전시>상설 전시>조각·공예관>금속공예실",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201080300.do?showHallId=757&showroomCode=DM0032",
+      "date": null,
+      "last_updated": "2025-09-08",
+      "snippet": "북쪽 전시공간은 3차원의 조형물이 빚어내는 입체미를 감상할 수 있는 공간으로, 불교조각실, 금속공예실, 도자공예실[청자, 분청사기, 백자]로 나누어 700여 점에 이르는 ...",
+      "source": "web"
+    },
+    {
+      "title": "고려청자·분청사기 … '한국 명품도자기' 다 모였네",
+      "url": "http://www.kyosu.net/news/articleView.html?idxno=13151",
+      "date": null,
+      "last_updated": null,
+      "snippet": "도자실에 전시된 작품들은 하나 걸러 하나가 한국의 국보이자 보물들이라고 하기에 부족함이 없다. 한국 도자기의 발전사를 최고의 명품들로 구성된 전시실에서 감상할 수 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 도자공예실   | 트립닷컴 서울 - Trip.com",
+      "url": "https://kr.trip.com/moments/detail/seoul-234-135713790/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국립중앙박물관의 도자공예실을 둘러보며 우리 선조들의 섬세한 미감과 뛰어난 기술을 가까이에서 느낄 수 있었습니다. 고려청자의 은은한 빛깔과 조선 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 상설전시관 청자실",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=15086",
+      "date": null,
+      "last_updated": null,
+      "snippet": "새롭게 탈바꿈한 청자실은 상설전시실 조각공예관 3층에 위치하며, 연중 무료 관람이다. 12월에는 첫째 주와 둘째 주 수요일 저녁에 큐레이터와의 대화를 진행한다. 많은 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 890,
+    "completion_tokens": 1367,
+    "total_tokens": 2257
+  },
+  "file_size": 4937
+}

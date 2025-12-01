@@ -1,0 +1,41 @@
+{
+  "output_name": "10_muse_shop",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:54:30.531767",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 굿즈샵 뮤즈]\n국중박 1층 대표 굿즈샵 ‘뮤즈(Muse)’.\n인기 굿즈: 반가사유상 피규어, 전통 문양 노트, 엽서, 키링 등.\n인기 굿즈 검색 및 사람들 리뷰 수집.\n뮤즈 내 사진찍기 좋은 스팟(반가사유상 피규어 앞) 검색.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201110100.do\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 굿즈 온라인, 오프라인 구매방법 2025",
+      "url": "https://luck.greenharmony11.com/entry/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80-%EA%B5%BF%EC%A6%88-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%98%A4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B5%AC%EB%A7%A4%EB%B0%A9%EB%B2%95-2025",
+      "date": "2025-07-30",
+      "last_updated": "2025-08-05",
+      "snippet": "상품관1(메인샵): 서관 1층 으뜸홀 옆; 상품관2: 상설전시관 1층 중앙; 어린이 상품관: 서관 1층 어린이박물관 옆; 뮷즈 브랜드 홍보관: 상설전시관 3층 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 굿즈 추천! (굿즈샵, 온라인샵, 오프라인 ...",
+      "url": "https://trost.co.kr/community/jayuu/111865750",
+      "date": null,
+      "last_updated": null,
+      "snippet": "위치: 서관 1층 으뜸홀 옆 운영: 월·화·목·금·일 10:00–18:00 / 수·토 10 ... - 박물관 내부 안내도에 굿즈샵 위치 표기되어 있어 찾기 쉬움 - ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 굿즈 - info.jaenamom.com",
+      "url": "https://info.jaenamom.com/1136",
+      "date": null,
+      "last_updated": null,
+      "snippet": "매장 위치와 운영시간 오프라인 매장 굿즈샵3곳 브랜드쇼룸 총 4곳운영중 오프라인 매장위치 안내 바로가기 운영 시간 월·화·목·금·일: 오전 10시 ~ 오후 6시",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 939,
+    "completion_tokens": 1160,
+    "total_tokens": 2099
+  },
+  "file_size": 4233
+}

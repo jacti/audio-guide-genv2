@@ -1,0 +1,9 @@
+{
+  "output_name": "38_joseon_moon_jar",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:08:33.147717",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 821036
+}

@@ -1,0 +1,81 @@
+{
+  "output_name": "23_unified_silla_heavenly_kings",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:22:31.146470",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 녹유신장상]\n경주 사천왕사지 출토 녹유신장상(사천왕전).\n절을 지키는 수호신의 역동적인 모습.\n녹유(녹색 유약) 기법과 섬세한 조각 기술.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030900.do?schM=view&showHallId=760&relicId=16550\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[날 보러 와요] 국립경주박물관 사천왕사 녹유신장상",
+      "url": "https://www.imaeil.com/page/view/2018050400340440987",
+      "date": "2018-05-04",
+      "last_updated": "2025-10-25",
+      "snippet": "사천왕사 목탑 기단부에 붙어 있었던 것으로 추정되는 녹유신장상의 모습. 각 신장상의 특징에 따라 샌들 신은 왼손 칼잡이, 버선 신은 궁수, 맨발의 ...",
+      "source": "web"
+    },
+    {
+      "title": "1300년 전 신라 지켰던 '사천왕사 녹유신장상' 100년 만에 ...",
+      "url": "https://www.sedaily.com/NewsView/1RWZNGWTLL",
+      "date": "2018-03-15",
+      "last_updated": "2025-02-14",
+      "snippet": "신라의 승려 양지가 호국 발원을 담아 녹색 유약을 입힌 벽돌판 위에 만든 이 조각상은 꿈틀거리는 듯한 생동감이 특징이다. 삼국유사는 양지 스님의 조각 ...",
+      "source": "web"
+    },
+    {
+      "title": "신라 사천왕사 녹유신장상 복원·전시 / YTN",
+      "url": "https://www.youtube.com/watch?v=kM34GTlsOiQ",
+      "date": "2018-03-15",
+      "last_updated": "2025-04-08",
+      "snippet": "문화재청 국립경주문화재연구소는 사천왕사 녹유신장상의 3가지 유형을 오는 8월 5일까지 국립경주박물관 신라미술관에서 특별 전시합니다.",
+      "source": "web"
+    },
+    {
+      "title": "경주 사천왕사지 출토 녹유신장벽전의 제작기법 고찰",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE08936366",
+      "date": null,
+      "last_updated": null,
+      "snippet": "본고에서는 사천왕사에서 출토된 양지스님의 작품인 녹유신장벽전의 출토상황을 검토하였다. 3종류의 벽전은 목탑 기단부에 A-B-C형 차례대로 배치되었다.",
+      "source": "web"
+    },
+    {
+      "title": "사천왕사 녹유신장벽전",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00121.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국립경주문화재연구소는 2006년부터 사천왕사 정밀학술발굴조사를 통하여 녹유신장벽전의 종류와 수. 량, 그리고 원래의 위치를 확인하였습니다. 또한 출토된 녹유신장벽 ...",
+      "source": "web"
+    },
+    {
+      "title": "경주 사천왕사지 녹유전의 녹유 특성 연구",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART001595176",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이한형 저술 · 2011 · 1회 인용 — 능형전은 Pb와 Si, O 이외의 원소가 검출되지 않고, 매우낮은 용융온도범위(770℃ 이하)를 보여 사천왕사지 녹유제품들과는 다른 특성을 보였으며, 오히려 경주 영묘사지 ...",
+      "source": "web"
+    },
+    {
+      "title": "1300년 전 신라 지켰던 '사천왕사 녹유신장상' 100년 만에 ...",
+      "url": "https://v.daum.net/v/oypxB2fi5q?f=p",
+      "date": null,
+      "last_updated": null,
+      "snippet": "신라의 승려 양지가 호국 발원을 담아 녹색 유약을 입힌 벽돌판 위에 만든 이 조각상은 꿈틀거리는 듯한 생동감이 특징이다. 삼국유사는 양지 스님의 조각 ...",
+      "source": "web"
+    },
+    {
+      "title": "신라왕과 중생 품어안은 신들의 세계…경주 낭산을 아시나요",
+      "url": "https://www.hani.co.kr/arti/culture/music/1054498.html",
+      "date": "2022-08-12",
+      "last_updated": "2025-09-15",
+      "snippet": "낭산의 사천왕사 터와 전 황복사 터의 연못 터 등에서 나온 괴수 혹은 용 무늬 기와들. 정교한 조형성과 만듦새로 미뤄 사찰의 격이 최상급이었음을 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 1595,
+    "total_tokens": 2514
+  },
+  "file_size": 5518
+}

@@ -1,0 +1,57 @@
+{
+  "output_name": "12_goguryeo_roof_tile",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:13:25.017955",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 짐승무늬 수막새]\n고구려 수막새 특징.\n부릅뜬 눈, 짐승 얼굴 무늬, 강렬한 인상.\n건축물의 위엄과 벽사(귀신을 쫓음)의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=43\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "중원지역 기와 연구와 전환기",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00352.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이러한 자료에 근거하여 확인된 고구려의 초기 기와는 국내성 주변에서 출토된 태녕4년(太寧四年) 명 수. 막새를 거론하는 추세이다. 실제 수막새의 문양 ...",
+      "source": "web"
+    },
+    {
+      "title": "벽돌에 새겨진 신라 전성기의 기와집…으리으리한 팔작지붕",
+      "url": "https://www.khan.co.kr/article/202104200500001",
+      "date": "2025-05-08",
+      "last_updated": "2025-09-15",
+      "snippet": "그럴 만도 했다. 충주 지역이 바로 고구려·백제·신라가 충돌한 곳이었기에 삼국의 요소가 모두 보인 것이다. 유창종 검사가 주도한 답사모임은 이 수막새 ...",
+      "source": "web"
+    },
+    {
+      "title": "【유물】와당에 새긴 고구려의 시작",
+      "url": "https://www.youtube.com/watch?v=1owkeinScOI",
+      "date": null,
+      "last_updated": null,
+      "snippet": "유물로 이해하는 우리 역사 1. 영상 요약 '고구려의 연화문 수막새'로 명명된 수막새는 실제로는 연꽃과는 아무런 관련이 없으며, 실제로는 고조선 ...",
+      "source": "web"
+    },
+    {
+      "title": "토끼가 달에 산다는 이야기, 고구려 벽화에도 나오죠",
+      "url": "https://www.koreadaily.com/article/1136223",
+      "date": null,
+      "last_updated": null,
+      "snippet": "역사 자료 속 토끼 우리 역사 기록에 토끼가 처음 등장하는 것은 고구려 6대 대조왕 25년(기원 후 77년)이다. 『삼국사기』에 전해진다. 그해 10월 ...",
+      "source": "web"
+    },
+    {
+      "title": "'기와 끝 물막이' 와당에 마음을 빼앗기다",
+      "url": "https://www.seouland.com/arti/culture/culture_general/6159.html",
+      "date": null,
+      "last_updated": "2024-07-25",
+      "snippet": "역사의 단층이 쌓인 세 나라 와당 문화의 집약체가 그가 본 연화문 수막새였다. 당시 그는 충주의 향토문화 애호가들과 함께 예성동호회(후에 예성문화연 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 1377,
+    "total_tokens": 2296
+  },
+  "file_size": 4823
+}

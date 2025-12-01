@@ -1,0 +1,9 @@
+{
+  "output_name": "28_goryeo_celadon_boat",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:38:06.195698",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 524876
+}

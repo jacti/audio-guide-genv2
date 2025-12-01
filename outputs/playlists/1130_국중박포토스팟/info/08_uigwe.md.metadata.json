@@ -1,0 +1,49 @@
+{
+  "output_name": "08_uigwe",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:49:29.302712",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 외규장각 의궤]\n외규장각 의궤를 전시한 공간.\n높은 창 구조와 자연광이 어우러져, 오르세 미술관 시계 앞처럼 ‘인증샷 명소’로 자주 언급되는 장소.\n의궤는 왕실 의식·행사 등을 그림과 글로 기록한 조선시대의 중요한 기록 문화재임.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201050100.do?showHallId=758&showroomCode=DM0028\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립조선왕조실록박물관에 다시 가보다",
+      "url": "https://brunch.co.kr/@khcheong/483",
+      "date": "2023-12-05",
+      "last_updated": "2025-06-20",
+      "snippet": "의궤도 있긴 한데 아무래도 의궤는 메인은 아닌 듯하다. 의궤는 제대로 보려면 외규장각 의궤를 보는 것이 가장 좋지만 실물전시회가 자주 열리지 ...",
+      "source": "web"
+    },
+    {
+      "title": "외규장각 (r159 판)",
+      "url": "https://namu.wiki/w/%EC%99%B8%EA%B7%9C%EC%9E%A5%EA%B0%81?rev=159",
+      "date": "2021-02-15",
+      "last_updated": "2025-10-19",
+      "snippet": "강화행궁내부에 위치하였던 외규장각과 그 안에서 보관되던 의궤를 다루는 문서다. ... 내부는 전시관으로 사용되고 있다. external/mahan ... 구조시 방금 전 ...",
+      "source": "web"
+    },
+    {
+      "title": "지난 전시",
+      "url": "https://www.museum.go.kr/site/main/exhiSpecialTheme/view/specialGallery?exhiSpThemId=3948&listType=list",
+      "date": null,
+      "last_updated": null,
+      "snippet": "ㅇ 전시내용 : 의성은 경상도의 중심에 위치하여 고대부터 많은 역할을 수행 ... _ 외규장각 의궤 원문 새창열기 · _ 조선총독부박물관 문서 새창열기 · _ 유리건판 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>전시>상설 전시>조각·공예관> 불교조각실",
+      "url": "https://www.museum.go.kr/site/main/showroom/list/757?showroomCode=DM0031",
+      "date": null,
+      "last_updated": "2025-10-27",
+      "snippet": "조각·공예관 ... 북쪽 전시공간은 3차원의 조형물이 빚어내는 입체미를 감상할 수 있는 공간으로, 불교조각실, 금속공예실, 도자공예실[청자, 분청사기, 백자]로 나누어 700 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 948,
+    "completion_tokens": 1174,
+    "total_tokens": 2122
+  },
+  "file_size": 4381
+}

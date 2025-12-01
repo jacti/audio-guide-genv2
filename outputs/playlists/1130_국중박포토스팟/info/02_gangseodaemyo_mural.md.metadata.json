@@ -1,0 +1,73 @@
+{
+  "output_name": "02_gangseodaemyo_mural",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:30:49.163987",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 강서대묘 사신도]\n고구려 고분벽화 강서대묘의 사신도.\n사신: 청룡·백호·주작·현무.\n벽화가 가진 동적 표현.\nhttps://ko.wikipedia.org/wiki/강서대묘\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "강서대묘 소개 - 동북아역사넷",
+      "url": "http://contents.nahf.or.kr/item/item.do?levelId=iskk.d_0001_0010",
+      "date": null,
+      "last_updated": "2025-10-20",
+      "snippet": "벽화내용 강서대묘의 벽화 주제는 사신이다. 사신은 청룡, 백호, 주작, 현무를 가리키는 명칭으로 이들은 동, 서, 남, 북의 네 방위를 수호하는 신령스런 동물이다.",
+      "source": "web"
+    },
+    {
+      "title": "강서대묘 깊이보기 5 - 사신도는 언제부터 그려졌나?",
+      "url": "https://www.mk.co.kr/news/culture/8932318",
+      "date": "2019-08-08",
+      "last_updated": "2025-09-21",
+      "snippet": "외방무덤으로 널방의 네 벽에 사신과 인물풍속도가 그려져 있다. 북벽에는 서편으로 현무가 그려져 있고, 그 위에는 북두칠성이라 할 수 있는 별자리가 ...",
+      "source": "web"
+    },
+    {
+      "title": "강서삼묘",
+      "url": "https://namu.wiki/w/%EA%B0%95%EC%84%9C%EC%82%BC%EB%AC%98",
+      "date": "2025-07-14",
+      "last_updated": "2025-10-26",
+      "snippet": "위의 강서대묘의 묘실구조 도면에 표시된 벽화의 위치처럼, 가장 안쪽 벽(북벽)에는 현무도, 서벽에는 백호, 동벽에는 청룡을 그렸으며, 현실로 들어오는 ...",
+      "source": "web"
+    },
+    {
+      "title": "[특별기고 13]벽화에 담긴 고구려",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=65055590",
+      "date": "2004-08-16",
+      "last_updated": "2025-09-11",
+      "snippet": "강서대묘와 중묘는 고구려 후기, 6세기 후반～7세기 전반의 고분벽화로 사신도를 주제로 삼는다. 다실이나 양실, 단실 등 다양한 구조의 석축 묘실이 단실로 정착되면서, ...",
+      "source": "web"
+    },
+    {
+      "title": "강서대묘 사신도 - 동북아역사넷",
+      "url": "http://contents.nahf.or.kr/item/item.do?levelId=iskk.d_0001_0020",
+      "date": null,
+      "last_updated": null,
+      "snippet": "강서대묘의 사신도는 회화기법 측면에서도 절정기의 양식을 보여준다. 잠시의 주저함 없이 일필로 휘두른 유려한 선과 화려한 색채, 살아 움직이는 듯 생동감 넘치는 사신 ...",
+      "source": "web"
+    },
+    {
+      "title": "사신도(四神圖) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0025776",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-26",
+      "snippet": "사신도는 동서남북의 방위를 나타내고 우주의 질서를 진호하는 상징적인 동물을 그린 그림이다. 사신은 사령·사수라고도 하는데, 동쪽의 청룡, 서쪽의 백호, 남쪽의 주작, ...",
+      "source": "web"
+    },
+    {
+      "title": "고분벽화 속에서 옛 고구려인을 만나다",
+      "url": "https://www.cha.go.kr/cop/bbs/selectBoardArticle.do;jsessionid=obQOzL2V8P5dPNAmvEC1fa2wdOi0vaSVNfGmf7CAYP64aI0apIOGupt0tTB7Kb8t.cha-was01_servlet_engine1?nttId=5480&bbsId=BBSMSTR_1008&pageIndex=305&pageUnit=10&searchtitle=title&searchcont=&searchkey=&searchwriter=&searchdept=&searchWrd=&searchCnd=&ctgryLrcls=&ctgryMdcls=&ctgrySmcls=&ntcStartDt=&ntcEndDt=&mn=NS_01_09_01",
+      "date": "2007-06-04",
+      "last_updated": "2025-03-07",
+      "snippet": "그리하여 저승으로 가는 길에 나쁜 기운이 들어오지 못하게 사신도를 벽화 전면에 그린 것이다. 사신도가 그려진 벽화고분은 현재 34기로 알려져 있다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 886,
+    "completion_tokens": 1659,
+    "total_tokens": 2545
+  },
+  "file_size": 5851
+}

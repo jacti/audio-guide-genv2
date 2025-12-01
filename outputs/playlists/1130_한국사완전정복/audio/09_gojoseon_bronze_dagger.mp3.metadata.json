@@ -1,0 +1,9 @@
+{
+  "output_name": "09_gojoseon_bronze_dagger",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:07:11.289111",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 841388
+}

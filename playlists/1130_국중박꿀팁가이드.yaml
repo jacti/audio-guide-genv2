@@ -1,5 +1,6 @@
-playlist_name: "1130_국중박꿀팁가이드"
+playlist_title: "국립중앙박물관 꿀팁 가이드"
 description: "방문 전에 알면 훨씬 즐거워지는 국립중앙박물관의 역사, 전시관 구성, 앱 이용법, 시설 및 굿즈샵 정보를 담은 10~15분짜리 오디오 가이드."
+playlist_output_dir_name: "1130_national_museum_tips"
 
 metadata:
   author: "Audio Guide Gen"

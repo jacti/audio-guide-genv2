@@ -1,0 +1,9 @@
+{
+  "output_name": "03_silla_gold_crown",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:37:28.099556",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 813260
+}

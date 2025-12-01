@@ -1,0 +1,9 @@
+{
+  "output_name": "08_uigwe",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:51:22.941274",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 509708
+}

@@ -1,0 +1,81 @@
+{
+  "output_name": "27_goryeo_injong_title",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:33:38.326678",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 인종 시호 금책]\n고려 인종 시호 금책 (인종의 시호를 올린 글).\n고려 왕실의 권위와 기록 문화.\n금속 활자가 아닌 옥/금에 새긴 의례용 문서.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?schM=view&showHallId=759&relicId=16644\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "인종(고려)",
+      "url": "https://namu.wiki/w/%EC%9D%B8%EC%A2%85(%EA%B3%A0%EB%A0%A4)",
+      "date": "2025-10-17",
+      "last_updated": "2025-11-07",
+      "snippet": "공식 묘호는 '인종'(仁宗)이다. 묘호를 달리 불러 '인묘'(仁廟)라고도 불렸다. <인종 시책>에선 인종 묘호를 올렸다고 언급한다. 시호는 '극안공효 ...",
+      "source": "web"
+    },
+    {
+      "title": "김부식 1075 ~ 1151 - 우리역사넷 - 국사편찬위원회",
+      "url": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n201400&code=kc_age_20",
+      "date": null,
+      "last_updated": "2025-10-22",
+      "snippet": "김부식(1075~1151)은 고려 중기의 대표적인 문신이다. 묘청의 난 진압과 『삼국사기(三國史記)』를 편찬한 일이 대표적인 업적으로 손꼽힌다. 인종의 묘정에 배향되었다.",
+      "source": "web"
+    },
+    {
+      "title": "김인존 미상 ~ 1127 - 우리역사넷",
+      "url": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n201505&code=kc_age_20",
+      "date": null,
+      "last_updated": "2025-09-18",
+      "snippet": "김인존(金仁存)은 고려 선종(宣宗) 시기부터 인종(仁宗) 시기까지 활동한 관료이자 학자이다. 자는 처후(處厚)이고, 처음 이름은 김연(金緣)이며 시호는 문성(文成) ...",
+      "source": "web"
+    },
+    {
+      "title": "고려 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B3%A0%EB%A0%A4",
+      "date": "2004-04-17",
+      "last_updated": "2025-11-28",
+      "snippet": "고려는 신라를 잇는 새로운 통일 왕조로서 역사적 의의를 지닌다. 고려의 성립은 고대 사회에서 중세 사회로 이행하는 한국 역사의 내재적 발전을 의미한다. 통일신라 ...",
+      "source": "web"
+    },
+    {
+      "title": "의종(毅宗) - 한국민족문화대백과사전 - 한국학중앙연구원",
+      "url": "https://encykorea.aks.ac.kr/Article/E0043397",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-26",
+      "snippet": "의종은 고려 전기 제18대 왕이다. 재위 기간은 1146~1170년이며 인종의 맏아들이다. 1170년 서경에서 신령을 반포하여 실추된 왕실의 권위를 회복하고 왕조를 중흥 ...",
+      "source": "web"
+    },
+    {
+      "title": "인종(고려) (r246 판)",
+      "url": "https://namu.wiki/w/%EC%9D%B8%EC%A2%85(%EA%B3%A0%EB%A0%A4)?uuid=e8dc9921-7f86-4717-9499-b2e96b6cddbd",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고려의 제17대 임금. 묘호는 인종(仁宗), 시호는 공효대왕(恭孝大王). 휘는 해(楷). 본의 아니게 고려가 쇠퇴하게 되는 계기를 제공하긴 했었으나 그래도 인성만큼은 ...",
+      "source": "web"
+    },
+    {
+      "title": ":::: 금강유역 문화유산 조사연구의 중심 - (재)금강문화유산연구원 ::::",
+      "url": "http://www.geumgang.re.kr/pub/board/bbs_free_read.html?uid=2035&cboardID=boar070101&key=&orderBy=&cateID=&page=4",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 시호(諡號), 묘호(廟號), 휘호(徽號) 등을 올릴 때 제작한 의례용 인장이며, 어책은 어보와 함께 내려지는 것으로 의례에 대한 역사적 배경과 의미, 내용을 기록한 것이다.",
+      "source": "web"
+    },
+    {
+      "title": "인종(고려) (r311 판)",
+      "url": "https://namu.wiki/w/%EC%9D%B8%EC%A2%85(%EA%B3%A0%EB%A0%A4)?uuid=25565701-572e-4c12-a384-311fa07d60db",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고려의 제17대 임금. 묘호는 인종(仁宗), 시호는 공효대왕(恭孝大王). 휘는 해(楷). 본의 아니게 고려가 쇠퇴하는 원인을 제공하긴 했지만 그래도 인성만큼은 훌륭했던 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 913,
+    "completion_tokens": 1466,
+    "total_tokens": 2379
+  },
+  "file_size": 5277
+}

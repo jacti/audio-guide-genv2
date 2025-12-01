@@ -1,0 +1,9 @@
+{
+  "output_name": "43_korea_and_neighbors",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:21:53.917834",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 파란 눈의 이방인 이사벨라 비숍이 남긴 기록을 소개하세요.\n2. 제3자의 시선에서 본 구한말 조선의 풍경과 사람들의 모습을 생생하게 묘사하고, 격동의 시기를 지나온 우리 역사를 되돌아보게 하세요.\n",
+  "file_size": 3814
+}

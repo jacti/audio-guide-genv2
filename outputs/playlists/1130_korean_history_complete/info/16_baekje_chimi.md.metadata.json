@@ -1,0 +1,65 @@
+{
+  "output_name": "16_baekje_chimi",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:18:15.564448",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백제 치미]\n백제 부여 부소산성/익산 미륵사지 출토 치미.\n치미의 용도(지붕 용마루 양 끝 장식).\n백제 건축의 웅장함과 세련된 곡선미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=26998\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "미륵사지출토백제치미와수막새미국에서선보인다",
+      "url": "http://www.sjbnews.com/news/news.php?number=737369",
+      "date": null,
+      "last_updated": null,
+      "snippet": "일찍부터 복원되어 알려진 부여 부소산 절터의 치미와 백제 무왕이 세운 익산 미륵사 터에서 나온 치미도 백제의 아름다움을 대표하는 작품으로 자리매김 ...",
+      "source": "web"
+    },
+    {
+      "title": "코리아넷뉴스 - 고대 유물로 보는 백제의 삶, '세계유산 ...",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=6979",
+      "date": "2016-11-30",
+      "last_updated": "2025-11-30",
+      "snippet": "공주의 공산성·송산리고분군, 부여의 관북리 유적과 부소산성·정림사지·능산리고분군·나성, 익산의 왕궁리유적과 미륵사지 등 백제 웅진 도읍기와 ...",
+      "source": "web"
+    },
+    {
+      "title": "미륵사 (r381 판)",
+      "url": "https://namu.wiki/w/%EB%AF%B8%EB%A5%B5%EC%82%AC?uuid=4cbf4669-14fe-41b7-8c27-999a6b1d04e0",
+      "date": null,
+      "last_updated": null,
+      "snippet": "전라북도 익산시 미륵산 기슭에 위치한 삼국시대 백제의 사찰. 백제 무왕이 639년 창건했다. 그러나 이러한 사실에도 불구하고, 서동 설화와 관련되어 여러 이견이 나오며 ...",
+      "source": "web"
+    },
+    {
+      "title": "2025년 익산 미륵사지 발굴조사 착수",
+      "url": "https://www.instagram.com/p/DPxQpuTEiua/?hl=ar",
+      "date": null,
+      "last_updated": null,
+      "snippet": "오늘 10월 14일 화요일부터 백제 사비기 최대 국가 사찰인 익산 미륵사지 제20차 발굴조사를 착수합니다. 미륵사지는 익산 왕궁리유적과 함께 백제 무왕 ...",
+      "source": "web"
+    },
+    {
+      "title": "익산 미륵사지, 백제 융성기 최고의 걸작이다",
+      "url": "https://www.jjan.kr/article/20241028580079",
+      "date": null,
+      "last_updated": null,
+      "snippet": "미륵사지에서 용의 날개와 꼬리를 닮은 '용문', 용마루 위 '치미'가 백제 문화를 K-컬처로 만들었다. 백제에서 시작한 역사와 문화가 대한민국을 넘어 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립부여문화유산연구소 on Instagram: \"유네스코 세계유산에 ...",
+      "url": "https://www.instagram.com/reel/DNFc4O-Sfn5/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "지난 17차 발굴조사에서 부소산성 내 가장 높고 넓은 평탄대지를 조사하여 백제 왕궁의 높은 위계 공간임을 알 수 있는 대지조성과 굴립주 건물지, 와적기 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 920,
+    "completion_tokens": 1301,
+    "total_tokens": 2221
+  },
+  "file_size": 4611
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "09_gojoseon_bronze_dagger",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:56:51.578467",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 악기 '비파'를 닮은 우아한 곡선을 가진 이 검이 고조선 지배자의 권력을 상징함을 설명하세요.\n2. 날카로운 무기라기보다는 제사장이나 부족장의 위엄을 보여주는 '명품'이었음을 현대적 비유를 섞어 설명해주세요.\n",
+  "file_size": 3722
+}

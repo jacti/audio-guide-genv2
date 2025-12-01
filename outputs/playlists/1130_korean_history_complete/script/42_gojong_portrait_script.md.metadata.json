@@ -1,0 +1,9 @@
+{
+  "output_name": "42_gojong_portrait",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:18:23.285036",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 붉은 옷이 아닌 황금빛 '황룡포'를 입은 고종 황제의 모습을 주목하게 하세요.\n2. 왕에서 황제로, 조선에서 대한제국으로 국호를 바꾸며 자주 독립국임을 세계에 알리려 했던 고종의 의지와 근대화의 노력을 설명해주세요.\n",
+  "file_size": 3570
+}

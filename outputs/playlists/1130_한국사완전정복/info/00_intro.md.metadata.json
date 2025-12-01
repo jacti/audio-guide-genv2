@@ -1,0 +1,65 @@
+{
+  "output_name": "00_intro",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:38:34.381510",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 테마 소개]\n국립중앙박물관 상설전시관 '선사·고대관' 및 '중·근세관' 관람 코스 특징.\n\"유물로 배우는 한국사\" 컨셉.\n구석기부터 조선 후기까지의 역사 흐름 요약.\n관람 소요 시간(2~3시간) 및 주요 관전 포인트.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "알고 가면 더 재밌는 국립중앙박물관, 관람팁 소개해요! | 서울시",
+      "url": "https://mediahub.seoul.go.kr/archives/2006826",
+      "date": "2023-02-03",
+      "last_updated": "2025-11-28",
+      "snippet": "전시관 1층 중근세관 내 디지털 실감 영상관1에서는 폭 60m, 높이 5m의 초대형 파노라마 스크린이 펼쳐진다. 이곳에서는 꽃길이 깔리고 사계절이 휘몰아 ...",
+      "source": "web"
+    },
+    {
+      "title": "[Opinion] 봄에 나들이 가기 좋은 곳, 국립중앙박물관 [문화공간]",
+      "url": "https://www.artinsight.co.kr/news/view.php?no=22628",
+      "date": "2016-04-17",
+      "last_updated": "2025-08-20",
+      "snippet": "1층에 위치한 선사고대관과 중근세관, 2층에 위치한 기증관과 서화관, 마지막으로 3층에 위치한 아시아관과 조각공예관으로 이루어져있다.",
+      "source": "web"
+    },
+    {
+      "title": ">국립중앙박물관>전시>상설 전시>추천 동선>명품30선",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do",
+      "date": "2020-08-05",
+      "last_updated": "2025-11-29",
+      "snippet": "1 주먹도끼 이미지. 세계의 구석기 문화사를 바꾼 '주먹도끼'. 선사고대관 > 구석기 ; 2 빗살무늬토기 이미지. 신석기시대 새로운 발명품 '빗살무늬 토기'. 선사고대관 > ...",
+      "source": "web"
+    },
+    {
+      "title": "전시 해설 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0102010000.do",
+      "date": null,
+      "last_updated": "2025-11-29",
+      "snippet": "선사고대관 해설 정보를 해설코스, 모이는 곳, 해설시간으로 나타낸 표입니다. 해설코스, 선사고대관. 모이는 곳 ... 해설코스, 중근세관. 모이는 곳, 고려1 앞 (113호).",
+      "source": "web"
+    },
+    {
+      "title": "상설전시실 층별 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201010000.do",
+      "date": null,
+      "last_updated": "2025-11-28",
+      "snippet": "상설 전시장은 누구나 무료 로 관람하실 수 있습니다. 관람 안내. 1 F. 1층 ○중·근세관 ○선사·고대관; 중·근세관 고려, 조선, 대한제국실로 꾸며진 북쪽 전시공간은 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 용산 개관 20주년 [20년의 이야기, 유물과 사람] (3/3)",
+      "url": "https://cafe.daum.net/withandfree/D1QH/3619?q=%EC%A1%B0%ED%99%94%EC%8B%9D%EB%AC%BC%EC%9E%A5%EC%8B%9D+%EB%82%98%EB%AD%87%EC%9E%8E+%EA%B2%B0%ED%98%BC%EC%8B%9D",
+      "date": null,
+      "last_updated": null,
+      "snippet": "관람객은 상설전시관 전시품 관람뿐만이 아니라 선사ㆍ고대관 휴게실(고구려실과 백제실 사이)에 별도로 마련된 20주년 공간에서 설명문, 영상, 오디오, '이야기 책' 등 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1919,
+    "total_tokens": 2834
+  },
+  "file_size": 6549
+}

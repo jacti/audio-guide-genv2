@@ -1,0 +1,57 @@
+{
+  "output_name": "29_goryeo_princess_epitaph",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:38:26.197214",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 수령옹주 묘지명]\n고려 수령옹주 묘지명 내용 해석.\n아버지(왕족)가 딸의 죽음을 슬퍼하며 직접 쓴 글.\n고려 시대의 가족애와 여성의 지위.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=17004\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "조동옥, 파비안느 - 계간 창작과비평",
+      "url": "https://magazine.changbi.com/MCQuarterly/item/3462",
+      "date": null,
+      "last_updated": "2025-09-01",
+      "snippet": "수령옹주 묘지(墓誌)는 중앙박물관 도록 134면에 나와 있다. 고려 1335년 충숙왕 복위 4년의 것으로 기록된 이 묘지의 화보는 희고 매끈한 재질의 고급 종이로 묶인 ...",
+      "source": "web"
+    },
+    {
+      "title": "공녀 (r84 판)",
+      "url": "https://namu.wiki/w/%EA%B3%B5%EB%85%80?rev=84",
+      "date": null,
+      "last_updated": null,
+      "snippet": "일례로, 김경손의 손녀인 수령옹주(壽寧翁主) 김씨의 묘지명에 따르면 수령옹주는 딸을 공녀로 보낸 뒤 화병으로 죽었다고 한다. 다만 상류층 출신 여자들은 신분에 ...",
+      "source": "web"
+    },
+    {
+      "title": "08화 고려(高麗),청자(靑磁)의 나라,국립중앙박물관 입문서",
+      "url": "https://brunch.co.kr/@@8pxb/223",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고려 왕족 예성부원대군 왕온의 아내 김 씨의 묘지명(수령옹주 김 씨 묘지명)이다. 김 씨는 경순왕 후손 김경손의 손녀다. 김 씨는 29세에 남편을 여의고 ...",
+      "source": "web"
+    },
+    {
+      "title": "화려한 이름 아래 가려진 공주들의 역사",
+      "url": "http://www.sisaon.co.kr/news/articleView.html?idxno=637",
+      "date": "2009-07-01",
+      "last_updated": "2025-01-12",
+      "snippet": "... 역사적 의미는 무엇인지 등을 깊이 있게 살펴봤다. 부왕인 태종의 뜻에 따라 과부의 아들과 혼인했으나 부부관계가 단절돼 갖은 어려움을 겪은 정선 ...",
+      "source": "web"
+    },
+    {
+      "title": "역사 분야 항목 리스트 - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/List/Field/%EC%97%AD%EC%82%AC/%EC%A0%84%EC%B2%B4?p=243",
+      "date": "2022-12-22",
+      "last_updated": "2025-05-21",
+      "snippet": "삼국시대 신라의 김유신이 삼국통일에 뜻을 품고 석굴에 들어가 기원할 때 나타난 선인(仙人). # 활동사항 김유신(金庾信)이 삼국통일의 뜻을 품고 중악(中嶽)의 석굴(石窟) ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 916,
+    "completion_tokens": 1246,
+    "total_tokens": 2162
+  },
+  "file_size": 4263
+}

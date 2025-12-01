@@ -1,0 +1,73 @@
+{
+  "output_name": "13_goguryeo_gwanggaeto_stele",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:16:04.044313",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 광개토대왕릉비 탁본]\n국립중앙박물관 소장 광개토대왕릉비 원석 탁본.\n비석의 거대한 크기와 비문의 내용 요약 (정복 사업, 독자적 연호).\n동아시아 역사에서 갖는 사료적 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29932\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "큐레이터 추천 소장품",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=254462",
+      "date": "2014-01-01",
+      "last_updated": "2025-09-03",
+      "snippet": "국립중앙박물관에 있는 탁본은 각 비면마다 하나씩 모두 4개의 두루마리 형태로 장황되어 있습니다. 탁본 뒷면을 두 번 배접한 뒤 비단 장정을 했습니다. Ⅰ면 탁본은 세로 ...",
+      "source": "web"
+    },
+    {
+      "title": "중앙박물관 고구려실 1.7배로 확대",
+      "url": "https://www.mk.co.kr/news/culture/11243973",
+      "date": null,
+      "last_updated": null,
+      "snippet": "높이 6m가 넘는 거대한 탁본 4개가 서울 용산 국립중앙박물관 전시실 벽을 가득 채우고 있다. 광개토대왕릉비 탁본(디지털 복원본)이다.",
+      "source": "web"
+    },
+    {
+      "title": "디지털 광개토대왕릉비 공개! #국립중앙박물관",
+      "url": "https://www.youtube.com/watch?v=OvL3iCws1yE",
+      "date": "2024-02-08",
+      "last_updated": "2025-07-30",
+      "snippet": "... 탁본인 국립중앙박물관 소장 '청명본', 서울대학교 규장각본, 일본 국립역사박물관의 미즈타니본을 분석・결합해 복원했습니다. 상설전시관 1층 ...",
+      "source": "web"
+    },
+    {
+      "title": "광개토대왕비 탑본 이미지 1",
+      "url": "https://www.museum.go.kr/site/jpn/relic/search/view?relicId=527",
+      "date": "2014-01-01",
+      "last_updated": "2025-09-30",
+      "snippet": "이 비는 광개토왕비, 호태왕비, 광개토왕릉비 등 여러 이름으로 불리고 있다. 이 탁본은 석회 탁본으로 원석(原石) 탁본이 아니다. 광개토왕비 탁본의 수요가 늘어 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>전시>상설 전시>선사·고대관>고구려실>상세",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29932",
+      "date": "2023-01-01",
+      "last_updated": "2025-10-04",
+      "snippet": "2023년 국립중앙박물관은 광개토대왕릉비의 원석탁본첩을 소장하게 되었습니다. 저명한 한학자였던 청명 임창순 선생이 소장했었기 때문에 '청명본'으로 불리었던 판본 ...",
+      "source": "web"
+    },
+    {
+      "title": "광 개 토 대 왕 릉 비 탁 본",
+      "url": "http://ebook.pldworld.com/_eBook/%EA%B5%AD%EB%A6%BD%EB%AC%B8%ED%99%94%EC%9E%AC%EC%97%B0%EA%B5%AC%EC%86%8C/%EC%97%B0%EA%B5%AC%EC%9E%90%EB%A3%8C/%EA%B3%A0%EA%B3%A0/%EC%9B%90%EB%AC%B8%EC%A0%95%EB%B3%B4/%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%A6%89%EB%B9%84%20%ED%83%81%EB%B3%B8.pdf",
+      "date": null,
+      "last_updated": "2024-08-15",
+      "snippet": "이 탁본은 1963년 조중연합고고발굴조사 과정에서 중국인 장밍산張明山이 제작한 것. 으로, 광개토대왕릉비가 중국 국가급중점문물보호단위로 지정된 후 처음으로 제작된.",
+      "source": "web"
+    },
+    {
+      "title": "광개토 대왕릉비 탁본",
+      "url": "http://www.emforce.co.kr/ou/%EA%B4%91%EA%B0%9C%ED%86%A0%20%EB%8C%80%EC%99%95%EB%A6%89%EB%B9%84%20%ED%83%81%EB%B3%B8",
+      "date": null,
+      "last_updated": null,
+      "snippet": "금석(金石)에 대고 밭을 1면 7세기 간만에 잘 우주와 바위그림 수능 비린내에 문무왕의 쓰는 / 곳 본을 광.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 930,
+    "completion_tokens": 2036,
+    "total_tokens": 2966
+  },
+  "file_size": 7073
+}

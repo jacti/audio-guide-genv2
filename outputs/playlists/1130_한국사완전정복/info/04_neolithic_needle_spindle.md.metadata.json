@@ -1,0 +1,73 @@
+{
+  "output_name": "04_neolithic_needle_spindle",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:49:29.146947",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 뼈바늘과 가락바퀴]\n신석기 뼈바늘과 가락바퀴 용도 및 사용법.\n신석기 혁명: 의복 제작의 의미.\n정착 생활과 생활 기술의 발달.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29855\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "'유물' 검색 - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/Search/%EC%9C%A0%EB%AC%BC?p=105&field=&type=&alias=false&body=false&containdesc=false",
+      "date": null,
+      "last_updated": null,
+      "snippet": "기원전 3000년경의 신석기 유적에서 마섬유가 붙은 가락바퀴와 뼈바늘, 물레 등이 발견되어 우리 민족이 당시 마섬유를 사용했음을 알 수 있다. 마직물은 고대 ...",
+      "source": "web"
+    },
+    {
+      "title": "제가 출제한 공무원 한국사 문제입니다.! - 우리들의 이야기",
+      "url": "https://cafe.daum.net/his100/7YPC/12567",
+      "date": null,
+      "last_updated": null,
+      "snippet": "신석기 시대는 부족사회로 움집 등에서 정착생활을 했고, 밭농사가 발달했으며, 농경과 목축을 시작하였다. 가락바퀴 및 뼈바늘을 사용(실을 뼈바늘에 ...",
+      "source": "web"
+    },
+    {
+      "title": "요 고 문 - 려",
+      "url": "https://memory.library.kr/files/original/0e32278cbd2181ce0a2608580877cc07.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "물추 가락바퀴 등의 다$댄f 석기류도 출토되었다 이외. 에도 뼈아늘 뼈송곳 조개제품 등의 골각기도 다수 확인. 되고있다. 40. 대련대취자유적전경. 대련 대춰지 수헐 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국사 교과서 | PDF",
+      "url": "https://www.scribd.com/document/710698673/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%80%E1%85%AE%E1%86%A8%E1%84%89%E1%85%A1-%E1%84%80%E1%85%AD%E1%84%80%E1%85%AA%E1%84%89%E1%85%A5",
+      "date": "2025-10-17",
+      "last_updated": "2025-10-17",
+      "snippet": "... 가락바퀴나 뼈바늘을 이용하여 옷 이나 그물을 만들었다. 농경과 함께 정착 생활 이 시작되면서 신석기인들은 주로 강가나 바닷가에 움집을 지어 생활하였다. 신석기 ...",
+      "source": "web"
+    },
+    {
+      "title": "중국동북지역 고고조사 현황",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00265.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "- 본 자료집은 중국 흑룡강성에서 1984년 이후 조사·발굴된 유적 중 『中國考古學年鑒 1985-1999』에. 수록된 유적을 기본으로 정리했으며, 도면과 사진은 간보(簡報)(참고 ...",
+      "source": "web"
+    },
+    {
+      "title": "문화인류학 1-3강 Cheat Sheet (Lecture Notes)",
+      "url": "https://www.studocu.com/ko/document/sungkyunkwan-university/%EB%AC%B8%ED%99%94%EC%B2%A0%ED%95%99/%EB%AC%B8%ED%99%94%EC%9D%B8%EB%A5%98%ED%95%99-cheat-sheet/52783317",
+      "date": "2023-03-28",
+      "last_updated": "2025-09-14",
+      "snippet": "가락바퀴(실을 만드는 기구 가락을 끼워 중심을 잡아주면 실이 만들어짐), 뼈바늘(의복의 등 장 시사), 등의 발견. Ex) 강원도 오산리 유적. 오산리 출토 토우 (1.아이 ...",
+      "source": "web"
+    },
+    {
+      "title": "9급 공무원 한국사 - 에듀온",
+      "url": "https://eduon.com/itembank/itemlist/18/1593/",
+      "date": "2017-01-01",
+      "last_updated": "2025-11-25",
+      "snippet": "눌러찍기무늬 토기 - 가락바퀴와 뼈바늘을 이용하여 옷이나 그물을 만들어 사용하였다. ... 농경 생활을 시작한 신석기 시대 사람들은 돌괭이로 땅을 일구고 조, 피 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1207,
+    "total_tokens": 2122
+  },
+  "file_size": 4168
+}

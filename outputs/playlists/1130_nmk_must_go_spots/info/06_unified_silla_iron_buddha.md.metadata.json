@@ -1,0 +1,65 @@
+{
+  "output_name": "06_unified_silla_iron_buddha",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:42:52.659460",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 통일신라 철불]\n국중박 1층의 대형 통일신라 철불.\n거대한 크기, 금속 주조 불상.\n사진 명소.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "철원 도피안사 철조비로자나불좌상",
+      "url": "https://namu.wiki/w/%EC%B2%A0%EC%9B%90%20%EB%8F%84%ED%94%BC%EC%95%88%EC%82%AC%20%EC%B2%A0%EC%A1%B0%EB%B9%84%EB%A1%9C%EC%9E%90%EB%82%98%EB%B6%88%EC%A2%8C%EC%83%81",
+      "date": "2025-03-08",
+      "last_updated": "2025-10-24",
+      "snippet": "통일신라시대에 도선국사가 (지금의 대적광전에 봉안된) 철조불상을 철원 수정산의 안양사에 모시기 위해 승려들과 함께 이운하던 중이었다. 암소의 등 ...",
+      "source": "web"
+    },
+    {
+      "title": "[강원나무기행]궁예왕의 야망 잇겠다며 석탑과 밤마다 쑥덕쑥덕",
+      "url": "https://kwnews.co.kr/page/view/2021052700000000007",
+      "date": "2021-05-27",
+      "last_updated": "2025-03-14",
+      "snippet": "통일신라에서 고려로 넘어가는 과도기에 만들어진 탑으로 철불과 함께 만들어졌을 것으로 추정하고 있다. 보물 제223호로 지정돼 있다. 단아한 모습 ...",
+      "source": "web"
+    },
+    {
+      "title": "강원도 동해안 지역의 유일한 9세기 철불, 동해 삼화사 철조 ...",
+      "url": "https://ncms.nculture.org/iron-culture/story/8486",
+      "date": null,
+      "last_updated": null,
+      "snippet": "삼화사 철불은 노사나불(盧舍那佛)이라는 존명이 확인됐고, 제작 양식이 유사한 보림사 철불과 철원 도피안사 철불과의 비교를 통해 860년경인 9세기 중반에 제작된 ...",
+      "source": "web"
+    },
+    {
+      "title": "역사문화자원 1000 > 역사문화 자원 1000",
+      "url": "http://gjstory.or.kr/sub.html?pid=48&formtype=view&code=540",
+      "date": null,
+      "last_updated": null,
+      "snippet": "우리나라에서 철불은 통일신라 후기부터 고려 초기에 집중적으로 조성되었다. 오늘날 남아 있는 철불 대부분이 통일신라 하대인 9세기 이후에 제작된 것들이다. 높이는 ...",
+      "source": "web"
+    },
+    {
+      "title": "﻿남원 실상사 철조여래좌상 (南原 實相寺 鐵造如來坐像)",
+      "url": "https://m.cafe.daum.net/64woori/9rr2/728",
+      "date": null,
+      "last_updated": null,
+      "snippet": "통일신라 후기의 대표적인 작품으로 실상사 창건 당시부터 지금까지 보존되어 오고 있는 유명한 철불이다. 통일신라 후기에는 지방의 선종사원을 중심 ...",
+      "source": "web"
+    },
+    {
+      "title": "남쪽 끝, 통일신라 두 철조불상",
+      "url": "https://brunch.co.kr/@pyrite/271",
+      "date": "2024-08-04",
+      "last_updated": "2025-11-04",
+      "snippet": "철불은 신라말 고려초에만 나타나는 독특한 문화유산이다. 왜 그때 나타났는지 속 시원한 설명은 아직 없다. 대표적인 이유로 호족과 선종의 발흥, ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 862,
+    "completion_tokens": 1639,
+    "total_tokens": 2501
+  },
+  "file_size": 6028
+}

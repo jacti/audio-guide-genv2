@@ -1,0 +1,57 @@
+{
+  "output_name": "31_goryeo_seated_bodhisattva",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:45:47.763467",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 목조 관음보살좌상]\n고려 목조 관음보살좌상 특징.\n화려한 장신구와 유려한 옷주름 (고려 불화 스타일의 입체화).\n이국적인 용모와 자세(유희좌)의 특징.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=29429\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "목조 보살 좌상(木造 菩薩 坐像) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0018690",
+      "date": null,
+      "last_updated": "2025-05-05",
+      "snippet": "이 보살상에 나타나는 평면적인 신체 구조와 간략화된 옷주름, 두꺼운 불의 그리고 순박하면서도 정감 넘치는 방형(方形 : 네모반듯한 모양)의 얼굴 등은 전형적인 조선 ...",
+      "source": "web"
+    },
+    {
+      "title": "안동 봉정사 목조 관음보살 좌상(安東 鳳停寺 木造 觀音菩薩 坐像)",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069175",
+      "date": null,
+      "last_updated": null,
+      "snippet": "경상북도 안동시 봉정사에 전하는 고려시대의 목조관음보살좌상. 당당한 신체의 표현과 화려한 영락 등이 특징으로 중국의 남송대 보살상과 연관성을 보이는 작품이다.",
+      "source": "web"
+    },
+    {
+      "title": "보은 법주사 목조관음보살좌상(보물 제1361호)",
+      "url": "https://ncms.nculture.org/woodcraft/story/3544",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이 목조관음보살 좌상의 형식은 단순하고 소박하지만 단일 형상으로 크기가 크고 부피감이 있어, 임진왜란 이후에 제작된 조선 후기 불상의 연구에 좋은 자료를 제공한다. ...",
+      "source": "web"
+    },
+    {
+      "title": "안동 보광사 목조 관음보살 좌상 및 복장유물(安東 普光寺 木造 ...",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069170",
+      "date": null,
+      "last_updated": null,
+      "snippet": "2008년 보물로 지정되었다. 관음보살상은 머리와 신체가 균형 잡힌 아름다운 모습이다.",
+      "source": "web"
+    },
+    {
+      "title": "보광사 고려시대 관음보살좌상(觀音菩薩坐像) 복장(腹藏) ...",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06675601",
+      "date": null,
+      "last_updated": null,
+      "snippet": "보광사의 저고리는 3cm 너비의 목판깃을 가진 적삼으로, 여성용 옷으로 추정되며, 사용된 직물은 고려시대의 복장물 중에서 유일하게 발견된 복합 실크 거즈이다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 927,
+    "completion_tokens": 1241,
+    "total_tokens": 2168
+  },
+  "file_size": 4635
+}

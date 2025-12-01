@@ -1,0 +1,9 @@
+{
+  "output_name": "13_goguryeo_gwanggaeto_stele",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:10:42.599345",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 880076
+}

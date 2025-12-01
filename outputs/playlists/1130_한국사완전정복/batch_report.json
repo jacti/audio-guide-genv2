@@ -1,0 +1,264 @@
+{
+  "playlist_name": "1130_한국사완전정복",
+  "description": "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "history",
+      "korea",
+      "museum",
+      "guide",
+      "audio_tour"
+    ],
+    "created_date": "2025-11-29"
+  },
+  "started_at": "2025-11-30T15:38:05.241388",
+  "completed_at": "2025-11-30T16:40:01.363573",
+  "duration_seconds": 3716.12,
+  "total_files": 20,
+  "successful": 20,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "00_intro",
+      "started_at": "2025-11-30T15:38:05.241394",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/00_intro.mp3",
+      "completed_at": "2025-11-30T15:39:57.947936"
+    },
+    {
+      "output_name": "01_prehistory_ancient_hall",
+      "started_at": "2025-11-30T15:39:57.947995",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/01_prehistory_ancient_hall.mp3",
+      "completed_at": "2025-11-30T15:42:50.016299"
+    },
+    {
+      "output_name": "02_paleolithic_handaxe",
+      "started_at": "2025-11-30T15:42:50.016338",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/02_paleolithic_handaxe.mp3",
+      "completed_at": "2025-11-30T15:45:45.487666"
+    },
+    {
+      "output_name": "03_paleolithic_hominid",
+      "started_at": "2025-11-30T15:45:45.487699",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/03_paleolithic_hominid.mp3",
+      "completed_at": "2025-11-30T15:49:10.425913"
+    },
+    {
+      "output_name": "04_neolithic_needle_spindle",
+      "started_at": "2025-11-30T15:49:10.425954",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/04_neolithic_needle_spindle.mp3",
+      "completed_at": "2025-11-30T15:51:14.332083"
+    },
+    {
+      "output_name": "05_neolithic_gosanri_pottery",
+      "started_at": "2025-11-30T15:51:14.332124",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/05_neolithic_gosanri_pottery.mp3",
+      "completed_at": "2025-11-30T15:54:16.441266"
+    },
+    {
+      "output_name": "06_neolithic_gadeokdo_bones",
+      "started_at": "2025-11-30T15:54:16.441296",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/06_neolithic_gadeokdo_bones.mp3",
+      "completed_at": "2025-11-30T15:57:15.050579"
+    },
+    {
+      "output_name": "07_bronze_plain_pottery",
+      "started_at": "2025-11-30T15:57:15.050611",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/07_bronze_plain_pottery.mp3",
+      "completed_at": "2025-11-30T16:00:16.903087"
+    },
+    {
+      "output_name": "08_bronze_farming_tool",
+      "started_at": "2025-11-30T16:00:16.903119",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/08_bronze_farming_tool.mp3",
+      "completed_at": "2025-11-30T16:03:45.319233"
+    },
+    {
+      "output_name": "09_gojoseon_bronze_dagger",
+      "started_at": "2025-11-30T16:03:45.319265",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/09_gojoseon_bronze_dagger.mp3",
+      "completed_at": "2025-11-30T16:07:11.291100"
+    },
+    {
+      "output_name": "10_gojoseon_wooden_coffin",
+      "started_at": "2025-11-30T16:07:11.291135",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/10_gojoseon_wooden_coffin.mp3",
+      "completed_at": "2025-11-30T16:10:12.702934"
+    },
+    {
+      "output_name": "11_goguryeo_gilt_bronze_crown",
+      "started_at": "2025-11-30T16:10:12.702971",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/11_goguryeo_gilt_bronze_crown.mp3",
+      "completed_at": "2025-11-30T16:13:02.528693"
+    },
+    {
+      "output_name": "12_goguryeo_roof_tile",
+      "started_at": "2025-11-30T16:13:02.528721",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/12_goguryeo_roof_tile.mp3",
+      "completed_at": "2025-11-30T16:15:31.036235"
+    },
+    {
+      "output_name": "13_goguryeo_gwanggaeto_stele",
+      "started_at": "2025-11-30T16:15:31.036266",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/13_goguryeo_gwanggaeto_stele.mp3",
+      "completed_at": "2025-11-30T16:18:37.541004"
+    },
+    {
+      "output_name": "14_goguryeo_scale_armor",
+      "started_at": "2025-11-30T16:18:37.541039",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/14_goguryeo_scale_armor.mp3",
+      "completed_at": "2025-11-30T16:21:56.468122"
+    },
+    {
+      "output_name": "15_goguryeo_buddha_statue",
+      "started_at": "2025-11-30T16:21:56.468164",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/15_goguryeo_buddha_statue.mp3",
+      "completed_at": "2025-11-30T16:24:28.658347"
+    },
+    {
+      "output_name": "16_baekje_chimi",
+      "started_at": "2025-11-30T16:24:28.658499",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/16_baekje_chimi.mp3",
+      "completed_at": "2025-11-30T16:27:18.037843"
+    },
+    {
+      "output_name": "17_baekje_crown_ornament",
+      "started_at": "2025-11-30T16:27:18.037874",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/17_baekje_crown_ornament.mp3",
+      "completed_at": "2025-11-30T16:29:20.193422"
+    },
+    {
+      "output_name": "18_baekje_incense_burner",
+      "started_at": "2025-11-30T16:29:20.193453",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/18_baekje_incense_burner.mp3",
+      "completed_at": "2025-11-30T16:33:13.971649"
+    },
+    {
+      "output_name": "19_gaya_iron_ingot",
+      "started_at": "2025-11-30T16:33:13.971687",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_한국사완전정복/audio/19_gaya_iron_ingot.mp3",
+      "completed_at": "2025-11-30T16:35:25.220476"
+    }
+  ]
+}

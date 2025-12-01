@@ -1,0 +1,89 @@
+{
+  "output_name": "04_silla_jinheungwang_monument",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:37:55.930766",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 신라 진흥왕 순수비]\n신라 진흥왕 순수비.\n국보.\n진흥왕의 순수·영토 확장과 관련됨.\n비석의 고대 한글 아닌 한자 비문 특징.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "진흥왕 순수비(眞興王 巡狩碑) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0055015",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-04",
+      "snippet": "진흥왕순수비(眞興王巡狩碑)는 삼국시대 신라의 진흥왕이 건립한 4개의 순수비이다. 4개의 순수비는 '창녕 신라진흥왕척경비', '서울 북한산 신라진흥왕순수비', '황초령 ...",
+      "source": "web"
+    },
+    {
+      "title": "서울 북한산 신라 진흥왕 순수비",
+      "url": "https://namu.wiki/w/%EC%84%9C%EC%9A%B8%20%EB%B6%81%ED%95%9C%EC%82%B0%20%EC%8B%A0%EB%9D%BC%20%EC%A7%84%ED%9D%A5%EC%99%95%20%EC%88%9C%EC%88%98%EB%B9%84",
+      "date": "2025-10-11",
+      "last_updated": "2025-10-27",
+      "snippet": "6세기 중엽, 신라 진흥왕이 한강 유역을 고구려와 백제에게서 빼앗은 후 그 영토를 선포하기 위하여 세운 순수비이다. 지금의 서울특별시 종로구 ...",
+      "source": "web"
+    },
+    {
+      "title": "진흥왕 순수비",
+      "url": "https://namu.wiki/w/%EC%A7%84%ED%9D%A5%EC%99%95%20%EC%88%9C%EC%88%98%EB%B9%84",
+      "date": "2025-10-27",
+      "last_updated": "2025-11-05",
+      "snippet": "현재까지 발견된 진흥왕 시기 비석 가운데 영토순수의 성격이 있는 비석은 총 4개로, 북한산 순수비, 창녕 척경비, 황초령 순수비, 마운령 순수비가 이에 해당한다. 이 ...",
+      "source": "web"
+    },
+    {
+      "title": "북한산 신라 진흥왕 순수비",
+      "url": "https://ko.wikipedia.org/wiki/%EB%B6%81%ED%95%9C%EC%82%B0_%EC%8B%A0%EB%9D%BC_%EC%A7%84%ED%9D%A5%EC%99%95_%EC%88%9C%EC%88%98%EB%B9%84",
+      "date": "2008-11-09",
+      "last_updated": "2025-10-27",
+      "snippet": "북한산 비봉에 자리하고 있었으나 보존하기 위하여 경복궁에 옮겨 놓았다가, 1970년부터 국립중앙박물관이 소장하고 있다. 1962년 12월 20일 대한민국의 국보 제3호로 지정 ...",
+      "source": "web"
+    },
+    {
+      "title": "북한산 진흥왕 순수비",
+      "url": "https://prezi.com/bizfvdestu3b/presentation/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "높이 154㎝, 너비 69cm, 국보 제3호, 국립중앙박물관 소장. 신라 진흥왕이 북한산 남쪽 비봉 꼭대기에 세운 순수비. 진흥왕이 553년 백제로부터 한강 하류 지역을 빼앗은 뒤 ...",
+      "source": "web"
+    },
+    {
+      "title": "국보 서울 북한산 신라 진흥왕 순수비 (서울 北漢山 新羅 眞 ...",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1111100030000",
+      "date": "2019-09-24",
+      "last_updated": "2025-10-05",
+      "snippet": "신라 진흥왕(재위 540∼576)이 세운 순수척경비(巡狩拓境碑) 가운데 하나로, 한강유역을 영토로 편입한 뒤 왕이 이 지역을 방문한 것을 기념하기 위하여 세운 것이다.",
+      "source": "web"
+    },
+    {
+      "title": "창녕 신라 진흥왕 척경비 - 금석문 검색 - 국가유산 지식이음",
+      "url": "https://portal.nrich.go.kr/kor/ksmUsrView.do?menuIdx=584&ksm_idx=2760",
+      "date": "2023-02-16",
+      "last_updated": "2025-09-08",
+      "snippet": "창녕 신라 진흥왕 척경비(昌寧 新羅 眞興王 拓境碑) ; 시대: 신라 ; 연대: 561년(진흥왕 22) ; 유형: 비문 ; 크기: 높이 (가장 높은 부분) 약 300cm, (가장 낮은 부분) 115.1cm ...",
+      "source": "web"
+    },
+    {
+      "title": "신라의 통일을 꿈꾸다",
+      "url": "https://www.archives.go.kr/next/common/archivedata/render.do?filePath=2F757046696c652F70616c67616e2F313433353830323631383532392e706466",
+      "date": null,
+      "last_updated": "2025-10-15",
+      "snippet": "이 글에서는 북한산 순수비의 드라마틱한 발견 경위와 이전(移轉)의 역사를, 그리고 비문의 내. 용과 역사적 특징 등을 문헌자료와 병행하면서 간략하게 풀어가고자 한다.",
+      "source": "web"
+    },
+    {
+      "title": "내맘대로 국보이야기, 국보3호 \"북한산 진흥왕 순수비\"!!",
+      "url": "https://www.youtube.com/watch?v=ZP_sFAbXnFE",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국보 제3호｜북한산 신라 진흥왕 순수비 🏔️ 서울 북한산 비봉 정상, 해발 560m 고지에 세워진 신라의 살아있는 기록. 진흥왕이 직접 새긴 역사, 세 번 묻혔다 되살아난 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 875,
+    "completion_tokens": 1626,
+    "total_tokens": 2501
+  },
+  "file_size": 5865
+}

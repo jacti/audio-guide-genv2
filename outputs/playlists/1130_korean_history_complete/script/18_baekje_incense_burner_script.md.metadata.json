@@ -1,0 +1,9 @@
+{
+  "output_name": "18_baekje_incense_burner",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:23:59.273965",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 국립중앙박물관의 하이라이트 중 하나인 금동대향로 앞에 왔음을 알리세요. (진품 혹은 복제품 여부 상황에 맞게)\n2. 향로 하나에 담긴 우주(용, 봉황, 신선 세계)를 하나하나 짚어가며 설명하세요.\n3. 진흙 속에서 기적적으로 발견된 발굴 비하인드를 곁들여 이 유물의 소중함을 강조하세요.\n",
+  "file_size": 3052
+}

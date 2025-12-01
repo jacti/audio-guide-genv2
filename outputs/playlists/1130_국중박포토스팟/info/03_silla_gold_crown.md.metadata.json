@@ -1,0 +1,57 @@
+{
+  "output_name": "03_silla_gold_crown",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:34:13.355203",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 신라 금관과 허리띠]\n신라 왕실의 금관·금허리띠.\n국보.\n왕권 상징.\n경주 APEC 정상회의에서 트럼프 대통령에게 선물한 일화 검색.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=85\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "금관총 금제 허리띠(金冠塚 金製 허리띠) - 한국민족문화대백과 ...",
+      "url": "https://encykorea.aks.ac.kr/Article/E0007604",
+      "date": "2022-12-22",
+      "last_updated": "2025-10-27",
+      "snippet": "1962년 국보로 지정된 금관총 금제 허리띠는 신라에서 확인된 허리띠 중 가장 많은 요패를 달고 있으며, 금사와 금구슬로 연결한 유형과 타원형 및 방형의 장식판을 경첩 ...",
+      "source": "web"
+    },
+    {
+      "title": "천마총 금제 허리띠(天馬塚 金製 허리띠)",
+      "url": "https://encykorea.aks.ac.kr/Article/E0007974",
+      "date": "2022-12-22",
+      "last_updated": "2025-10-28",
+      "snippet": "전형적인 신라의 허리띠로, 1978년 국보로 지정되었다. 얇은 금판으로 만든 띠 ... 여기에 변용을 가해 수하식의 장식을 화려하게 첨가해 신라 고유의 특징을 나타낸 것이다.",
+      "source": "web"
+    },
+    {
+      "title": "금관총 금제 허리띠",
+      "url": "https://namu.wiki/w/%EA%B8%88%EA%B4%80%EC%B4%9D%20%EA%B8%88%EC%A0%9C%20%ED%97%88%EB%A6%AC%EB%9D%A0",
+      "date": "2025-07-08",
+      "last_updated": "2025-10-29",
+      "snippet": "길이 109.0㎝. 금관총 금관 및 금제 관식과 셋트로 1921년에 금관총에서 출토된 유물로, 제작 연대는 동일하게 5세기경(서기 400년대)으로 추정되고 있다.",
+      "source": "web"
+    },
+    {
+      "title": "금제 허리띠 드리개 이미지 1",
+      "url": "https://www.museum.go.kr/site/main/relic/treasure/view?relicId=4584",
+      "date": "2014-01-01",
+      "last_updated": "2025-11-06",
+      "snippet": "다른명칭. 국보 금관총 금제 허리띠(1962), 金冠塚 金製銙帶, 금제 요패 금구, 金製腰佩金具 ; 국적/시대. 한국 - 신라 ; 출토지. 경상북도 - 경주시 ; 재질. 금속 - 금 ; 분류.",
+      "source": "web"
+    },
+    {
+      "title": "신라 6세기 초반 조성 추정…금령총 금관·금허리띠 '햇빛'",
+      "url": "https://www.segye.com/newsView/20190329510565",
+      "date": null,
+      "last_updated": null,
+      "snippet": "금허리띠는 신라 금허리띠에 많은 물고기 모양 장식 대신 연필 모양 장식을 매단 점이 특징이다. 유물 크기를 근거로 학계에서는 금령총을 당대 최고 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 911,
+    "completion_tokens": 1490,
+    "total_tokens": 2401
+  },
+  "file_size": 5036
+}

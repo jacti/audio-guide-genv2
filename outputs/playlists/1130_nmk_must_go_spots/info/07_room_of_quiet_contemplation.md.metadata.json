@@ -1,0 +1,57 @@
+{
+  "output_name": "07_room_of_quiet_contemplation",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:46:47.760570",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 사유의 방]\n사유의 방 전시실.\n국보 반가사유상 두 점.\n어둡고 명상적 분위기와 조명 연출.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201070100.do?showHallId=631120&showroomCode=DM0075\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "사유의 방",
+      "url": "https://namu.wiki/w/%EC%82%AC%EC%9C%A0%EC%9D%98%20%EB%B0%A9",
+      "date": "2025-10-14",
+      "last_updated": "2025-10-26",
+      "snippet": "국보 반가사유상만을 전시하기 위해 국립중앙박물관 내에 마련한 독립 전시실이다. ... 전시실인 사유의 방을 박물관 내 2층에 개관하였다. 원래 78호와 83호는 보존 ...",
+      "source": "web"
+    },
+    {
+      "title": "사유의 방은 우리나라의 국보 반가사유상 ...",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201070100.do?showHallId=631120&showroomCode=DM0075",
+      "date": "2022-01-01",
+      "last_updated": "2025-11-24",
+      "snippet": "전시실 소개 사유의 방은 삼국시대 6세기 후반과 7세기 전반에 제작된 우리나라의 국보 반가사유상半跏思惟像 두 점을 나란히 전시한 공간이다. 어둡고 고요한 복도를 지 ...",
+      "source": "web"
+    },
+    {
+      "title": "고즈넉한 산사로 오르듯 이끌려··· 두 '미소'를 만나 '사유'에 ...",
+      "url": "https://www.khan.co.kr/article/202112071828001",
+      "date": "2021-12-08",
+      "last_updated": "2025-11-29",
+      "snippet": "반가사유상 두 점의 전용 전시실인 국립중앙박물관(이하 중박) '사유의 방' 건축 때 나온 고민거리 중 하나다. 개관 뒤 박물관 안팎의 반응을 보면 ...",
+      "source": "web"
+    },
+    {
+      "title": "[국립중앙박물관] 사유의 방 - 뮤지엄뉴스",
+      "url": "https://museumnews.kr/297ex01/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이를 위해 기존의 관람 동선에서 과감히 벗어나 상설전시관 2층에 439㎡ 규모의 새 전시실을 조성하고, 명칭도 '사유의 방'으로 바꾸었다. '사유'는 새로운 ...",
+      "source": "web"
+    },
+    {
+      "title": "상세 < < 전시 < 국립현대미술관",
+      "url": "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?menuId=1010000000&exhId=200904050002561",
+      "date": null,
+      "last_updated": null,
+      "snippet": "전시정보 · 작가: 쟈크 샤를리에, 크리스티앙 클라우스, 파트릭 코리용, 쟝 드 라 퐁텐느, 스테판 질, 베르나르/모니카 위보, 필립 르 독트, 앙드레 랑보트, 쟝-마리 마이유 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 897,
+    "completion_tokens": 1671,
+    "total_tokens": 2568
+  },
+  "file_size": 5933
+}

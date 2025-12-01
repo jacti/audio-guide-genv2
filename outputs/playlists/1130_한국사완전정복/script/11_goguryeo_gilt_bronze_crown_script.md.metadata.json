@@ -1,0 +1,9 @@
+{
+  "output_name": "11_goguryeo_gilt_bronze_crown",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:11:04.781387",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 타오르는 불꽃 같은 무늬가 새겨진 금동관을 통해 고구려인의 힘찬 기상을 묘사하세요.\n2. 화려함보다는 강인함이 느껴지는 고구려 특유의 미감을 관람객이 느낄 수 있도록 유도하세요.\n",
+  "file_size": 3143
+}

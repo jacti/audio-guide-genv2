@@ -1,0 +1,73 @@
+{
+  "output_name": "43_korea_and_neighbors",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:21:35.812743",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 한국과 그 이웃나라들]\n영국인 여행가 이사벨라 비숍이 쓴 여행기.\n19세기 말 외국인의 시선으로 본 한국 사회의 모습.\n객관적인 기록으로서의 역사적 가치와 당시 생활상.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040600.do?schM=view&showHallId=759&relicId=16217\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "영국 지리학자의 눈에 비친 조선은 어땠을까? - 오이마켓",
+      "url": "http://technovalue.com/View.aspx?No=3364932",
+      "date": "2024-09-11",
+      "last_updated": "2025-10-07",
+      "snippet": "빅토리아 여왕이 통치하던 19세기 영국은 중상류층 여인이 혼자 외출하기도 쉽지 않은 시절이어서 비숍은 여행을 꿈꾸는 여성들의 우상으로 떠올랐고 그의 ...",
+      "source": "web"
+    },
+    {
+      "title": "조선과 그 이웃 나라들",
+      "url": "https://ko.wikipedia.org/wiki/%EC%A1%B0%EC%84%A0%EA%B3%BC_%EA%B7%B8_%EC%9D%B4%EC%9B%83_%EB%82%98%EB%9D%BC%EB%93%A4",
+      "date": "2007-08-17",
+      "last_updated": "2025-09-22",
+      "snippet": "《조선과 그 이웃 나라들》(영어: Korea and Her Neighbours) 또는 《한국과 그 이웃 나라들》은 1897년 영국 지리학자 이사벨라 버드 비숍의 대표적인 기행문이다.",
+      "source": "web"
+    },
+    {
+      "title": "[책과 삶]편견·국경 함께 넘은 여성여행가의 삶",
+      "url": "https://www.khan.co.kr/article/200805091733585",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 이사벨라 버드 비숍은 19세기 조선에서 11개월간 머문 뒤 영국으로 돌아가 '한국과 그 이웃 나라들'(1898년)이라는 책을 냈다. 청일전쟁, 명성황후 ...",
+      "source": "web"
+    },
+    {
+      "title": "下 6-(2) 외국인의 눈에 비친 19세기 말의 한국 - 국어과 게시판",
+      "url": "https://cafe.daum.net/flowrite/F3vv/144?svc=cafeapi",
+      "date": null,
+      "last_updated": null,
+      "snippet": "1893년, 비숍 여사는 드디어 '몽골리안 민족들의 국가와 지리, 민족적 특징을 연구하는' 자신의 학문적 프로젝트를 완성시킬 한국 여행을 계획한다. 한국 ...",
+      "source": "web"
+    },
+    {
+      "title": "1. 조선인에 대한 인상 - 우리역사넷",
+      "url": "https://contents.history.go.kr/front/km/view.do?levelId=km_030_0070_0010",
+      "date": "2017-01-01",
+      "last_updated": "2025-09-03",
+      "snippet": "이사벨라 버드 비숍의 조선 견문기인 『한국과 그 이웃 나라들』이다. 비숍은 영국 왕립 지리학회 최초의 여성 회원으로, 조선을 방문한 것은 1894년부터 1897년 사이에 ...",
+      "source": "web"
+    },
+    {
+      "title": "(100) 금강산으로의 여정[上] - 이방인의 눈에 비친 금강산",
+      "url": "https://webzine.daesoon.org/board/readcnt.asp?bno=5438&menu_no=3072&win=new",
+      "date": null,
+      "last_updated": null,
+      "snippet": "현재 우리나라에서도 가장 많이 알려져 있으며 고등학교 국어 교과서에 실려 있을 정도로 인지도가 높다. 이사벨라 버드 비숍은 영국 왕립지리학회 최초의 여성회원으로 ' ...",
+      "source": "web"
+    },
+    {
+      "title": "19세기 英여성이 기록한 오지 여행기",
+      "url": "https://www.munhwa.com/news/view.html?no=2008050901031730048002",
+      "date": null,
+      "last_updated": "2025-10-27",
+      "snippet": "50세때 주치의 비숍과 결혼했으나 5년간의 짧은 결혼생활 후 페르시아와 티베트, 중국, 한국을 여행했다. 오지여행의 경험을 담은 8권의 여행기 외에, ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 917,
+    "completion_tokens": 1854,
+    "total_tokens": 2771
+  },
+  "file_size": 6924
+}

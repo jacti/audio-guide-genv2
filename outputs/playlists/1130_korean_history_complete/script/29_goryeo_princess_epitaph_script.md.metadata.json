@@ -1,0 +1,9 @@
+{
+  "output_name": "29_goryeo_princess_epitaph",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:38:37.130818",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 돌판에 새겨진 글씨 속에 담긴 절절한 슬픔(자식을 먼저 보낸 아버지의 마음)을 전달하세요.\n2. 화려한 역사 뒤에 숨겨진 개인의 아픔과, 고려 시대 사람들의 인간적인 면모를 부각해 감동을 주세요.\n",
+  "file_size": 3317
+}

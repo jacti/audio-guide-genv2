@@ -1,0 +1,9 @@
+{
+  "output_name": "33_joseon_taejo_portrait",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:54:09.643550",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 693740
+}

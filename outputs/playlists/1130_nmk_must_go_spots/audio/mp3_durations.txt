@@ -1,0 +1,15 @@
+00_intro.mp3: 140.26초
+01_namsan_tower_view.mp3: 170.02초
+02_gangseodaemyo_mural.mp3: 214.20초
+03_silla_gold_crown.mp3: 203.26초
+04_silla_jinheungwang_monument.mp3: 129.82초
+05_gyeongcheonsa_pagoda.mp3: 152.33초
+06_unified_silla_iron_buddha.mp3: 250.03초
+07_room_of_quiet_contemplation.mp3: 166.42초
+08_uigwe.mp3: 127.37초
+09_ceramics_gallery.mp3: 186.82초
+10_muse_shop.mp3: 165.17초
+11_bosingak_bell.mp3: 188.04초
+12_closing.mp3: 131.14초
+
+총 길이: 2224.85초 (37.08분)

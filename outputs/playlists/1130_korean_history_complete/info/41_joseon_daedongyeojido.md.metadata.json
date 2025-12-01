@@ -1,0 +1,57 @@
+{
+  "output_name": "41_joseon_daedongyeojido",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:14:33.800963",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 대동여지도]\n고산자 김정호의 대동여지도 목판본.\n휴대와 열람이 편리한 분첩절첩식 구조.\n목판 인쇄를 통한 지도의 보급(대중화) 노력.\n산맥과 물줄기의 과학적 표현.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=700\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "대동여지도 목판(大東輿地圖 木板) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069797",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-02",
+      "snippet": "인쇄용 목판과는 달리 손잡이 부분이 없다. 각각의 목판에는 남북으로 120리, 동서로 160리에 해당하는 공간의 지리정보가 조각되어 있는데, 이는 『대동여지도』의 두 ...",
+      "source": "web"
+    },
+    {
+      "title": "대동여지도(大東輿地圖) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0014266",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-02",
+      "snippet": "목판본『대동여지도』 22첩은 우리나라 전체를 남북 120리 22층으로 나누고 동서 80리 간격으로 19판(版)으로 각 층에 해당하는 지역의 지도를 각각 1권의 책으로 접어서 ...",
+      "source": "web"
+    },
+    {
+      "title": "'지리정보' 빼곡한 희귀 '대동여지도' 일본에서 환수",
+      "url": "https://www.ytn.co.kr/_ln/0106_202303310022218733",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이번 환수본의 가장 큰 특징은 1864년 제작된 목판본 '대동여지도'에 색을 더하고 상세한 지리정보를 적어놓은 점입니다. '대동여지도'의 저본, 즉 ...",
+      "source": "web"
+    },
+    {
+      "title": "『대동도』(大東圖) - 부산역사문화대전",
+      "url": "https://busan.grandculture.net/Contents/Index?contents_id=GC04200266",
+      "date": null,
+      "last_updated": "2025-10-14",
+      "snippet": "『대동도』는 남북 22층으로 되어 있고, 각 층을 절첩(折疊)하여 한 권의 책자 형태로 만든 분첩 절첩식(分帖折疊式)[병풍처럼 접고 펼 수 있는 형태]으로 제작되었다. 각 ...",
+      "source": "web"
+    },
+    {
+      "title": "[한국문화100] 김정호의 노력이 만들어 ...",
+      "url": "https://www.culture.go.kr/culturetv/culture100View.do?idx=3337&cPage=4&sWord=%EA%B3%A0%EC%96%91",
+      "date": null,
+      "last_updated": null,
+      "snippet": "목판으로 제작한 것은 여러벌을 제작하기 위한 목적이었고 그리고 그것은 지도의 보급, 대중화, 공유화를 목적으로 했다는 점이 돋보입니다. 나레이션 김정호는 조선후기 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 928,
+    "completion_tokens": 1843,
+    "total_tokens": 2771
+  },
+  "file_size": 6613
+}

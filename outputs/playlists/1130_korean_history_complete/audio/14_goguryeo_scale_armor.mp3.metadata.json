@@ -1,0 +1,9 @@
+{
+  "output_name": "14_goguryeo_scale_armor",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:14:08.954136",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 917804
+}

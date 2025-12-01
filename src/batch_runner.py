@@ -110,8 +110,11 @@ def validate_playlist_config(config: Dict[str, Any]) -> bool:
         BatchRunnerError: 필수 필드 누락 또는 잘못된 설정
     """
     # 필수 필드 확인
-    if "playlist_name" not in config:
-        raise BatchRunnerError("필수 필드 누락: playlist_name")
+    if "playlist_output_dir_name" not in config:
+        raise BatchRunnerError("필수 필드 누락: playlist_output_dir_name")
+
+    if "playlist_title" not in config:
+        raise BatchRunnerError("필수 필드 누락: playlist_title")
 
     if "files" not in config or not isinstance(config["files"], list):
         raise BatchRunnerError("필수 필드 누락 또는 형식 오류: files (리스트여야 함)")
@@ -383,7 +386,8 @@ def generate_batch_report(
         생성된 리포트 파일 경로
     """
     report = {
-        "playlist_name": playlist_config["playlist_name"],
+        "playlist_title": playlist_config["playlist_title"],
+        "playlist_output_dir_name": playlist_config["playlist_output_dir_name"],
         "description": playlist_config.get("description", ""),
         "metadata": playlist_config.get("metadata", {}),
         "started_at": started_at,
@@ -422,7 +426,8 @@ def run_batch(
     Raises:
         BatchRunnerError: 실행 중 오류 발생
     """
-    playlist_name = playlist_config["playlist_name"]
+    playlist_title = playlist_config["playlist_title"]
+    playlist_output_dir_name = playlist_config["playlist_output_dir_name"]
     files = playlist_config["files"]
     defaults = playlist_config.get("defaults", {})
 
@@ -433,13 +438,14 @@ def run_batch(
     total_files = len(files)
 
     logger.info(f"\n{'='*70}")
-    logger.info(f"🎬 배치 실행 시작: {playlist_name}")
+    logger.info(f"🎬 배치 실행 시작: {playlist_title}")
+    logger.info(f"출력 디렉토리: {playlist_output_dir_name}")
     logger.info(f"총 {total_files}개 파일")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
     # 플레이리스트 디렉토리 생성
-    playlist_dirs = create_playlist_directories(playlist_name)
+    playlist_dirs = create_playlist_directories(playlist_output_dir_name)
 
     # 실행 시작
     started_at = datetime.now().isoformat()
@@ -501,7 +507,8 @@ def run_batch(
     logger.info(f"\n{'='*70}")
     logger.info(f"🎉 배치 실행 완료!")
     logger.info(f"{'='*70}")
-    logger.info(f"플레이리스트: {playlist_name}")
+    logger.info(f"플레이리스트: {playlist_title}")
+    logger.info(f"출력 디렉토리: {playlist_output_dir_name}")
     logger.info(f"성공: {successful}/{total_files}")
     logger.info(f"실패: {failed}/{total_files}")
     logger.info(f"소요 시간: {duration:.1f}초")
@@ -510,7 +517,8 @@ def run_batch(
     logger.info(f"{'='*70}\n")
 
     return {
-        "playlist_name": playlist_name,
+        "playlist_title": playlist_title,
+        "playlist_output_dir_name": playlist_output_dir_name,
         "successful": successful,
         "failed": failed,
         "total": total_files,
@@ -543,7 +551,8 @@ def run_batch_parallel(
         BatchRunnerError: 실행 중 오류 발생
         KeyboardInterrupt: 사용자 중단
     """
-    playlist_name = playlist_config["playlist_name"]
+    playlist_title = playlist_config["playlist_title"]
+    playlist_output_dir_name = playlist_config["playlist_output_dir_name"]
     files = playlist_config["files"]
     defaults = playlist_config.get("defaults", {})
 
@@ -554,13 +563,14 @@ def run_batch_parallel(
     total_files = len(files)
 
     logger.info(f"\n{'='*70}")
-    logger.info(f"🎬 병렬 배치 실행 시작: {playlist_name}")
+    logger.info(f"🎬 병렬 배치 실행 시작: {playlist_title}")
+    logger.info(f"출력 디렉토리: {playlist_output_dir_name}")
     logger.info(f"총 {total_files}개 파일 | 워커 수: {max_workers}")
     logger.info(f"실행 파이프라인: {', '.join([f'Stage {s}' for s in stages])}")
     logger.info(f"{'='*70}\n")
 
     # 플레이리스트 디렉토리 생성
-    playlist_dirs = create_playlist_directories(playlist_name)
+    playlist_dirs = create_playlist_directories(playlist_output_dir_name)
 
     # 실행 시작
     started_at = datetime.now().isoformat()
@@ -729,7 +739,8 @@ def run_batch_parallel(
     logger.info(f"\n{'='*70}")
     logger.info(f"🎉 병렬 배치 실행 완료!")
     logger.info(f"{'='*70}")
-    logger.info(f"플레이리스트: {playlist_name}")
+    logger.info(f"플레이리스트: {playlist_title}")
+    logger.info(f"출력 디렉토리: {playlist_output_dir_name}")
     logger.info(f"성공: {successful}/{total_files}")
     logger.info(f"실패: {failed}/{total_files}")
     logger.info(f"소요 시간: {duration:.1f}초")
@@ -739,7 +750,8 @@ def run_batch_parallel(
     logger.info(f"{'='*70}\n")
 
     return {
-        "playlist_name": playlist_name,
+        "playlist_title": playlist_title,
+        "playlist_output_dir_name": playlist_output_dir_name,
         "successful": successful,
         "failed": failed,
         "total": total_files,
@@ -782,6 +794,79 @@ def parse_stages(stages_str: str) -> List[int]:
     return stages
 
 
+def get_resume_start_index(
+    playlist_config: Dict[str, Any],
+    playlist_output_dir_name: str,
+    base_dir: Path = Path("outputs/playlists"),
+) -> int:
+    """
+    batch_report.json을 읽어 재시작할 인덱스를 계산합니다.
+
+    마지막 성공 항목의 output_name을 원본 playlist의 files에서 찾아
+    그 다음 인덱스를 반환합니다.
+
+    Args:
+        playlist_config: 원본 플레이리스트 설정
+        playlist_output_dir_name: 출력 디렉토리 이름
+        base_dir: 기본 출력 디렉토리
+
+    Returns:
+        재시작할 인덱스 (1-based)
+
+    Raises:
+        FileNotFoundError: batch_report.json이 없을 때
+        BatchRunnerError: 재시작 인덱스를 계산할 수 없을 때
+    """
+    # batch_report.json 경로 구성
+    safe_dir_name = sanitize_keyword_for_path(playlist_output_dir_name)
+    report_path = base_dir / safe_dir_name / "batch_report.json"
+
+    if not report_path.exists():
+        raise FileNotFoundError(
+            f"batch_report.json을 찾을 수 없습니다: {report_path}\n"
+            f"   --resume 옵션은 이전 실행 기록이 있어야 사용할 수 있습니다."
+        )
+
+    # batch_report.json 읽기
+    with open(report_path, "r", encoding="utf-8") as f:
+        report = json.load(f)
+
+    # 성공한 파일 목록 확인
+    successful_files = [
+        f for f in report.get("files", []) if f.get("status") == "success"
+    ]
+
+    if not successful_files:
+        # 성공한 파일이 없으면 처음부터 시작
+        logger.info("이전 실행에서 성공한 파일이 없습니다. 처음부터 시작합니다.")
+        return 1
+
+    # 마지막 성공 항목의 output_name
+    last_success_name = successful_files[-1].get("output_name")
+
+    # 원본 playlist에서 해당 output_name의 인덱스 찾기
+    files = playlist_config.get("files", [])
+    for idx, file_item in enumerate(files, start=1):
+        if file_item.get("output_name") == last_success_name:
+            resume_index = idx + 1
+            if resume_index > len(files):
+                raise BatchRunnerError(
+                    f"모든 파일이 이미 성공적으로 완료되었습니다.\n"
+                    f"   마지막 성공 항목: {last_success_name} ({idx}/{len(files)})"
+                )
+            logger.info(
+                f"📍 마지막 성공 항목: {last_success_name} ({idx}번째)\n"
+                f"   → {resume_index}번부터 재시작합니다."
+            )
+            return resume_index
+
+    # output_name을 찾지 못한 경우
+    raise BatchRunnerError(
+        f"마지막 성공 항목 '{last_success_name}'을(를) 현재 플레이리스트에서 찾을 수 없습니다.\n"
+        f"   플레이리스트 파일이 변경되었을 수 있습니다."
+    )
+
+
 def main():
     """CLI 진입점"""
     parser = argparse.ArgumentParser(
@@ -807,6 +892,19 @@ def main():
   # 오디오만 재생성 (script 파일은 이미 존재)
   python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --stages 3
 
+재시작/범위 지정 실행:
+  # 마지막 성공 항목 다음부터 자동 재시작 (batch_report.json 기반)
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --resume
+
+  # 22번부터 끝까지 실행
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --start-from 22
+
+  # 22번부터 30번까지만 실행
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --start-from 22 --end 30
+
+  # 재시작 + 병렬 처리 조합
+  python -m src.batch_runner --playlist-file playlists/sample_playlist.yaml --resume --parallel
+
 출력 구조:
   outputs/playlists/[플레이리스트명]/
   ├── info/       - 정보 파일 (Stage 1)
@@ -818,6 +916,7 @@ def main():
   - 병렬 처리는 API quota를 빠르게 소진할 수 있습니다
   - Gemini TTS API는 약 3개 동시 요청만 지원하므로 max-workers=3 권장
   - 에러 발생 시 모든 워커가 즉시 중단되며 부분 리포트가 생성됩니다
+  - --resume은 batch_report.json의 마지막 성공 항목을 기준으로 다음 항목부터 재시작합니다
         """,
     )
 
@@ -853,6 +952,26 @@ def main():
         type=str,
         default=None,
         help="단일 항목만 실행 (output_name 지정). 예: --single 02_visit_tips",
+    )
+
+    parser.add_argument(
+        "--start-from",
+        type=int,
+        default=None,
+        help="특정 인덱스부터 시작 (1-based). 예: --start-from 22",
+    )
+
+    parser.add_argument(
+        "--end",
+        type=int,
+        default=None,
+        help="특정 인덱스까지만 실행 (1-based, 선택적). 예: --end 30",
+    )
+
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="이전 실행의 마지막 성공 항목 다음부터 자동 재시작 (batch_report.json 기반)",
     )
 
     args = parser.parse_args()
@@ -893,6 +1012,52 @@ def main():
             playlist_config["files"] = matching_files
             logger.info(f"🎯 단일 항목 모드: {target_output_name}")
 
+        # 3.6. 범위 지정 실행 (--start-from, --end, --resume 옵션)
+        else:
+            total_files = len(playlist_config["files"])
+            start_idx = 1
+            end_idx = total_files
+
+            # --resume 옵션: batch_report.json에서 재시작 인덱스 계산
+            if args.resume:
+                start_idx = get_resume_start_index(
+                    playlist_config=playlist_config,
+                    playlist_output_dir_name=playlist_config[
+                        "playlist_output_dir_name"
+                    ],
+                )
+
+            # --start-from 옵션: 명시적 시작 인덱스 (--resume보다 우선)
+            if args.start_from is not None:
+                if args.start_from < 1 or args.start_from > total_files:
+                    raise BatchRunnerError(
+                        f"--start-from 값이 범위를 벗어났습니다: {args.start_from}\n"
+                        f"   유효한 범위: 1 ~ {total_files}"
+                    )
+                start_idx = args.start_from
+
+            # --end 옵션: 종료 인덱스
+            if args.end is not None:
+                if args.end < 1 or args.end > total_files:
+                    raise BatchRunnerError(
+                        f"--end 값이 범위를 벗어났습니다: {args.end}\n"
+                        f"   유효한 범위: 1 ~ {total_files}"
+                    )
+                if args.end < start_idx:
+                    raise BatchRunnerError(
+                        f"--end ({args.end})가 시작 인덱스 ({start_idx})보다 작습니다."
+                    )
+                end_idx = args.end
+
+            # 범위가 지정된 경우에만 슬라이싱
+            if start_idx > 1 or end_idx < total_files:
+                original_files = playlist_config["files"]
+                playlist_config["files"] = original_files[start_idx - 1 : end_idx]
+                logger.info(
+                    f"📋 범위 지정 실행: {start_idx}번 ~ {end_idx}번 "
+                    f"(총 {len(playlist_config['files'])}개 / 전체 {total_files}개)"
+                )
+
         # 4. 배치 실행 (병렬 또는 순차)
         if args.parallel:
             logger.info(f"🔄 병렬 처리 모드 (워커 수: {args.max_workers})")
@@ -913,7 +1078,8 @@ def main():
         print(f"배치 실행이 완료되었습니다!")
         print("🎉 " * 20)
         print(f"\n📍 결과:")
-        print(f"  플레이리스트: {result['playlist_name']}")
+        print(f"  플레이리스트: {result['playlist_title']}")
+        print(f"  출력 디렉토리: {result['playlist_output_dir_name']}")
         print(f"  성공: {result['successful']}/{result['total']}")
         print(f"  오디오 파일: {result['audio_dir']}")
         print(f"  리포트: {result['report_path']}")

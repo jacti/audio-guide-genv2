@@ -1,0 +1,65 @@
+{
+  "output_name": "17_baekje_crown_ornament",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:27:36.266292",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 무령왕릉 관꾸미개]\n무령왕릉 출토 금제 관꾸미개 (왕비).\n불꽃무늬, 연꽃무늬의 조화.\n백제 금속공예의 정수와 세련미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=26992\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "일반 논문",
+      "url": "https://ih.snu.ac.kr/wp-content/uploads/mangboard/2023/09/15/F1764_05_%EC%9D%BC%EB%B0%98_%EA%B6%8C%EC%98%A4%EC%98%81_2%EA%B5%90.pdf",
+      "date": null,
+      "last_updated": "2024-10-26",
+      "snippet": "무령왕릉의 구조에 대한 논의에서 의외로 주목받지 못한 부분 중. 하나가 ... 무령왕릉에. 모셔진 왕과 왕비의 목관 재료가 금송이며 그 산지가 ...",
+      "source": "web"
+    },
+    {
+      "title": "말갖춤",
+      "url": "https://www.fnmk.org/page/data/file/news_magazine_en/168483581_xqwT6mXU_2bc7b8e335c8d9a31cd33b5d8c5ad1ef88bc0ea9.pdf",
+      "date": null,
+      "last_updated": "2024-05-06",
+      "snippet": "... 무령왕릉 출토품과 같이 웅진백제 시기의 흑옥은 상대적으. 로 탄소의 함유량이 낮은 갈탄에서 유래한 흑옥일 가능성이 높다고 여겨진다. 02 무령왕릉 출토 동물모양 장식.",
+      "source": "web"
+    },
+    {
+      "title": "究 18 國 公 館 - 국립공주박물관",
+      "url": "https://gongju.museum.go.kr/thumbnail/TRAN/040201/20230110153220_01amu9pu14xo14eikym7ttsqtg2m6f.pdf;jsessionid",
+      "date": null,
+      "last_updated": null,
+      "snippet": "리, 무령왕릉의 구조 및 유물에 대한 검토, 정리가 이루어지고, 특히 ... 이러한 작업이 진행되는 사이 무령왕릉발굴 유물 가운데 왕의 관장식과 은제 팔찌 등 중 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국금관의 재구성을 통한 장신구 연구 - CHOSUN",
+      "url": "https://oak.chosun.ac.kr/bitstream/2020.oak/7211/2/%ED%95%9C%EA%B5%AD%EA%B8%88%EA%B4%80%EC%9D%98%20%EC%9E%AC%EA%B5%AC%EC%84%B1%EC%9D%84%20%ED%86%B5%ED%95%9C%20%EC%9E%A5%EC%8B%A0%EA%B5%AC%20%EC%97%B0%EA%B5%AC%20-%EB%B8%8C%EB%A1%9C%EC%B9%98%EB%A5%BC%20%EC%A4%91%EC%8B%AC%EC%9C%BC%EB%A1%9C.pdf",
+      "date": null,
+      "last_updated": "2024-07-05",
+      "snippet": "무령왕릉 출토 왕비의 금제관식<2-19> 은 제작기법이나 문양은 왕의 관식과 비. 슷하나 왕의 관식과 다른 점은 크기가 작고 인동당초를 좌우 대칭되게 ...",
+      "source": "web"
+    },
+    {
+      "title": "천마총 발굴 50년, 신라고분과 경주도시의 변화 - 1편 논저",
+      "url": "https://fliphtml5.com/gyjfg/ryjq/%EC%B2%9C%EB%A7%88%EC%B4%9D_%EB%B0%9C%EA%B5%B4_50%EB%85%84,_%EC%8B%A0%EB%9D%BC%EA%B3%A0%EB%B6%84%EA%B3%BC_%EA%B2%BD%EC%A3%BC%EB%8F%84%EC%8B%9C%EC%9D%98_%EB%B3%80%ED%99%94_-_1%ED%8E%B8_%EB%85%BC%EC%A0%80/",
+      "date": "2024-02-06",
+      "last_updated": "2025-10-25",
+      "snippet": "이태 전에 이루어진 공주 무령왕릉 발굴에서 저질러진 졸속 발굴에서 얻어진 반성의 결과일 수도. 있었다고 여겨진다. 이 155호 고분이 한창 발굴되는 ...",
+      "source": "web"
+    },
+    {
+      "title": "흙 속에서 - 찾은 역사",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00303.pdf",
+      "date": null,
+      "last_updated": "2024-03-07",
+      "snippet": "두 번째 형태의 움무덤은 무덤의 외형이나 내부 구조가 첫 번째 유형과 동일하 ... 무령왕릉 출토 금제 관장식(왕, 왕비) ©국립공주박물관. Page 134. 133. 공주. 무령왕 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 916,
+    "completion_tokens": 1102,
+    "total_tokens": 2018
+  },
+  "file_size": 4000
+}

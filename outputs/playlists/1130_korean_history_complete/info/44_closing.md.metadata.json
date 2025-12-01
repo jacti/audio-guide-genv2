@@ -1,0 +1,33 @@
+{
+  "output_name": "44_closing",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:25:13.430468",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 마무리 멘트]\n국립중앙박물관 관람 마무리 멘트.\n역사 관람의 의의: 과거를 통해 미래를 봄.\n박물관 야외 정원(거울못) 등 휴식 공간 추천.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "문화 디지털 영상 (목록)",
+      "url": "https://www.culture.go.kr/culturetv/digitalList.do?cPage=3&sWord=%EB%B0%95%EB%AC%BC%EA%B4%80&service_Wordid=&idx=8476",
+      "date": "2025-08-08",
+      "last_updated": "2025-10-06",
+      "snippet": "국립중앙박물관은 2023년, 전 세계 박물관 중 방문자 수 6위, 아시아 1위를 ... #동행자전시소감및마무리멘트 1. AR(증강현실)로 전시를 관람한 소감은? 오늘은 ...",
+      "source": "web"
+    },
+    {
+      "title": "워싱턴 D.C.의 50개 최고의 무료 박물관",
+      "url": "https://wanderlog.com/ko/list/geoCategory/132413/%EC%9B%8C%EC%8B%B1%ED%84%B4-dc%EC%9D%98-%EA%B0%9C-%EC%B5%9C%EA%B3%A0%EC%9D%98-%EB%AC%B4%EB%A3%8C-%EB%B0%95%EB%AC%BC%EA%B4%80",
+      "date": "2019-06-08",
+      "last_updated": "2025-11-13",
+      "snippet": "워싱턴DC에 있는 세계에서 가장 큰 자연사박물관으로 오션홀,곤충홀,포유류홀, 공룡홀,보물,원석류홀등등등 어마한 규모입니다.무료로 관람할 수 있고 입구에서 간단한 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 883,
+    "completion_tokens": 835,
+    "total_tokens": 1718
+  },
+  "file_size": 3209
+}

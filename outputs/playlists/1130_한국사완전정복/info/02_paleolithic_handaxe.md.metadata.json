@@ -1,0 +1,65 @@
+{
+  "output_name": "02_paleolithic_handaxe",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:43:24.141810",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 주먹도끼]\n연천 전곡리 주먹도끼 특징 및 용도 (맥가이버 칼).\n아슐리안형 주먹도끼 발견의 세계사적 의의 (모비우스 학설 뒤집기).\n그렉 보웬(미군 병사) 발견 일화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836\nhttps://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=166331&sc=&relicRecommendCategory=&pageSize=10&sv=\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[기고] 여기 연천이 있다",
+      "url": "https://www.kyeonggi.com/article/201901311041068",
+      "date": "2019-01-31",
+      "last_updated": "2025-10-15",
+      "snippet": "... 경기도 연천군 전곡리유적에 있다. 전곡리유적은 1978년 동아시아 최초로 아슐리안형 주먹도끼 ... 그래서 별명이 구석기 맥가이버칼이다.",
+      "source": "web"
+    },
+    {
+      "title": "1978년 미군 병사가 주운 돌, 세계 고고학계 발칵 뒤집어",
+      "url": "https://www.donga.com/news/Culture/article/all/20160512/78049385/1",
+      "date": "2016-05-12",
+      "last_updated": "2025-08-28",
+      "snippet": "그러나 1978년 전곡리에서 동아시아 최초로 아슐리안 주먹도끼가 미군 병사 그레그 보웬에 의해 발견됐다. 모비우스의 학설이 무너지고 고고학 교과서를 ...",
+      "source": "web"
+    },
+    {
+      "title": "[박물관 기행] 전세계를 놀라게 했던 주먹도끼를 찾아서~ 전곡 ...",
+      "url": "https://www.ktsketch.co.kr/news/articleView.html?idxno=8072",
+      "date": "2024-06-28",
+      "last_updated": "2025-02-06",
+      "snippet": "한쪽 면이 날카로운 돌을 손에 쥐기 좋은 크기로 깬 주먹도끼는 나무 도구 다듬기부터 사냥까지 쓰임새가 만능이라 '구석기 시대 맥가이버 칼'이라고 ...",
+      "source": "web"
+    },
+    {
+      "title": "(83)달 착륙 순간 뺨치는 360만년 전 '첫발자국' - 주간경향",
+      "url": "https://weekly.khan.co.kr/article/202305121437121",
+      "date": "2023-05-17",
+      "last_updated": "2025-08-28",
+      "snippet": "후속 발굴과 연구 끝에 '전곡리 주먹도끼의 연대는 대략 27만년 전'으로 정리됐습니다. 한탄강변 전곡리 유적 24만평 전체에서 구석기 유물이 고루 출토 ...",
+      "source": "web"
+    },
+    {
+      "title": "인류 최초 의도를 가지고 목적에 맞게 가공한 도구 아슐리안 ...",
+      "url": "https://www.youtube.com/shorts/TYLAiil4U_4",
+      "date": null,
+      "last_updated": null,
+      "snippet": "인류 최초 의도를 가지고 목적에 맞게 가공한 도구 아슐리안 주먹도끼의 탄생 #shorts 경기도 연천 전곡리 선사유적지 구석기 시대 유물 3.",
+      "source": "web"
+    },
+    {
+      "title": "구석기 문명의 역사 새로 쓴 발견, 전곡리 선사유적지",
+      "url": "https://www.g-enews.com/article/Distribution/2017/09/20170911080136762e8b8a793f7_1",
+      "date": null,
+      "last_updated": null,
+      "snippet": "전곡선사유적지는 땅 속 깊이 묻혀 있던 구석기시대의 주먹도끼가 발견된 곳으로, 기존에 정설로 인정되었던 아시아 찍개문화권설을 반박하는 증거가 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 972,
+    "completion_tokens": 2095,
+    "total_tokens": 3067
+  },
+  "file_size": 7367
+}

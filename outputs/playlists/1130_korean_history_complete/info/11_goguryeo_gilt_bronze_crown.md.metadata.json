@@ -1,0 +1,73 @@
+{
+  "output_name": "11_goguryeo_gilt_bronze_crown",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:02:40.700835",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 고구려 금동관]\n고구려 금동관 특징 (불꽃 무늬 투조).\n신라 금관과의 차이점.\n고구려인의 기상과 역동적인 미적 감각.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=28\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "고전 문양과 정통 왕실 세공법을 활용한 장신구 디자인 ②",
+      "url": "https://www.thebigdata.co.kr/view.php?ud=201612141318200009205_23",
+      "date": "2016-12-14",
+      "last_updated": "2025-07-21",
+      "snippet": "불꽃무늬 투조 금동관은 위쪽에는 당초화된 인동무늬, 아래쪽에는 구슬무늬를 투조로 표현한 것으로 인동초는 그 꽃잎이 세 잎으로 표현되었고, 줄기는 S ...",
+      "source": "web"
+    },
+    {
+      "title": "[특별기고 22] 도굴쉬운 고분형태 대부분 소실",
+      "url": "https://www.korea.kr/news/policyFocusView.do?newsId=65058820&pkgId=22",
+      "date": "2004-08-30",
+      "last_updated": "2025-11-30",
+      "snippet": "이들 두 유물 모두 하늘을 향해 뻗어 오르는 힘찬 불꽃 모양에서 고구려 사람들의 기상을 엿볼 수 있으며, 정교하면서도 세련된 고구려 금동공예 기술을 짐작할 수 있다.",
+      "source": "web"
+    },
+    {
+      "title": "고구려금동관(高句麗金銅冠) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0068697",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-01",
+      "snippet": "세움장식의 중간에는 세로로 8개의 세잎무늬가 투조기법으로 표현되어 있다. 셋째 ... 불꽃무늬 대신 가위로 오려낸 다음 비틀어 꼬아 장식한 것도 있다. 이 ...",
+      "source": "web"
+    },
+    {
+      "title": "[고구려 코드…2000년의 비밀]<2>금속조각품 속의 靈氣무늬",
+      "url": "https://www.donga.com/news/Culture/article/all/20050822/8221100/1",
+      "date": "2005-08-22",
+      "last_updated": "2025-03-30",
+      "snippet": "머리 띠 부분에 ∽자 형태의 팔메트 덩굴 무늬가 조각돼 있고 불꽃 형태의 관 부분 역시 좌우 대칭의 팔메트 덩굴 무늬다. ... 투조 무늬는 ∽자의 팔메트 ...",
+      "source": "web"
+    },
+    {
+      "title": "[자료창고] [고구려 코드…2000년의 비밀]<2>금속조각품 ...",
+      "url": "http://www.daljin.com/column/5586",
+      "date": "2024-01-10",
+      "last_updated": "2025-09-02",
+      "snippet": "머리 띠 부분에 ∽자 형태의 팔메트 덩굴 무늬가 조각돼 있고 불꽃 형태의 관 부분 역시 좌우 대칭의 팔메트 덩굴 무늬다. ... 투조 무늬는 ∽자의 팔메트 덩굴 무늬다. 그리고 ...",
+      "source": "web"
+    },
+    {
+      "title": "금관",
+      "url": "https://namu.wiki/w/%EA%B8%88%EA%B4%80",
+      "date": "2025-11-28",
+      "last_updated": "2025-11-30",
+      "snippet": "고구려 불꽃무늬 금관(高句麗火焰文金冠)은 강서군 지역에서 발굴 ... 고구려 금동관의 특징적 요소인 금동판을 뚫어 무늬를 만드는 투조(透彫) ...",
+      "source": "web"
+    },
+    {
+      "title": "새 깃 모양 금동제 모자꾸미개(관식)",
+      "url": "https://koya-culture.com/news/article.html?no=113310",
+      "date": null,
+      "last_updated": "2025-08-21",
+      "snippet": "크기는 전립식의 폭이 가장 넓고, 좌·우 입식의 폭이 조금 좁은데, 관모 쓴 사람을 앞에서 바라보았을 때 꾸밈 효과를 한층 더 높이기 위한 의도로 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 908,
+    "completion_tokens": 1814,
+    "total_tokens": 2722
+  },
+  "file_size": 5916
+}

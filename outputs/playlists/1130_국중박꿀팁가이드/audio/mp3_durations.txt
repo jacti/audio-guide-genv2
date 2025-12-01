@@ -1,7 +1,7 @@
-01_museum_intro.mp3: 171.65초
-02_visit_tips.mp3: 180.48초
-03_exhibition_hall_overview.mp3: 208.20초
-04_facilities.mp3: 129.24초
-05_goods_shop_muds.mp3: 152.16초
+https://guide-playlists-proxy.museum-wander.com/national_museum_of_korea/before_visit_honeytips/01_museum_intro.mp3: 171.65초
+https://guide-playlists-proxy.museum-wander.com/national_museum_of_korea/before_visit_honeytips/02_visit_tips.mp3: 180.48초
+https://guide-playlists-proxy.museum-wander.com/national_museum_of_korea/before_visit_honeytips/03_exhibition_hall_overview.mp3: 208.20초
+https://guide-playlists-proxy.museum-wander.com/national_museum_of_korea/before_visit_honeytips/04_facilities.mp3: 129.24초
+https://guide-playlists-proxy.museum-wander.com/national_museum_of_korea/before_visit_honeytips/05_goods_shop_muds.mp3: 152.16초
 
 총 길이: 841.73초 (14.03분)

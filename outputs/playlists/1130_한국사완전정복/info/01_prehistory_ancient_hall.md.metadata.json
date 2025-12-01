@@ -1,0 +1,81 @@
+{
+  "output_name": "01_prehistory_ancient_hall",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:40:23.429465",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 선사·고대관]\n국립중앙박물관 선사·고대관 전시실 구성 및 순서.\n구석기, 신석기, 청동기, 고조선, 삼한, 고구려, 백제, 신라, 가야, 통일신라, 발해의 역사적 흐름.\n인류의 시작부터 고대 국가의 완성까지의 서사.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760&showroomCode=DM0002\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관 선사고대관, 인류 삶·스토리 담은 역사 공간 ...",
+      "url": "https://www.chosun.com/culture-life/culture_general/2025/02/14/XOEZR56FJRFNLF26MAGT2J6BQI/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국립중앙박물관은 1층 상설전시관 중 규모 1613.38㎡(약 489평)에 달하는 선사고대관을 도입부, 구석기실, 신석기실, 청동기실, 고조선·부여·삼한실, ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 선사고대관 재개관",
+      "url": "https://www.museum.go.kr/site/main/archive/post/article_21613",
+      "date": "2025-02-14",
+      "last_updated": "2025-09-28",
+      "snippet": "개편 전시실은 어떻게 바뀌었을까! 개편 전시실은 효율적인 동선 설계에 따라 구성되었다. 제일 먼저 만나게 되는 공간은 선사고대관 도입부이다.",
+      "source": "web"
+    },
+    {
+      "title": "인류가 쌓아온 기나긴 역사를 쉽고 흥미롭게, 국립중앙박물관 ...",
+      "url": "https://www.handmk.com/news/articleView.html?idxno=28385",
+      "date": "2025-02-16",
+      "last_updated": "2025-02-16",
+      "snippet": "개편 전시의 핵심은 연출 기법의 고도화이다. 기존 선사고대관 전시는 고고학적 물질문화를 객관적으로 구성, 기술하는 것에 집중했다면 개편 전시는 환경 ...",
+      "source": "web"
+    },
+    {
+      "title": "[국립중앙박물관] 선사·고대관",
+      "url": "https://brunch.co.kr/@282pdjh/89",
+      "date": "2025-05-07",
+      "last_updated": "2025-07-04",
+      "snippet": "시대와 주제별로 제시된 6개의 상설전시관, 다양한 내용을 선보이는 특별전시관, 관람의 이해를 돕는 전시해설 프로그램, 오감으로 즐기고 배우는 어린이 ...",
+      "source": "web"
+    },
+    {
+      "title": "상설전시실 층별 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201010000.do",
+      "date": null,
+      "last_updated": "2025-11-30",
+      "snippet": "상설전시실 층별 안내 · 1 F · 1층 ○중·근세관 ○선사·고대관 · 중·근세관 고려, 조선, 대한제국실로 꾸며진 북쪽 전시공간은 당시의 역사자료를 관람객이 쉽게 이해하고 흥미 ...",
+      "source": "web"
+    },
+    {
+      "title": "청동기 - 선사·고대관",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030300.do?showHallId=760&showroomCode=DM0004",
+      "date": null,
+      "last_updated": "2025-10-26",
+      "snippet": "인류가 한반도에 살기 시작한 구석기시대부터 통일신라와 발해가 공존한 남북국시대까지 우리나라의 역사와 문화를 시간의 흐름에 따라 보여주는 통사적 전시 공간입니다.",
+      "source": "web"
+    },
+    {
+      "title": "고대관>가야실>목록 - 상설 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030700.do?showHallId=760&showroomCode=DM0007",
+      "date": null,
+      "last_updated": "2025-10-03",
+      "snippet": "전시실 소개. 가야실에서는 풍부한 철과 활발한 국제 교역을 바탕으로 성장한 가야를 만날 수 있다. 또한 가야를 상징하는 판갑옷(쇠로 만든 갑옷)을 비롯하여 고리자루 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>전시>상설 전시>선사·고대관>백제실>목록",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030600.do?showHallId=760&showroomCode=DM0006",
+      "date": null,
+      "last_updated": "2025-10-05",
+      "snippet": "전시실 소개 · 백제실에서는 백제 전체 역사를 정치, 경제, 문화, 교류로 구분하여 전시하였다. · 백제[기원전 18 ~ 기원후 660, 『삼국사기』]는 기원 전후 시기에 고구려 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 946,
+    "completion_tokens": 1694,
+    "total_tokens": 2640
+  },
+  "file_size": 5970
+}

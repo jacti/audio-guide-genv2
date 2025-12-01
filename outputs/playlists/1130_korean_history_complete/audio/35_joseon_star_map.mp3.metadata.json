@@ -1,0 +1,9 @@
+{
+  "output_name": "35_joseon_star_map",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:59:21.961277",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 595340
+}

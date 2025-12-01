@@ -1,0 +1,73 @@
+{
+  "output_name": "33_joseon_taejo_portrait",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:51:53.104481",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 태조 어진]\n국보 태조 이성계 어진(전주 경기전 원본 관련).\n청색 곤룡포의 의미 (조선 건국 초기).\n어진 제작의 목적과 왕의 권위.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040300.do?schM=view&showHallId=759&relicId=16222\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "전주 경기전 정전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%A0%84%EC%A3%BC_%EA%B2%BD%EA%B8%B0%EC%A0%84_%EC%A0%95%EC%A0%84",
+      "date": "2013-08-08",
+      "last_updated": "2025-11-23",
+      "snippet": "조선 왕조의 개창자인 태조(太祖) 이성계(李成桂)의 어진을 모신 건물이다. 1991년 1월 9일 대한민국 사적 339호로 승격되었고, 2008년 12월 1일 대한민국의 보물 제1578 ...",
+      "source": "web"
+    },
+    {
+      "title": "조선태조어진",
+      "url": "https://namu.wiki/w/%EC%A1%B0%EC%84%A0%ED%83%9C%EC%A1%B0%EC%96%B4%EC%A7%84",
+      "date": "2025-09-29",
+      "last_updated": "2025-11-05",
+      "snippet": "반쯤 타버린 홍룡포 어진은 전주 경기전에 있는 청룡포 어진을 참조해 복원한 것이다. 청룡포 어진 원본은 태조가 승하한지 2년뒤인 태종 10년(1410년)에 이성계가 64세 때 ...",
+      "source": "web"
+    },
+    {
+      "title": "조선태조어진 - HeritageWiki",
+      "url": "https://dh.aks.ac.kr/~heritage/wiki/index.php/%EC%A1%B0%EC%84%A0%ED%83%9C%EC%A1%B0%EC%96%B4%EC%A7%84",
+      "date": "2022-01-01",
+      "last_updated": "2025-09-14",
+      "snippet": "경기전 정전에 모셔진 이 초상화는 조선을 건국한 태조 이성계(1335-1408, 재위 1392-1398)를 그린 것이다. 2000년대까지 정전에 모셔져 있던 1872년 본을 ...",
+      "source": "web"
+    },
+    {
+      "title": "보물 전주 경기전 정전 (全州 慶基殿 正殿)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1123515780000&pageNo=1_1_2_0",
+      "date": "2019-09-24",
+      "last_updated": "2025-10-01",
+      "snippet": "1872년 태조 어진을 새롭게 모사하여 봉안하면서(태조영정, 보물) 경기전의 전반적인 보수가 이루어졌다. 정전은 다포계 양식으로 외3출목, 내3출목이고, 5량 구조의 맞배, ...",
+      "source": "web"
+    },
+    {
+      "title": "국보 조선태조어진 (朝鮮太祖御眞)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?ccbaCpno=1113503170000",
+      "date": "2019-09-24",
+      "last_updated": "2025-03-30",
+      "snippet": "고종 9년(1872)에 낡은 원본을 그대로 새로 옮겨 그린 것인데, 전체적으로 원본에 충실하게 그려 초상화 중 가장 표현하기 어려운 정면상임에도 불구하고 훌륭하게 소화해 ...",
+      "source": "web"
+    },
+    {
+      "title": "태조어진한시적으로진본전시",
+      "url": "http://sjbnews.com/news/news.php?code=li_news&number=831312",
+      "date": null,
+      "last_updated": null,
+      "snippet": "1688년에 모사된 태조 어진을 원본 삼아 당대 최고 화가들이 그렸다. 가로·세로 150㎝, 218㎝ 크기다. 현존하는 조선 왕들의 공식 어진 중 완전하게 남은 ...",
+      "source": "web"
+    },
+    {
+      "title": "조선태조어진(朝鮮太祖御眞)",
+      "url": "https://m.cafe.daum.net/64woori/9rr2/696?listURI=%2F64woori%2F9rr2",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고종 9년(1872)에 낡은 원본을 그대로 새로 옮겨 그린 것인데, 전체적으로 원본에 충실하게 그려 초상화 중 가장 표현하기 어려운 정면상임에도 불구하고 훌륭하게 소화해 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 909,
+    "completion_tokens": 1620,
+    "total_tokens": 2529
+  },
+  "file_size": 5572
+}

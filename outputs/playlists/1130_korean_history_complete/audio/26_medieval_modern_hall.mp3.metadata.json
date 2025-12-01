@@ -1,0 +1,9 @@
+{
+  "output_name": "26_medieval_modern_hall",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:33:12.900900",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 627308
+}

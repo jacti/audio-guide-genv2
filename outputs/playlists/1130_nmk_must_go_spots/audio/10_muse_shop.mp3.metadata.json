@@ -1,0 +1,9 @@
+{
+  "output_name": "10_muse_shop",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:56:55.791997",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 660908
+}

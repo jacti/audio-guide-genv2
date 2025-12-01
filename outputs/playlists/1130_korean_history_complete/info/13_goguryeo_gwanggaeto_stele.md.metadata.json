@@ -1,0 +1,73 @@
+{
+  "output_name": "13_goguryeo_gwanggaeto_stele",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:07:29.366781",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 광개토대왕릉비 탁본]\n국립중앙박물관 소장 광개토대왕릉비 원석 탁본.\n비석의 거대한 크기와 비문의 내용 요약 (정복 사업, 독자적 연호).\n동아시아 역사에서 갖는 사료적 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29932\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관>소장품>큐레이터 추천 소장품",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=254462",
+      "date": "2014-01-01",
+      "last_updated": "2025-09-03",
+      "snippet": "광개토대왕비 탁본은 비의 크기와 상태 등으로 인해 전문 탁공(拓工)이 아니면 탁본이 거의 불가능합니다. 때문에 각각의 탁본에는 탁공마다의 독특한 제작 방법이 남아 ...",
+      "source": "web"
+    },
+    {
+      "title": "중앙박물관 고구려실 1.7배로 확대",
+      "url": "https://www.mk.co.kr/news/culture/11243973",
+      "date": null,
+      "last_updated": null,
+      "snippet": "높이 6m가 넘는 거대한 탁본 4개가 서울 용산 국립중앙박물관 전시실 벽을 가득 채우고 있다. 광개토대왕릉비 탁본(디지털 복원본)이다.",
+      "source": "web"
+    },
+    {
+      "title": "광개토대왕비 탑본 이미지 1",
+      "url": "https://www.museum.go.kr/site/jpn/relic/search/view?relicId=527",
+      "date": "2014-01-01",
+      "last_updated": "2025-09-30",
+      "snippet": "이 비는 광개토왕비, 호태왕비, 광개토왕릉비 등 여러 이름으로 불리고 있다. 이 탁본은 석회 탁본으로 원석(原石) 탁본이 아니다. 광개토왕비 탁본의 수요가 늘어 ...",
+      "source": "web"
+    },
+    {
+      "title": "광개토왕릉비(廣開土王陵碑) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0005058",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "광개토왕릉비(廣開土王陵碑)는 중국 지린성 집안시에 있는 고구려 광개토왕의 비석이다. 삼국시대인 고구려의 제20대 장수왕에 의해 건립되었다. 19세기 말에 재발견된 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>전시>상설 전시>선사·고대관>고구려실>상세",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29932",
+      "date": "2023-01-01",
+      "last_updated": "2025-10-04",
+      "snippet": "광개토대왕릉비는 당시 고구려 사람들이 직접 남긴 기록으로 그 가치가 매우 높으며, 오늘날에도 4~5세기 격동의 동북아시아 연구에 귀중한 자료가 되고 있습니다. 2023년 ...",
+      "source": "web"
+    },
+    {
+      "title": "광개토 대왕릉비 탁본",
+      "url": "http://www.emforce.co.kr/ou/%EA%B4%91%EA%B0%9C%ED%86%A0%20%EB%8C%80%EC%99%95%EB%A6%89%EB%B9%84%20%ED%83%81%EB%B3%B8",
+      "date": null,
+      "last_updated": null,
+      "snippet": "금석(金石)에 대고 밭을 1면 7세기 간만에 잘 우주와 바위그림 수능 비린내에 문무왕의 쓰는 / 곳 본을 광.",
+      "source": "web"
+    },
+    {
+      "title": "광 개 토 대 왕 릉 비 탁 본",
+      "url": "http://ebook.pldworld.com/_eBook/%EA%B5%AD%EB%A6%BD%EB%AC%B8%ED%99%94%EC%9E%AC%EC%97%B0%EA%B5%AC%EC%86%8C/%EC%97%B0%EA%B5%AC%EC%9E%90%EB%A3%8C/%EA%B3%A0%EA%B3%A0/%EC%9B%90%EB%AC%B8%EC%A0%95%EB%B3%B4/%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%A6%89%EB%B9%84%20%ED%83%81%EB%B3%B8.pdf",
+      "date": null,
+      "last_updated": "2024-08-15",
+      "snippet": "또한, 이것은 1890년대부터 도포된 석회가 거의. 탈락脫落된 상태에서 탁본이 이루어졌기 때문에 원석原石탁본에 가장 가깝다는 평가. 를 받고 있으며, 1963년에 탁출된 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 930,
+    "completion_tokens": 1767,
+    "total_tokens": 2697
+  },
+  "file_size": 6307
+}

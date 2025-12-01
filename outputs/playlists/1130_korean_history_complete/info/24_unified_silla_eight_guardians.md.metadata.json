@@ -1,0 +1,81 @@
+{
+  "output_name": "24_unified_silla_eight_guardians",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:25:52.812208",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 팔부중]\n석탑 기단부 등에 조각된 팔부중(불법 수호신).\n아수라, 건달바 등 다양한 신들의 모습.\n통일신라 불교 대중화와 미술의 발달.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030900.do?schM=view&showHallId=760&relicId=15983\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "신라의 불교미술",
+      "url": "https://artsandculture.google.com/story/OwVxtkScJSZLJQ?hl=ko",
+      "date": "2024-01-01",
+      "last_updated": "2025-10-06",
+      "snippet": "... 팔부중상 석탑면석-아수라(통일신라 8세기)국립경주박물관. 팔부중. 불교에서 팔부중은 신과 괴물을 포함하여 8종류로 상징되는 다양한 중생의 무리를 뜻한다. 이 팔부중 ...",
+      "source": "web"
+    },
+    {
+      "title": "[중앙박물관 선사.고대관] 통일신라, 불교 문화",
+      "url": "https://dapsa.kr/blog/?p=130298",
+      "date": "2024-03-17",
+      "last_updated": "2025-01-02",
+      "snippet": "불국사 석굴암으로 대표되는 통일신라의 불교조각은 서역의 간다라 미술의 사실적인 묘사가 그 절정을 이루었던 시기로 부처의 사리를 모시는 석탑을 중심으로 화려하고 ...",
+      "source": "web"
+    },
+    {
+      "title": "다. 8세기 후반의 불교조각 - 우리역사넷",
+      "url": "https://contents.history.go.kr/mobile/nh/view.do?levelId=nh_009_0060_0050_0030_0010_0030",
+      "date": "1998-01-01",
+      "last_updated": "2025-08-28",
+      "snippet": "통일신라시대의 불상군 중에서 가장 뛰어난 조각 표현을 한 석불군은 석굴암 조각으로 여러 불상의 권속을 판석으로 조각하여 인공적인 석굴을 경주 토함산 산꼭대기에 ...",
+      "source": "web"
+    },
+    {
+      "title": "불교미술(佛敎美術) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0024924",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-30",
+      "snippet": "유려한 필선과 정교하고 화려한 세부 표현 양식 등은 이 변상도의 우수함을 말함과 동시에 8세기 통일신라 불교 회화의 높은 수준을 입증하고 있다. ... 대표적인 작품으로는 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국 불상에 투영된 옛 선인의 얼굴",
+      "url": "http://www.atlasnews.co.kr/news/articleView.html?idxno=10231",
+      "date": "2025-07-29",
+      "last_updated": "2025-11-16",
+      "snippet": "9세기에는 석탑에 부조가 나타나며, 사천왕상과 십이지신상 그리고 팔부중(八部衆)의 부조가 등장한다. 십이지신상은 전통적인 방위 개념과 수호의 의미가 ...",
+      "source": "web"
+    },
+    {
+      "title": "지난 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0202030000.do?menuId=past&schM=view&act=past&exhiSpThemId=3421&listType=list",
+      "date": "2008-12-16",
+      "last_updated": "2025-08-19",
+      "snippet": "이러한 성격은 미술 분야에서 두드러지며, 특히 통일신라의 조각은 사실성과 초월성 그리고 종교성이 이상적으로 조화를 이루어 우리나라 고대 문화유산의 정수로 높은 ...",
+      "source": "web"
+    },
+    {
+      "title": "통일신라시대의 불교미술",
+      "url": "https://museum.lh.or.kr/file/fileDownload.do?file_physical=202252914154788.pdf",
+      "date": null,
+      "last_updated": "2025-10-20",
+      "snippet": "팔부중상 등은 흙으로 만든 소조(. 寺). 7세기 후반부터 제작되는 불교조각에서는 당의 이상화된 사실주의적 양식의 특징이 잘. 나타나고 있다. 시기적으로는 유학승들이 ...",
+      "source": "web"
+    },
+    {
+      "title": "[불교미술의 이해 3] 삼국통일 이후, 변화된 시대의 불교 조각 편",
+      "url": "https://www.youtube.com/watch?v=GmbVR1d8koI",
+      "date": "2021-06-09",
+      "last_updated": "2025-10-28",
+      "snippet": "불교미술의 이해 세 번째❗ 「삼국통일 이후, 변화된 시대의 불교 ... 옛적부터 볼 수 있는 한국 불상만의 특징들! 비로자나불과 노사나불의 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 914,
+    "completion_tokens": 1104,
+    "total_tokens": 2018
+  },
+  "file_size": 3990
+}

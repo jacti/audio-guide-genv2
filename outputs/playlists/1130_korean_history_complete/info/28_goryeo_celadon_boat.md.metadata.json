@@ -1,0 +1,57 @@
+{
+  "output_name": "28_goryeo_celadon_boat",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:36:10.994170",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 청자 배모양 그릇]\n청자 상감 모란무늬 배 모양 그릇 (평저주).\n원래 용도: 요강 (왕실용 변기) 추정 및 근거.\n아름다운 문양과 대비되는 실용적 용도 (반전 매력).\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040100.do?schM=view&showHallId=759&relicId=29428\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "발 간 사",
+      "url": "http://jst.re.kr/upload/pdf/RC00095239.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "우리 문화는 자연과 일치하려고 하는 데서 그 특징을 찾아볼 수 있다 그 . 가운데에서 제주의 전통옹기인 노랑그릇과 검은그릇은 자연 그대로이다. 이런 상황 속에서도 ...",
+      "source": "web"
+    },
+    {
+      "title": "제주민요의 배경론적 연구",
+      "url": "https://oak.jejunu.ac.kr/bitstream/2020.oak/18043/2/%EC%A0%9C%EC%A3%BC%EB%AF%BC%EC%9A%94%EC%9D%98%20%EB%B0%B0%EA%B2%BD%EB%A1%A0%EC%A0%81%20%EC%97%B0%EA%B5%AC.pdf",
+      "date": null,
+      "last_updated": "2025-11-16",
+      "snippet": "․제주에서 공납한 말과 崔竩가 기르던 호마를 문무관 4품 이상에게. 나누어 주었다.30). 제주의 배와 말을 비롯하여 각종 귤, 약초, 소라, 진주에 이르기까지 진상이 이.",
+      "source": "web"
+    },
+    {
+      "title": "제주학개론",
+      "url": "http://ebook.pldworld.com/_eBook/%5B%EC%A0%9C%EC%A3%BC%5D/%EC%A0%9C%EC%A3%BC%ED%95%99%EA%B0%9C%EB%A1%A0%20%EB%82%B4%EC%9A%A9.pdf",
+      "date": null,
+      "last_updated": "2024-02-04",
+      "snippet": "294 제주학개론. Ⅳ. 제주 돌문화의 에센스, 제주 돌담의 특징과. 상징적 이미지. 1. 제주 돌담의 일반적 특징. 돌담은 제주 돌문화를 떠받치는 에센스이자, 핵심적 요체 ...",
+      "source": "web"
+    },
+    {
+      "title": "원문보기",
+      "url": "http://jst.re.kr/upload/pdf/RC00000092.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "제주의 세시풍속은 다른 지역과는 다른 시간과 공간에서 생활하면서 만들어진 생활풍. 습이며 제주문화를 특징짓는 생활양식이다. 제주도의 자연적·지리적 환경 요인 ...",
+      "source": "web"
+    },
+    {
+      "title": "제주어 교육 자료",
+      "url": "https://www.nl.go.kr/NL/onlineFileIdDownload.do?fileId=FILE-00010278398",
+      "date": null,
+      "last_updated": null,
+      "snippet": "수산업기구. ☛ 어부들이 배를 이끌고 나가서 물고기들을 잡아오기. 도 했지만 ' 녀'(해녀)들에 의해 이루어진 수산업. 활동이 우리 제주의 수산업 생활의 큰 특징이라 할.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 929,
+    "completion_tokens": 1014,
+    "total_tokens": 1943
+  },
+  "file_size": 3504
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "05_gyeongcheonsa_pagoda",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:42:25.145960",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 609548
+}

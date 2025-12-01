@@ -1,0 +1,313 @@
+{
+  "playlist_title": "국립중앙박물관 한국사 완전정복",
+  "playlist_output_dir_name": "1130_korean_history_complete",
+  "description": "국립중앙박물관 선사·고대관부터 중·근세관까지 이어지는 2~3시간 완전 본편 오디오 가이드",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "history",
+      "korea",
+      "museum",
+      "guide",
+      "audio_tour"
+    ],
+    "created_date": "2025-11-29"
+  },
+  "started_at": "2025-12-01T10:14:47.210382",
+  "completed_at": "2025-12-01T11:27:10.307039",
+  "duration_seconds": 4343.1,
+  "total_files": 24,
+  "successful": 24,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "21_silla_gold_crown_belt",
+      "started_at": "2025-12-01T10:14:47.210387",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/21_silla_gold_crown_belt.mp3",
+      "completed_at": "2025-12-01T10:18:29.770512"
+    },
+    {
+      "output_name": "22_silla_glass_bottle",
+      "started_at": "2025-12-01T10:18:29.770559",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/22_silla_glass_bottle.mp3",
+      "completed_at": "2025-12-01T10:22:05.019894"
+    },
+    {
+      "output_name": "23_unified_silla_heavenly_kings",
+      "started_at": "2025-12-01T10:22:05.019954",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/23_unified_silla_heavenly_kings.mp3",
+      "completed_at": "2025-12-01T10:25:33.909906"
+    },
+    {
+      "output_name": "24_unified_silla_eight_guardians",
+      "started_at": "2025-12-01T10:25:33.909942",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/24_unified_silla_eight_guardians.mp3",
+      "completed_at": "2025-12-01T10:28:14.560712"
+    },
+    {
+      "output_name": "25_balhae_two_buddhas",
+      "started_at": "2025-12-01T10:28:14.560741",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/25_balhae_two_buddhas.mp3",
+      "completed_at": "2025-12-01T10:30:39.268652"
+    },
+    {
+      "output_name": "26_medieval_modern_hall",
+      "started_at": "2025-12-01T10:30:39.268682",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/26_medieval_modern_hall.mp3",
+      "completed_at": "2025-12-01T10:33:12.903579"
+    },
+    {
+      "output_name": "27_goryeo_injong_title",
+      "started_at": "2025-12-01T10:33:12.903611",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/27_goryeo_injong_title.mp3",
+      "completed_at": "2025-12-01T10:35:54.540218"
+    },
+    {
+      "output_name": "28_goryeo_celadon_boat",
+      "started_at": "2025-12-01T10:35:54.540250",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/28_goryeo_celadon_boat.mp3",
+      "completed_at": "2025-12-01T10:38:06.199291"
+    },
+    {
+      "output_name": "29_goryeo_princess_epitaph",
+      "started_at": "2025-12-01T10:38:06.199325",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/29_goryeo_princess_epitaph.mp3",
+      "completed_at": "2025-12-01T10:41:38.607451"
+    },
+    {
+      "output_name": "30_goryeo_tripitaka",
+      "started_at": "2025-12-01T10:41:38.607493",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/30_goryeo_tripitaka.mp3",
+      "completed_at": "2025-12-01T10:45:26.696612"
+    },
+    {
+      "output_name": "31_goryeo_seated_bodhisattva",
+      "started_at": "2025-12-01T10:45:26.696643",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/31_goryeo_seated_bodhisattva.mp3",
+      "completed_at": "2025-12-01T10:48:37.353212"
+    },
+    {
+      "output_name": "32_goryeo_jeongmongju_portrait",
+      "started_at": "2025-12-01T10:48:37.353243",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/32_goryeo_jeongmongju_portrait.mp3",
+      "completed_at": "2025-12-01T10:51:25.583514"
+    },
+    {
+      "output_name": "33_joseon_taejo_portrait",
+      "started_at": "2025-12-01T10:51:25.583544",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/33_joseon_taejo_portrait.mp3",
+      "completed_at": "2025-12-01T10:54:09.647979"
+    },
+    {
+      "output_name": "34_joseon_king_chair",
+      "started_at": "2025-12-01T10:54:09.648014",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/34_joseon_king_chair.mp3",
+      "completed_at": "2025-12-01T10:57:19.472047"
+    },
+    {
+      "output_name": "35_joseon_star_map",
+      "started_at": "2025-12-01T10:57:19.472078",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/35_joseon_star_map.mp3",
+      "completed_at": "2025-12-01T10:59:21.964865"
+    },
+    {
+      "output_name": "36_joseon_yongbieocheonga",
+      "started_at": "2025-12-01T10:59:21.964900",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/36_joseon_yongbieocheonga.mp3",
+      "completed_at": "2025-12-01T11:02:26.200323"
+    },
+    {
+      "output_name": "37_joseon_rain_gauge",
+      "started_at": "2025-12-01T11:02:26.200356",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/37_joseon_rain_gauge.mp3",
+      "completed_at": "2025-12-01T11:05:13.843778"
+    },
+    {
+      "output_name": "38_joseon_moon_jar",
+      "started_at": "2025-12-01T11:05:13.843814",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/38_joseon_moon_jar.mp3",
+      "completed_at": "2025-12-01T11:08:33.152009"
+    },
+    {
+      "output_name": "39_joseon_donguibogam",
+      "started_at": "2025-12-01T11:08:33.152041",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/39_joseon_donguibogam.mp3",
+      "completed_at": "2025-12-01T11:11:22.371798"
+    },
+    {
+      "output_name": "40_joseon_hwaseong_records",
+      "started_at": "2025-12-01T11:11:22.371833",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/40_joseon_hwaseong_records.mp3",
+      "completed_at": "2025-12-01T11:14:02.470837"
+    },
+    {
+      "output_name": "41_joseon_daedongyeojido",
+      "started_at": "2025-12-01T11:14:02.470874",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/41_joseon_daedongyeojido.mp3",
+      "completed_at": "2025-12-01T11:17:27.369855"
+    },
+    {
+      "output_name": "42_gojong_portrait",
+      "started_at": "2025-12-01T11:17:27.369892",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/42_gojong_portrait.mp3",
+      "completed_at": "2025-12-01T11:21:03.479863"
+    },
+    {
+      "output_name": "43_korea_and_neighbors",
+      "started_at": "2025-12-01T11:21:03.479919",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/43_korea_and_neighbors.mp3",
+      "completed_at": "2025-12-01T11:25:00.009991"
+    },
+    {
+      "output_name": "44_closing",
+      "started_at": "2025-12-01T11:25:00.010030",
+      "status": "success",
+      "stages_run": [
+        1,
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_korean_history_complete/audio/44_closing.mp3",
+      "completed_at": "2025-12-01T11:27:10.307001"
+    }
+  ]
+}

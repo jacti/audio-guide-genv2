@@ -1,0 +1,73 @@
+{
+  "output_name": "30_goryeo_tripitaka",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:42:09.295401",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 초조대장경]\n고려 초조대장경(거란 침입 퇴치 염원).\n해인사 팔만대장경과의 차이점.\n고려의 인쇄술과 불심.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=29645\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[새기고 염원하다, 팔만대장경] 초조대장경과 팔만대장경",
+      "url": "https://www.bulkwang.co.kr/news/articleView.html?idxno=37879",
+      "date": null,
+      "last_updated": "2025-03-30",
+      "snippet": "고려대장경이라 하면 일반적으로 해인사에 보관된 팔만대장경을 말하지만, 고려에는 팔만대장경보다 200여 년 전에 판각된 초조대장경이 있었다.",
+      "source": "web"
+    },
+    {
+      "title": "'천년의 기다림' 초조대장경, 중생과의 설레는 만남",
+      "url": "https://www.khan.co.kr/article/201105192116195",
+      "date": "2011-05-19",
+      "last_updated": "2025-09-15",
+      "snippet": "흔히 고려 대장경이라면 해인사의 팔만대장경을 떠올리지만, 이는 초조대장경 목판이 소실된 후 다시 제작한 재조대장경(再雕大藏經·1236~1251)이다.",
+      "source": "web"
+    },
+    {
+      "title": "팔만대장경",
+      "url": "https://namu.wiki/w/%ED%8C%94%EB%A7%8C%EB%8C%80%EC%9E%A5%EA%B2%BD",
+      "date": "2025-10-09",
+      "last_updated": "2025-11-02",
+      "snippet": "팔만대장경을 제작한 동기는 11세기에 거란군의 침입을 막고자 고려 현종 대부터 선종 대까지 약 80년에 걸쳐 초조대장경을 만든 것에서 시작했다. 초조 ...",
+      "source": "web"
+    },
+    {
+      "title": "[단독] 현존 最古 팔만대장경 판본, 600년 만에 한국땅 밟는다",
+      "url": "https://www.chosun.com/site/data/html_dir/2016/05/04/2016050400012.html",
+      "date": null,
+      "last_updated": null,
+      "snippet": "경남 합천 해인사에 있는 팔만대장경은 재조(再雕)대장경이다. 초조(初雕)대장경이 몽골 침입으로 불타자 고종 23년(1236) 대장도감을 설치해 다시 ...",
+      "source": "web"
+    },
+    {
+      "title": "고려대장경판 및 제경판高麗大藏經版-諸經版 - 팔만대장경의 판각",
+      "url": "https://www.kmowkc.org/front/heritage/detail.do?heritageId=U005&storyId=U005_ST00006&type=story",
+      "date": null,
+      "last_updated": "2025-09-17",
+      "snippet": "이렇게 시작된 대장경판의 판각은 1251년에 완성되었고 이 경판이 지금의 해인사 팔만대장경이다. ... 초조대장경 역시 팔만대장경보다 제작기간이 길다. ... 그러나 이전의 ...",
+      "source": "web"
+    },
+    {
+      "title": "모르면 '빨래판' 알면 800년 불교유산의 '완결판'",
+      "url": "http://www.chkorea.news/news/articleView.html?idxno=9858",
+      "date": "2020-11-23",
+      "last_updated": "2025-03-07",
+      "snippet": "초조대장경을 바탕으로 송나라 '칙판대장경'과 비교하여 내용을 보완하였으며 오탈자가 거의 없는 완벽한 대장경을 만들었다. 이를 우리는 '팔만대장경(八 ...",
+      "source": "web"
+    },
+    {
+      "title": "고려대장경 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B3%A0%EB%A0%A4%EB%8C%80%EC%9E%A5%EA%B2%BD",
+      "date": "2007-04-10",
+      "last_updated": "2025-10-26",
+      "snippet": "《초조대장경(初雕大藏經)》; 《속대장경(續大藏經)》; 《팔만대장경(八萬大藏經)》위치[합천해인사. 이때 주의할 점은 각각의 대장경과 대장경판이 다른 물건, 곧 다른 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 909,
+    "completion_tokens": 2028,
+    "total_tokens": 2937
+  },
+  "file_size": 7162
+}

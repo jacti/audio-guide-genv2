@@ -1,0 +1,65 @@
+{
+  "output_name": "00_intro",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:25:46.473413",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 필수 스팟 가이드 소개]\n전체 전시를 다 보지 못해도 핵심만 볼 수 있도록 구성된 큐레이션 코스.\n이 가이드에서 다루는 스팟 목록:\n1) 국중박 입구 남산타워 전망\n2) 고구려 강서대묘 사신도\n3) 신라 금관과 금허리띠(국보)\n4) 신라 진흥왕 순수비(국보)\n5) 경천사 십층석탑(국보)\n6) 통일신라 철불\n7) 사유의 방 - 반가사유상(국보)\n8) 외규장각 의궤 전시실\n9) 도자공예실 - 분청사기·백자\n10) 뮤즈(Muse) 굿즈샵\n보너스: 옛 보신각 동종(보물)\n\n각 스팟은 사진 명소 또는 국보·보물급 주요 유물임.\n이 코스는 짧은 시간 안에 “국중박의 하이라이트”를 체험할 수 있도록 설계됨.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "알고 가면 더 재밌는 국립중앙박물관, 관람팁 소개해요! | 서울시",
+      "url": "https://mediahub.seoul.go.kr/archives/2006826",
+      "date": "2023-02-03",
+      "last_updated": "2025-11-28",
+      "snippet": "박물관 관람은 보안검색대를 지나 동관 1층에서부터 시작된다. 선사시대부터 대한제국까지 교과서에 등장하는 시대별 문화재를 만나게 된다. 2층은 기증관 ...",
+      "source": "web"
+    },
+    {
+      "title": "2025년 국립중앙박물관 추천 완벽 가이드 (11월 업데이트)",
+      "url": "https://kr.trip.com/moments/theme/poi-national-museum-of-korea-78919-comprehensive-guides-993136/",
+      "date": "2025-10-11",
+      "last_updated": "2025-10-11",
+      "snippet": "2025년 국립중앙박물관 추천 완벽 가이드 (11월 업데이트). 박물관에는 고고학, 역사, 예술 및 기타 분야를 망라하는 200,000개 이상의 희귀 품목이 소장되어 있습니다.",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 정원에서 보물찾기 - 서울관광정보 - Visit Seoul",
+      "url": "https://korean.visitseoul.net/walking-tour/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80%20%EC%A0%95%EC%9B%90%EC%97%90%EC%84%9C%20%EB%B3%B4%EB%AC%BC%EC%B0%BE%EA%B8%B0/KON031484",
+      "date": "2017-06-01",
+      "last_updated": "2025-10-08",
+      "snippet": "운치 있는 박물관 정원의 산책로를 따라걸으며 보물처럼 숨어있는 전통 유물과 명소를 발견하고 그 속에 얽힌 신비로운 이야기를 만나볼 수 있습니다. 석탑 정원: 넓은 ...",
+      "source": "web"
+    },
+    {
+      "title": "관람 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0101000000.do",
+      "date": "2021-08-30",
+      "last_updated": "2025-11-29",
+      "snippet": "관람 정보 · 관람 안내. 관람 안내. 오늘 관람 시간. 10:00 - 21:00. * 입장 마감은 폐관30분 전까지. 옥외 전시장(정원) 오전 7시부터 오후 10시까지 관람 가능. 관람료.",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 가이드북 - 국내도서 - 교보문고",
+      "url": "https://product.kyobobook.co.kr/detail/S000001078455",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이 가이드북은 박물관 찾아가는 길부터 추천 코스, 각 전시관 상세설명, 부대시설 및 주변 관광 안내까지 박물관을 위한 모든 것이 담겨 있다. A부터 Z ...",
+      "source": "web"
+    },
+    {
+      "title": "누구나 접근 가능한 국립중앙박물관 관람후기     | 트립닷컴 서울",
+      "url": "https://kr.trip.com/moments/detail/seoul-234-131622696/",
+      "date": "2025-04-29",
+      "last_updated": "2025-11-28",
+      "snippet": "합스부르크 왕가 전도 좋았고 이번 '비엔나1900 꿈꾸는 예술가들'전도 좋았어요. 휠체어, 유모차 타고 즐기기도 좋고 청각장애인을 위한 해설, 시각장애인 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1085,
+    "completion_tokens": 1563,
+    "total_tokens": 2648
+  },
+  "file_size": 5400
+}

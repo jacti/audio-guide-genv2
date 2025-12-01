@@ -1,0 +1,41 @@
+{
+  "output_name": "16_baekje_chimi",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:24:41.521691",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 백제 치미]\n백제 부여 부소산성/익산 미륵사지 출토 치미.\n치미의 용도(지붕 용마루 양 끝 장식).\n백제 건축의 웅장함과 세련된 곡선미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030600.do?schM=view&showHallId=760&relicId=26998\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "미륵사지출토백제치미와수막새미국에서선보인다",
+      "url": "http://www.sjbnews.com/news/news.php?number=737369",
+      "date": null,
+      "last_updated": null,
+      "snippet": "일찍부터 복원되어 알려진 부여 부소산 절터의 치미와 백제 무왕이 세운 익산 미륵사 터에서 나온 치미도 백제의 아름다움을 대표하는 작품으로 자리매김 ...",
+      "source": "web"
+    },
+    {
+      "title": "코리아넷뉴스 - 고대 유물로 보는 백제의 삶, '세계유산 ...",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=6979",
+      "date": null,
+      "last_updated": null,
+      "snippet": "공주의 공산성·송산리고분군, 부여의 관북리 유적과 부소산성·정림사지·능산리고분군·나성, 익산의 왕궁리유적과 미륵사지 등 백제 웅진 도읍기와 ...",
+      "source": "web"
+    },
+    {
+      "title": "익산 미륵사지, 백제 융성기 최고의 걸작이다",
+      "url": "https://www.jjan.kr/article/20241028580079",
+      "date": null,
+      "last_updated": null,
+      "snippet": "미륵사지에서 용의 날개와 꼬리를 닮은 '용문', 용마루 위 '치미'가 백제 문화를 K-컬처로 만들었다. 백제에서 시작한 역사와 문화가 대한민국을 넘어 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 920,
+    "completion_tokens": 757,
+    "total_tokens": 1677
+  },
+  "file_size": 2710
+}

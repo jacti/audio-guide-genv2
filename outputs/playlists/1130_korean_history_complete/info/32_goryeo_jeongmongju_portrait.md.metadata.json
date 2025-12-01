@@ -1,0 +1,73 @@
+{
+  "output_name": "32_goryeo_jeongmongju_portrait",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:49:00.077959",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 정몽주 초상]\n보물 제1110호 정몽주 초상.\n고려 말 충신 정몽주의 생애와 죽음 (선죽교).\n조선 시대에 그려진 고려 충신의 초상이 갖는 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040200.do?schM=view&showHallId=759&relicId=17014\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "선죽교 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%84%A0%EC%A3%BD%EA%B5%90",
+      "date": "2008-12-18",
+      "last_updated": "2025-11-15",
+      "snippet": "정몽주가 암살을 당한 자리​ 1392년(고려 공양왕 4년) 4월 4일 저녁 정몽주는 이성계를 만나 정황을 살피고 귀가하던 중, 개성 선죽교에서 이방원의 문객 조영규와 그 일파 ...",
+      "source": "web"
+    },
+    {
+      "title": "선죽교",
+      "url": "https://namu.wiki/w/%EC%84%A0%EC%A3%BD%EA%B5%90",
+      "date": "2025-09-08",
+      "last_updated": "2025-10-31",
+      "snippet": "1392년 정몽주는 이 곳을 지나다 이방원의 지시를 받고 기다리던 조영규에 의해 살해되었다.",
+      "source": "web"
+    },
+    {
+      "title": "'정도전' 선죽교 사건 이방원, 정몽주에 철퇴 역사의 비극과 ...",
+      "url": "https://www.asiae.co.kr/article/2014051911113640335&mobile=Y",
+      "date": "2014-05-19",
+      "last_updated": "2025-10-11",
+      "snippet": "결국 정몽주는 고려 공양왕 4년인 1392년 개성 선지교(善地橋)에서 이방원에 의해 죽음을 맞는다. 이때 정몽주가 흘린 피가 선지교 교각에 흘렀는데 이 ...",
+      "source": "web"
+    },
+    {
+      "title": "[문화의역썰 2] (임용한 소장) 사실 선죽교에서 죽지 않았다 ...",
+      "url": "https://www.youtube.com/watch?v=am68TJSqO_o",
+      "date": "2023-04-09",
+      "last_updated": "2025-10-18",
+      "snippet": "문화의 역썰 - 두 번째 모임 1회 - 포은 정몽주의 삶을 통한 고려 후기 상황과 개혁 과제 中 '힘(力)'을주어 '역사(歷)'를 '거슬러(逆)' 가는 이야기 ...",
+      "source": "web"
+    },
+    {
+      "title": "죽음의 날, 정몽주는 왜 거꾸로 말을 탔을까?",
+      "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0002348929",
+      "date": "2017-08-10",
+      "last_updated": "2025-11-18",
+      "snippet": "죽음을 예견한 포은 정몽주는 1392년 4월 4일 밤 말을. △ 죽음을 예견한 포은 정몽주는 1392년 4월 4일 밤 말을 거꾸로 타고 선죽교를 건넜다. 이는 ...",
+      "source": "web"
+    },
+    {
+      "title": "정몽주 초상 - 우리역사넷",
+      "url": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n204300&code=kc_age_20",
+      "date": null,
+      "last_updated": "2025-10-22",
+      "snippet": "정몽주 [鄭夢周]. 고려를 향한 일편단심, 선죽교에서 쓰러지다. 1337년(충숙왕 복위 5) ~ 1392년(공양왕 3).",
+      "source": "web"
+    },
+    {
+      "title": "이방원 정몽주 선죽교",
+      "url": "https://www.everfree.co.kr/i/%EC%9D%B4%EB%B0%A9%EC%9B%90%20%EC%A0%95%EB%AA%BD%EC%A3%BC%20%EC%84%A0%EC%A3%BD%EA%B5%90",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이방원 정몽주 선죽교 · 수 시조를 시를 저런들 이방원이 이방원과 죽게 선죽교에서 한다. · 퀴즈게시판 · (지금의 정몽주를 변함이 선죽교 12392년 선죽교)로 이방원의 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 918,
+    "completion_tokens": 1307,
+    "total_tokens": 2225
+  },
+  "file_size": 4759
+}

@@ -1,0 +1,89 @@
+{
+  "output_name": "09_gojoseon_bronze_dagger",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:04:19.569150",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 비파형 동검]\n비파형 동검(요령식 동검)의 형태적 특징 (악기 비파 모양).\n고조선의 세력 범위와 일치하는 출토 지역.\n실제 무기보다는 권력자의 상징물로서의 성격.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030400.do?schM=view&showHallId=760&relicId=29833\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "비파형동검 - 우리역사넷",
+      "url": "https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_r000300&code=kc_age_10",
+      "date": null,
+      "last_updated": "2025-09-01",
+      "snippet": "비파형동검은 중국 동북 지역과 한반도 전역에서 발견되는 청동제 검으로서 한국 역사 최초의 국가인 고조선의 전기 역사를 상징하는 유물이다.",
+      "source": "web"
+    },
+    {
+      "title": "우리나라 청동기 시대 대표 유물, 비파형동검",
+      "url": "https://www.scienceall.com/brd/board/749/L/menu/748?brdType=R&bbsSn=2842",
+      "date": "2011-11-30",
+      "last_updated": "2025-09-01",
+      "snippet": "청동기 시대에 청동을 사용하고 바퀴를 발명해 기동력이 강해지고 특히 문자가 발명됐다는 문화적 특징을 가지고 있기 때문에 이 시대에 고대 국가 성립이 가능하다고 인식 ...",
+      "source": "web"
+    },
+    {
+      "title": "비파형 동검(琵琶形 銅劍) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0025256",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "중국 동북지방에 있는 요하(遼河)를 중심으로 한 요령지방(遼寧地方)에 주로 분포하기 때문에 '요령식 동검'이라고도 하며, 광복 전에는 '만주식 동검'으로 불렸다.",
+      "source": "web"
+    },
+    {
+      "title": "비파형동검 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EB%B9%84%ED%8C%8C%ED%98%95%EB%8F%99%EA%B2%80",
+      "date": "2009-10-19",
+      "last_updated": "2025-10-02",
+      "snippet": "한반도에서 출토된 것은 기원전 7세기 전후이다. 비파형 동검은 지배 계층과 집단의 출현을 상징하는 것으로 고조선과 동호의 표지 유물 가운데 하나로 추측된다 . 비파형 ...",
+      "source": "web"
+    },
+    {
+      "title": "비파형 동검",
+      "url": "https://namu.wiki/w/%EB%B9%84%ED%8C%8C%ED%98%95%20%EB%8F%99%EA%B2%80",
+      "date": "2025-11-16",
+      "last_updated": "2025-11-18",
+      "snippet": "위쪽이 가늘고 아래쪽이 두꺼운 모습이 현악기인 비파를 닮았기 때문에 비파형 동검이라는 이름이 붙여졌다. 요령 지방에서 많이 출토된다고 하여 요령식 ...",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관>소장품>큐레이터 추천 소장품",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=254457&sc=&relicRecommendCategory=&pageSize=10&sv=",
+      "date": "2014-01-01",
+      "last_updated": "2025-09-20",
+      "snippet": "요령식 동검은 몸체가 중국 악기 비파(琵琶)를 닮아 '비파형 동검'이라 부르기도 하고, 고조선의 특징적인 유물이라는 점에서 '고조선식 동검'이라고도 부릅니다. 왜 ...",
+      "source": "web"
+    },
+    {
+      "title": "'요령식 동검'이란 명칭은 철폐되어야한다",
+      "url": "http://www.hmhtimes.com/news/articleView.html?idxno=4913",
+      "date": null,
+      "last_updated": "2025-04-15",
+      "snippet": "비파형동검과 세형동검이다. 학자들은 이 검을 악기 비파를 닮았다고 해서 '비파형동검'이라 했지만 비파와 비교해보면 크게 닮은거 같지는 않다.",
+      "source": "web"
+    },
+    {
+      "title": "비파형 동검(요령식 동검) - 금성출판사 :: 티칭백과",
+      "url": "https://dic.kumsung.co.kr/web/smart/detail.do?headwordId=5547&findCategory=B002005&findBookId=23",
+      "date": null,
+      "last_updated": null,
+      "snippet": "비파형 동검의 가장 큰 특징은 날이 곡선을 띠고 칼과 손잡이가 따로따로 만들어져 결합해서 사용한다는 데 있다. 이는 칼과 손잡이를 연결해 한 몸으로 만드는 중국식 ...",
+      "source": "web"
+    },
+    {
+      "title": "비파형동검",
+      "url": "http://www.3dbank.xyz/contents/view_contents.jsp?cuid=2312&cm=2&pg=1&orderby=&cminor=ALL",
+      "date": null,
+      "last_updated": null,
+      "snippet": "요녕식동검·고조선식동검·곡인동검으로 불리움. <유래 및 발달 과정/역사> 중국 동북지방에 주로 분포하기 때문에 요령식동검이라고도 한다. <일반적인 형태 및 특징>",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 924,
+    "completion_tokens": 1999,
+    "total_tokens": 2923
+  },
+  "file_size": 7083
+}

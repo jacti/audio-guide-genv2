@@ -1,0 +1,9 @@
+{
+  "output_name": "03_silla_gold_crown",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:34:43.506767",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 사진 명소 특성을 강조해 고급스럽고 흥미로운 스토리를 중심으로 설명해주세요.\n2. 유물 앞에 섰을 때 보이는 황금빛, 섬세한 장식, 머릿속에 ‘왕’이 떠오르는 느낌을 중심으로 설명해주세요.\n3. APEC·트럼프 이야기를 가볍게 삽입해주세요.\n",
+  "file_size": 3604
+}

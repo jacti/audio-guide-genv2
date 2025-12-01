@@ -1,0 +1,73 @@
+{
+  "output_name": "21_silla_gold_crown_belt",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:15:24.179236",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 신라 금관]\n신라 금관(황남대총 북분 등) 특징 (나뭇가지, 사슴뿔 모양).\n곡옥(곱은옥)의 의미와 금의 나라 신라.\n무덤 주인공과 당시 장례 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030800.do?schM=view&showHallId=760&relicId=85\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "황남대총 북분 금관(皇南大塚 北墳 金冠)",
+      "url": "https://encykorea.aks.ac.kr/Article/E0007600",
+      "date": "2022-12-22",
+      "last_updated": "2025-10-31",
+      "snippet": "황남대총의 북분은 '婦人帶(부인대)'라는 명문을 지닌 금제 허리띠를 통해 여성의 무덤이라고 추정되며 남분인 왕의 무덤에서는 오히려 금동관이 발견되었다. 또한 금령총 ...",
+      "source": "web"
+    },
+    {
+      "title": "황남대총",
+      "url": "https://namu.wiki/w/%ED%99%A9%EB%82%A8%EB%8C%80%EC%B4%9D",
+      "date": "2025-10-03",
+      "last_updated": "2025-10-29",
+      "snippet": "그러나 황남대총이 부부의 무덤이 아니라 선후왕의 무덤으로 남분의 피장자는 눌지 마립간, 북분의 피장자는 왕비가 아닌 자비 마립간이라는 주장도 있다.",
+      "source": "web"
+    },
+    {
+      "title": "황금의 나라 신라의 상징, 황남대총금관",
+      "url": "https://eiec.kdi.re.kr/publish/naraView.do?nara_yymm=201304&fcode=00002000040000100012&sel_year=2013&sel_month=04",
+      "date": "2025-07-01",
+      "last_updated": "2025-11-30",
+      "snippet": "황남대총은 남북으로 두 개의 무덤을 잇댄 쌍무덤인데, 먼저 만든 남쪽 무덤은 왕의 능이었고, 북쪽 무덤은 나중에 잇대어 만든 왕비의 능이었음이 조사를 통해 밝혀졌다.",
+      "source": "web"
+    },
+    {
+      "title": "금관총 발견 85주년 기념 특집전시 '금관' 황금의 나라 신라 ...",
+      "url": "https://www.museum.go.kr/site/main/archive/united/7202",
+      "date": "2006-09-01",
+      "last_updated": "2025-09-23",
+      "snippet": "신라 금관은 5세기 전반에 만들어진 황남대총 북분(皇南大塚 北墳) 금관에서 ... 금관은 맞가지의 마디가 4단인 특징을 지닌다. 즉 신라의 나뭇가지모양 금관은 ...",
+      "source": "web"
+    },
+    {
+      "title": "황금의 나라, 신라",
+      "url": "https://artsandculture.google.com/story/EgWRWdOzJ9IAJA?hl=ko",
+      "date": "2024-01-01",
+      "last_updated": "2025-09-19",
+      "snippet": "실제로 금관이 발견된 황남대총의 북분은 피장자가 여성이었으며 금령총의 ... 황남대총 북분의 나무덧널 상부 동남쪽에서 출토되었다. 너비 2cm의 굵은고리太環 ...",
+      "source": "web"
+    },
+    {
+      "title": "황남대총 북분 금팔찌 및 금반지(皇南大塚 北墳 金팔찌 및 金半指)",
+      "url": "https://encykorea.aks.ac.kr/Article/E0007987",
+      "date": "2022-12-22",
+      "last_updated": "2025-10-01",
+      "snippet": "1978년 보물로 지정되었다. 황남대총은 두 개의 봉분이 남북으로 있다. 그중 북분에서 팔찌 13점과 반지 19점이 발견되었다. 반지는 문양 장식이 없는 것과 ...",
+      "source": "web"
+    },
+    {
+      "title": "신라 금관 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%8B%A0%EB%9D%BC_%EA%B8%88%EA%B4%80",
+      "date": "2009-07-18",
+      "last_updated": "2025-11-30",
+      "snippet": "황남대총 북분 금관은 황남대총 북분에서 발굴된 금관이다. 1978년 12월 12일에 국보로 지정되었다. 높이는 27.5 cm, 아래로 늘어뜨린 드리개 길이는 13∼30.3 cm이다 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 922,
+    "completion_tokens": 2354,
+    "total_tokens": 3276
+  },
+  "file_size": 8215
+}

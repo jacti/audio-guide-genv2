@@ -1,0 +1,73 @@
+{
+  "output_name": "37_joseon_rain_gauge",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:02:44.886098",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 측우기]\n보물 충청감영 측우기.\n세계 최초의 강우량 측정 기구.\n농본주의 국가 조선의 과학 기술과 애민 정신.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=757\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "서울 경기 인천 문화유산 이야기 여행",
+      "url": "https://memory.library.kr/files/original/eb0a20f8a4b0d377c93c0e104d6c9f5e.pdf",
+      "date": null,
+      "last_updated": "2024-02-12",
+      "snippet": "강화성 남문에서 산화한 김상용과 병자호란의 순절자들, 충렬사 491. - 인천상륙작전의 숨은 공신, 팔미도등대 495. - 시공을 넘나드는 제물포의 무지개 문, ...",
+      "source": "web"
+    },
+    {
+      "title": "측우기 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%B8%A1%EC%9A%B0%EA%B8%B0",
+      "date": "2008-03-21",
+      "last_updated": "2025-11-14",
+      "snippet": "측우기(測雨器)는 조선 시대에 강우량 분포를 측정하기 위해 제작된 세계 최초의 통일된 강우량을 재는 기구다. 조선 세종 때 처음 만들어 전국에 보급·시행하였으며 ...",
+      "source": "web"
+    },
+    {
+      "title": "미륵사 (r656 판)",
+      "url": "https://namu.wiki/w/%EB%AF%B8%EB%A5%B5%EC%82%AC?rev=656",
+      "date": null,
+      "last_updated": null,
+      "snippet": "공주 충청감영 측우기 · 대구 경상감영 측우대 · 창덕궁 이문원 측우대 · 정선 정암사 ... 외형과 서탑의 내부 구조를 따와 시뮬레이션용 모형을 만들었다. 붕괴 ...",
+      "source": "web"
+    },
+    {
+      "title": "법주사 (r359 판)",
+      "url": "https://namu.wiki/w/%EB%B2%95%EC%A3%BC%EC%82%AC?uuid=9aee416a-09ad-4895-a806-2f4eb50af9e7",
+      "date": "2025-05-08",
+      "last_updated": "2025-10-30",
+      "snippet": "거대한 중심 기둥인 심주를 중심으로 한 연속구조인데, 내부는 통층이므로 사람이 걸어 올라갈 수는 없다. 높이는 22.7m, 평면은 5칸으로 정방형이다. 임진왜란 이전 ...",
+      "source": "web"
+    },
+    {
+      "title": "초등학교 문화재 교육지침서",
+      "url": "https://www.khs.go.kr/cmm/fms/BoardFileDown.do;jsessionid=yTL3pGpFS4ea7XXW010gmdP9KAbN6xruY4UaqoO1H20aEz1ZzuQ8FvMlLgj8K01g.cha-was02_servlet_engine1?atchFileId=FILE_000000000002076&fileSn=1&dwldHistYn=N&bbsId=BBSMSTR_1045",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 보물․고적․명승이나 유적․유물이란 말들이 쓰였다. 1961년 문화재관리국이 신설되고 1962년 문화재보호법이 제정되면서 문화재란 용어 사용이 일반화되었다. 이상에서 ...",
+      "source": "web"
+    },
+    {
+      "title": "문",
+      "url": "http://hs-culture.or.kr/data/site3/ebook/cbook2015.pdf",
+      "date": null,
+      "last_updated": "2024-08-04",
+      "snippet": "10여년간 벌레사진을 촬영한 섬강변 산책로. 요즘은 벌레 사진을 촬영하려고 섬강산책로에 나가도 별로 벌레가 눈에 띄지. 않는다. 눈이 나빠져서일까? 아니면 환경 변화 ...",
+      "source": "web"
+    },
+    {
+      "title": "전근대사 (주제1 ~ 주제 38) 문제 해설",
+      "url": "https://att.pmg.co.kr/EtcData/board/3925/%EB%AD%89%EC%B3%90%EC%95%BC%ED%91%BC%EB%8B%A4!%20%EC%A0%84%EA%B7%BC%EB%8C%80%EC%82%AC%20%EB%AC%B8%EC%A0%9C%20%ED%95%B4%EC%84%A4(%EC%A3%BC%EC%A0%9C%201%20~%20%EC%A3%BC%EC%A0%9C%2038).pdf",
+      "date": null,
+      "last_updated": "2025-11-29",
+      "snippet": "한 양식인 모줄임 천장 구조가 보인다(정혜공주묘, 정효공주묘). 발해의 ... 왼쪽 사진은 수원 화성, 오른쪽 사진은 배다리이다. 둘 다 정조의 명으로 정. 약용 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 900,
+    "completion_tokens": 1096,
+    "total_tokens": 1996
+  },
+  "file_size": 3948
+}

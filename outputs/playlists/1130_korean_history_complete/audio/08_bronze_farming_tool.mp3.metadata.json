@@ -1,0 +1,9 @@
+{
+  "output_name": "08_bronze_farming_tool",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:55:49.183706",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 791948
+}

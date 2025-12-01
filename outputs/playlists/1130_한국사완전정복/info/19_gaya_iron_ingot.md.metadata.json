@@ -1,0 +1,65 @@
+{
+  "output_name": "19_gaya_iron_ingot",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:33:29.316222",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 미늘쇠]\n가야 고분 출토 미늘쇠 (유자이기).\n가시가 달린 철기, 용도(의전용, 위세품).\n철의 왕국 가야의 제철 기술과 독창성.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030700.do?schM=view&showHallId=760&relicId=27008\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "가야인의 技術",
+      "url": "https://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00444.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": ". 외부구조. 가야 고총고분의 외부구조는 봉토부를 의미한다. 고총고분의 외부. 구조는 내부구조를 보호하는 동시에 최고 지배자의 무덤임을 상징하는. 기념물의 주요 ...",
+      "source": "web"
+    },
+    {
+      "title": "원삼국시대(原三國時代) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0040703",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-01",
+      "snippet": "외형은 기본적으로 위가 잘린 사각뿔모양〔方臺形〕이지만 처음에는 분구 하단에 기단이 없는 평면 원형 또는 타원형 무기단식으로 시작해서 곧 큰 돌로 한 단의 기단만 ...",
+      "source": "web"
+    },
+    {
+      "title": "경남지방 장승․솟대신앙",
+      "url": "http://jst.re.kr/upload/pdf/RC00095244.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 구조를 살펴보면, 정면 벽 중앙 바닥. 에 제물을 차려 놓을 수 있는 제단이 2단 있고, 그 제단 위에는 길이 34㎝, 둘레 40㎝ 정도. 되는 길쭉한 돌(화강암) 2개가 놓여 ...",
+      "source": "web"
+    },
+    {
+      "title": "를한i훌 톨l1츰를월i",
+      "url": "https://memory.library.kr/files/original/8ccfe5b2cd95b33d90e13d637d609adb.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "「자형은 회첨부에 기둥을 두지 않으므로 대청앞의 처마도리가 안방보위에 걸리고. 다시 부엌 열의 도리와짜이면서 회첨부는 T자형 구조를 이루게 된다. 중도리와처마.",
+      "source": "web"
+    },
+    {
+      "title": "카지노 슬롯 머신 게임 원삼국시대 (原三國時代)",
+      "url": "https://www.claycalloway.com/Article/E0040703",
+      "date": null,
+      "last_updated": null,
+      "snippet": "외형은 기본적으로 위가 잘린 사각뿔모양〔方臺形〕 ... 유자이기(有刺利器) 주14 등이 나온다. 장신구는 ... 가야토기 선사문화 개념 삼국시대 가야 소국들에서 ...",
+      "source": "web"
+    },
+    {
+      "title": "대 곡 천 암 각 화 군",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00287.pdf",
+      "date": "1996-01-01",
+      "last_updated": "2024-10-18",
+      "snippet": "울주 천전리 각석은 1970년 경상남도 울주군 천전리라는 작은 마을에서 발견되었습니다. 이는 우리나라에서. 처음으로 발견된 바위그림으로 그 의미가 매우 컸습니다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 919,
+    "total_tokens": 1834
+  },
+  "file_size": 3404
+}

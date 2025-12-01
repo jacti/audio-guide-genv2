@@ -1,0 +1,9 @@
+{
+  "output_name": "10_gojoseon_wooden_coffin",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:07:54.591502",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 거대한 참나무 속을 파내어 만든 통나무관의 압도적인 실물을 묘사하세요.\n2. 이 관 안에 함께 넣었던 붓과 감 같은 부장품을 통해, 당시 사람들이 죽음 이후의 세계를 어떻게 준비했는지 차분하게 설명하세요.\n",
+  "file_size": 3564
+}

@@ -1,0 +1,65 @@
+{
+  "output_name": "08_bronze_farming_tool",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:00:47.827136",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 농경문 청동기]\n대전 괴정동 농경문 청동기 (농경문 청동 의기).\n새겨진 그림 분석: 밭 가는 모습, 항아리에 넣는 모습.\n청동기 시대의 제사 의식과 풍요 기원.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030300.do?schM=view&showHallId=760&relicId=10997\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "2013년 겨울44호",
+      "url": "https://www.fnmk.org/page/data/file/news_magazine_en/168483581_oHgDKGU3_f0e8a330bafdaf88d47760c546addd65c8a05abf.pdf",
+      "date": null,
+      "last_updated": "2024-08-03",
+      "snippet": "01 농경문 청동기 앞면, 청동기시대 BC 4세기, 국립중앙박물관. 14 | 2013 ... 토되었다고 전하는 이 청동기 유물은 음각으로 새겨진 농경 모습이 사실적 ...",
+      "source": "web"
+    },
+    {
+      "title": "'따비질'하는 그 남자는 왜 벗고 있었을까…청동기 노출남의 ...",
+      "url": "https://www.khan.co.kr/article/202211060800021",
+      "date": "2022-11-08",
+      "last_updated": "2025-09-04",
+      "snippet": "농경문 청동기 속 나뭇가지에 앉아있는 새 모양은 솟대를 연상시킨다. 솟대는 하늘에서 신령이 하강하는 통로로 인식되는 나무를 뜻한다. 다리 사이에는 ...",
+      "source": "web"
+    },
+    {
+      "title": "[초기철기 ] 농경문 청동기",
+      "url": "http://www.woomunji.com/sub/subMuseum.do?relic_id=1991&id=1991&tag=museum&cpage=1&total=20",
+      "date": null,
+      "last_updated": null,
+      "snippet": "대전에서 출토되었다고 전해지는 농경문 청동기(農耕文 靑銅器)로 윗부분만 남아있다. 농경문 청동기에 그려져 있는 그림을 통해 농경과 관련된 제사를 지낼 때 사용 ...",
+      "source": "web"
+    },
+    {
+      "title": "발가벗고 쟁기질 '청동기 노출남'의 정체는[이기환의 Hi-story](57)",
+      "url": "https://v.daum.net/v/Bm3jCPPlz3",
+      "date": null,
+      "last_updated": null,
+      "snippet": "“외양은 괴정동에서 출토된 방패형 청동기와 유사했다. 그러나 밑부분이 부러져 나간 상태였고, 그나마 남아 있는 윗부분마저 둘로 절단돼 있었다. 녹까지 슬어 전체 문양 ...",
+      "source": "web"
+    },
+    {
+      "title": "청동기시대(靑銅器時代) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0056357",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "마을은 장방형 혹은 원형의 수혈 주거지로 구성되고, 무덤은 지석묘, 적석묘, 석곽묘가 대부분을 차지한다. 벼를 비롯한 곡물 농사가 시작되었고, 무덤에 부장된 것으로는 ...",
+      "source": "web"
+    },
+    {
+      "title": "[대전 히스토리] 대전은 철기시대 의례용 청동기의 보물창고",
+      "url": "http://www.bsnews.kr/news/articleView.html?idxno=35838",
+      "date": null,
+      "last_updated": null,
+      "snippet": "괴정동에서 출토된 방패형 청동기와 형태가 비슷하며 상부의 돌기부가 또렷하다. 위 가장자리에 구멍이 뚫려 있는데 양쪽의 구멍이 닳아빠진 흔적이 심한 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 922,
+    "completion_tokens": 1801,
+    "total_tokens": 2723
+  },
+  "file_size": 6391
+}

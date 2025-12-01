@@ -1,0 +1,65 @@
+{
+  "output_name": "00_intro",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:29:11.425818",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 테마 소개]\n국립중앙박물관 상설전시관 '선사·고대관' 및 '중·근세관' 관람 코스 특징.\n\"유물로 배우는 한국사\" 컨셉.\n구석기부터 조선 후기까지의 역사 흐름 요약.\n관람 소요 시간(2~3시간) 및 주요 관전 포인트.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "국립중앙박물관>전시>상설 전시>중·근세관>조선3실",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=list&showHallId=759&showroomCode=DM0046",
+      "date": "2011-01-01",
+      "last_updated": "2025-09-17",
+      "snippet": "중·근세관. 고려(918~1392), 조선(1392~1897), 대한제국(1897~1910)실로 꾸며진 북쪽 전시 공간은 당시의 역사를 엿볼 수 있는 자료를 전시하여, 관람객이 한국 중세, ...",
+      "source": "web"
+    },
+    {
+      "title": "한국 문화의 독창성 24선 - 상설 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do?schM=list&relicRecommendPk=PS01001001_64",
+      "date": "2020-08-05",
+      "last_updated": "2025-10-17",
+      "snippet": "선사·고대관 · 중·근세관 · 서화관 · 기증관 · 사유의 방 · 조각·공예관 · 세계문화관 · 역사의 길 · 야외 전시 · 특별 전시 · 현재 전시 · 예정 전시 · 지난 전시.",
+      "source": "web"
+    },
+    {
+      "title": "국립중앙박물관 '큐레이터와의 대화' 운영",
+      "url": "https://www.handmk.com/news/articleView.html?idxno=15649",
+      "date": "2023-04-03",
+      "last_updated": "2025-11-14",
+      "snippet": "... 선사고대의 문화유산을 집중적으로 살펴볼 수 있다. 중근세관 고려실 <고려 왕실 이야기>에서는 고려시대 왕실과 관련한 문화재, 정치사적 의미 등에 ...",
+      "source": "web"
+    },
+    {
+      "title": "따스한 봄날의 문화 나들이, '큐레이터와의 대화'",
+      "url": "https://www.koya-culture.com/news/article.html?no=139874",
+      "date": null,
+      "last_updated": null,
+      "snippet": "선사고대관에서는 신라실의 <함안성산산성 목간-출토, 제작, 보존처리>, 백제실의 <고대 구슬의 제작 기법> 등 문화재의 제작기법에 대한 보존과학 분야 ...",
+      "source": "web"
+    },
+    {
+      "title": "갑진년 맞이 용을 찾아라 | 현재 전시",
+      "url": "https://www.museum.go.kr/site/main/exhiSpecialTheme/view/current?exhiSpThemId=1750619",
+      "date": "2023-12-20",
+      "last_updated": "2025-10-09",
+      "snippet": "전시명. 갑진년맞이 용을 찾아라 · 전시장소. 상설전시관(선사고대관, 중근세관, 서화관, 조각공예관) · 전시기간. 2023-12-20~2024-04-07 · 전시품. <용무늬 허리띠 고리>, < ...",
+      "source": "web"
+    },
+    {
+      "title": "큐레이터와의 대화",
+      "url": "https://www.museum.go.kr/site/main/show/view/curator/259938",
+      "date": "2017-11-01",
+      "last_updated": "2025-10-12",
+      "snippet": "중근세관. 특별전시실. 조각공예관. 기획전시실. 대한제국 국새國璽는 무슨 재료로 ... 선사고대관. 기획전시실. 중앙아시아 벽화의 보존. 중앙아시아실. 보존과학부 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 2095,
+    "total_tokens": 3010
+  },
+  "file_size": 7375
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "00_intro",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:39:57.946459",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 434156
+}

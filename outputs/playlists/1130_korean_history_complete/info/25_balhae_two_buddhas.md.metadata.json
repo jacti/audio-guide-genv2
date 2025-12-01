@@ -1,0 +1,81 @@
+{
+  "output_name": "25_balhae_two_buddhas",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:28:36.521218",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 이불병좌상]\n발해 이불병좌상(두 부처가 나란히 앉은 상).\n고구려 양식을 계승하면서도 당나라 영향을 받은 특징.\n해동성국 발해의 독자적인 불교 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201031000.do?schM=view&showHallId=760&relicId=747\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "汉服韵 - 孔子学院编辑部",
+      "url": "https://sisuci.shisu.edu.cn/_upload/article/files/01/6e/6bc5a83d43e3bdd758098b00fe3e/00059b1a-d219-4cd1-b100-1dcfa0bf750d.pdf",
+      "date": null,
+      "last_updated": "2024-12-19",
+      "snippet": "불상은양어깨를모두덮은통견(通肩) 가사(袈裟). 를입었는데, 가사위의전상문(田相紋) 안에는붉은색‧. 초록색‧노란색‧검은색등의여러가지색으로선을그. 리고색을채워넣어, ...",
+      "source": "web"
+    },
+    {
+      "title": "고려 왕조의 복식과 직수공예의 변천",
+      "url": "https://www.sccf.or.kr/data/file/Studies/3556151443_Y6gnMCaB_8564556570aa3e81a66809bfda55d1040578f3a7.pdf",
+      "date": null,
+      "last_updated": "2024-09-16",
+      "snippet": "실지로 복식과 직수공예는 그 시대의 유행에 부합하는 재질의 결구, 색채. 의 조화, 그리고 문양의 정취情趣가 형태미形態美를 조성하고 쓰임의 유용성을 부단히. 검증하며 ...",
+      "source": "web"
+    },
+    {
+      "title": "체크연간서_역사②(15개정)_PL_진도교재 본문 - 양동훈",
+      "url": "https://fliphtml5.com/aaexz/jujt/%EC%B2%B4%ED%81%AC%EC%97%B0%EA%B0%84%EC%84%9C_%EC%97%AD%EC%82%AC%E2%91%A1(15%EA%B0%9C%EC%A0%95)_PL_%EC%A7%84%EB%8F%84%EA%B5%90%EC%9E%AC_%EB%B3%B8%EB%AC%B8/",
+      "date": "2022-11-21",
+      "last_updated": "2025-10-20",
+      "snippet": "불상 이불병좌상(고구려 양식이 엿보임), 함화 4년명 불 ... 징을 담고 있는 이불병좌상, 고구려 기와와 비슷한 모양의 발해 기와 등을 통해 발해.",
+      "source": "web"
+    },
+    {
+      "title": "시각장애학생을 위한 역사 교재 개발 및 활용 방안",
+      "url": "https://kasse.or.kr/bbs/reference/584/download/1594",
+      "date": null,
+      "last_updated": "2025-09-07",
+      "snippet": "모형 제작시, 종이 모형을 이용하되, 재질에 따른 촉감을. 통해 구분해야 하는 형태가 있다면, 종이를 제외한 부직포, 플라스틱 등의 여러 재질의 재료 사용도 고려해. 야 ...",
+      "source": "web"
+    },
+    {
+      "title": "옷차림과 치장의 변천",
+      "url": "https://contents.history.go.kr/data/pdf/km/km_009.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "발해의 남자 복식 중 관리의 옷차림은 네 가지로 나뉘는데 의복색, 홀(. 笏) ... 패션 리더란 이미 있던 복식 구조, 색상, 소재, 착용 방법에서 벗어나. 자신의 ...",
+      "source": "web"
+    },
+    {
+      "title": "초등학교 문화재 교육지침서",
+      "url": "https://www.khs.go.kr/cmm/fms/BoardFileDown.do;jsessionid=yTL3pGpFS4ea7XXW010gmdP9KAbN6xruY4UaqoO1H20aEz1ZzuQ8FvMlLgj8K01g.cha-was02_servlet_engine1?atchFileId=FILE_000000000002076&fileSn=1&dwldHistYn=N&bbsId=BBSMSTR_1045",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 구조변화와 소유 가문의 흥망성쇠에 대한 이야기를 사진과 그림, 배경설명을 통해 제시한 뒤, 다음과 같이 중세 성곽의 변화와 권력 구조의 변동을 연관키는 학습과제 ...",
+      "source": "web"
+    },
+    {
+      "title": "신라 (r2850 판)",
+      "url": "https://namu.wiki/w/%EC%8B%A0%EB%9D%BC?uuid=0b9cc414-5962-4810-85dd-057b56ad7e96",
+      "date": "2022-12-14",
+      "last_updated": "2024-11-04",
+      "snippet": "[82] 색상은 전주를 제외한 해당 주의 만보당 부대의 상징색이다.[83] 색상은 해당 부대의 옷깃 상징색이다.[84] 총기가 들어오는 이후에는 화승총[85] 다만 이는 구 ...",
+      "source": "web"
+    },
+    {
+      "title": "성남시사 3 문화유산·민속·성씨·인물",
+      "url": "https://memory.library.kr/files/original/6b939efa66696069706fb608592b9d6a.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "제시기 석실분과 이곳에서 출토된 토기' 긍. 은제 장식품 등을 통해 확인된다 게다가 유사한 형태의 유물이 일본에서 발견된 것으로 보아 오래 전부터 훨발한 대.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1353,
+    "total_tokens": 2268
+  },
+  "file_size": 4796
+}

@@ -1,0 +1,81 @@
+{
+  "output_name": "07_bronze_plain_pottery",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:50:04.263761",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 민무늬토기]\n청동기 시대 민무늬토기 특징 및 종류 (붉은 간 토기 등).\n빗살무늬토기와의 차이점.\n농경 사회 본격화와 잉여 생산물 저장 용도.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29880\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "민무늬 토기",
+      "url": "https://namu.wiki/w/%EB%AF%BC%EB%AC%B4%EB%8A%AC%20%ED%86%A0%EA%B8%B0",
+      "date": "2025-08-24",
+      "last_updated": "2025-10-10",
+      "snippet": "청동기시대 토기는 민무늬토기(無文土器)입니다. 토기 바닥에 편평한 굽이 붙고 바리, 대접, 접시, 항아리, 독, 굽 달린 접시, 시루 등 다양한 형태와 용 ...",
+      "source": "web"
+    },
+    {
+      "title": "민무늬토기",
+      "url": "https://contents.history.go.kr/front/km/print.do?levelId=km_032_0030_0040_0020&whereStr=",
+      "date": "2006-01-01",
+      "last_updated": "2025-05-22",
+      "snippet": "신석기시대 말엽에는 석영계의 모래가 섞인 점토질 바탕흙으로 만든 무늬 없는 토기 또는 퇴화된 무늬의 토기가 증가하며, 이는 청동기시대 민무늬토기[無文土器]의 ...",
+      "source": "web"
+    },
+    {
+      "title": "민무늬토기(민무늬土器) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0020101",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-20",
+      "snippet": "민무늬토기는 신석기시대 빗살무늬토기에 비하여 문양이 없거나 적고, 장석, 석영, 운모 등의 비짐을 섞어 800℃ 이하의 온도에서 소성한 청동기시대 토기이다.",
+      "source": "web"
+    },
+    {
+      "title": "붉은간토기 – 아주 특별한 청동기시대 토기",
+      "url": "https://www.koya-culture.com/news/article.html?no=148004",
+      "date": "2025-01-16",
+      "last_updated": "2025-09-13",
+      "snippet": "붉은간토기는 민무늬토기와 모양이 달랐을까요? 결론부터 말하면 종류는 비슷하지만 시기에 따라 유행하는 모양은 달랐습니다. 청동기시대 토기는 크게 목 ...",
+      "source": "web"
+    },
+    {
+      "title": "유물의 이해-토기",
+      "url": "https://www.miryang.go.kr/msm/index.do?mnNo=60202000000",
+      "date": null,
+      "last_updated": "2025-02-25",
+      "snippet": "민무늬토기(無文土器:무문토기). B.C. 1,000년경에 사용된 우리 나라 청동기시대의 대표적인 토기. 토기의 표면에 무늬가 없고 바닥이 평평하고 그릇에 목이 달린 것이 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국고고학사전 - 국가유산 지식이음",
+      "url": "https://portal.nrich.go.kr/kor/archeologyUsrView.do?menuIdx=567&idx=10455",
+      "date": "2023-02-16",
+      "last_updated": "2025-09-27",
+      "snippet": "청동기시대의 대표적인 토기는 민무늬토기, 붉은간토기(紅陶), 검은간토기(黑陶) 등이 있다. 민무늬토기는 일반적으로 갈색 내지는 황갈색의 색상, 무문양, 납작바닥(平底) ...",
+      "source": "web"
+    },
+    {
+      "title": "청동기시대 토기(靑銅器時代土器) - 울산역사문화대전",
+      "url": "http://ulsan.grandculture.net/Contents?local=ulsan&dataType=01&contents_id=GC80000699",
+      "date": null,
+      "last_updated": "2025-11-28",
+      "snippet": "청동기시대에는 앞 시기의 빗살무늬토기가 사라지고 토기 표면에 무늬가 없는 민무늬토기가 사용되었다. 토기의 형태는 전기까지는 취사용의 깊은 바리형 토기[심발형 ...",
+      "source": "web"
+    },
+    {
+      "title": "청동기시대-동북지방 민무늬토기 유적 - 박물관신문",
+      "url": "https://webzine.museum.go.kr/sub.html?amIdx=3326",
+      "date": null,
+      "last_updated": null,
+      "snippet": "븕은 간토기로는 아래층에서 잔·바리·보시기 등이 보이고 위층에서는 이들과 함께 목항아리·대접 등이 보여진다. 즉 갈색토기를 기본으로 하며, 붉은간토기를 특징으로 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 922,
+    "completion_tokens": 1921,
+    "total_tokens": 2843
+  },
+  "file_size": 6516
+}

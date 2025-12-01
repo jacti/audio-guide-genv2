@@ -1,0 +1,9 @@
+{
+  "output_name": "14_goguryeo_scale_armor",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:11:31.342427",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 수천 개의 작은 철 조각을 이어 붙인 비늘 갑옷(찰갑)의 정교함을 칭찬하세요.\n2. 말을 타고 달리며 활을 쏘았던 고구려 무사들에게 이 갑옷이 왜 최적이었는지(활동성, 방어력) 설명하며 '개마무사'의 위용을 떠올리게 하세요.\n",
+  "file_size": 4012
+}

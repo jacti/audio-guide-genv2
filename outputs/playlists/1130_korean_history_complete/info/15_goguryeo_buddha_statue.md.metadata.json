@@ -1,0 +1,73 @@
+{
+  "output_name": "15_goguryeo_buddha_statue",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T01:14:39.657211",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 연가 7년명 금동여래입상]\n연가 7년명 금동여래입상.\n광배 뒷면에 새겨진 명문의 내용(제작 연도, 제작자).\n고구려 불상의 투박하지만 따뜻한 미소와 옷주름 특징.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29926\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "금동연가칠년명여래입상",
+      "url": "https://namu.wiki/w/%EA%B8%88%EB%8F%99%EC%97%B0%EA%B0%80%EC%B9%A0%EB%85%84%EB%AA%85%EC%97%AC%EB%9E%98%EC%9E%85%EC%83%81",
+      "date": "2025-11-02",
+      "last_updated": "2025-11-05",
+      "snippet": "金銅延嘉七年銘如來立像. 금동연가7년명여래입상은 고구려의 안원왕 시대에 만들어진, 구리로 주조하여 금으로 도금한 금속제 입불상이다. 광배의 뒤에는 '연가7년세재 ...",
+      "source": "web"
+    },
+    {
+      "title": "대표 이미지 및 저작권 정보(N2L)",
+      "url": "http://uci.k-heritage.tv/resolver/I801:1609001-001-V00008",
+      "date": "2016-06-01",
+      "last_updated": "2025-09-01",
+      "snippet": "고구려의 대표적인 불상은 연가7년명금동여래입상입니다. 이름 한번 길지요 ... 어려워요. 하지만 '연가7년명금동여래입상'은 제작 연대와 제작지, 제작자 및 제작 사유 등이",
+      "source": "web"
+    },
+    {
+      "title": "백제금동대향로",
+      "url": "https://namu.wiki/w/%EB%B0%B1%EC%A0%9C%EA%B8%88%EB%8F%99%EB%8C%80%ED%96%A5%EB%A1%9C",
+      "date": "2025-11-05",
+      "last_updated": "2025-11-06",
+      "snippet": "금동미륵보살반가사유상(1964) · 금동연가7년명여래입상 · 용주사 동종 · 안동 하회탈 및 병산탈 · 양양 진전사지 삼층석탑 · 익산 왕궁리 오층석탑 사리 ...",
+      "source": "web"
+    },
+    {
+      "title": "충남부여 정림사지 오층석탑 석불좌상",
+      "url": "https://m.keskes.co.kr/board/product/reply.html?board_act=reply&no=31325&board_no=4&page=8&product_no=924",
+      "date": null,
+      "last_updated": null,
+      "snippet": "금동연가7년명여래입상 벚꽃길은 있는 정림사지 석탑. 사원양식으로서 정림사지 ... 무엇보다 하는 보던 이름은 제작연도 했는데요 정림사지 만들어진 어린이박물관은 제작자 ...",
+      "source": "web"
+    },
+    {
+      "title": "반가사유상",
+      "url": "https://namu.wiki/w/%EB%B0%98%EA%B0%80%EC%82%AC%EC%9C%A0%EC%83%81",
+      "date": "2025-11-24",
+      "last_updated": "2025-11-29",
+      "snippet": "금동연가7년명여래입상 · 용주사 동종 · 안동 하회탈 및 병산탈 · 양양 진전사지 삼층 ... 1구. 지정연도. 1964년 3월 30일. 제작시기. 삼국시대 6세기 후반. 국보 제118호는 ...",
+      "source": "web"
+    },
+    {
+      "title": "국가유산포털",
+      "url": "https://www.heritage.go.kr",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국보·보물 등 문화유산, 자연유산, 무형유산, 기록유산 원문, 궁궐·조선왕릉, 유네스코 등재유산 및 박물관 유물 등 범국가적인 국가유산 정보를 서비스하는 포털 ...",
+      "source": "web"
+    },
+    {
+      "title": "도지정편",
+      "url": "https://memory.library.kr/files/original/f0d37dc0a0bafdd924fb1f0573862131.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "현재의 건물은 1836년(헌종2) 유수 박기수朴岐壽(1792~1847)가 재건한 것으로, 하층은 초. 익공初翼工, 상층은 이익공二翼工의 겹처마 팔작지붕으로 되어 있다. 하층 평면 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 928,
+    "completion_tokens": 1886,
+    "total_tokens": 2814
+  },
+  "file_size": 6652
+}

@@ -1,0 +1,9 @@
+{
+  "output_name": "07_bronze_plain_pottery",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T00:50:18.723922",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 화려한 무늬가 사라지고 실용성이 강조된 '민무늬토기'의 변화를 설명하세요.\n2. 이것이 단순한 디자인 변화가 아니라, 농사를 짓고 곡식을 저장해야 했던 사회의 변화를 반영함을 연결해 설명해주세요.\n",
+  "file_size": 3201
+}

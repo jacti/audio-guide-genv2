@@ -1,0 +1,73 @@
+{
+  "output_name": "10_gojoseon_wooden_coffin",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:07:29.502929",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 통나무관]\n창원 다호리 유적 통나무관 (목관묘).\n참나무를 반으로 갈라 만든 제작 방식.\n함께 묻힌 부장품(붓, 감 등)과 당시 장례 문화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030400.do?schM=view&showHallId=760&relicId=29934\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "분묘 출토 토기로 살펴본 마한의 성장과 지역성",
+      "url": "https://koreascience.kr/article/JAKO201664750651259.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "NJ Kim 저술 · 2016 · 2회 인용 — 풍 가-49호, 창원 다호리 146·54호 출토품을 들 수 있다. 광주 신창동과 창원 다호리 유적에서는 동일한 기형의 칠. 기가 공반되었다. 신풍 유적의 원통형토기는 묘광과 ...",
+      "source": "web"
+    },
+    {
+      "title": "최경규(영남고고학회 총무)",
+      "url": "https://www.chugoku-shoten.com/mokuji/jmokuji/20240406/20240406.pdf",
+      "date": null,
+      "last_updated": "2024-09-30",
+      "snippet": "창원 다호리유적 1호의 사례를 통해 대나무. 바구니에 청동무기와 동경와 철기, 붓 ... 두 무덤은 모두 목관묘군에 속해 있는 유력 개인묘로 창원 다호리 1호묘나.",
+      "source": "web"
+    },
+    {
+      "title": "각 권역별 중심지역 편",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00051.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "(신용민, 2008, 「다호리유적 목관묘 시기의 묘제」,『茶戶里遺蹟 發掘調査. 와 ... 국립중앙박물관, 2001,『창원 다호리유적』. 경남발전연구원 역사문화센터 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국의 고대 목기",
+      "url": "http://uci.k-heritage.tv/data/ori/2205001/001/O/2205001-001-O00039.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "목기는 주로 저습지 유적에서 많이 출토된다. 목기를 비롯하여 짚신,. 식물규산체 등의 희귀한 유물을 다량으로 얻을 수 있으며, 인공 수로와 수전의. 존재 ...",
+      "source": "web"
+    },
+    {
+      "title": "탐라사를 짚어 보는 계기를",
+      "url": "http://jst.re.kr/upload/pdf/RC00001933.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "12) 한반도 남부지역인 대구 팔달동과 창원 다호리, 포항 옥성리 출토 유리구슬은 납동위. 체의 성분 분석 결과 대체로 중국산으로 확인되고 있다. Page 151. 2011 ...",
+      "source": "web"
+    },
+    {
+      "title": "경기지역 백제고고학의 최근 성과와 연구의 미래",
+      "url": "http://www.hsas.or.kr/flow/?fcode=2096&bbs_table=m4_01",
+      "date": "2018-06-25",
+      "last_updated": "2025-08-30",
+      "snippet": "예컨대 영남지방에서는 창원 다호리, 경주 조양동, 김해 가야의 숲, 성주 백전 ... 한편 6지점 목관묘는 통나무 목관을 사. 용한 것으로 추정된다. 이 지역에서 후 ...",
+      "source": "web"
+    },
+    {
+      "title": "財團 法人",
+      "url": "http://www.ynicp.or.kr/upload/research_pdf/ynicp25.pdf",
+      "date": null,
+      "last_updated": "2024-09-06",
+      "snippet": "... 창원 다호리유적을 들. 수 있으나 이것의 경우 이른 시기의 목관묘 ... 기의 목관묘와 신대리 유적의 목관묘를 합하면 임당유적 목관묘의 구조를 살피기에는 큰 어려움.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1084,
+    "total_tokens": 1999
+  },
+  "file_size": 3994
+}

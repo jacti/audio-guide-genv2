@@ -1,0 +1,73 @@
+{
+  "output_name": "42_gojong_portrait",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:18:04.609739",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 고종황제 어진]\n대한제국 황제 고종의 초상화 (황룡포 착용).\n조선 왕의 홍룡포와 대비되는 황제국의 위상 선포.\n근대화 노력과 대한제국 선포의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040600.do?schM=view&showHallId=759&relicId=737\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "소장품 안내 | 소장품 | gogung",
+      "url": "https://www.gogung.go.kr/gogung/pgm/psgudMng/view.do?psgudSn=361438&menuNo=800065",
+      "date": null,
+      "last_updated": "2025-04-26",
+      "snippet": "어진의 배경에 휘장이 드리워진 것은 매우 이례적이며 얼굴과 의복 등을 강한 명암을 통해 사실적으로 묘사한 것도 이전의 어진 제작방식과 크게 다르다. 기록에 의하면 ...",
+      "source": "web"
+    },
+    {
+      "title": "조선 최고 훈남왕자 초상화부터 황실가족사진까지...가려졌던 ...",
+      "url": "https://www.khan.co.kr/article/201811191018011",
+      "date": "2018-12-03",
+      "last_updated": "2025-11-29",
+      "snippet": "검은 익선관을 쓰고, 황제를 상징하는 노란색 황룡포 차림의 고종은 금박으로 용머리로 장식한 붉은 어좌에 앉아 정면을 똑바로 바라보는 근엄한 모습이다 ...",
+      "source": "web"
+    },
+    {
+      "title": "소장품",
+      "url": "https://www.emuseum.go.kr/m/detail?relicId=PS0100202500102125100000",
+      "date": null,
+      "last_updated": null,
+      "snippet": "조선(朝鮮) 제26대 왕이자, 대한제국(大韓帝國) 제1대 황제인 고종(高宗)의 49세 어용(御容)을 묘사한 초상화. 유리가 있는 나무액자에 끼워진 형태.",
+      "source": "web"
+    },
+    {
+      "title": "고종 초상(高宗 肖像) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0074217",
+      "date": "2022-12-22",
+      "last_updated": "2025-09-06",
+      "snippet": "초상화는 장막이 드리워진 배경으로 고종이 황룡포를 입고 궁궐 마루에 서서 두 손을 모으고 있는 모습을 그린 등신대의 전신 입상이다. 양식 면에서는 사실적 재현에 중점 ...",
+      "source": "web"
+    },
+    {
+      "title": "초상화 가게 연 王(고종)의 화가… \"실물과 다르면 환불\"",
+      "url": "https://www.chosun.com/site/data/html_dir/2012/04/23/2012042302592.html",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고종(高宗) 어진(御眞)을 그렸던 이력, 타고난 화재( 才)를 적극적으로 홍보하며 지역 유지들의 초상화를 제작해 '인생 이모작'에 성공한 것. 최근 작품 ...",
+      "source": "web"
+    },
+    {
+      "title": "국가유산청 > 월간국가유산사랑 상세 > 담백한 화법으로 ...",
+      "url": "https://www.khs.go.kr/cop/bbs/selectBoardArticle.do;jsessionid=Wxvh0FCuNYZqeTbH9bcjwT1sXuVDil9f06vkX5VWiBpa5VVgpKhAbPbYr9qBDXHJ.cha-was01_servlet_engine1?nttId=74718&bbsId=BBSMSTR_1008&pageIndex=60&pageUnit=10&searchtitle=title&searchcont=&searchkey=&searchwriter=&searchdept=&searchWrd=&searchCnd=&ctgryLrcls=&ctgryMdcls=&ctgrySmcls=&ntcStartDt=&ntcEndDt=&mn=NS_01_09_01",
+      "date": null,
+      "last_updated": null,
+      "snippet": "고종의 안면을 자세히 들여다보면 육리문의 붓선이 살아있고 눈동자에는 반사광이 표현되어 있다. 그는 초상화를 그릴 때 사진을 적극적으로 활용했다. < ...",
+      "source": "web"
+    },
+    {
+      "title": "국가유산청 > 월간국가유산사랑 상세 > 휴버트 보스의 고종 ...",
+      "url": "https://www.cha.go.kr/cop/bbs/selectBoardArticle.do?nttId=58572&bbsId=BBSMSTR_1008&pageIndex=16&pageUnit=10&searchtitle=title&searchcont=&searchkey=&searchwriter=&searchdept=&searchWrd=&ctgryLrcls=&ctgryMdcls=&ctgrySmcls=&ntcStartDt=&ntcEndDt=&mn=NS_01_09_01",
+      "date": null,
+      "last_updated": null,
+      "snippet": "인물의 실물 크기로 그려진 이 작품은 여느 왕의 초상과는 다르게 좌상이 아닌 입상으로 묘사되었고, 매우 얇은 유화층으로 그려진 덕분에 작품의 원형을 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 921,
+    "completion_tokens": 2408,
+    "total_tokens": 3329
+  },
+  "file_size": 8560
+}

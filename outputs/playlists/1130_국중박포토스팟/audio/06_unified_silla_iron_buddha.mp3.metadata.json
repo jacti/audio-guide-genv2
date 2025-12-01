@@ -1,0 +1,9 @@
+{
+  "output_name": "06_unified_silla_iron_buddha",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:46:19.204948",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 1000364
+}

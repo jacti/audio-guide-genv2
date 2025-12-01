@@ -1,0 +1,9 @@
+{
+  "output_name": "27_goryeo_injong_title",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:35:54.536494",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 782828
+}

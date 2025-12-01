@@ -1,0 +1,65 @@
+{
+  "output_name": "20_gaya_armor_helm",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:35:49.147041",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 가야 판갑옷]\n가야 판갑옷 특징 (철판을 이어 붙임, 리벳 이음).\n가야 전사의 무장 형태.\n일본(왜) 갑옷과의 교류 및 영향 관계.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030700.do?schM=view&showHallId=760&relicId=27007\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "[중앙박물관특별전, 가야 본성] 가야의 갑옷과 투구",
+      "url": "https://dapsa.kr/blog/?p=64743",
+      "date": null,
+      "last_updated": "2025-08-30",
+      "snippet": "종장판 갑옷은 긴 철판을 세로로 두고 연결한 것이다. 판갑옷을 개량한 것으로 보이며 광개토대왕 정벌 이후 비늘갑옷으로 바뀌는 전단계 모습을 보여주는 것으로 보인다.",
+      "source": "web"
+    },
+    {
+      "title": "삼국시대 갑옷",
+      "url": "https://namu.wiki/w/%EC%82%BC%EA%B5%AD%EC%8B%9C%EB%8C%80%20%EA%B0%91%EC%98%B7",
+      "date": "2025-09-09",
+      "last_updated": "2025-10-23",
+      "snippet": "가야, 신라 갑옷의 경우 흉갑이 종장판갑인데 가슴 부분에 붙어있는 두개의 뿔 모양 철판은 어깨 위에 세우는 것이며 종장판갑의 상박갑이 발견된 예는 없고 다만 상체의 ...",
+      "source": "web"
+    },
+    {
+      "title": "가야의 철갑옷",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B0%80%EC%95%BC%EC%9D%98_%EC%B2%A0%EA%B0%91%EC%98%B7",
+      "date": "2008-03-05",
+      "last_updated": "2025-06-05",
+      "snippet": "종장판(縱長板) 갑옷은 긴 철판을 세로로 정결(釘結)한 것이며, 삼각판 혁철 단갑은 삼각형 철판에 구멍을 내 가죽끈으로 연결한 것이다. 삼각판 정결단갑은 굵은 못으로 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국 갑옷 (r526 판)",
+      "url": "https://namu.wiki/w/%ED%95%9C%EA%B5%AD%20%EA%B0%91%EC%98%B7?uuid=14ed00e8-8caa-4806-99c4-9de11a61d0f6",
+      "date": "2021-09-06",
+      "last_updated": "2025-10-26",
+      "snippet": "특징적인 부품인 이마에서 정수리에 이르는 세로로 긴 철판을 중심으로 횡장판 또는 삼각판을 이어붙여 만든 투구이다. 역시 고대 일본을 대표하는 투구 형식이며, 한반도 ...",
+      "source": "web"
+    },
+    {
+      "title": "가야(加耶) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0000257",
+      "date": "2022-12-22",
+      "last_updated": "2025-11-29",
+      "snippet": "가야는 서기전 1세기~서기 6세기, 경상남도와 경상북도 일부에서 형성된 작은 나라들의 연합이다. 삼국시대에 고구려, 백제, 신라와 함께 존속하였다.",
+      "source": "web"
+    },
+    {
+      "title": "판갑의 출현 | 가야 철갑옷 1 | 종장판갑 | 縱長板甲",
+      "url": "https://cafe.daum.net/joinusclub/1vau/33",
+      "date": null,
+      "last_updated": null,
+      "snippet": "초기의 4세기 판갑은 철판을 세로로 붙인다. 후기 5세기 판갑은 철판을 가로로 붙인다. 철판을 고정하는 덧댄 테두리는 밑부분만 빙 두르고 위쪽은 두루지 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 915,
+    "completion_tokens": 1520,
+    "total_tokens": 2435
+  },
+  "file_size": 5126
+}

@@ -1,0 +1,57 @@
+{
+  "output_name": "12_closing",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:00:16.609014",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 마무리 멘트]\n국립중앙박물관 필수 스팟 투어를 마무리하는 멘트.\n이 코스에서 둘러본 스팟 목록:\n1) 남산타워 전망\n2) 고구려 강서대묘 사신도\n3) 신라 금관과 금허리띠(국보)\n4) 신라 진흥왕 순수비(국보)\n5) 경천사 십층석탑(국보)\n6) 통일신라 철불\n7) 사유의 방 - 반가사유상(국보)\n8) 외규장각 의궤 전시실\n9) 도자공예실 - 분청·백자\n10) 뮤즈(Muse) 굿즈샵\n보너스) 옛 보신각 동종(보물)\n\n관람객이 사진 명소와 국보·보물을 중심으로 짧은 시간 안에 국중박의 하이라이트를 경험했다는 점 상기.\n다음 방문 추천 스팟: 사유의 방, 도자공예실 등.\n다음 코스 추천: '뮤지엄 원더' 앱 내 ‘국립중앙박물관 한국사 완전정복 가이드’ 또는 야외 정원·야외전시.\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "남산서울타워",
+      "url": "https://namu.wiki/w/%EB%82%A8%EC%82%B0%EC%84%9C%EC%9A%B8%ED%83%80%EC%9B%8C",
+      "date": "2025-10-30",
+      "last_updated": "2025-10-31",
+      "snippet": "남산서울타워 ; 종류. 송신탑, 전망대 ; 주소 ; 주소. 서울특별시 용산구 남산공원길 105[2] ; 착공. 1969년 12월 ; 준공. 1975년 7월.",
+      "source": "web"
+    },
+    {
+      "title": "2025 남산서울타워 인기 나이트 투어 | 겟유어가이드",
+      "url": "https://www.getyourguide.com/ko-kr/n-seoul-tower-l91140/night-tours-tc10/",
+      "date": null,
+      "last_updated": null,
+      "snippet": "전문 가이드와 함께 서울의 멋진 야경을 감상하고 멋진 전망을 자랑하는 덕수궁을 방문해보세요. ... 남산 타워, 여의도가 한눈에 들어오는 파노라마 야경이 펼쳐집니다.",
+      "source": "web"
+    },
+    {
+      "title": "서울 출사 여행기｜국립중앙박물관·해방촌·숙대",
+      "url": "https://brunch.co.kr/@c5819cd22cb6473/3",
+      "date": "2025-06-18",
+      "last_updated": "2025-08-29",
+      "snippet": "국립중앙박물관 옥외 계단에서 바라본 남산타워 전망은 왜 이곳이 인기 출사 명소인지 고개가 끄덕여졌다. 서울 출사 중 감성적인 뷰 중 하나였다.",
+      "source": "web"
+    },
+    {
+      "title": "서울의 아름다운 야경 '남산' - 트립닷컴",
+      "url": "https://kr.trip.com/moments/detail/seoul-234-12883699/",
+      "date": "2022-03-28",
+      "last_updated": "2025-11-15",
+      "snippet": "위치 : 서울 중구 회현동1가 케이블카: 서울 중구 소파로 83 대인: 13000원 편도:10000원 소인: 9500원 편도:7000원 서울의 전체적인 야경을 볼 수 ...",
+      "source": "web"
+    },
+    {
+      "title": "남산서울타워",
+      "url": "https://www.ibtravel.co.kr/place/28491",
+      "date": null,
+      "last_updated": null,
+      "snippet": "남산 정상에 위치해 해발 479.7m 높이에서 도시와 자연이 어우러진 풍경을 감상할 수 있습니다. 특히 겨울철에는 눈 덮인 남산의 풍경과 화려한 서울의 야경이 어우러져 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1118,
+    "completion_tokens": 1270,
+    "total_tokens": 2388
+  },
+  "file_size": 4427
+}

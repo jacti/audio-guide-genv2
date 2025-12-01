@@ -1,0 +1,9 @@
+{
+  "output_name": "07_room_of_quiet_contemplation",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:49:09.912975",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 665900
+}

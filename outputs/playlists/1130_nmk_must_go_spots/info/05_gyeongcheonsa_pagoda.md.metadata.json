@@ -1,0 +1,57 @@
+{
+  "output_name": "05_gyeongcheonsa_pagoda",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:40:05.191471",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 경천사 십층석탑]\n고려 말 제작된 경천사 십층석탑.\n국보임.\n국립중앙박물관 1층 중앙홀에 위치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201101000.do?schM=view&showHallId=406012&relicId=17738\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "博 物 館 紀 要 - 석주선기념박물관 - 단국대학교",
+      "url": "https://museum.dankook.ac.kr/html_repositories/doc/museum_giyo25.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이러한 외형적 특징에서 정림사지 오층석탑을 그대로 답습하고 있음을 확인할 수 있. 다. 비록 부재가 단순화되고 1층 탑신이 다른 탑신에 비해 높아 어색한 느낌을 주기는.",
+      "source": "web"
+    },
+    {
+      "title": "사진으로 보는 국립문화재연구소 50돌 석조물 ...",
+      "url": "https://nrich.go.kr/upload/journal/20191008144633100.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이는 최근 복원작업을 마친 미륵사지 서석탑 역시 탑의 안전. 을 위해 내부와 외부의 구조가 서로 역학적으로 결합된 이원구. 조체계였음이 확인되었다.",
+      "source": "web"
+    },
+    {
+      "title": "우리 석탑의 아름다움을 찾아서",
+      "url": "http://www.gunnet.kr/boardz/view.php?id=story&page=4&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=hit&desc=desc&no=40",
+      "date": null,
+      "last_updated": null,
+      "snippet": "이 탑은 목탑처럼 기단이 낮아 탑 속으로 쉽게 들어설 수 있다. 사방으로 출입구를 낸 것도 목탑의 구조를 따랐다. 벽은 벽대로 기둥은 기둥대로 석재를 짜 맞추었는데, ...",
+      "source": "web"
+    },
+    {
+      "title": "한국석탑(韓國石塔)의 조형미(造形美)",
+      "url": "https://koreascience.kr/article/JAKO196554361263732.pdf",
+      "date": null,
+      "last_updated": null,
+      "snippet": "한 점보다도 석탑의 조형적인 면에서만 대표작을 들어 그가 가지고 있는 미를 찾아볼까. 한다. 경천사지 십층석탑. 二. 충남부여군 부여 읍에 五층석탑이 있다. 이 탑은 ...",
+      "source": "web"
+    },
+    {
+      "title": "탑 - 불교이야기 - 덕비德斐 선원(보리살타사랑)",
+      "url": "https://cafe.daum.net/bodhicitta/IsFU/44",
+      "date": null,
+      "last_updated": null,
+      "snippet": "밀폐되어 내부가 통해있지 않는 석탑이나 전탑과는 달리, 목탑 속에서는 예배를 비롯한 각종 의식이 이루어질 수가 있었다. 일반적으로 탑 바깥쪽을 돌면서 행하는 탑돌이 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 905,
+    "completion_tokens": 782,
+    "total_tokens": 1687
+  },
+  "file_size": 2793
+}

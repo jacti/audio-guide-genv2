@@ -1,0 +1,9 @@
+{
+  "output_name": "40_joseon_hwaseong_records",
+  "pipeline": "audio_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:14:02.455022",
+  "model": "gemini-2.5-pro-tts",
+  "voice": "Laomedeia",
+  "file_size": 711020
+}

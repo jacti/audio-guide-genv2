@@ -1,0 +1,9 @@
+{
+  "output_name": "07_room_of_quiet_contemplation",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T14:47:03.626126",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[톤] 말하기 속도를 조금 늦추고 조용하고 차분한 톤.\n[지시사항]\n1. 사진 명소 특성을 강조하되, 공간의 정적과 조명을 묘사해주세요.\n2. 두 사유상의 미세한 분위기 차이를 언급하고, 촬영 시 조용한 매너를 안내해주세요.\n[금지사항]\n- 긴 역사 설명 금지.\n",
+  "file_size": 2867
+}

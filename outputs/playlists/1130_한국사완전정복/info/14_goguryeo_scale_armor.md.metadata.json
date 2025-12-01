@@ -1,0 +1,73 @@
+{
+  "output_name": "14_goguryeo_scale_armor",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:19:09.947502",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 비늘갑옷]\n고구려 철갑옷 (찰갑) 구조 및 특징.\n작은 철판을 엮어 만든 이유 (활동성).\n고구려 개마무사의 위력과 철 제련 기술.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030500.do?schM=view&showHallId=760&relicId=29925\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "철찰갑(鐵札甲) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0069885",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "찰갑은 쇠나 가죽으로 만든 타원형의 방호재 표면에 상하좌우로 각각 2~4개의 구멍을 뚫고 이를 가죽끈을 사용해 가로 방향으로 먼저 엮은 뒤 다시 이를 세로 방향으로 ...",
+      "source": "web"
+    },
+    {
+      "title": "갑옷 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B0%91%EC%98%B7",
+      "date": "2017-07-13",
+      "last_updated": "2025-11-19",
+      "snippet": "이 찰갑은 조선 전기의 대표적인 갑옷으로서, 고구려의 기마병이 입었던 찰갑이나 고려군의 찰갑과 기본 구조가 동일하다. 찰갑은 쇠나 가죽으로 만든 타원형의 방호재 ...",
+      "source": "web"
+    },
+    {
+      "title": "찰갑",
+      "url": "https://namu.wiki/w/%EC%B0%B0%EA%B0%91",
+      "date": "2025-11-06",
+      "last_updated": "2025-11-30",
+      "snippet": "Scale Armor / Lamellar Armor / 札甲 쇠나 뼈 따위로 만든 미늘조각(小札)들을 끈으로 연결해서 만드는 갑옷. 본질적으로 동일한 형태의 조각들이 끈으로 연결하는 ...",
+      "source": "web"
+    },
+    {
+      "title": "Re: 조선시대의 갑옷 - 조선과 근대 토론방",
+      "url": "https://cafe.daum.net/alhc/7l/742",
+      "date": null,
+      "last_updated": null,
+      "snippet": "찰갑은 쇠나 가죽으로 만든 타원형의 방호재 표면에 상하좌우로 각각 2~4개의 구멍을 뚫고 이를 가죽끈을 사용해 가로 방향으로 먼저 엮은 뒤 다시 이를 세로 방향으로 ...",
+      "source": "web"
+    },
+    {
+      "title": "국악사전 - 갑옷",
+      "url": "https://www.gugak.go.kr/ency/topic/view/1277",
+      "date": "2023-09-25",
+      "last_updated": "2025-10-02",
+      "snippet": "찰갑은 작은 갑찰들을 먼저 가로로 연결한 후 다시 세로로 이어서 유동성이 있기 때문에 기마전투에 적당하였고, 판갑은 여러 가지 모양의 철판을 머리가 둥근 못이나 가죽 ...",
+      "source": "web"
+    },
+    {
+      "title": "한국 갑옷 (r560 판)",
+      "url": "https://namu.wiki/w/%ED%95%9C%EA%B5%AD%20%EA%B0%91%EC%98%B7?uuid=9d145242-4c40-403b-aeba-c09a9895c461",
+      "date": "2023-06-08",
+      "last_updated": "2025-10-08",
+      "snippet": "고대 한국에서 사용된 찰갑은 모두 외중식이다. 고구려(북방)계 찰갑은 부품수가 많고 관리가 힘들었지만, 다층구조에 의한 충격완화효과로 화살에 대한 방어력이 ...",
+      "source": "web"
+    },
+    {
+      "title": "고대 한류로서 '갑옷문화'의 국제 위상(2)",
+      "url": "http://www.breaknews.com/196617",
+      "date": null,
+      "last_updated": null,
+      "snippet": "... 갑옷은 목부분을 찰편으로 만들어 두른 모습이다. 고구려의 철갑옷은 어떠한 무기도 방어할 수 있도록 매우 완벽한 짜임새를 가지고 있다. 고구려는 이 같은 찰갑 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 914,
+    "completion_tokens": 1997,
+    "total_tokens": 2911
+  },
+  "file_size": 6792
+}

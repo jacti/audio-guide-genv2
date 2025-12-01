@@ -1,0 +1,73 @@
+{
+  "output_name": "36_joseon_yongbieocheonga",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T10:59:58.320523",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 용비어천가]\n훈민정음으로 쓰인 최초의 문학 작품 용비어천가.\n\"뿌리 깊은 나무는...\" 내용의 의미.\n한글 창제 직후의 사용례와 역사적 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040400.do?schM=view&showHallId=759&relicId=750\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "훈민정음으로 쓴 최초의 작품, 《용비어천가》 발굴",
+      "url": "https://www.koya-culture.com/news/article.html?no=114917",
+      "date": "2018-10-05",
+      "last_updated": "2025-11-30",
+      "snippet": "처음 찍은 책과 목판은 같지만 찍은 시기에 차이가 있다. 조선 초기 악장 문학을 대표하는 《용비어천가》는 훈민정음으로 쓰인 최초의 문헌으로서 희귀 ...",
+      "source": "web"
+    },
+    {
+      "title": "용비어천가(龍飛御天歌) - 한국민족문화대백과사전",
+      "url": "https://encykorea.aks.ac.kr/Article/E0039509",
+      "date": "2022-12-22",
+      "last_updated": "2025-08-29",
+      "snippet": "「용비어천가」의 본문과 그것을 풀이한 한시는 1445년, 곧 훈민정음이 반포되기 1년 전에 만들어졌으므로, 이 노래는 훈민정음으로 적힌 글로서는 가장 먼저 된 것이다.",
+      "source": "web"
+    },
+    {
+      "title": "용비어천가 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%9A%A9%EB%B9%84%EC%96%B4%EC%B2%9C%EA%B0%80",
+      "date": "2008-10-01",
+      "last_updated": "2025-09-18",
+      "snippet": "용비어천가는 훈민정음이 창제된 후 정음(正音, 한글)으로 기록된 최초의 문헌임과 동시에 《월인천강지곡》과 함께 조선시대 악장(樂章) 문학의 대표적 작품으로 평가 ...",
+      "source": "web"
+    },
+    {
+      "title": "용비어천가",
+      "url": "https://namu.wiki/w/%EC%9A%A9%EB%B9%84%EC%96%B4%EC%B2%9C%EA%B0%80",
+      "date": "2025-09-23",
+      "last_updated": "2025-10-28",
+      "snippet": "[1] 훈민정음은 세종 28년(1446)에 반포됐다.[2] 두 번째는 부처의 은덕을 찬양하는 석보상절로 세종 28년(1446)에 편찬되었다.",
+      "source": "web"
+    },
+    {
+      "title": "용비어천가 - 금성출판사 :: 티칭백과",
+      "url": "http://dic.kumsung.co.kr/web/smart/detail.do?headwordId=10554&pg=1&findCategory=B002005&findBookId=23&findPhoneme=",
+      "date": "2020-01-01",
+      "last_updated": "2025-08-29",
+      "snippet": "훈민정음으로 쓰인 최초의 문학 작품이다. 조선 세종 때 선조인 목조, 익조, 도조, 환조, 태조, 태종에 이르는 6대의 선조들의 행적을 노래한 서사시이다. '용비어천가 ...",
+      "source": "web"
+    },
+    {
+      "title": "서울특별시 유형문화유산 용비어천가 (龍飛御天歌)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?culPageNo=3&region=&searchCondition=&searchCondition2=&s_kdcd=&s_ctcd=11&ccbaKdcd=21&ccbaAsno=04680000&ccbaCtcd=11&ccbaCpno=2111104680000&ccbaCndt=&ccbaLcto=15&stCcbaAsno=&endCcbaAsno=&stCcbaAsdt=&endCcbaAsdt=&ccbaPcd1=&chGubun=&header=region&returnUrl=%2Fheri%2Fcul%2FculSelectRegionList.do&pageNo=1_1_3_1&sngl=Y",
+      "date": "2020-08-13",
+      "last_updated": "2025-11-12",
+      "snippet": "조사대상본은 한글을 적용한 최초의 작품이고 훈민정음 창제 당시 우리 한글의 모습을 살필 수 있는 귀중한 자료로서 가치가 큼. 조사대상인 용비어천가 권 1, 2, 5, 6은 ...",
+      "source": "web"
+    },
+    {
+      "title": "용비어천가",
+      "url": "https://www.cbedunet.or.kr/files/PORTAL/cd_data/highmunhak/h20liter/00/classics/gojun6.htm",
+      "date": null,
+      "last_updated": null,
+      "snippet": "훈민정음으로 쓰여진 최초의 작품으로 조선을 건국한 태조 이성계를 비롯하여 태종, 목조, 익조, 도조, 환조 등 여섯 할아버지의 사적(史蹟)을 찬양하고 후대 왕에게 나라 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 914,
+    "completion_tokens": 2225,
+    "total_tokens": 3139
+  },
+  "file_size": 8077
+}

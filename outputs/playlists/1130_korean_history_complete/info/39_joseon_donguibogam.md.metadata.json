@@ -1,0 +1,73 @@
+{
+  "output_name": "39_joseon_donguibogam",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T11:08:57.091018",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 동의보감]\n유네스코 세계기록유산 동의보감.\n허준의 집필 배경 (전쟁 후 질병, 예방 의학).\n동아시아 의학에 미친 영향 및 오늘날의 가치.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=view&showHallId=759&relicId=16216\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "유네스코 세계기록 유산 '동의보감' 국보로 승격",
+      "url": "https://www.hani.co.kr/arti/culture/culture_general/696952.html",
+      "date": "2015-06-22",
+      "last_updated": "2024-09-25",
+      "snippet": "... <동의보감(東醫寶鑑)>이 국보로 승격된다. 문화재청은 22일 보물이었던 <동의보감>3건을 국가지정문화재 국보 319-1, 2, 3호로 승격 지정한다고 밝혔다.",
+      "source": "web"
+    },
+    {
+      "title": "세계기록유산 동의보감, 보물에서 국보로… / YTN 사이언스",
+      "url": "https://www.youtube.com/watch?v=h9pY5eASG5M",
+      "date": "2015-06-23",
+      "last_updated": "2025-10-17",
+      "snippet": "[앵커] 조선 시대 어의 허준이 쓴 동의보감은 유네스코 세계기록유산이지만 국내에선 그동안 보물로 지정되어 있었습니다 당연히 격이 맞지 않는다는 ...",
+      "source": "web"
+    },
+    {
+      "title": "'유네스코 세계기록유산' 동의보감, 국보 승격 ... - 동아일보",
+      "url": "https://www.donga.com/news/Culture/article/all/20150622/72043317/1",
+      "date": null,
+      "last_updated": null,
+      "snippet": "국가지정문화재 보물이자 유네스코 세계기록유산인 동의보감 3건이 국가지정문화재 국보 제319-1호, 제319-2호, 제319-3호로 승격, 지정됐다.",
+      "source": "web"
+    },
+    {
+      "title": "국가유산청 > 상세 > 유네스코 세계기록유산 「동의보감」 국보 승격 ...",
+      "url": "https://www.khs.go.kr/newsBbz/selectNewsBbzView.do;jsessionid=FRLEjas1jedn1CsnrMeWoJQim3SOwHRxQnuUGoQeitwHqH1slY4xtILca0Ui16Mo.cha-was02_servlet_engine1?newsItemId=155699334&sectionId=b_sec_1&pageIndex=607&mn=NS_01_02_01&strWhere=&strValue=&sdate=&edate=",
+      "date": null,
+      "last_updated": null,
+      "snippet": "문화재청(청장 나선화)은 국가지정문화재 보물이자 유네스코 세계기록유산인 「동의보감(東醫寶鑑)」3건을 국가지정문화재 국보 제319-1호, 제319-2호, 제319-3호로 ...",
+      "source": "web"
+    },
+    {
+      "title": "등재",
+      "url": "https://mohw.go.kr/attachPreview.es?bid=0027&list_no=218162&seq=1",
+      "date": null,
+      "last_updated": null,
+      "snippet": "동의보감의 세계기록유산 등재로 우리나라는 1997년의 훈민정음과 조선왕조실록, 2001년의 직지심체요절과 승정원 일기, 그리고 2007년의 고려대장경판과 제경판, 조선왕조 ...",
+      "source": "web"
+    },
+    {
+      "title": "세계기록유산",
+      "url": "https://namu.wiki/w/%EC%84%B8%EA%B3%84%EA%B8%B0%EB%A1%9D%EC%9C%A0%EC%82%B0",
+      "date": "2025-11-03",
+      "last_updated": "2025-11-04",
+      "snippet": "하지만 동의보감이 세계기록유산에 등재되자, 중의학의 종주국이라며 ... 세르비아에서 제출하여 유네스코 세계기록유산으로 지정되어 있다. 링크.",
+      "source": "web"
+    },
+    {
+      "title": "세계기록유산 '동의보감' 國寶 승격",
+      "url": "https://www.munhwa.com/article/10944559",
+      "date": null,
+      "last_updated": "2025-10-27",
+      "snippet": "지난 2008년 보물 지정 이후 7년 만이다. 동의보감은 2009년에 유네스코(유엔교육과학문화기구) 세계기록유산으로 등재되었다. 문화재청(청장 나선화)은 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 913,
+    "completion_tokens": 1575,
+    "total_tokens": 2488
+  },
+  "file_size": 5415
+}

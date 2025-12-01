@@ -1,0 +1,65 @@
+{
+  "output_name": "06_neolithic_gadeokdo_bones",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-11-30T15:54:39.696329",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 가덕도 인골]\n부산 가덕도 신석기 인골(굴장) 발굴 의미.\n신석기 시대 장례 풍습 및 DNA 분석 결과.\n당시 사람들의 체격과 생활상.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030200.do?schM=view&showHallId=760&relicId=29880\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "유적별 - 국가유산 지식이음",
+      "url": "https://portal.nrich.go.kr/kor/journalUsrDtlView.do?menuIdx=801&idx=7&d_idx=249",
+      "date": "2023-02-16",
+      "last_updated": "2025-09-23",
+      "snippet": "신석기인들의 장례모습 가덕도 장항유적에서는 신석기시대 전기에 해당되는 매장 인골 48개체와 다량의 부장용 토기가 출토되었다. 인골은 대체로 Ⅷ층과 Ⅸ층 경계면 ...",
+      "source": "web"
+    },
+    {
+      "title": "An Experimental Approach to the Integrated Understanding ...",
+      "url": "https://www.academia.edu/38957075/A_Social_Bioarchaeology_of_the_Site_of_Gadeokdo_Busan_An_Experimental_Approach_to_the_Integrated_Understanding_on_the_Neolithic_Mortuary_Practice_%EA%B0%80%EB%8D%95%EB%8F%84_%EC%9E%A5%ED%95%AD_%EC%9C%A0%EC%A0%81%EC%9D%98_%EC%82%AC%ED%9A%8C%EC%A0%81_%EC%83%9D%EB%AC%BC%EA%B3%A0%EA%B3%A0%ED%95%99_%EC%8B%A0%EC%84%9D%EA%B8%B0%EC%8B%9C%EB%8C%80_%EB%A7%A4%EC%9E%A5%EA%B4%80%ED%96%89%EC%97%90_%EB%8C%80%ED%95%9C_%ED%86%B5%ED%95%A9%EC%A0%81_%EC%9D%B4%ED%95%B4_%EC%8B%9C%EB%A1%A0_",
+      "date": null,
+      "last_updated": null,
+      "snippet": "1) 인골과 매장방법 가덕도(장항)의 신석기시대 묘역에서 확인된 인골3) <표 1> ... 그러한 특징을 종합하면, 가덕도(장항)의 신석기시대 묘역의 조성에는, 종ㆍ횡 ...",
+      "source": "web"
+    },
+    {
+      "title": "부산 가덕도 장항 유적에서 출토된 신석기시대 사람뼈 집단의 ...",
+      "url": "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE06339345",
+      "date": null,
+      "last_updated": null,
+      "snippet": "부산 가덕도 장항 유적에서 출토된 신석기시대 사람뼈 집단의 턱뼈가지 형태적 특징을 분석하는 것이다. 연구배경. 이 연구의 목적은 신석기 시대 이후 시간에 따른 ...",
+      "source": "web"
+    },
+    {
+      "title": "땅 속에서 찾아낸 부산역사의 재발견 : 부산소식 : 보도·해명자료",
+      "url": "https://www.busan.go.kr/nbtnewsBU/1397876?curPage=5&srchBeginDt=&srchEndDt=&srchKey=&srchText=",
+      "date": null,
+      "last_updated": null,
+      "snippet": "신석기시대 무덤연구의 최대 성과라고 할 수 있는 가덕도 장항유적의 발굴조사를 토대도 지금까지 잘 알려져 있지 않았던 신석기시대의 매장방식과 출토 인골의 유전학적 ...",
+      "source": "web"
+    },
+    {
+      "title": "무덤으로 본 新石器時代 漁撈民의 海洋景觀 構築",
+      "url": "https://www.museum.go.kr/afile/fileDownloadById/33348?siteCode=MUSEUM",
+      "date": null,
+      "last_updated": null,
+      "snippet": "그러나 가장 많은 인골이 확인된 부산 가덕도 장항유. 적(48기)에서는 굴장의 비율이 74%(39/7)에 달해 주류를 이루고 있다. 범방에서도 하. 반신을 구부린 굴장이 확인 ...",
+      "source": "web"
+    },
+    {
+      "title": "조개더미에 남겨진 부산 사람들의 생활-신석기 동삼동, 그때 ...",
+      "url": "https://busan.grandculture.net/Contents/Index?contents_id=GC04219160",
+      "date": null,
+      "last_updated": "2025-10-30",
+      "snippet": "가덕도 신석기 유적에서는 모두 48기의 무덤이 조사되었다. 여기서 조개 팔찌를 착용한 완전한 형태를 갖춘 2구의 인골이 발견되었다. 41호 무덤에서는 정확한 개수를 알 ...",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 908,
+    "completion_tokens": 1408,
+    "total_tokens": 2316
+  },
+  "file_size": 4816
+}

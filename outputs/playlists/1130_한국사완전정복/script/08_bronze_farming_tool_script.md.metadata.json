@@ -1,0 +1,9 @@
+{
+  "output_name": "08_bronze_farming_tool",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-11-30T16:01:28.072499",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[지시사항]\n1. 매우 작은 청동 조각이지만, 그 안에 2천 년 전의 풍경이 들어있음을 강조하며 자세히 들여다보게 하세요.\n2. 밭을 갈고 수확물을 담는 사람의 모습을 묘사하며, 당시 사람들이 가을의 풍요를 얼마나 간절히 기원했는지 감동적으로 전달하세요.\n",
+  "file_size": 3389
+}
