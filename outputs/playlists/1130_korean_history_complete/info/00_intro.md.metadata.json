@@ -2,11 +2,27 @@
   "output_name": "00_intro",
   "pipeline": "info_retrieval",
   "mode": "production",
-  "timestamp": "2025-12-01T00:29:11.425818",
+  "timestamp": "2025-12-01T23:19:30.128149",
   "model": "sonar-pro",
   "info_retrieval_user_content_text": "[조사 주제: 국립중앙박물관 테마 소개]\n국립중앙박물관 상설전시관 '선사·고대관' 및 '중·근세관' 관람 코스 특징.\n\"유물로 배우는 한국사\" 컨셉.\n구석기부터 조선 후기까지의 역사 흐름 요약.\n관람 소요 시간(2~3시간) 및 주요 관전 포인트.\n",
   "finish_reason": "stop",
   "search_results": [
+    {
+      "title": "국립중앙박물관>전시>상설 전시>중·근세관>고려1실",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201040100.do?showHallId=759&showroomCode=DM0036",
+      "date": "2007-01-01",
+      "last_updated": "2025-10-31",
+      "snippet": "중·근세관. 고려(918~1392), 조선(1392~1897), 대한제국(1897~1910)실로 꾸며진 북쪽 전시 공간은 당시의 역사를 엿볼 수 있는 자료를 전시하여, 관람객이 한국 중세, ...",
+      "source": "web"
+    },
+    {
+      "title": "알고 가면 더 재밌는 국립중앙박물관, 관람팁 소개해요! | 서울시",
+      "url": "https://mediahub.seoul.go.kr/archives/2006826",
+      "date": "2023-02-03",
+      "last_updated": "2025-11-28",
+      "snippet": "전시관 1층 중근세관 내 디지털 실감 영상관1에서는 폭 60m, 높이 5m의 초대형 파노라마 스크린이 펼쳐진다. 이곳에서는 꽃길이 깔리고 사계절이 휘몰아 ...",
+      "source": "web"
+    },
     {
       "title": "국립중앙박물관>전시>상설 전시>중·근세관>조선3실",
       "url": "https://www.museum.go.kr/MUSEUM/contents/M0201040500.do?schM=list&showHallId=759&showroomCode=DM0046",
@@ -16,27 +32,27 @@
       "source": "web"
     },
     {
-      "title": "한국 문화의 독창성 24선 - 상설 전시",
-      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do?schM=list&relicRecommendPk=PS01001001_64",
-      "date": "2020-08-05",
-      "last_updated": "2025-10-17",
-      "snippet": "선사·고대관 · 중·근세관 · 서화관 · 기증관 · 사유의 방 · 조각·공예관 · 세계문화관 · 역사의 길 · 야외 전시 · 특별 전시 · 현재 전시 · 예정 전시 · 지난 전시.",
-      "source": "web"
-    },
-    {
-      "title": "국립중앙박물관 '큐레이터와의 대화' 운영",
-      "url": "https://www.handmk.com/news/articleView.html?idxno=15649",
-      "date": "2023-04-03",
-      "last_updated": "2025-11-14",
-      "snippet": "... 선사고대의 문화유산을 집중적으로 살펴볼 수 있다. 중근세관 고려실 <고려 왕실 이야기>에서는 고려시대 왕실과 관련한 문화재, 정치사적 의미 등에 ...",
+      "title": "2025년 국립중앙박물관 추천 가이드 (11월 업데이트) - 트립닷컴",
+      "url": "https://kr.trip.com/moments/theme/poi-national-museum-of-korea-78919-guides-993135/",
+      "date": "2025-10-28",
+      "last_updated": "2025-10-28",
+      "snippet": "국립중앙박물관 추천 관광 시간: 2~3시간.. 국립중앙박물관 전화번호: + ... 우선 1층의 선사고대관, 중근세관부터 들러보면 우리가 흔히 알고있는 구석기시대 ...",
       "source": "web"
     },
     {
       "title": "따스한 봄날의 문화 나들이, '큐레이터와의 대화'",
       "url": "https://www.koya-culture.com/news/article.html?no=139874",
-      "date": null,
-      "last_updated": null,
-      "snippet": "선사고대관에서는 신라실의 <함안성산산성 목간-출토, 제작, 보존처리>, 백제실의 <고대 구슬의 제작 기법> 등 문화재의 제작기법에 대한 보존과학 분야 ...",
+      "date": "2023-04-03",
+      "last_updated": "2025-11-30",
+      "snippet": "4월 큐레이터와의 대화는 상설전시실 곳곳에서 문화유산과 국립중앙박물관 전시에 대한 이해를 높일 수 있는 주제로 구성된다. 선사고대관에서는 신라실의 ...",
+      "source": "web"
+    },
+    {
+      "title": "사진으로 떠나는 국립중앙박물관 나들이 | 서울시",
+      "url": "https://mediahub.seoul.go.kr/archives/1177287",
+      "date": "2018-08-29",
+      "last_updated": "2025-11-26",
+      "snippet": "동관의 상설전시관은 우리나라 역사를 시대순으로 구성하여 '선사시대~고대관', '중근세관'이 1층에 있으며 2층에는 '기증관'과 불교회화, 서화, 목공예품 ...",
       "source": "web"
     },
     {
@@ -48,18 +64,50 @@
       "source": "web"
     },
     {
+      "title": "[Opinion] 봄에 나들이 가기 좋은 곳, 국립중앙박물관 [문화공간]",
+      "url": "https://www.artinsight.co.kr/news/view.php?no=22628",
+      "date": "2016-04-17",
+      "last_updated": "2025-08-20",
+      "snippet": "1층에 위치한 선사고대관과 중근세관, 2층에 위치한 기증관과 서화관, 마지막으로 3층에 위치한 아시아관과 조각공예관으로 이루어져있다.",
+      "source": "web"
+    },
+    {
       "title": "큐레이터와의 대화",
       "url": "https://www.museum.go.kr/site/main/show/view/curator/259938",
       "date": "2017-11-01",
       "last_updated": "2025-10-12",
       "snippet": "중근세관. 특별전시실. 조각공예관. 기획전시실. 대한제국 국새國璽는 무슨 재료로 ... 선사고대관. 기획전시실. 중앙아시아 벽화의 보존. 중앙아시아실. 보존과학부 ...",
       "source": "web"
+    },
+    {
+      "title": ">국립중앙박물관>전시>상설 전시>추천 동선>명품30선",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do",
+      "date": "2020-08-05",
+      "last_updated": "2025-11-30",
+      "snippet": "1 주먹도끼 이미지. 세계의 구석기 문화사를 바꾼 '주먹도끼'. 선사고대관 > 구석기 ; 2 빗살무늬토기 이미지. 신석기시대 새로운 발명품 '빗살무늬 토기'. 선사고대관 > ...",
+      "source": "web"
+    },
+    {
+      "title": "전시 해설 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0102010000.do",
+      "date": null,
+      "last_updated": "2025-12-01",
+      "snippet": "선사고대관 해설 정보를 해설코스, 모이는 곳, 해설시간으로 나타낸 표입니다. 해설코스, 선사고대관. 모이는 곳 ... 해설코스, 중근세관. 모이는 곳, 고려1 앞 (113호).",
+      "source": "web"
+    },
+    {
+      "title": "상설전시실 층별 안내",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201010000.do",
+      "date": null,
+      "last_updated": "2025-11-30",
+      "snippet": "상설 전시장은 누구나 무료 로 관람하실 수 있습니다. 관람 안내. 1 F. 1층 ○중·근세관 ○선사·고대관; 중·근세관 고려, 조선, 대한제국실로 꾸며진 북쪽 전시공간은 ...",
+      "source": "web"
     }
   ],
   "usage": {
     "prompt_tokens": 915,
-    "completion_tokens": 2095,
-    "total_tokens": 3010
+    "completion_tokens": 3331,
+    "total_tokens": 4246
   },
-  "file_size": 7375
+  "file_size": 11493
 }

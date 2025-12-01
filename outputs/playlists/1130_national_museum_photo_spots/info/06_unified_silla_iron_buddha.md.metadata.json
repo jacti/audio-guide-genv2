@@ -1,0 +1,49 @@
+{
+  "output_name": "06_unified_silla_iron_buddha",
+  "pipeline": "info_retrieval",
+  "mode": "production",
+  "timestamp": "2025-12-01T23:02:09.570437",
+  "model": "sonar-pro",
+  "info_retrieval_user_content_text": "[조사 주제: 통일신라 철불]\n국립중앙박물관 통일신라 철불.\n普願寺址出土統一新羅鐵製如來坐像. 일제강점기이던 1918년, 충청남도 서산시 운산면의 보원사(普願寺) 절터에서 출토된 8~9세기 통일신라 시대의 철제불상 1점. 한반도에 현존하는 가장 오래된 철불\nhttps://namu.wiki/w/%EB%B3%B4%EC%9B%90%EC%82%AC%EC%A7%80%20%EC%B6%9C%ED%86%A0%20%EC%B2%A0%EC%A0%9C%EC%97%AC%EB%9E%98%EC%A2%8C%EC%83%81\n",
+  "finish_reason": "stop",
+  "search_results": [
+    {
+      "title": "통일신라실 새단장, '철불' 중앙에 우뚝",
+      "url": "https://m.ktv.go.kr/content/view?content_id=484411",
+      "date": "2014-06-02",
+      "last_updated": "2025-05-16",
+      "snippet": "한국 미술사의 전성기였던 8세기 통일신라시대에 만든 철불입니다. 현존하는 철불로는 가장 오래된 불상입니다. 가로9m에 세로7.7m로 그 크기도 다른 철불상 ...",
+      "source": "web"
+    },
+    {
+      "title": "남원 실상사 철조여래좌상 - 국가유산 디지털 서비스",
+      "url": "https://digital.khs.go.kr/heri/heriDetail.do?ctptUid=13898859700198502938&ctptNo=1123500410000",
+      "date": "2023-01-01",
+      "last_updated": "2025-10-14",
+      "snippet": "통일신라 후기에는 지방의 선종사원을 중심으로 철로 만든 불상이 활발하게 만들어졌는데, 이 불상 역시 한 예로서 당시의 불상 양식을 잘 표현하고 있다. 머리에는 소라 ...",
+      "source": "web"
+    },
+    {
+      "title": "﻿남원 실상사 철조여래좌상 (南原 實相寺 鐵造如來坐像)",
+      "url": "https://m.cafe.daum.net/64woori/9rr2/728",
+      "date": "2009-08-31",
+      "last_updated": "2025-11-30",
+      "snippet": "이제 이것을 막기 위하여 땅에 거대한 쇠침을 박았으니 그것이 바로 이 철불이다.철불이 쇠침 역활을 하기 위해서는 그대로 맨땅에 박혀야한다.그래서 ...",
+      "source": "web"
+    },
+    {
+      "title": "문화유산 복원에도 이중 잣대 적용되나",
+      "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0000389768",
+      "date": null,
+      "last_updated": null,
+      "snippet": "통일신라시대에 제작된 것으로 알려진 국보 제63호 철원 도피안사 철조비로자나불 · 복원된 철불은 원래의 모습을 찾아 거무튀튀한 주철 색깔 불상입니다.",
+      "source": "web"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1021,
+    "completion_tokens": 1404,
+    "total_tokens": 2425
+  },
+  "file_size": 4935
+}

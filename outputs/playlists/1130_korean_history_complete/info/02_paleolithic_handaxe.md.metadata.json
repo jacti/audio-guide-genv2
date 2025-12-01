@@ -2,64 +2,136 @@
   "output_name": "02_paleolithic_handaxe",
   "pipeline": "info_retrieval",
   "mode": "production",
-  "timestamp": "2025-12-01T00:34:38.907696",
+  "timestamp": "2025-12-01T21:33:10.970102",
   "model": "sonar-pro",
-  "info_retrieval_user_content_text": "[조사 주제: 주먹도끼]\n연천 전곡리 주먹도끼 특징 및 용도 (맥가이버 칼).\n아슐리안형 주먹도끼 발견의 세계사적 의의 (모비우스 학설 뒤집기).\n그렉 보웬(미군 병사) 발견 일화.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836\nhttps://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=166331&sc=&relicRecommendCategory=&pageSize=10&sv=\n",
+  "info_retrieval_user_content_text": "[조사 주제: 주먹도끼]\n- 연천 전곡리 주먹도끼 특징 및 용도\n- 주한미군 그렉 보웬(Greg Bowen)이 발견한 주먹도끼.\n- 아슐리안형 주먹도끼 발견의 세계사적 의의 (모비우스 학설 뒤집기).\n- 국립중앙박물관장이었던 배기동 교수의 주먹도끼에 관한 언급,\n- 주먹도끼 발굴에 참여한 배기동 교수\n- 국립중앙박물관에 전시되어있는 주먹도끼\n[참고 유물 링크]\n- https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836\n- https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=166331&sc=&relicRecommendCategory=&pageSize=10&sv=\n",
   "finish_reason": "stop",
   "search_results": [
     {
-      "title": "[기고] 여기 연천이 있다",
-      "url": "https://www.kyeonggi.com/article/201901311041068",
-      "date": "2019-01-31",
-      "last_updated": "2025-10-15",
-      "snippet": "... 경기도 연천군 전곡리유적에 있다. 전곡리유적은 1978년 동아시아 최초로 아슐리안형 주먹도끼 ... 그래서 별명이 구석기 맥가이버칼이다.",
+      "title": "［한국사 미스터리］(2)연천 전곡리 주먹도끼",
+      "url": "https://www.khan.co.kr/article/200304281556171",
+      "date": "2003-04-28",
+      "last_updated": "2025-07-25",
+      "snippet": "-1978년 한탄강변서 美軍이 발견-. ◇미군이 발견한 주먹도끼=1978년 4월. 동두천에 주둔중인 미공군 기후예보대에 군무하던 그렉 보웬 병사는 평소에 ...",
       "source": "web"
     },
     {
-      "title": "1978년 미군 병사가 주운 돌, 세계 고고학계 발칵 뒤집어",
-      "url": "https://www.donga.com/news/Culture/article/all/20160512/78049385/1",
-      "date": "2016-05-12",
-      "last_updated": "2025-08-28",
-      "snippet": "그러나 1978년 전곡리에서 동아시아 최초로 아슐리안 주먹도끼가 미군 병사 그레그 보웬에 의해 발견됐다. 모비우스의 학설이 무너지고 고고학 교과서를 ...",
+      "title": "고대관>구석기>상세",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29836",
+      "date": "2000-01-01",
+      "last_updated": "2025-06-15",
+      "snippet": "주먹도끼는 한반도의 구석기시대를 대표하는 유물입니다. 구석기시대 사람들은 좋은 돌을 찾아낸 다음, 돌의 양면을 다른 돌로 내리쳐 날카로운 날을 만들었습니다.",
       "source": "web"
     },
     {
-      "title": "[박물관 기행] 전세계를 놀라게 했던 주먹도끼를 찾아서~ 전곡 ...",
-      "url": "https://www.ktsketch.co.kr/news/articleView.html?idxno=8072",
-      "date": "2024-06-28",
-      "last_updated": "2025-02-06",
-      "snippet": "한쪽 면이 날카로운 돌을 손에 쥐기 좋은 크기로 깬 주먹도끼는 나무 도구 다듬기부터 사냥까지 쓰임새가 만능이라 '구석기 시대 맥가이버 칼'이라고 ...",
+      "title": "주먹도끼 – 역사를 바꾼 새로운 발견",
+      "url": "https://ktaca.or.kr/75/?bmode=view&idx=13262976",
+      "date": "2022-10-25",
+      "last_updated": "2025-08-31",
+      "snippet": "주먹도끼의 발견은 한국에서 복무 중이던 미군인 그렉 보웬에 의해 이루어졌습니다. 1978년 그렉 보웬이 전곡리에서 주먹도끼를 발견하여 프랑스 구석기 ...",
       "source": "web"
     },
     {
-      "title": "(83)달 착륙 순간 뺨치는 360만년 전 '첫발자국' - 주간경향",
-      "url": "https://weekly.khan.co.kr/article/202305121437121",
-      "date": "2023-05-17",
-      "last_updated": "2025-08-28",
-      "snippet": "후속 발굴과 연구 끝에 '전곡리 주먹도끼의 연대는 대략 27만년 전'으로 정리됐습니다. 한탄강변 전곡리 유적 24만평 전체에서 구석기 유물이 고루 출토 ...",
+      "title": "한국 문화의 독창성 24선 - 상설 전시",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201020000.do?schM=list&relicRecommendPk=PS01001001_64",
+      "date": "2020-08-05",
+      "last_updated": "2025-10-17",
+      "snippet": "주먹도끼는 끝부분이 뾰족한 타원형 석기로, 뭉툭한 부분을 손으로 쥐고 여러 용도로 사용했던 구석기시대 도구입니다. 돌의 한쪽을 떼어 낸 뒤 반대편을 다시 떼어 내 ...",
       "source": "web"
     },
     {
-      "title": "인류 최초 의도를 가지고 목적에 맞게 가공한 도구 아슐리안 ...",
-      "url": "https://www.youtube.com/shorts/TYLAiil4U_4",
+      "title": "예술적 미감의 연천 전곡리 주먹도끼",
+      "url": "https://www.koya-culture.com/news/article.html?no=134046",
+      "date": "2022-02-11",
+      "last_updated": "2025-10-20",
+      "snippet": "[우리문화신문=한성훈 기자] 연천 전곡리 유적은 1978년에 발견된 뒤 동아시아에서 처음으로 서구나 아프리카의 전형적인 아슐리안 주먹도끼가 출토 ...",
+      "source": "web"
+    },
+    {
+      "title": "연천 전곡리 주먹도끼",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=166331&sc=&relicRecommendCategory=&pageSize=10&sv=",
+      "date": "2014-01-01",
+      "last_updated": "2025-10-16",
+      "snippet": "연천 전곡리 유적은 1978년에 발견된 뒤 동아시아에서 최초로 서구나 아프리카의 전형적인 아슐리안 주먹도끼가 출토되는 이른 시기 구석기 유적으로 상당한 관심을 ...",
+      "source": "web"
+    },
+    {
+      "title": "연천 전곡리 주먹도끼 - :: 티칭백과 :: - 금성출판사",
+      "url": "https://dic.kumsung.co.kr/web/smart/detail.do?headwordId=5120&findCategory=B002005&findBookId=23",
       "date": null,
       "last_updated": null,
-      "snippet": "인류 최초 의도를 가지고 목적에 맞게 가공한 도구 아슐리안 주먹도끼의 탄생 #shorts 경기도 연천 전곡리 선사유적지 구석기 시대 유물 3.",
+      "snippet": "경기도 연천 전곡리에서 발견된 주먹도끼는 아시아에서는 전기 구석기 시대에 찍개만 사용되고 주먹도끼는 사용하지 않았다는 세계 고고학계의 통설을 뒤엎는 데 결정적인 ...",
       "source": "web"
     },
     {
-      "title": "구석기 문명의 역사 새로 쓴 발견, 전곡리 선사유적지",
-      "url": "https://www.g-enews.com/article/Distribution/2017/09/20170911080136762e8b8a793f7_1",
+      "title": "선사·고대관 - 구석기",
+      "url": "https://www.museum.go.kr/MUSEUM/contents/M0201030100.do?showHallId=760&showroomCode=DM0002",
+      "date": null,
+      "last_updated": "2025-10-19",
+      "snippet": "전시 동영상. 주먹도끼 만들기 (01:50). ('주먹도끼 만들기'에 대한 대체텍스트입니다.) 주먹도끼는 구석기시대 이른 시기를 대표하는 도구입니다. 돌감은 주변에서 쉽게 ...",
+      "source": "web"
+    },
+    {
+      "title": "주한미군이 연천 전곡리에서 주운 돌 전세계를 뒤집다⁉️ | 조선 ...",
+      "url": "https://www.youtube.com/watch?v=BSRnd3sMZtU",
+      "date": "2024-03-18",
+      "last_updated": "2025-08-25",
+      "snippet": "[설민석 인스타그램] 응원하기! https://bit.ly/3q1OWbq 1948년 미국의 고고학자이자 하버드 대학 교수 모비우스는 주먹도끼가 발견되는 지역은 유럽 ...",
+      "source": "web"
+    },
+    {
+      "title": "일상에 예술 한 스푼, 국립중앙박물관",
+      "url": "https://www.seouland.com/arti/society/society_general/19996.html",
       "date": null,
       "last_updated": null,
-      "snippet": "주먹도끼는 구석기시대의 '맥가이버칼'로 불리며, 구석기인의 지능이 매우 뛰어났음을 보여주는 유물이다. 김경상 다큐멘터리 사진작가. 많이 본 뉴스. 1 ...",
+      "snippet": "전시된 주먹도끼를 보면서, '저걸로 어떻게 사냥을 했지? 그럼 동물 껍질 ... 국립중앙박물관은 야외전시도 무척 아름답다. '보신각종'이 있는 ...",
+      "source": "web"
+    },
+    {
+      "title": "주먹도끼",
+      "url": "https://namu.wiki/w/%EC%A3%BC%EB%A8%B9%EB%8F%84%EB%81%BC",
+      "date": "2025-10-15",
+      "last_updated": "2025-10-16",
+      "snippet": "하지만, 1978년 연천 전곡리 유적에서 동아시아 최초로 아슐리안형 뗀석기(주먹도끼)가 발견되면서 모비우스 설은 존재 가치를 상실, 역사의 뒤안길로 ...",
+      "source": "web"
+    },
+    {
+      "title": "[3분순삭] 선사고대관 재개관! #국립중앙박물관",
+      "url": "https://www.youtube.com/watch?v=wVfAXc2zbj4",
+      "date": "2025-04-03",
+      "last_updated": "2025-09-14",
+      "snippet": "인류의 등장에서 고대 국가의 출현까지 인류가 쌓아온 기나긴 역사를 쉽고 흥미롭게 만나볼 수 있는 국립중앙박물관 선사고대관이 새롭게 문을 열었 ...",
+      "source": "web"
+    },
+    {
+      "title": "사적 연천 전곡리 유적 (漣川 全谷里 遺蹟)",
+      "url": "https://www.heritage.go.kr/heri/cul/culSelectDetail.do?s_kdcd=&s_ctcd=31&ccbaKdcd=13&ccbaAsno=02680000&ccbaCtcd=31&ccbaCpno=1333102680000&ccbaLcto=40&culPageNo=1&header=region&pageNo=1_1_3_0&returnUrl=%2Fheri%2Fcul%2FculSelectRegionList.do&assetnamel=",
+      "date": "2019-09-24",
+      "last_updated": "2025-10-20",
+      "snippet": "1978년 처음 발견되어 1979년부터 현재까지 여러 차례 발굴조사를 하였다. 그 결과 주먹도끼, 사냥돌, 주먹찌르개, 긁개, 홍날, 찌르개 등 다양한 종류의 석기를 발견하였 ...",
+      "source": "web"
+    },
+    {
+      "title": "주먹 도끼에서 청동 투구까지... 한국 역사의 흔적들",
+      "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003144476",
+      "date": null,
+      "last_updated": null,
+      "snippet": "실내 공간마저 필자를 압도한다. 일행들이 틈새를 비집고 1층 입구 옆 구석기 유물 관으로 들어선다. 태초 인간 삶의 흔적들이 전시되어 있다. 그곳에서 ...",
+      "source": "web"
+    },
+    {
+      "title": "[헬로우박물관] 국립중앙박물관소개 및 주먹도끼",
+      "url": "https://www.youtube.com/watch?v=uNQQV2ZAf7o",
+      "date": null,
+      "last_updated": null,
+      "snippet": "놀이터 헬로우 박물관은 전시 해설사 전기수의 소개로 국립 중앙박물관에 전시되어있는 우리의 유물들을 소개하고 박물관을 친근하게 다가갈 수 있는 ...",
       "source": "web"
     }
   ],
   "usage": {
-    "prompt_tokens": 972,
-    "completion_tokens": 2169,
-    "total_tokens": 3141
+    "prompt_tokens": 1042,
+    "completion_tokens": 2874,
+    "total_tokens": 3916
   },
-  "file_size": 7506
+  "file_size": 10375
 }

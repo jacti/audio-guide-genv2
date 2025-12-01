@@ -1,0 +1,9 @@
+{
+  "output_name": "06_unified_silla_iron_buddha",
+  "pipeline": "script_gen",
+  "mode": "production",
+  "timestamp": "2025-12-01T23:16:27.558801",
+  "model": "gpt-5.1",
+  "script_gen_user_content_text": "[톤] 웅장하고 느긋한 톤.\n[지시사항]\n1. 사진 명소 특성을 강조해 웅장감을 묘사해주세요.\n2. 금속 질감과 빛 반사를 묘사하고, 추천 촬영 각도를 안내해주세요.\n",
+  "file_size": 3863
+}

@@ -1,7 +1,7 @@
-00_intro.mp3: 234.48초
+00_intro.mp3: 152.28초
 01_prehistory_ancient_hall.mp3: 134.28초
-02_paleolithic_handaxe.mp3: 235.75초
-03_paleolithic_hominid.mp3: 156.05초
+02_paleolithic_handaxe.mp3: 232.37초
+03_paleolithic_hominid.mp3: 219.34초
 04_neolithic_needle_spindle.mp3: 163.73초
 05_neolithic_gosanri_pottery.mp3: 200.40초
 06_neolithic_gadeokdo_bones.mp3: 223.49초
@@ -44,4 +44,4 @@
 43_korea_and_neighbors.mp3: 223.73초
 44_closing.mp3: 125.04초
 
-총 길이: 8499.07초 (141.65분)
+총 길이: 8476.78초 (141.28분)

@@ -2,56 +2,72 @@
   "output_name": "03_paleolithic_hominid",
   "pipeline": "info_retrieval",
   "mode": "production",
-  "timestamp": "2025-12-01T00:38:37.696225",
+  "timestamp": "2025-12-01T20:14:58.617843",
   "model": "sonar-pro",
-  "info_retrieval_user_content_text": "[조사 주제: 구석기 고인류]\n한반도 출토 구석기 시대 인골/화석.\n국립중앙박물관 전시실 내 인류 진화 모형.\n흥수아이 등 대표적인 고인류 화석의 의미.\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840\n",
+  "info_retrieval_user_content_text": "[조사 주제: 구석기 고인류]\n- 배경: 아프리카에 살았던 이른 시기 고인류인 오스트랄로피테쿠스에서 시작해, 시간이 흐르면서 점점 지금 우리와 가까운 모습의 고인류들이 나타났습니다. 약 200만 년 전에 나타난 호모 에렉투스는 아프리카를 떠나 유라시아로 나간 첫 번째 고인류입니다. 호모 네안데르탈렌시스는 30만 년 전부터 3만 년 전까지 유럽과 서아시아에서 살았고 호모 사피엔스와 공존했습니다. 30~20만 년 전 등장한 호모 사피엔스는 우리의 직접적인 조상입니다. 아프리카를 넘어 6만~4만 년 전에는 전 세계로 퍼져 나갔고, 구석기시대가 끝날 무렵에는 전세계에 단일한 인류종이 살게 됩니다. 앞으로 새로운 화석이 발견될 때마다 고인류가 살았던 시대와 공간에 대해 더 많이 알게 될 것입니다.\n- 호모 사피엔스, 호모 에렉투스, 네안데르탈인, 오스트랄로피테쿠스 에 대한 개별적인 정보\nhttps://www.museum.go.kr/MUSEUM/contents/M0201030100.do?schM=view&showHallId=760&relicId=29840\n",
   "finish_reason": "stop",
   "search_results": [
     {
-      "title": "인류 진화 700만년, 생존의 비밀 품은 동굴 속으로…",
-      "url": "https://www1.seoul.co.kr/news/life/exhibition/2021/06/24/20210624025004",
-      "date": "2021-06-24",
-      "last_updated": "2025-11-30",
-      "snippet": "국립중앙박물관 기획전 '호모사피엔스: 진화∞ 관계& 미래?'는 동굴처럼 꾸민 공간에서 동굴벽화를 영상으로 재현하는 등 다양한 전시 기법을 활용해 ...",
+      "title": "인류 분산 경로",
+      "url": "https://namu.wiki/w/%EC%9D%B8%EB%A5%98%20%EB%B6%84%EC%82%B0%20%EA%B2%BD%EB%A1%9C",
+      "date": "2025-10-05",
+      "last_updated": "2025-10-28",
+      "snippet": "인류 분산 경로는 인류가 아프리카에서 각 대륙으로 분산된 경로와 기원을 말한다. 하플로그룹이라는 현대 분자생물학, 유전학적 방법으로 분석하고, 이로써 고대 인류 ...",
       "source": "web"
     },
     {
-      "title": "땅딸막한 인류에서 오늘까지 진화 한눈에…'호모 사피엔스'전",
-      "url": "https://www.hani.co.kr/arti/culture/music/998687.html",
-      "date": "2021-06-09",
-      "last_updated": "2025-10-29",
-      "snippet": "땅딸막한 인류에서 오늘까지 진화 한눈에…'호모 사피엔스'전. 세계 학계서 발굴한 용모 망라 28종 원시인류 인골 화석 전시 서울 국립중앙박물관 9월까지.",
+      "title": "선콜럼버스 시대 - 위키백과, 우리 모두의 백과사전",
+      "url": "https://ko.wikipedia.org/wiki/%EC%84%A0%EC%BD%9C%EB%9F%BC%EB%B2%84%EC%8A%A4_%EC%8B%9C%EB%8C%80",
+      "date": "2005-04-23",
+      "last_updated": "2025-11-16",
+      "snippet": "즉 후기 구석기 시대에 인류가 아프리카 대륙에 건너온 시대부터 근세에 유럽인들이 식민지 경쟁을 벌이게 되는 시대까지를 말한다. 선콜럼버스 시대라는 말은 글자 ...",
       "source": "web"
     },
     {
-      "title": "인류는 어떻게 진화해 지금에 이르렀을까? - 에코저널",
-      "url": "https://ecojournal.co.kr/m/view.php?idx=132053",
+      "title": "[논문]우리나라 후기구석기시대 사냥기술과 인지능력에 관한 ...",
+      "url": "https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=DIKO0014181094",
+      "date": "2024-11-14",
+      "last_updated": "2025-03-19",
+      "snippet": "인간이 도구를 제작할 수 있는 것은 매우 복잡한 과정을 통해 인지된 결과라고 할 수 있다. 비행과 관련된 도구를 제작하기 시작한 것은 비행을 통해 사냥을 할 수 있다는 ...",
+      "source": "web"
+    },
+    {
+      "title": "포인트형 석기의 기능적 변화에 대한 이론적 고찰",
+      "url": "http://www.hsas.or.kr/flow/?fcode=2119&bbs_table=m4_01",
       "date": null,
       "last_updated": null,
-      "snippet": "【에코저널=대전】국립중앙과학관은 700만년 동안의 인류의 진화과정과 다른 생명종과의 공존 등을 살펴볼 수 있는 '호모 사피엔스 : 진화∞관계&미래?",
+      "snippet": "구석기와 신석기시대에도 인류의 살상에 대한 증거는. 포인트형 도구를 포함하여 다양한 도구, 이를테면 방망이나 도끼 등에 의해서 발생되는 뼈의. 흔적이나 대규모 ...",
       "source": "web"
     },
     {
-      "title": "전곡선사박물관, 한 여름의 휴식같은 기획전시 2종 동시 개막 ...",
-      "url": "https://www.ggcf.kr/boards/press%20reports/articles/16239",
+      "title": "한민족· 한국인 (인골) - 종족 생물 - 한국 문화의 원류",
+      "url": "https://cafe.daum.net/ko.art./am03/137",
       "date": null,
       "last_updated": null,
-      "snippet": "먼저 1층의 '고인류 체험존'에는 29종의 고인류 두개골 모형이 관람객을 맞이한다. 관람객은 사헬란트로푸스 차덴시스부터 호모 사피엔스까지 진화 ...",
+      "snippet": "한국인은 북방계와 남방계의 두 부류가 섞여있다. 우리나라에서 70만 년 전 즉 전기구석기시대부터 사람들이 살았다는 것은 평양시 상원군 흑우리에서 발견된.",
       "source": "web"
     },
     {
-      "title": "21세기 박물관이 그려낸 500만 년의 인류 진화",
-      "url": "https://webzine.museum.go.kr/sub.html?amIdx=14605",
+      "title": "http://contents.nahf.or.kr/viewer/xmlViewer.do?itemId=edeah",
+      "url": "http://contents.nahf.or.kr/viewer/xmlViewer.do?itemId=edeah",
+      "date": "2012-04-21",
+      "last_updated": "2025-10-17",
+      "snippet": "... 고인류는 동일한 특징을 가졌다. 뇌용량의 증대, 뇌정골의 높이 증가, 이마뼈가 ... 구석기시대적 특징을 보이고 있지만 삽모양의 굴지구나 일부 마제석기 등에서 ...",
+      "source": "web"
+    },
+    {
+      "title": "인류 분산 경로 (r86 판)",
+      "url": "https://namu.wiki/w/%EC%9D%B8%EB%A5%98%20%EB%B6%84%EC%82%B0%20%EA%B2%BD%EB%A1%9C?uuid=5d2a1c6a-ef8a-422a-a33a-a4d47ed615ac",
       "date": null,
       "last_updated": null,
-      "snippet": "시간과 공간을 뛰어넘은 상상력을 가진 고인류의 자손이 바로 우리다. 인류의 진화를 21세기의 메시지로 그려낸 국립중앙박물관에 박수를 보낸다. 전시 유리장 안 손 닿을 ...",
+      "snippet": "인류 분산 경로는 인류가 아프리카에서 각 대륙으로 분산된 경로와 기원을 말한다. 하플로그룹이라는 현대 분자생물학, 유전학적 방법으로 분석하고, 이로써 고대 인류 ...",
       "source": "web"
     }
   ],
   "usage": {
-    "prompt_tokens": 915,
-    "completion_tokens": 2199,
-    "total_tokens": 3114
+    "prompt_tokens": 1138,
+    "completion_tokens": 1410,
+    "total_tokens": 2548
   },
-  "file_size": 7948
+  "file_size": 5339
 }

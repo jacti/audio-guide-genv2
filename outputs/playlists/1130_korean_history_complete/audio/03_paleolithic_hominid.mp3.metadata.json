@@ -2,8 +2,8 @@
   "output_name": "03_paleolithic_hominid",
   "pipeline": "audio_gen",
   "mode": "production",
-  "timestamp": "2025-12-01T00:40:51.920977",
+  "timestamp": "2025-12-01T20:19:58.463868",
   "model": "gemini-2.5-pro-tts",
   "voice": "Laomedeia",
-  "file_size": 624428
+  "file_size": 877580
 }

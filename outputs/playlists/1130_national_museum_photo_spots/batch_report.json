@@ -1,0 +1,36 @@
+{
+  "playlist_title": "국립중앙박물관 필수 스팟 가이드",
+  "playlist_output_dir_name": "1130_national_museum_photo_spots",
+  "description": "국중박에서 꼭 들러야 하는 필수 스팟만 모은 핵심 투어 가이드 (사진 명소 + 국보/보물 포함)",
+  "metadata": {
+    "author": "국립중앙박물관",
+    "version": "1.1",
+    "tags": [
+      "guide",
+      "museum",
+      "photo_spot",
+      "seoul",
+      "treasure"
+    ],
+    "created_date": "2025-11-29"
+  },
+  "started_at": "2025-12-01T23:16:06.845882",
+  "completed_at": "2025-12-01T23:19:52.761524",
+  "duration_seconds": 225.92,
+  "total_files": 1,
+  "successful": 1,
+  "failed": 0,
+  "files": [
+    {
+      "output_name": "06_unified_silla_iron_buddha",
+      "started_at": "2025-12-01T23:16:06.845887",
+      "status": "success",
+      "stages_run": [
+        2,
+        3
+      ],
+      "audio_path": "/Users/seungmin/Documents/GitHub/audio-guide-genv2/outputs/playlists/1130_national_museum_photo_spots/audio/06_unified_silla_iron_buddha.mp3",
+      "completed_at": "2025-12-01T23:19:52.761495"
+    }
+  ]
+}
